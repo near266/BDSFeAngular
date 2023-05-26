@@ -3,9 +3,30 @@
 @import "primeng/resources/primeng.css";
 @import "primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
+
 body {
   font-family: var(--font-family);
 }
+
 html, body {
   height: 100%;
+}
+
+.danger-form-control {
+  border: 1px solid #FFC872;
+  position: relative;
+  border-radius: 6px;
+  margin-top: 2em;
+
+  label {
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    background: #FFFFFF;
+  }
+
+  input {
+    border: none;
+    width: 100%;
+  }
 }
