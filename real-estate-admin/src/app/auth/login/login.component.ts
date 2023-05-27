@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
 import {Message} from "primeng/api";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {ApiErrorArgsInvalid, ApiErrorTokenInvalid} from "../../core/model/error-response";
 
 @Component({
   selector: 'app-login',
@@ -22,9 +24,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.messages = [
-      {severity: 'success', summary: 'Success', detail: 'Message Contentaaa'},
-    ];
   }
 
   initForm() {
@@ -36,16 +35,31 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
+    this.msgInvalid = [];
     if (this.loginForm.invalid) {
       this.msgInvalid = [
-        {severity: 'error', summary: '', detail: 'Thông tin đăng nhập không hợp lệ'},
+        {severity: 'error', summary: '', detail: 'Vui lòng nhập đủ tên đăng nhập và mật khẩu'},
       ];
+      return;
+    }
+    if (!navigator.onLine){
+      this.msgInvalid = [
+        {severity: 'error', summary: '', detail: 'Kết nối mạng không ổn định, vui lòng kiểm tra lại'},
+      ];
+      return;
     }
     this.authService.login(this.loginForm.value).subscribe((res: any) => {
       if (res) {
         this.authService.setToken(res.id_token, new Date().getTime());
         this.goToView();
       }
+    }, err => {
+      if (err instanceof ApiErrorTokenInvalid){
+      this.msgInvalid = [
+        {severity: 'error', summary: '', detail: 'Tên đăng nhập hoặc mật khẩu không đúng'},
+      ];
+      }
+
     })
   }
 
