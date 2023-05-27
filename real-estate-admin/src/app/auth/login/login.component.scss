@@ -7,7 +7,8 @@
     font-weight: 600;
     font-size: 30px;
   }
-    .left-color {
+
+  .left-color {
     color: #006BBB;
   }
 
@@ -23,6 +24,7 @@
 
 
 .login-body {
+  margin-top: 3rem;
   h1 {
     font-family: UTM Libel KT, sans-serif;
     font-style: normal;
@@ -51,4 +53,11 @@
     text-align: center;
     letter-spacing: 0.03em;
   }
+}
+
+.login-bg {
+  background-image: url("../../../assets/resouces/login-bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
 }
