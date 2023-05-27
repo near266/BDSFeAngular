@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
 import { UtilService } from './service/util.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {ConfirmationService} from 'primeng/api';
-import {AuthService} from '../auth/auth.service';
 import {
   ApiErrorArgsInvalid,
   ApiErrorForbidden,
@@ -15,6 +14,7 @@ import {
 } from './model/error-response';
 import {Router} from '@angular/router';
 import {IdleService} from './service/idle.service';
+import {AuthService} from "../auth/service/auth.service";
 
 /**
  * @author TruongNH
@@ -67,7 +67,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
       case ApiErrorTokenInvalid: {
         // if (!this.auth.isAuthed()) {
         this.idle.stopTimer();
-        this.auth.logOut();
+        // this.auth.logOut();
         this.ngzone.run(() => {
           // bypass form leave guard with queryParams expired is 1
           this.router.navigate(['auth', 'login'], { queryParams: { expired: '1' } });

@@ -19,5 +19,6 @@ export class BaseErrorHandle {
 
   sendLogToServer(err: any): void {
     // TODO: write service sendlog
+    console.error(err)
   }
 }
