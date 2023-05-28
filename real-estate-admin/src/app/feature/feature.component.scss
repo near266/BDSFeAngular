@@ -2,12 +2,16 @@
   width: 100%;
   height: 100%;
   display: flex;
-
+  .close-toggle {
+      i {
+        color: #FFB43F;
+        font-size: 30px;
+      }
+  }
   .feature-navigation {
     width: 15%;
     height: 100%;
     background: #30A0E0;
-
     .items {
       label {
         font-family: Roboto, sans-serif;
@@ -37,7 +41,12 @@
       }
     }
   }
-
+  .a {
+    height: 100%;
+    background: #30A0E0;
+    position: absolute;
+    z-index: 2;
+  }
   .feature-content {
     width: 100%;
     height: 100%;
@@ -59,4 +68,7 @@
     }
   }
 
+}
+.hidden-feature-navigation {
+  width: 0 !important;
 }

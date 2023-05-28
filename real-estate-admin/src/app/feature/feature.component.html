@@ -1,7 +1,13 @@
 <div class="feature-container">
-  <div class="feature-navigation">
+  <div class="" *ngIf="isShowNavigation"
+       [ngClass]="navigationClass">
     <div class="flex justify-content-center">
-      <h1>YOUR LOGO</h1>
+      <div class="">
+        <h1>YOUR LOGO</h1>
+      </div>
+      <div class="close-toggle" (click)="showNavigationToggle()" *ngIf="isMobile() && isShowNavigation">
+        <i class="pi pi-chevron-left"></i>
+      </div>
     </div>
     <div class="col p-0 ml-5" *ngFor="let f of featureList">
       <div class="flex justify-content-center h-3rem align-items-center items" (click)="routerLink(f)"
@@ -11,14 +17,13 @@
         </div>
         <div class="col-6">
           <label for=""> {{f.label}}</label>
-
         </div>
       </div>
     </div>
   </div>
   <div class="feature-content">
     <div class="feature-content-header">
-      <div class="list-toggle">
+      <div class="list-toggle" (click)="showNavigationToggle()">
         <i class="pi pi-list"></i>
       </div>
       <div class="info-toggle">

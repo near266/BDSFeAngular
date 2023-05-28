@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SlotRoutingModule } from './slot-routing.module';
 import { SlotComponent } from './slot/slot.component';
 import { SlotCreateComponent } from './slot-create/slot-create.component';
+import {InputTextModule} from "primeng/inputtext";
+import {ButtonModule} from "primeng/button";
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { SlotCreateComponent } from './slot-create/slot-create.component';
   ],
   imports: [
     CommonModule,
-    SlotRoutingModule
+    SlotRoutingModule,
+    InputTextModule,
+    ButtonModule
   ]
 })
 export class SlotModule { }
