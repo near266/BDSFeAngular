@@ -1,8 +1,35 @@
-<p>feature works!</p>
-<div class="card">
-  <div class="card-container yellow-container">
-    <div class="block bg-yellow-500 font-bold text-center p-4 border-round mb-3">1</div>
-    <div class="block bg-yellow-500 font-bold text-center p-4 border-round mb-3">2</div>
-    <div class="block bg-yellow-500 font-bold text-center p-4 border-round mb-3">3</div>
+<div class="feature-container">
+  <div class="feature-navigation">
+    <div class="flex justify-content-center">
+      <h1>YOUR LOGO</h1>
+    </div>
+    <div class="col p-0 ml-5" *ngFor="let f of featureList">
+      <div class="flex justify-content-center h-3rem align-items-center items" (click)="routerLink(f)"
+           [class.router-selected]="f.isSelected">
+        <div class="col-2">
+          <i [class]="f.icon"></i>
+        </div>
+        <div class="col-6">
+          <label for=""> {{f.label}}</label>
+
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="feature-content">
+    <div class="feature-content-header">
+      <div class="list-toggle">
+        <i class="pi pi-list"></i>
+      </div>
+      <div class="info-toggle">
+        <p-splitButton
+          styleClass="p-button-outlined"
+          label="Account name" icon="pi pi-user" (onClick)="save()" [model]="items"></p-splitButton>
+      </div>
+    </div>
+    <div class="feature-content-body p-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
 </div>

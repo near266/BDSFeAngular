@@ -1,16 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {NotFoundComponent} from "./not-found/not-found.component";
+import {SlotComponent} from "./slot/slot.component";
 
 const routes: Routes = [
   {
     path: '',
-    children: [
-      {
-        path: 'not-found',
-        component: NotFoundComponent
-      }
-    ]
+    component: SlotComponent
   }
 ];
 
@@ -18,5 +13,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HandleRoutingModule {
+export class SlotRoutingModule {
 }

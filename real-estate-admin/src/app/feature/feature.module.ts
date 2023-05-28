@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FeatureRoutingModule } from './feature-routing.module';
 import { FeatureComponent } from './feature.component';
-
+import {SplitButtonModule} from 'primeng/splitbutton';
 
 @NgModule({
   declarations: [
@@ -11,6 +11,7 @@ import { FeatureComponent } from './feature.component';
   ],
   imports: [
     CommonModule,
+    SplitButtonModule,
     FeatureRoutingModule
   ]
 })

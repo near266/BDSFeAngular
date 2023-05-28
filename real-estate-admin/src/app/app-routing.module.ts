@@ -11,13 +11,17 @@ const routes: Routes = [
     loadChildren: () =>import('../../src/app/feature/feature-routing.module').then(m => m.FeatureRoutingModule)
   },
   {
-    path: '*',
+    path: 'error',
     loadChildren: () =>import('../../src/app/handle/handle-routing.module').then(m => m.HandleRoutingModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'error/not-found'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

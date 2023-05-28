@@ -1,9 +1,9 @@
-import { ErrorHandler, Injectable, NgZone } from '@angular/core';
-import { BaseErrorHandle } from './base-error-handle';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../environments/environment';
-import { UtilService } from './service/util.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import {ErrorHandler, Injectable, NgZone} from '@angular/core';
+import {BaseErrorHandle} from './base-error-handle';
+import {TranslateService} from '@ngx-translate/core';
+import {environment} from '../../environments/environment';
+import {UtilService} from './service/util.service';
+import {HttpErrorResponse} from '@angular/common/http';
 import {ConfirmationService} from 'primeng/api';
 import {
   ApiErrorArgsInvalid,
@@ -12,7 +12,7 @@ import {
   ApiErrorResponse,
   ApiErrorTokenInvalid
 } from './model/error-response';
-import {Router} from '@angular/router';
+import {NavigationError, Router} from '@angular/router';
 import {IdleService} from './service/idle.service';
 import {AuthService} from "../auth/service/auth.service";
 
@@ -25,13 +25,13 @@ import {AuthService} from "../auth/service/auth.service";
 export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
   constructor(
     private ngzone: NgZone,
-        private dialog: ConfirmationService,
-        private translate: TranslateService,
-        private auth: AuthService,
-        private util: UtilService,
-        private router: Router,
-        private idle: IdleService
-      ) {
+    private dialog: ConfirmationService,
+    private translate: TranslateService,
+    private auth: AuthService,
+    private util: UtilService,
+    private router: Router,
+    private idle: IdleService
+  ) {
     super();
   }
 
@@ -70,7 +70,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
         // this.auth.logOut();
         this.ngzone.run(() => {
           // bypass form leave guard with queryParams expired is 1
-          this.router.navigate(['auth', 'login'], { queryParams: { expired: '1' } });
+          this.router.navigate(['auth', 'login'], {queryParams: {expired: '1'}});
         });
         // }
         break;
@@ -116,7 +116,8 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
         acceptVisible: true,
         rejectVisible: false,
         acceptLabel: this.translate.instant('message.ok'),
-        accept: () => {}
+        accept: () => {
+        }
       });
     });
   }

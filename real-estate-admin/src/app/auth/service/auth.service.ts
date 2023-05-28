@@ -29,7 +29,7 @@ export class AuthService extends BaseService {
     return  true;
   }
   getToken(): string {
-    return '';
+    return this.getCookie(this.TOKEN_KEY);
   }
    private setCookie(cname: string, cvalue: string, seconds: number): void {
     const d = new Date();

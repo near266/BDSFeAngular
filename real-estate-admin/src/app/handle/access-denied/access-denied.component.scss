@@ -1,0 +1,16 @@
+.not-found-container {
+  background-image: url("../../../assets/resouces/login-bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  .not-found-status {
+    span {
+    font-size: 208px;
+    font-weight: bolder;
+    color: #30A0E0;
+    }
+    .title {
+      text-align: center;
+    }
+  }
+}
