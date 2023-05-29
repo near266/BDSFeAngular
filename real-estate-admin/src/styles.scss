@@ -33,8 +33,69 @@ html, body {
     width: 100%;
   }
 }
-.form-control {
-  input  {
-    width: 100% !important;
+
+.field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    width: 33.333333333333%;
+
+    label {
+      font-weight: 500;
+    }
   }
+
+  input {
+    width: 66.6666666667%
+  }
+}
+
+.title-content {
+  label {
+    //font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 23px;
+    color: #006BBB;
+  }
+
+  span {
+    //font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    color: #505050;
+
+  }
+}
+
+.checked-field {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  min-width: 100px;
+  width: auto;
+  //padding: 0 10% 0 10%;
+
+  p-checkbox {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  label {
+    font-weight: 500;
+    margin-right: 10px;
+  }
+}
+
+.border-line {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }

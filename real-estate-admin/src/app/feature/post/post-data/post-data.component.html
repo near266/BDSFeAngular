@@ -1,30 +1,75 @@
 <div class="container">
   <div class="grid p-3">
     <div class="col-12 md:col-10">
-      <div class="grid align-items-end">
-        <h2>Danh sách khu đất</h2>
-        <span>(666 khu đất)</span>
+      <div class="title-content">
+        <label for="">DANH SÁCH BÀI ĐĂNG </label>
+        <span>(3103 bài đăng)</span>
       </div>
-    </div>
-    <div class="col-12 md:col-2">
-      <button pButton label="Thêm mới" icon="pi pi-plus"></button>
     </div>
   </div>
-  <div class="grid p-3">
-    <div class="col-12 md:col-4">
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon">Khu vực</span>
-        <input type="text" pInputText>
+  <div class="grid p-3 border-line">
+    <div class="field col-12 md:col-4">
+      <div class="title">
+        <label for="">Trạng thái</label>
       </div>
+      <input type="text" pInputText>
     </div>
-    <div class="col-12 md:col-6">
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon">Tên khu đất</span>
-        <input type="text" pInputText>
+    <div class="field col-12 md:col-6">
+      <div class="title">
+        <label for="">Tin tìm mua đất</label>
       </div>
+      <input type="text" pInputText>
     </div>
     <div class="col-12 md:col-2">
       <button pButton label="Tìm kiếm" icon="pi pi-search"></button>
     </div>
+  </div>
+  <div class="grid p-3 mt-2">
+    <div class="mr-2">
+      <button pButton label="Duyệt tất cả" icon="pi pi-search" class="p-button-outlined"></button>
+    </div>
+    <div class="mr-2">
+      <button pButton label="Xoá tất cả" icon="pi pi-search" class="p-button-outlined p-button-warning"></button>
+    </div>
+    <div class="">
+      <div class="checked-field">
+        <p-checkbox></p-checkbox>
+        <label for="">Chọn tất cả </label>
+      </div>
+    </div>
+  </div>
+  <div class="p-3">
+    {{checkBoxHeader}}
+    <p-table [value]="data" [(selection)]="dataSelection" dataKey="code">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4rem">
+            <p-tableHeaderCheckbox (change)="headerCheckboxChange($event)"></p-tableHeaderCheckbox>
+          </th>
+          <th>Mã tin</th>
+          <th>Loại bài</th>
+          <th>Loại bài</th>
+          <th>Người đăng</th>
+          <th>Trạng thái</th>
+          <th>Created Date</th>
+          <th>Last Updated</th>
+          <th>Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="product"></p-tableCheckbox>
+          </td>
+          <td>{{ product.id }}</td>
+          <td>{{ product.code }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.author }}</td>
+          <td>{{ product.status }}</td>
+          <td>{{ product.createDate }}</td>
+          <td>{{ product.lastUpdate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>

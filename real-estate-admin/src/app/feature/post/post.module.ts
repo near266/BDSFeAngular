@@ -10,6 +10,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {CheckboxModule} from "primeng/checkbox";
 import {TableModule} from "primeng/table";
 import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {DropdownModule} from "primeng/dropdown";
     ButtonModule,
     CheckboxModule,
     TableModule,
-    DropdownModule
+    DropdownModule,
+    FormsModule
 
   ]
 })
