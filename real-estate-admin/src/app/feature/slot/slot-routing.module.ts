@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {SlotComponent} from "./slot/slot.component";
+import {SlotComponent} from "./slot.component";
 
 const routes: Routes = [
   {

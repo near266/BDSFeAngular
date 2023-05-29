@@ -5,6 +5,7 @@ import { FeatureRoutingModule } from './feature-routing.module';
 import { FeatureComponent } from './feature.component';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {SlotModule} from "./slot/slot.module";
+import {PostModule} from "./post/post.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {SlotModule} from "./slot/slot.module";
     CommonModule,
     SplitButtonModule,
     FeatureRoutingModule,
-    SlotModule
+    SlotModule,
+    PostModule
   ]
 })
 export class FeatureModule { }

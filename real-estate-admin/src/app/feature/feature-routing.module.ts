@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'news',
-        component: FeatureComponent
+        loadChildren: () => import('./post/post.module').then(m => m.PostModule)
       },
       {
         path: 'customers',
