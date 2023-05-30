@@ -33,18 +33,18 @@
     </div>
     <div class="">
       <div class="checked-field">
-        <p-checkbox></p-checkbox>
+        <p-checkbox [(ngModel)]="isCheckAll" (onChange)="onCheckAllChange($event)" [binary]="true"></p-checkbox>
         <label for="">Chọn tất cả </label>
       </div>
     </div>
   </div>
   <div class="p-3">
-    {{checkBoxHeader}}
-    <p-table [value]="data" [(selection)]="dataSelection" dataKey="code">
+    {{checkAll?.checked}}
+    <p-table [value]="data" [(selection)]="dataSelection" dataKey="code" (selectionChange)="cboChange($event)">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 4rem">
-            <p-tableHeaderCheckbox (change)="headerCheckboxChange($event)"></p-tableHeaderCheckbox>
+            <!--            <p-tableHeaderCheckbox #checkAll></p-tableHeaderCheckbox>-->
           </th>
           <th>Mã tin</th>
           <th>Loại bài</th>
@@ -59,15 +59,22 @@
       <ng-template pTemplate="body" let-product>
         <tr>
           <td>
-            <p-tableCheckbox [value]="product"></p-tableCheckbox>
+            <p-tableCheckbox [value]="product" (onChange)="onCheckAllChange($event)"></p-tableCheckbox>
           </td>
           <td>{{ product.id }}</td>
           <td>{{ product.code }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.author }}</td>
-          <td>{{ product.status }}</td>
+          <td><spam [ngClass]="product.status === 1 ? 'active' : 'inactive'">{{ product.status === 1 ? 'Chưa duyệt' : 'Đang hiển thị' }}</spam></td>
           <td>{{ product.createDate }}</td>
           <td>{{ product.lastUpdate }}</td>
+          <td>
+            <span>
+              <i></i>
+            </span>
+            <span></span>
+            <span></span>
+          </td>
         </tr>
       </ng-template>
     </p-table>

@@ -3,7 +3,7 @@ export interface NewsItem {
   code: string;
   title: string;
   author: string;
-  status: string;
+  status: number;
   createDate: string;
   lastUpdate: string;
 }

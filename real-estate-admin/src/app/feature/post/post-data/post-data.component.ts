@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NewsItem} from "../model/new-item";
-import {Table} from "primeng/table";
+import {Table, TableHeaderCheckbox} from "primeng/table";
 
 @Component({
   selector: 'app-post-data',
@@ -9,9 +9,10 @@ import {Table} from "primeng/table";
 })
 export class PostDataComponent implements OnInit {
   data: NewsItem[] = [];
-  dataSelection: [] = [];
+  dataSelection: NewsItem[] = [];
   checkBoxHeader = false;
-
+  @ViewChild('checkAll') checkAll: TableHeaderCheckbox;
+  isCheckAll = false;
 
   constructor() {
   }
@@ -23,7 +24,7 @@ export class PostDataComponent implements OnInit {
         code: "N1",
         title: "Bài viết số 1",
         author: "Tác giả 1",
-        status: "Đã xuất bản",
+        status: 1,
         createDate: "2023-05-01",
         lastUpdate: "2023-05-10",
       },
@@ -32,7 +33,7 @@ export class PostDataComponent implements OnInit {
         code: "N2",
         title: "Bài viết số 2",
         author: "Tác giả 2",
-        status: "Chưa xuất bản",
+        status: 2,
         createDate: "2023-05-02",
         lastUpdate: "2023-05-09",
       },
@@ -41,7 +42,7 @@ export class PostDataComponent implements OnInit {
         code: "N3",
         title: "Bài viết số 3",
         author: "Tác giả 3",
-        status: "Đã xuất bản",
+        status: 1,
         createDate: "2023-05-03",
         lastUpdate: "2023-05-08",
       },
@@ -50,7 +51,7 @@ export class PostDataComponent implements OnInit {
         code: "N4",
         title: "Bài viết số 4",
         author: "Tác giả 4",
-        status: "Chưa xuất bản",
+        status: 2,
         createDate: "2023-05-04",
         lastUpdate: "2023-05-07",
       },
@@ -59,7 +60,7 @@ export class PostDataComponent implements OnInit {
         code: "N5",
         title: "Bài viết số 5",
         author: "Tác giả 5",
-        status: "Đã xuất bản",
+        status: 1,
         createDate: "2023-05-05",
         lastUpdate: "2023-05-06",
       },
@@ -68,7 +69,7 @@ export class PostDataComponent implements OnInit {
         code: "N6",
         title: "Bài viết số 6",
         author: "Tác giả 6",
-        status: "Chưa xuất bản",
+        status: 2,
         createDate: "2023-05-06",
         lastUpdate: "2023-05-05",
       },
@@ -77,7 +78,7 @@ export class PostDataComponent implements OnInit {
         code: "N7",
         title: "Bài viết số 7",
         author: "Tác giả 7",
-        status: "Đã xuất bản",
+        status: 1,
         createDate: "2023-05-07",
         lastUpdate: "2023-05-04",
       },
@@ -86,7 +87,7 @@ export class PostDataComponent implements OnInit {
         code: "N8",
         title: "Bài viết số 8",
         author: "Tác giả 8",
-        status: "Chưa xuất bản",
+        status: 2,
         createDate: "2023-05-08",
         lastUpdate: "2023-05-03",
       },
@@ -95,7 +96,7 @@ export class PostDataComponent implements OnInit {
         code: "N9",
         title: "Bài viết số 9",
         author: "Tác giả 9",
-        status: "Đã xuất bản",
+        status: 1,
         createDate: "2023-05-09",
         lastUpdate: "2023-05-02",
       },
@@ -104,17 +105,19 @@ export class PostDataComponent implements OnInit {
         code: "N10",
         title: "Bài viết số 10",
         author: "Tác giả 10",
-        status: "Chưa xuất bản",
+        status: 2,
         createDate: "2023-05-10",
         lastUpdate: "2023-05-01",
       },
     ];
 
   }
-  headerCheckboxChange(event: Event) {
-  const target = event.target as HTMLInputElement;
-  const checked = target.checked;
-  console.log(checked); // Giá trị của checkBoxHeader
-}
 
+  onCheckAllChange(event: any) {
+    this.dataSelection = this.isCheckAll ? this.data : [];
+  }
+
+  cboChange(ent: any) {
+    this.isCheckAll = this.dataSelection.length === this.data.length;
+  }
 }
