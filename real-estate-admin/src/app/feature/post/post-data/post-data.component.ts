@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NewsItem} from "../model/new-item";
 import {Table, TableHeaderCheckbox} from "primeng/table";
+import {DialogService} from "primeng/dynamicdialog";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-post-data',
@@ -13,8 +15,13 @@ export class PostDataComponent implements OnInit {
   checkBoxHeader = false;
   @ViewChild('checkAll') checkAll: TableHeaderCheckbox;
   isCheckAll = false;
+  isShowModalApprove = false;
+  isShowModalReject = false;
 
-  constructor() {
+  constructor(
+    private dialog: DialogService,
+    private confirmationService: ConfirmationService
+  ) {
   }
 
   ngOnInit(): void {
@@ -119,5 +126,54 @@ export class PostDataComponent implements OnInit {
 
   cboChange(ent: any) {
     this.isCheckAll = this.dataSelection.length === this.data.length;
+  }
+
+  approve() {
+    this.confirmationService.confirm({
+      key: 'errorDialog',
+      header: 'Duyệt',
+      message: 'bạn xác nhận sẽ duyệt bài này',
+      acceptLabel: 'ok',
+      rejectLabel: 'ko',
+      rejectButtonStyleClass: 'p-button-outlined',
+      accept: () => {
+      }
+    })
+  }
+
+  reject() {
+    this.confirmationService.confirm({
+      key: 'errorDialog',
+      header: 'Duyệt',
+      message: 'bạn xác nhận sẽ xóa bài này',
+      acceptLabel: 'ok',
+      rejectLabel: 'ko',
+      rejectButtonStyleClass: 'p-button-outlined',
+      acceptButtonStyleClass: 'p-button-danger',
+      accept: () => {
+      }
+    })
+  }
+
+  down() {
+    this.confirmationService.confirm({
+      key: 'errorDialog',
+      header: 'Duyệt',
+      message: 'bạn xác nhận sẽ hạ bài này',
+      acceptLabel: 'ok',
+      rejectLabel: 'ko',
+      rejectButtonStyleClass: 'p-button-outlined',
+      acceptButtonStyleClass: 'p-button-warning',
+      accept: () => {
+      }
+    })
+  }
+
+  approveAll() {
+    this.isShowModalApprove = true;
+  }
+
+  rejectAll() {
+    this.isShowModalReject = true;
   }
 }

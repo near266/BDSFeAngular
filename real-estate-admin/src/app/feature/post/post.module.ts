@@ -14,6 +14,11 @@ import {FormsModule} from "@angular/forms";
 import {LANGUAGE_FILE_PATH} from "../../core/translate.loader";
 import {TranslateModule} from "@ngx-translate/core";
 import {TabViewModule} from "primeng/tabview";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ToastModule} from "primeng/toast";
+import {DialogService} from "primeng/dynamicdialog";
+import {DialogModule} from "primeng/dialog";
 
 
 @NgModule({
@@ -32,7 +37,10 @@ import {TabViewModule} from "primeng/tabview";
     DropdownModule,
     FormsModule,
     TranslateModule,
-    TabViewModule
+    TabViewModule,
+    ConfirmDialogModule,
+    ToastModule,
+    DialogModule
   ],
   providers: [
     {
