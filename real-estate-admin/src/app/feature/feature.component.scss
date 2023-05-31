@@ -50,7 +50,7 @@
   .feature-content {
     width: 100%;
     height: 100%;
-
+    overflow: auto;
     &-header {
       background: #ffffff;
       height: 8vh;

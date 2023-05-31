@@ -26,21 +26,25 @@
   </div>
   <div class="grid p-3 mt-2">
     <div class="mr-2">
-      <button pButton label="Duyệt tất cả" icon="pi pi-search" class="p-button-outlined"></button>
+      <button pButton label="Duyệt tất cả" [disabled]="dataSelection.length === 0"
+              icon="pi pi-check" class="p-button-outlined"></button>
     </div>
     <div class="mr-2">
-      <button pButton label="Xoá tất cả" icon="pi pi-search" class="p-button-outlined p-button-warning"></button>
+      <button pButton label="Xoá tất cả"  [disabled]="dataSelection.length === 0"
+              icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
     </div>
     <div class="">
       <div class="checked-field">
-        <p-checkbox [(ngModel)]="isCheckAll" (onChange)="onCheckAllChange($event)" [binary]="true"></p-checkbox>
-        <label for="">Chọn tất cả </label>
+        <p-checkbox [(ngModel)]="isCheckAll" id="check-all" (onChange)="onCheckAllChange($event)"
+                    [binary]="true"></p-checkbox>
+        <label for="check-all">Chọn tất cả </label>
       </div>
     </div>
   </div>
-  <div class="p-3">
-    {{checkAll?.checked}}
-    <p-table [value]="data" [(selection)]="dataSelection" dataKey="code" (selectionChange)="cboChange($event)">
+  <div class="p-3" style="overflow: auto">
+    <p-table [value]="data" [(selection)]="dataSelection"
+             dataKey="code" (selectionChange)="cboChange($event)"
+             >
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 4rem">
@@ -48,7 +52,7 @@
           </th>
           <th>Mã tin</th>
           <th>Loại bài</th>
-          <th>Loại bài</th>
+          <th>Tiêu đề</th>
           <th>Người đăng</th>
           <th>Trạng thái</th>
           <th>Created Date</th>
@@ -65,15 +69,20 @@
           <td>{{ product.code }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.author }}</td>
-          <td><spam [ngClass]="product.status === 1 ? 'active' : 'inactive'">{{ product.status === 1 ? 'Chưa duyệt' : 'Đang hiển thị' }}</spam></td>
-          <td>{{ product.createDate }}</td>
-          <td>{{ product.lastUpdate }}</td>
           <td>
-            <span>
-              <i></i>
-            </span>
-            <span></span>
-            <span></span>
+            <span
+              [ngClass]="'new-status-' + product.status">{{ 'status.' + product.status | translate}}</span>
+          </td>
+          <td>{{ product.createDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ product.lastUpdate | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <div class="" style="width: 15rem">
+              <label for="" *ngIf="product.status === 1"
+                     class="p-text-danger cursor-pointer"><i class="pi pi-times"></i> Huỷ</label>
+              <label for=""
+                     class="ml-3 p-text-primary cursor-pointer"> <i class="pi pi-check"></i> Duyệt</label>
+              <label for="" class="ml-3 p-text-warning cursor-pointer"> <i class="pi pi-arrow-down"></i> Hạ bài</label>
+            </div>
           </td>
         </tr>
       </ng-template>

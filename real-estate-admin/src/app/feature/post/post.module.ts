@@ -11,6 +11,9 @@ import {CheckboxModule} from "primeng/checkbox";
 import {TableModule} from "primeng/table";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
+import {LANGUAGE_FILE_PATH} from "../../core/translate.loader";
+import {TranslateModule} from "@ngx-translate/core";
+import {TabViewModule} from "primeng/tabview";
 
 
 @NgModule({
@@ -27,8 +30,15 @@ import {FormsModule} from "@angular/forms";
     CheckboxModule,
     TableModule,
     DropdownModule,
-    FormsModule
-
+    FormsModule,
+    TranslateModule,
+    TabViewModule
+  ],
+  providers: [
+    {
+      provide: LANGUAGE_FILE_PATH,
+      useValue: { path: './assets/i18n/news/' }
+    },
   ]
 })
 export class PostModule { }
