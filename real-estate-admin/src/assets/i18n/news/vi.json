@@ -1,9 +1,10 @@
 {
   "status": {
-    "1": "Không duyệt",
-    "2": "Hạ tin",
+    "0": "Chưa duyệt",
+    "1": "Đang hiển thị",
+    "2": "Từ chối",
     "3": "Đã bán",
-    "4": "Đang hiển thị",
+    "4": "Đã hạ tin",
     "5": "Hết hạn"
   }
 }

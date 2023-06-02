@@ -2,7 +2,7 @@
   <div class="grid p-3">
     <div class="col-12 md:col-10">
       <div class="title-content">
-        <label for="">DANH SÁCH BÀI ĐĂNG </label>
+        <label>DANH SÁCH BÀI ĐĂNG </label>
         <span>(3103 bài đăng)</span>
       </div>
     </div>
@@ -10,13 +10,14 @@
   <div class="grid p-3 border-line">
     <div class="field col-12 md:col-4">
       <div class="title">
-        <label for="">Trạng thái</label>
+        <label>Trạng thái</label>
       </div>
-      <input type="text" pInputText>
+      <p-dropdown></p-dropdown>
     </div>
     <div class="field col-12 md:col-6">
       <div class="title">
-        <label for="">Tin tìm mua đất</label>
+        <label *ngIf="!isBuy">Tin tìm bán đất</label>
+        <label *ngIf="isBuy">Tin tìm mua đất</label>
       </div>
       <input type="text" pInputText>
     </div>
@@ -68,7 +69,7 @@
           </td>
           <td>{{ product.id }}</td>
           <td>{{ product.code }}</td>
-          <td>{{ product.title }}</td>
+          <td><span class="hyper-link">{{ product.title }}</span></td>
           <td>{{ product.author }}</td>
           <td>
             <span
@@ -77,14 +78,15 @@
           <td>{{ product.createDate | date: 'dd/MM/yyyy' }}</td>
           <td>{{ product.lastUpdate | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <div class="" style="width: 20rem">
-
-              <button pButton (click)="approve()" icon="pi pi-times" label="Xóa" disabled
+            <div class="">
+              <button pButton (click)="reject()" icon="pi pi-trash" pTooltip="Xóa"
                       class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
-              <button pButton (click)="approve()" icon="pi pi-times" label="Duyệt"
+              <button pButton (click)="reject()" icon="pi pi-times" pTooltip="Từ chối"
+                      [disabled]="product.status === 2 || listDoNotAction.includes(product.status)"
+                      class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
+              <button pButton (click)="approve()" icon="pi pi-check" pTooltip="Duyệt"
+                      [disabled]="product.status === 1 || listDoNotAction.includes(product.status)"
                       class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
-              <button pButton (click)="approve()" icon="pi pi-times" label="Hạ Bài"
-                      class="p-button-sm p-button-warning p-button-outlined"></button>
             </div>
           </td>
         </tr>

@@ -50,6 +50,12 @@ html, body {
   input {
     width: 66.6666666667%
   }
+  p-dropdown {
+    width: 100%;
+    .p-dropdown {
+      width: 100%;
+    }
+  }
 }
 
 .title-content {
@@ -177,7 +183,7 @@ html, body {
 }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-  background: #3B82F6 !important;
+  background: #30A0E0 !important;
   border-color: #ffffff !important;
   color: #ffffff !important;
   border-radius: 30px 0 30px 0px;
@@ -217,4 +223,9 @@ html, body {
   color: #495057;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
+}
+.hyper-link {
+  font-weight: 600;
+  color: #3B82F6;
+  cursor: pointer;
 }

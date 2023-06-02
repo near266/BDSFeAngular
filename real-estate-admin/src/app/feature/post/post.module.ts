@@ -19,13 +19,15 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
 import {DialogService} from "primeng/dynamicdialog";
 import {DialogModule} from "primeng/dialog";
-
+import { PostFormComponent } from './post-form/post-form.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
     PostComponent,
     PostDataComponent,
-    PostTabviewComponent
+    PostTabviewComponent,
+    PostFormComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import {DialogModule} from "primeng/dialog";
     TabViewModule,
     ConfirmDialogModule,
     ToastModule,
-    DialogModule
+    DialogModule,
+    TooltipModule
   ],
   providers: [
     {
