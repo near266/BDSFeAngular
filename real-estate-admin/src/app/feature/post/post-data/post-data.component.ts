@@ -2,7 +2,9 @@ import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core'
 import {NewsItem} from "../model/new-item";
 import {Table, TableHeaderCheckbox} from "primeng/table";
 import {DialogService} from "primeng/dynamicdialog";
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {approveModal} from "../model/confirm-dialog";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-post-data',
@@ -13,19 +15,25 @@ export class PostDataComponent implements OnInit {
   @Input() isBuy: boolean;
   data: NewsItem[] = [];
   dataSelection: NewsItem[] = [];
-  checkBoxHeader = false;
   @ViewChild('checkAll') checkAll: TableHeaderCheckbox;
   isCheckAll = false;
   isShowModalApprove = false;
   isShowModalReject = false;
-  listDoNotAction = [3,4,5]
+  listDoNotAction = [3, 4, 5]
+  isShowRejectReason = false;
+  listStatus = [];
   constructor(
     private dialog: DialogService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private translateService: TranslateService
   ) {
   }
 
   ngOnInit(): void {
+    this.translateService.get('listStatus').subscribe(res => {
+      this.listStatus = res;
+    })
     this.data = [
       {
         id: "1",
@@ -119,6 +127,7 @@ export class PostDataComponent implements OnInit {
       },
     ];
   }
+
   onCheckAllChange(event: any) {
     this.dataSelection = this.isCheckAll ? this.data : [];
   }
@@ -129,29 +138,16 @@ export class PostDataComponent implements OnInit {
 
   approve() {
     this.confirmationService.confirm({
-      key: 'errorDialog',
-      header: 'Duyệt',
-      message: 'bạn xác nhận sẽ duyệt bài này',
-      acceptLabel: 'ok',
-      rejectLabel: 'ko',
-      rejectButtonStyleClass: 'p-button-outlined',
+      ...approveModal,
       accept: () => {
+        console.log('aaaaaa')
       }
     })
   }
 
   reject() {
-    this.confirmationService.confirm({
-      key: 'errorDialog',
-      header: 'Duyệt',
-      message: 'bạn xác nhận sẽ xóa bài này',
-      acceptLabel: 'ok',
-      rejectLabel: 'ko',
-      rejectButtonStyleClass: 'p-button-outlined',
-      acceptButtonStyleClass: 'p-button-danger',
-      accept: () => {
-      }
-    })
+    this.isShowRejectReason = true;
+
   }
 
   down() {
@@ -168,11 +164,43 @@ export class PostDataComponent implements OnInit {
     })
   }
 
+  isValidateApprove() {
+    for (let s of this.dataSelection) {
+      if (s.status === 1 || this.listDoNotAction.includes(s.status)) {
+        this.messageService.add({
+          severity: 'error',
+          summary: '',
+          detail: 'Một số bản ghi không thể duyệt hoặc đã duyệt'
+        })
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isValidateReject() {
+    for (let s of this.dataSelection) {
+      if (s.status === 2 || this.listDoNotAction.includes(s.status)) {
+        this.messageService.add({
+          severity: 'error',
+          summary: '',
+          detail: 'Một số bản ghi không thể từ chối hoặc đã từ chối'
+        })
+        return true;
+      }
+    }
+    return false;
+  }
+
   approveAll() {
-    this.isShowModalApprove = true;
+    if (!this.isValidateApprove()) {
+      this.isShowModalApprove = true;
+    }
   }
 
   rejectAll() {
-    this.isShowModalReject = true;
+    if (!this.isValidateReject()) {
+      this.isShowModalReject = true;
+    }
   }
 }

@@ -21,6 +21,8 @@ import {DialogService} from "primeng/dynamicdialog";
 import {DialogModule} from "primeng/dialog";
 import { PostFormComponent } from './post-form/post-form.component';
 import { TooltipModule } from 'primeng/tooltip';
+import {MessagesModule} from "primeng/messages";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { TooltipModule } from 'primeng/tooltip';
     ConfirmDialogModule,
     ToastModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    MessagesModule,
+    InputTextareaModule,
   ],
   providers: [
     {

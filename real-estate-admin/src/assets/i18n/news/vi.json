@@ -6,5 +6,27 @@
     "3": "Đã bán",
     "4": "Đã hạ tin",
     "5": "Hết hạn"
-  }
+  },
+  "listStatus": [
+    {
+      "code": "all",
+      "label": "Tất cả"
+    },
+    {
+      "code": 1,
+      "label": "Đang hiển thị"
+    },
+    {
+      "code": 3,
+      "label": "Đã bán"
+    },
+    {
+      "code": 4,
+      "label": "Đã hạ"
+    },
+    {
+      "code": 5,
+      "label": "Hết hạn"
+    }
+  ]
 }

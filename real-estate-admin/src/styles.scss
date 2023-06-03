@@ -34,6 +34,25 @@ html, body {
   }
 }
 
+.primary-form-control {
+  border: 1px solid #006BBB;
+  position: relative;
+  border-radius: 6px;
+  margin-top: 2em;
+
+  label {
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    background: #FFFFFF;
+  }
+
+  input, textarea {
+    border: none;
+    width: 100%;
+  }
+}
+
 .field {
   display: flex;
   justify-content: center;
@@ -50,8 +69,10 @@ html, body {
   input {
     width: 66.6666666667%
   }
+
   p-dropdown {
     width: 100%;
+
     .p-dropdown {
       width: 100%;
     }
@@ -224,6 +245,7 @@ html, body {
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
+
 .hyper-link {
   font-weight: 600;
   color: #3B82F6;

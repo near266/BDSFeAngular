@@ -12,7 +12,7 @@
       <div class="title">
         <label>Trạng thái</label>
       </div>
-      <p-dropdown></p-dropdown>
+      <p-dropdown [options]="listStatus"></p-dropdown>
     </div>
     <div class="field col-12 md:col-6">
       <div class="title">
@@ -32,16 +32,16 @@
     </div>
     <div class="mr-2">
       <button pButton label="Từ chối" [disabled]="!(dataSelection.length > 1)"
-              icon="pi pi-trash" class="p-button-outlined p-button-danger"
+              icon="pi pi-times" class="p-button-outlined p-button-warning"
               (click)="rejectAll()"></button>
     </div>
-    <div class="">
-      <div class="checked-field">
-        <p-checkbox [(ngModel)]="isCheckAll" id="check-all" (onChange)="onCheckAllChange($event)"
-                    [binary]="true"></p-checkbox>
-        <label for="check-all">Chọn tất cả </label>
-      </div>
-    </div>
+    <!--    <div class="">-->
+    <!--      <div class="checked-field">-->
+    <!--        <p-checkbox [(ngModel)]="isCheckAll" id="check-all" (onChange)="onCheckAllChange($event)"-->
+    <!--                    [binary]="true"></p-checkbox>-->
+    <!--        <label for="check-all">Chọn tất cả </label>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
   <div class="p-3" style="overflow: auto">
     <p-table [value]="data" [(selection)]="dataSelection"
@@ -50,7 +50,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 4rem">
-            <!--            <p-tableHeaderCheckbox #checkAll></p-tableHeaderCheckbox>-->
+            <p-tableHeaderCheckbox #checkAll></p-tableHeaderCheckbox>
           </th>
           <th>Mã tin</th>
           <th>Loại bài</th>
@@ -94,7 +94,7 @@
     </p-table>
   </div>
 </div>
-<p-dialog [(visible)]="isShowModalApprove" header="Duyệt nhiều">
+<p-dialog [(visible)]="isShowModalApprove" [modal]="true" [draggable]="false" [resizable]="false" header="Duyệt nhiều">
   <div class="">
     <p-table [value]="dataSelection"
     >
@@ -118,7 +118,7 @@
     <button pButton label="Duyệt"></button>
   </div>
 </p-dialog>
-<p-dialog [(visible)]="isShowModalReject" header="Xóa nhiều">
+<p-dialog [(visible)]="isShowModalReject" [modal]="true" [draggable]="false" [resizable]="false" header="Từ chối nhiều">
   <div class="">
     <p-table [value]="dataSelection"
     >
@@ -138,7 +138,29 @@
       </ng-template>
     </p-table>
   </div>
+  <div class="">
+    <div class="primary-form-control">
+      <label for="">Lí do</label>
+      <textarea pInputTextarea></textarea>
+
+    </div>
+  </div>
   <div class="flex mt-2 justify-content-center">
-    <button pButton label="Xoá" class="p-button-danger"></button>
+    <button pButton label="Xoá" class="p-button-outlined p-button-warning"></button>
+  </div>
+</p-dialog>
+<p-dialog [(visible)]="isShowRejectReason" [modal]="true" [draggable]="false" [resizable]="false"
+          header="Lí do tử chối" [style]="{width: '35vw'}">
+  <div class="">
+    Bạn chắc chắn muốn từ chối bản ghi
+  </div>
+  <div class="">
+    <div class="primary-form-control">
+      <label for="">Lí do</label>
+      <textarea pInputTextarea></textarea>
+    </div>
+  </div>
+  <div class="flex mt-2 justify-content-center">
+    <button pButton label="Đồng ý" class="p-button-outlined p-button-warning"></button>
   </div>
 </p-dialog>

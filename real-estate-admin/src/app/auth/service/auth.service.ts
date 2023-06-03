@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BaseService} from "../../core/service/base.service";
 import {HttpClient} from "@angular/common/http";
 import {Login} from "../model/login";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import {Observable} from "rxjs";
 export class AuthService extends BaseService {
   public readonly TOKEN_KEY = 'token';
   public readonly REFRESH_TOKEN_KEY = 'refresh-token';
+
   getHttp(): HttpClient {
     return this.http;
   }
@@ -19,28 +21,42 @@ export class AuthService extends BaseService {
     return "";
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router) {
     super()
   }
-  login(body: Login): Observable<any>{
+
+  login(body: Login): Observable<any> {
     return this.doPost('authenticate', body).pipe(map((res: any) => res));
   }
-  isAuthed(): boolean{
-    return  true;
+
+  getInfo(): Observable<any> {
+    return this.doGet('account').pipe(map((res: any) => res));
+  }
+
+  isAuthed(): boolean {
+    return true;
+  }
+  logOut(){
+    this.router.navigate(['auth', 'login'])
+    this.deleteCookie('token')
   }
   getToken(): string {
     return this.getCookie(this.TOKEN_KEY);
   }
-   private setCookie(cname: string, cvalue: string, seconds: number): void {
+
+  private setCookie(cname: string, cvalue: string, seconds: number): void {
     const d = new Date();
     d.setTime(d.getTime() + (seconds * 1000));
     const expires = 'expires=' + d.toUTCString();
     document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
   }
+
   setToken(token: string, expireIn: number): void {
     this.deleteCookie(this.TOKEN_KEY);
     this.setCookie(this.TOKEN_KEY, token, expireIn);
   }
+
   private getCookie(cname: string): string {
     const name = cname + '=';
     const ca = document.cookie.split(';');

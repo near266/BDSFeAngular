@@ -3,6 +3,7 @@ import {AuthService} from "../auth/service/auth.service";
 import {feature} from "./feature-model";
 import {ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
 import {filter} from "rxjs/operators";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-feature',
@@ -11,9 +12,10 @@ import {filter} from "rxjs/operators";
 })
 export class FeatureComponent implements OnInit {
   featureList = feature;
-  items: any[];
+  items: MenuItem[];
   isShowNavigation: boolean = true;
   navigationClass = 'feature-navigation';
+  infoUser: any;
 
   constructor(
     private authService: AuthService,
@@ -24,7 +26,6 @@ export class FeatureComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.authService.getToken())
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         for (let f of this.featureList) {
@@ -32,6 +33,19 @@ export class FeatureComponent implements OnInit {
         }
       }
     });
+    this.authService.getInfo().subscribe(res => {
+      this.infoUser = res;
+      this.items = [
+        {
+          label: 'Đăng xuất',
+          command: () => {
+           this.authService.logOut();
+          }
+
+        }
+      ]
+    })
+
     this.showNavigation()
   }
 
@@ -60,17 +74,18 @@ export class FeatureComponent implements OnInit {
     const width = window.innerWidth;
     return width <= 768 && width > 640;
   }
+
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
     console.log(window.innerWidth)
-   this.showNavigation();
+    this.showNavigation();
   }
-  showNavigation(){
-     if (this.isMobile()){
+
+  showNavigation() {
+    if (this.isMobile()) {
       this.isShowNavigation = false;
       this.navigationClass = 'a';
-    }
-    else {
+    } else {
       this.isShowNavigation = true;
       this.navigationClass = 'feature-navigation';
     }
