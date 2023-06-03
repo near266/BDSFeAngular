@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="grid align-items-center justify-content-between p-3">
+    <div class="">
+      <h2 style=" color: #30A0E0">Chi tiết bài đăng</h2>
+    </div>
+    <div class="">
+      <button pButton class="p-button-warning p-button-outlined" label="Chỉnh sửa" icon="pi pi pencil"></button>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-12 md:col-2">
+      <div class="secondary-form-control">
+        <label>Loại tin</label>
+        <div class="view-content">
+          <span>content here</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-2">
+      <div class="secondary-form-control">
+        <label>Ngày đăng</label>
+        <div class="view-content">
+          <span>content here</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-2">
+      <div class="secondary-form-control">
+        <label>Ngày hết hạn</label>
+        <div class="view-content">
+          <span>content here</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-2">
+      <div class="secondary-form-control">
+        <label>Loại bài</label>
+        <div class="view-content">
+          <span>content here</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-2">
+      <div class="secondary-form-control">
+        <label>Người đăng</label>
+        <div class="view-content">
+          <span>content here</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-2">
+      <div class="secondary-form-control">
+        <label>Trạng thái</label>
+        <div class="view-content">
+          <span>content here</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <div class="col12 md:col-12">
+      <div class="secondary-form-control">
+        <label for="">Lí do</label>
+        <textarea pInputTextarea readonly [(ngModel)]="reasonContent"></textarea>
+      </div>
+    </div>
+    <div class="col12 md:col-12">
+      <div class="secondary-form-control">
+        <label for="">Mô tả</label>
+        <textarea pInputTextarea readonly rows="" [(ngModel)]="description"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="secondary-form-control">
+      <label for="">Ảnh</label>
+      <div class="grid justify-content-center p-3">
+        <div class="grid justify-content-center align-items-center">
+          <i class="pi pi-angle-left" style="font-size: 2rem; color: #30A0E0"></i>
+        </div>
+        <div class="p-3">
+          <p-image src="../../../../assets/resouces/300.PNG" alt="Image" [preview]="true"></p-image>
+        </div>
+        <div class="p-3">
+          <p-image src="../../../../assets/resouces/300.PNG" alt="Image" [preview]="true"></p-image>
+
+        </div>
+        <div class="p-3">
+          <p-image src="../../../../assets/resouces/300.PNG" alt="Image" [preview]="true"></p-image>
+        </div>
+        <div class="grid justify-content-center align-items-center">
+          <i class="pi pi-angle-right" style="font-size: 2rem; color: #30A0E0"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

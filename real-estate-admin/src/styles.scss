@@ -52,6 +52,31 @@ html, body {
     width: 100%;
   }
 }
+.secondary-form-control {
+  border: 1px solid #D8D8D8;
+  position: relative;
+  border-radius: 6px;
+  margin-top: 2em;
+
+  label {
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    background: #FFFFFF;
+    font-weight: 700;
+  }
+
+  input, textarea {
+    border: none;
+    width: 100%;
+  }
+  .view-content {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    padding: 10%;
+  }
+}
 
 .field {
   display: flex;

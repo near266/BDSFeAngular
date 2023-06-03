@@ -5,6 +5,7 @@ import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {approveModal} from "../model/confirm-dialog";
 import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post-data',
@@ -26,7 +27,8 @@ export class PostDataComponent implements OnInit {
     private dialog: DialogService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router: Router
   ) {
   }
 
@@ -202,5 +204,8 @@ export class PostDataComponent implements OnInit {
     if (!this.isValidateReject()) {
       this.isShowModalReject = true;
     }
+  }
+  goToView(){
+    this.router.navigate(['news', 'view'])
   }
 }

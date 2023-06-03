@@ -23,13 +23,17 @@ import { PostFormComponent } from './post-form/post-form.component';
 import { TooltipModule } from 'primeng/tooltip';
 import {MessagesModule} from "primeng/messages";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import { PostViewComponent } from './post-view/post-view.component';
+import {CardModule} from "primeng/card";
+import {ImageModule} from "primeng/image";
 
 @NgModule({
   declarations: [
     PostComponent,
     PostDataComponent,
     PostTabviewComponent,
-    PostFormComponent
+    PostFormComponent,
+    PostViewComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +52,8 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     TooltipModule,
     MessagesModule,
     InputTextareaModule,
+    CardModule,
+    ImageModule
   ],
   providers: [
     {
