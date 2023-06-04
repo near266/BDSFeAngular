@@ -6,6 +6,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {approveModal} from "../model/confirm-dialog";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
+import {PostService} from "../service/post.service";
 
 @Component({
   selector: 'app-post-data',
@@ -23,12 +24,23 @@ export class PostDataComponent implements OnInit {
   listDoNotAction = [3, 4, 5]
   isShowRejectReason = false;
   listStatus = [];
+  pageSize = 10;
+  page = 1;
+  totalRecord = 0;
+  listRequest = {
+    title: '',
+    status: 0,
+    page: 1,
+    pageSize: 10
+  }
+
   constructor(
     private dialog: DialogService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private translateService: TranslateService,
-    private router: Router
+    private router: Router,
+    private postService: PostService
   ) {
   }
 
@@ -36,98 +48,20 @@ export class PostDataComponent implements OnInit {
     this.translateService.get('listStatus').subscribe(res => {
       this.listStatus = res;
     })
-    this.data = [
-      {
-        id: "1",
-        code: "N1",
-        title: "Bài viết số 1  sad sda sda dsa sda sda da",
-        author: "Tác giả 1",
-        status: 0,
-        createDate: "2023-05-01",
-        lastUpdate: "2023-05-10",
-      },
-      {
-        id: "2",
-        code: "N2",
-        title: "Bài viết số 2",
-        author: "Tác giả 2",
-        status: 1,
-        createDate: "2023-05-02",
-        lastUpdate: "2023-05-09",
-      },
-      {
-        id: "3",
-        code: "N3",
-        title: "Bài viết số 3",
-        author: "Tác giả 3",
-        status: 2,
-        createDate: "2023-05-03",
-        lastUpdate: "2023-05-08",
-      },
-      {
-        id: "4",
-        code: "N4",
-        title: "Bài viết số 4",
-        author: "Tác giả 4",
-        status: 3,
-        createDate: "2023-05-04",
-        lastUpdate: "2023-05-07",
-      },
-      {
-        id: "5",
-        code: "N5",
-        title: "Bài viết số 5",
-        author: "Tác giả 5",
-        status: 4,
-        createDate: "2023-05-05",
-        lastUpdate: "2023-05-06",
-      },
-      {
-        id: "6",
-        code: "N6",
-        title: "Bài viết số 6",
-        author: "Tác giả 6",
-        status: 5,
-        createDate: "2023-05-06",
-        lastUpdate: "2023-05-05",
-      },
-      {
-        id: "7",
-        code: "N7",
-        title: "Bài viết số 7",
-        author: "Tác giả 7",
-        status: 0,
-        createDate: "2023-05-07",
-        lastUpdate: "2023-05-04",
-      },
-      {
-        id: "8",
-        code: "N8",
-        title: "Bài viết số 8",
-        author: "Tác giả 8",
-        status: 1,
-        createDate: "2023-05-08",
-        lastUpdate: "2023-05-03",
-      },
-      {
-        id: "9",
-        code: "N9",
-        title: "Bài viết số 9",
-        author: "Tác giả 9",
-        status: 2,
-        createDate: "2023-05-09",
-        lastUpdate: "2023-05-02",
-      },
-      {
-        id: "10",
-        code: "N10",
-        title: "Bài viết số 10",
-        author: "Tác giả 10",
-        status: 3,
-        createDate: "2023-05-10",
-        lastUpdate: "2023-05-01",
-      },
-    ];
+    this.getListPost();
+  }
+
+  getListPost() {
+    this.postService.getListPost(this.listRequest, this.isBuy).subscribe((res: any) => {
+      this.data = res.data;
+      this.totalRecord = res.totalCount;
+    })
+  }
+
+  paginate(evt: any) {
+    this.listRequest.pageSize = evt.rows;
+    this.listRequest.page = evt.pageCount;
+    this.getListPost();
   }
 
   onCheckAllChange(event: any) {
@@ -205,7 +139,8 @@ export class PostDataComponent implements OnInit {
       this.isShowModalReject = true;
     }
   }
-  goToView(){
-    this.router.navigate(['news', 'view'])
+
+  goToView(id: string) {
+    this.router.navigate(['news', 'view'], {queryParams: {id, isBuy: this.isBuy}})
   }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {PostTabviewComponent} from "./post-tabview/post-tabview.component";
 import {PostComponent} from "./post.component";
 import {PostViewComponent} from "./post-view/post-view.component";
+import {PostUpdateComponent} from "./post-update/post-update.component";
 
 const routes: Routes = [
   {
@@ -15,7 +16,11 @@ const routes: Routes = [
       },
       {
         path: 'view',
-        component: PostViewComponent
+        component: PostViewComponent,
+      },
+      {
+        path: 'edit',
+        component: PostUpdateComponent
       }
     ]
   }

@@ -27,11 +27,11 @@ export class AuthService extends BaseService {
   }
 
   login(body: Login): Observable<any> {
-    return this.doPost('authenticate', body).pipe(map((res: any) => res));
+    return this.doPost('api/authenticate', body).pipe(map((res: any) => res));
   }
 
   getInfo(): Observable<any> {
-    return this.doGet('account').pipe(map((res: any) => res));
+    return this.doGet('api/account').pipe(map((res: any) => res));
   }
 
   isAuthed(): boolean {

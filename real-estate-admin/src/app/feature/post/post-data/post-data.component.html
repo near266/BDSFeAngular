@@ -12,17 +12,17 @@
       <div class="title">
         <label>Trạng thái</label>
       </div>
-      <p-dropdown [options]="listStatus"></p-dropdown>
+      <p-dropdown [options]="listStatus" [(ngModel)]="listRequest.status" optionValue="code"></p-dropdown>
     </div>
     <div class="field col-12 md:col-6">
       <div class="title">
         <label *ngIf="!isBuy">Tin tìm bán đất</label>
         <label *ngIf="isBuy">Tin tìm mua đất</label>
       </div>
-      <input type="text" pInputText>
+      <input type="text" pInputText [(ngModel)]="listRequest.title">
     </div>
     <div class="col-12 md:col-2">
-      <button pButton label="Tìm kiếm" icon="pi pi-search"></button>
+      <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getListPost()"></button>
     </div>
   </div>
   <div class="grid p-3 mt-2">
@@ -35,13 +35,6 @@
               icon="pi pi-times" class="p-button-outlined p-button-warning"
               (click)="rejectAll()"></button>
     </div>
-    <!--    <div class="">-->
-    <!--      <div class="checked-field">-->
-    <!--        <p-checkbox [(ngModel)]="isCheckAll" id="check-all" (onChange)="onCheckAllChange($event)"-->
-    <!--                    [binary]="true"></p-checkbox>-->
-    <!--        <label for="check-all">Chọn tất cả </label>-->
-    <!--      </div>-->
-    <!--    </div>-->
   </div>
   <div class="p-3" style="overflow: auto">
     <p-table [value]="data" [(selection)]="dataSelection"
@@ -68,17 +61,17 @@
             <p-tableCheckbox [value]="product" (onChange)="onCheckAllChange($event)"></p-tableCheckbox>
           </td>
           <td>{{ product.id }}</td>
-          <td>{{ product.code }}</td>
-          <td><span class="hyper-link" (click)="goToView()">{{ product.title }}</span></td>
-          <td>{{ product.author }}</td>
+          <td>{{ product.type }}</td>
+          <td><span class="hyper-link" (click)="goToView(product.id)">{{ product.titile }}</span></td>
+          <td>{{ product.createdBy }}</td>
           <td>
             <span
               [ngClass]="'new-status-' + product.status">{{ 'status.' + product.status | translate}}</span>
           </td>
-          <td>{{ product.createDate | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ product.lastUpdate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ product.createdDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ product.dueDate | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <div class="">
+            <div class="flex">
               <button pButton (click)="reject()" icon="pi pi-trash" pTooltip="Xóa"
                       class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
               <button pButton (click)="reject()" icon="pi pi-times" pTooltip="Từ chối"
@@ -92,6 +85,12 @@
         </tr>
       </ng-template>
     </p-table>
+  </div>
+  <div class="grid p-3">
+    <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
+                 [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
+                 currentPageReportTemplate=
+                   "{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
 <p-dialog [(visible)]="isShowModalApprove" [modal]="true" [draggable]="false" [resizable]="false" header="Duyệt nhiều">

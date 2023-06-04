@@ -16,10 +16,11 @@ import {
   ApiErrorTokenInvalid
 } from './model/error-response';
 import { attempt, isError } from 'lodash-es';
+import {AuthService} from "../auth/service/auth.service";
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
-  private readonly BASE_URL = environment.basePath;
+  private readonly BASE_URL = environment.baseUrl;
   private readonly IGNORE_URLS = ['/assets/i18n', '/userPortal/exportUserExcel', '/role/exportRoleExcel'];
   private readonly CLIENT_LOG_API = '/common/log';
   private readonly NOT_FOUND_WILL_THROW = [
@@ -30,7 +31,9 @@ export class ResponseInterceptor implements HttpInterceptor {
     , '/areaData/detail'
     , '/portal/kpiDashboard'
   ];
-  constructor() {}
+  constructor(
+    private auth: AuthService
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const started = Date.now();
@@ -44,6 +47,7 @@ export class ResponseInterceptor implements HttpInterceptor {
       catchError((err: any) => {
         httpStatus = 'FAIL';
         const error = this.handleError(err, request);
+        console.log(error)
         return throwError(error);
       }),
       finalize(() => {
@@ -57,34 +61,34 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   handleResponse(event: any, req: HttpRequest<any>): void {
-    if (!(event instanceof HttpResponse)) {
-      return;
-    }
-    const requestUrl = req.url;
-    if (!this.isRequestToApi(requestUrl)) {
-      return;
-    }
-    if (this.IGNORE_URLS.find(url => requestUrl.includes(url))) {
-      return;
-    }
-    const { isParseJsonError, response } = this.safeParseJson(event.body);
-
-    if (isParseJsonError) {
-      throw new ApiErrorResponse('jsonFormat', 'Cant parse object to json');
-    } else {
-      if (!response.message || !response.message.code) {
-        throw new ApiErrorResponse('noResponseCode', 'Cant get response code');
-      }
-      const rsCode = response.message.code;
-      if (this.isResponseNotFound(response.message)
-        && this.NOT_FOUND_WILL_THROW.find(url => requestUrl.includes(url))
-      ) {
-        throw new ApiErrorNotFound();
-      }
-      if (!this.isResponseSuccess(response.message)) {
-        throw new ApiErrorResponse(rsCode, response.message.message);
-      }
-    }
+    // if (!(event instanceof HttpResponse)) {
+    //   return;
+    // }
+    // const requestUrl = req.url;
+    // if (!this.isRequestToApi(requestUrl)) {
+    //   return;
+    // }
+    // if (this.IGNORE_URLS.find(url => requestUrl.includes(url))) {
+    //   return;
+    // }
+    // const { isParseJsonError, response } = this.safeParseJson(event.body);
+    //
+    // if (isParseJsonError) {
+    //   throw new ApiErrorResponse('jsonFormat', 'Cant parse object to json');
+    // } else {
+    //   if (!response.message || !response.message.code) {
+    //     throw new ApiErrorResponse('noResponseCode', 'Cant get response code');
+    //   }
+    //   const rsCode = response.message.code;
+    //   if (this.isResponseNotFound(response.message)
+    //     && this.NOT_FOUND_WILL_THROW.find(url => requestUrl.includes(url))
+    //   ) {
+    //     throw new ApiErrorNotFound();
+    //   }
+    //   if (!this.isResponseSuccess(response.message)) {
+    //     throw new ApiErrorResponse(rsCode, response.message.message);
+    //   }
+    // }
   }
 
   handleError(err: any, req: HttpRequest<any>): void {
@@ -96,6 +100,7 @@ export class ResponseInterceptor implements HttpInterceptor {
         }
         if (err.status === 401) {
           err = new ApiErrorTokenInvalid('tokenInvalid', 'Token expired or invalid');
+          this.auth.logOut();
         } else if (err.status === 403) {
           err = new ApiErrorForbidden('forbidden', 'Not permission to access resource');
         } else if (err.status === 400) {

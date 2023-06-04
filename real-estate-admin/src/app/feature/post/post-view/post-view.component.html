@@ -4,7 +4,8 @@
       <h2 style=" color: #30A0E0">Chi tiết bài đăng</h2>
     </div>
     <div class="">
-      <button pButton class="p-button-warning p-button-outlined" label="Chỉnh sửa" icon="pi pi pencil"></button>
+      <button pButton class="p-button-warning p-button-outlined"
+              label="Chỉnh sửa" icon="pi pi pencil" (click)="update()"></button>
     </div>
   </div>
   <div class="grid">
@@ -20,7 +21,7 @@
       <div class="secondary-form-control">
         <label>Ngày đăng</label>
         <div class="view-content">
-          <span>content here</span>
+          <span>{{detailData?.createdDate | date: 'dd/MM/yyyy'}}</span>
         </div>
       </div>
     </div>
@@ -44,7 +45,7 @@
       <div class="secondary-form-control">
         <label>Người đăng</label>
         <div class="view-content">
-          <span>content here</span>
+          <span>{{detailData.fullName}}</span>
         </div>
       </div>
     </div>
@@ -52,7 +53,7 @@
       <div class="secondary-form-control">
         <label>Trạng thái</label>
         <div class="view-content">
-          <span>content here</span>
+          <span>{{'status.' + detailData.status | translate }}</span>
         </div>
       </div>
     </div>
@@ -61,13 +62,13 @@
     <div class="col12 md:col-12">
       <div class="secondary-form-control">
         <label for="">Lí do</label>
-        <textarea pInputTextarea readonly [(ngModel)]="reasonContent"></textarea>
+        <textarea pInputTextarea readonly [(ngModel)]="detailData.titile"></textarea>
       </div>
     </div>
     <div class="col12 md:col-12">
       <div class="secondary-form-control">
         <label for="">Mô tả</label>
-        <textarea pInputTextarea readonly rows="" [(ngModel)]="description"></textarea>
+        <textarea pInputTextarea readonly rows="" [(ngModel)]="detailData.description"></textarea>
       </div>
     </div>
   </div>

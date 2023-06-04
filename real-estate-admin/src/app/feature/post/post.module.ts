@@ -26,6 +26,8 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import { PostViewComponent } from './post-view/post-view.component';
 import {CardModule} from "primeng/card";
 import {ImageModule} from "primeng/image";
+import { PostUpdateComponent } from './post-update/post-update.component';
+import {PaginatorModule} from "primeng/paginator";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import {ImageModule} from "primeng/image";
     PostDataComponent,
     PostTabviewComponent,
     PostFormComponent,
-    PostViewComponent
+    PostViewComponent,
+    PostUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +56,8 @@ import {ImageModule} from "primeng/image";
     MessagesModule,
     InputTextareaModule,
     CardModule,
-    ImageModule
+    ImageModule,
+    PaginatorModule
   ],
   providers: [
     {
