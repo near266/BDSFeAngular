@@ -13,7 +13,7 @@ export const approveModal = {
 export const deleteModal = {
   key: 'errorDialog',
   header: 'Xoá',
-  message: 'bạn xác nhận sẽ duyệt bài này',
+  message: 'bạn xác nhận sẽ xóa bài này',
   acceptLabel: 'Đồng ý',
   rejectLabel: 'Huỷ',
   rejectButtonStyleClass: 'p-button-outlined p-button-danger'

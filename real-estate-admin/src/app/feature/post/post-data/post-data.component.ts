@@ -77,11 +77,20 @@ export class PostDataComponent implements OnInit {
     this.getListPost();
   }
 
-  approve() {
+  approve(id: any) {
     this.confirmationService.confirm({
       ...approveModal,
       accept: () => {
-        // this.doApprove();
+        const bodyApprove = {
+          postType: this.isBuy ? 1 : 0,
+          listId: [id],
+          status: 2,
+        }
+        this.postService.approve(bodyApprove).subscribe(res => {
+          this.isShowRejectReason = false;
+          this.successMessage();
+          this.getListPost();
+        })
       }
     })
   }
@@ -109,6 +118,7 @@ export class PostDataComponent implements OnInit {
       if (action === 2) {
         this.isShowModalReject = false;
       }
+      this.successMessage();
       this.getListPost();
     })
   }
@@ -126,10 +136,14 @@ export class PostDataComponent implements OnInit {
   doReject() {
     this.bodyApproveOne.reason = this.reason;
     this.postService.approve(this.bodyApproveOne).subscribe(res => {
-      this.isShowModalReject = false;
+      this.isShowRejectReason = false;
+      this.successMessage();
       this.getListPost();
     })
+  }
 
+  successMessage() {
+    this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
   }
 
   delete(id: any) {
@@ -139,8 +153,8 @@ export class PostDataComponent implements OnInit {
     this.confirmationService.confirm({
       ...deleteModal,
       accept: () => {
-        this.postService.delete(body).subscribe(res => {
-          console.log(res)
+        this.postService.delete(body, this.isBuy).subscribe(res => {
+          this.successMessage();
         })
       }
     })

@@ -30,15 +30,21 @@ export class PostService extends BaseService {
   }
 
   getDetail(id: any, isBuy: boolean): Observable<any> {
-    if (isBuy){
-    return this.doGet(`boughtpost/id?Id=${id}`).pipe(map((res: any) => res)) // tin bán
+    if (isBuy) {
+      return this.doGet(`boughtpost/id?Id=${id}`).pipe(map((res: any) => res)) // tin bán
     }
     return this.doGet(`salepost/id?Id=${id}`).pipe(map((res: any) => res)) // tin bán
   }
+
   approve(body: any): Observable<any> {
     return this.doPost('admin/approve', body).pipe(map((res: any) => res))
   }
-  delete(body: any): Observable<any>{
-    return this.doDelete('/salepost/delete', body).pipe(map((res: any) => res))
+
+  delete(body: any, isBuy: boolean): Observable<any> {
+    if (isBuy){
+          return this.doPost('salepost/deleteBPost', body).pipe(map((res: any) => res)) // tin bán
+    }
+        return this.doPost('boughtpost/deleteBPost', body).pipe(map((res: any) => res))// tin mua
+
   }
 }
