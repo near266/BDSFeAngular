@@ -52,7 +52,8 @@
         </div>
         <div class="col-12">
           <div class="flex justify-content-center">
-            <button pButton label="Đăng nhập" class="primary" (click)="doLogin()"></button>
+            <button pButton label="Đăng nhập" class="primary"
+                    (keyup.enter)="doLogin()" (click)="doLogin()"></button>
           </div>
         </div>
       </div>

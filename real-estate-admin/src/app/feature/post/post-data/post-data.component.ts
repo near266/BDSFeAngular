@@ -3,10 +3,11 @@ import {NewsItem} from "../model/new-item";
 import {Table, TableHeaderCheckbox} from "primeng/table";
 import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {approveModal} from "../model/confirm-dialog";
+import {approveModal, deleteModal} from "../model/confirm-dialog";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {PostService} from "../service/post.service";
+import {Paginator} from "primeng/paginator";
 
 @Component({
   selector: 'app-post-data',
@@ -18,6 +19,7 @@ export class PostDataComponent implements OnInit {
   data: NewsItem[] = [];
   dataSelection: NewsItem[] = [];
   @ViewChild('checkAll') checkAll: TableHeaderCheckbox;
+  @ViewChild('paginator', {static: false}) paginator: Paginator;
   isCheckAll = false;
   isShowModalApprove = false;
   isShowModalReject = false;
@@ -29,10 +31,18 @@ export class PostDataComponent implements OnInit {
   totalRecord = 0;
   listRequest = {
     title: '',
-    status: 0,
+    status: null,
     page: 1,
     pageSize: 10
   }
+  reason: string = '';
+  reasonOne: string = '';
+  bodyApproveOne = {
+    postType: 0,
+    listId: [''],
+    status: 2,
+    reason: ''
+  };
 
   constructor(
     private dialog: DialogService,
@@ -59,43 +69,79 @@ export class PostDataComponent implements OnInit {
   }
 
   paginate(evt: any) {
+    if (this.listRequest.pageSize !== evt.rows) {
+      this.page = 0;
+    }
+    this.listRequest.page = evt.page + 1;
     this.listRequest.pageSize = evt.rows;
-    this.listRequest.page = evt.pageCount;
     this.getListPost();
-  }
-
-  onCheckAllChange(event: any) {
-    this.dataSelection = this.isCheckAll ? this.data : [];
-  }
-
-  cboChange(ent: any) {
-    this.isCheckAll = this.dataSelection.length === this.data.length;
   }
 
   approve() {
     this.confirmationService.confirm({
       ...approveModal,
       accept: () => {
-        console.log('aaaaaa')
+        // this.doApprove();
       }
     })
   }
 
-  reject() {
+  /*
+  * input: Action
+  * Approve = 2
+  * Reject = 0
+  * */
+  doChangeAction(action: number) {
+    let listId: any[] = [];
+    this.dataSelection.forEach(el => {
+      listId.push(el.id);
+    })
+    const bodyApprove = {
+      postType: this.isBuy ? 1 : 0,
+      listId,
+      status: action,
+      reason: this.reason
+    }
+    this.postService.approve(bodyApprove).subscribe(res => {
+      if (action === 1) {
+        this.isShowModalApprove = false;
+      }
+      if (action === 2) {
+        this.isShowModalReject = false;
+      }
+      this.getListPost();
+    })
+  }
+
+  reject(listId: any) {
     this.isShowRejectReason = true;
+    this.bodyApproveOne = {
+      postType: this.isBuy ? 1 : 0,
+      listId: [listId],
+      status: 2,
+      reason: ''
+    }
+  }
+
+  doReject() {
+    this.bodyApproveOne.reason = this.reason;
+    this.postService.approve(this.bodyApproveOne).subscribe(res => {
+      this.isShowModalReject = false;
+      this.getListPost();
+    })
 
   }
 
-  down() {
+  delete(id: any) {
+    const body = {
+      listId: [id]
+    }
     this.confirmationService.confirm({
-      key: 'errorDialog',
-      header: 'Duyệt',
-      message: 'bạn xác nhận sẽ hạ bài này',
-      acceptLabel: 'ok',
-      rejectLabel: 'ko',
-      rejectButtonStyleClass: 'p-button-outlined',
-      acceptButtonStyleClass: 'p-button-warning',
+      ...deleteModal,
       accept: () => {
+        this.postService.delete(body).subscribe(res => {
+          console.log(res)
+        })
       }
     })
   }

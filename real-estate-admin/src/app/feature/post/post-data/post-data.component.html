@@ -38,12 +38,12 @@
   </div>
   <div class="p-3" style="overflow: auto">
     <p-table [value]="data" [(selection)]="dataSelection"
-             dataKey="code" (selectionChange)="cboChange($event)"
+             dataKey="id"
     >
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 4rem">
-            <p-tableHeaderCheckbox #checkAll></p-tableHeaderCheckbox>
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th>Mã tin</th>
           <th>Loại bài</th>
@@ -58,7 +58,7 @@
       <ng-template pTemplate="body" let-product>
         <tr>
           <td>
-            <p-tableCheckbox [value]="product" (onChange)="onCheckAllChange($event)"></p-tableCheckbox>
+            <p-tableCheckbox [value]="product"></p-tableCheckbox>
           </td>
           <td>{{ product.id }}</td>
           <td>{{ product.type }}</td>
@@ -72,9 +72,9 @@
           <td>{{ product.dueDate | date: 'dd/MM/yyyy' }}</td>
           <td>
             <div class="flex">
-              <button pButton (click)="reject()" icon="pi pi-trash" pTooltip="Xóa"
+              <button pButton (click)="delete(product.id)" icon="pi pi-trash" pTooltip="Xóa"
                       class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
-              <button pButton (click)="reject()" icon="pi pi-times" pTooltip="Từ chối"
+              <button pButton (click)="reject(product.id)" icon="pi pi-times" pTooltip="Từ chối"
                       [disabled]="product.status === 2 || listDoNotAction.includes(product.status)"
                       class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
               <button pButton (click)="approve()" icon="pi pi-check" pTooltip="Duyệt"
@@ -89,11 +89,13 @@
   <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
                  [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
+                 #paginator
                  currentPageReportTemplate=
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [(visible)]="isShowModalApprove" [modal]="true" [draggable]="false" [resizable]="false" header="Duyệt nhiều">
+<p-dialog [(visible)]="isShowModalApprove" [modal]="true" [draggable]="false"
+          [resizable]="false" header="Duyệt nhiều">
   <div class="">
     <p-table [value]="dataSelection"
     >
@@ -107,17 +109,18 @@
       <ng-template pTemplate="body" let-product>
         <tr>
           <td>{{ product.id }}</td>
-          <td>{{ product.code }}</td>
-          <td>{{ product.title }}</td>
+          <td>{{ product.type }}</td>
+          <td>{{ product.titile }}</td>
         </tr>
       </ng-template>
     </p-table>
   </div>
   <div class="flex mt-2 justify-content-center">
-    <button pButton label="Duyệt"></button>
+    <button pButton label="Duyệt" (click)="doChangeAction(1)"></button>
   </div>
 </p-dialog>
-<p-dialog [(visible)]="isShowModalReject" [modal]="true" [draggable]="false" [resizable]="false" header="Từ chối nhiều">
+<p-dialog [(visible)]="isShowModalReject" [modal]="true" [draggable]="false"
+          [resizable]="false" header="Từ chối nhiều">
   <div class="">
     <p-table [value]="dataSelection"
     >
@@ -131,8 +134,8 @@
       <ng-template pTemplate="body" let-product>
         <tr>
           <td>{{ product.id }}</td>
-          <td>{{ product.code }}</td>
-          <td>{{ product.title }}</td>
+          <td>{{ product.type }}</td>
+          <td>{{ product.titile }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -140,12 +143,13 @@
   <div class="">
     <div class="primary-form-control">
       <label for="">Lí do</label>
-      <textarea pInputTextarea></textarea>
+      <textarea pInputTextarea [(ngModel)]="reason"></textarea>
 
     </div>
   </div>
   <div class="flex mt-2 justify-content-center">
-    <button pButton label="Xoá" class="p-button-outlined p-button-warning"></button>
+    <button pButton label="Từ chối" (click)="doChangeAction(2)"
+            class="p-button-outlined p-button-warning"></button>
   </div>
 </p-dialog>
 <p-dialog [(visible)]="isShowRejectReason" [modal]="true" [draggable]="false" [resizable]="false"
@@ -156,10 +160,10 @@
   <div class="">
     <div class="primary-form-control">
       <label for="">Lí do</label>
-      <textarea pInputTextarea></textarea>
+      <textarea pInputTextarea [(ngModel)]="reasonOne"></textarea>
     </div>
   </div>
   <div class="flex mt-2 justify-content-center">
-    <button pButton label="Đồng ý" class="p-button-outlined p-button-warning"></button>
+    <button pButton label="Từ chối" (click)="doReject()" class="p-button-outlined p-button-warning"></button>
   </div>
 </p-dialog>

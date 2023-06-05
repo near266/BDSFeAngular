@@ -35,4 +35,10 @@ export class PostService extends BaseService {
     }
     return this.doGet(`salepost/id?Id=${id}`).pipe(map((res: any) => res)) // tin bán
   }
+  approve(body: any): Observable<any> {
+    return this.doPost('admin/approve', body).pipe(map((res: any) => res))
+  }
+  delete(body: any): Observable<any>{
+    return this.doDelete('/salepost/delete', body).pipe(map((res: any) => res))
+  }
 }
