@@ -1,6 +1,9 @@
 {
   "/api": {
-    "target": "https://api-bds.eztek.net",
+    "target": [
+      "https://api-bds.eztek.net",
+      "https://api.hoalac123.com"
+    ],
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
