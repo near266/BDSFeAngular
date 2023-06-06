@@ -46,7 +46,7 @@
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th>Mã tin</th>
-          <th>Loại bài</th>
+          <th *ngIf="!isBuy">Loại bài</th>
           <th class="text-center">Tiêu đề</th>
           <th>Người đăng</th>
           <th>Trạng thái</th>
@@ -61,7 +61,7 @@
             <p-tableCheckbox [value]="product"></p-tableCheckbox>
           </td>
           <td>{{ product.id }}</td>
-          <td>{{ 'typeNews.' + product.type | translate}}</td>
+          <td *ngIf="!isBuy">{{ 'typeNews.' + product.type | translate}}</td>
           <td><span class="hyper-link" (click)="goToView(product.id)">{{ product.titile }}</span></td>
           <td>{{ product.createdBy }}</td>
           <td>
