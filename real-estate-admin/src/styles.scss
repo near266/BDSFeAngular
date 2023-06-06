@@ -151,12 +151,8 @@ html, body {
     width: 66.6666666667%
   }
 
-  p-dropdown {
+  p-inputNumber, .p-inputnumber, p-dropdown, .p-dropdown, p-calendar, .p-calendar {
     width: 100%;
-
-    .p-dropdown {
-      width: 100%;
-    }
   }
 }
 

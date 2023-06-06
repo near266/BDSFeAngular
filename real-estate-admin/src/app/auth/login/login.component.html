@@ -35,7 +35,8 @@
           <div class="danger-form-control">
             <label>Mật khẩu</label>
             <input [type]="passwordType" pInputText formControlName="password"/>
-            <i class="pi pi-eye" style="position: absolute; top: 15px; right: 15px;" (click)="changeTypePass()"></i>
+            <i class="pi pi-eye" style="position: absolute; top: 15px; right: 15px;" (click)="changeTypePass()"
+               (keyup.enter)="doLogin()"></i>
           </div>
 
         </div>
@@ -53,7 +54,7 @@
         <div class="col-12">
           <div class="flex justify-content-center">
             <button pButton label="Đăng nhập" class="primary"
-                    (keyup.enter)="doLogin()" (click)="doLogin()"></button>
+                    (click)="doLogin()"></button>
           </div>
         </div>
       </div>

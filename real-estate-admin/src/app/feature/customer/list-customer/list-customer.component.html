@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="grid p-3 border-line">
+    <div class="field col-12 md:col-5">
+      <div class="title">
+        <label>Tên khách hàng</label>
+      </div>
+      <input type="text" pInputText>
+    </div>
+    <div class="field col-12 md:col-5">
+      <div class="title">
+        <label>Số điện thoại</label>
+      </div>
+      <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false"></p-inputNumber>
+    </div>
+    <div class="col-12 md:col-2">
+      <button pButton label="Tìm kiếm" icon="pi pi-search"></button>
+    </div>
+  </div>
+  <div class="grid p-3">
+    <div class="col-12 md:col-10">
+      <div class="title-content">
+        <label>DANH SÁCH KHÁCH HÀNG </label>
+        <span>(3103 bài đăng)</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3">
+    <div class="mr-2">
+      <button pButton label="Xóa"
+              icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+    </div>
+  </div>
+  <div class="p-3">
+    <p-table [value]="mockCustomers" [(selection)]="dataSelection"
+             dataKey="id">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <!--          <th>STT</th>-->
+          <th>Khách hàng</th>
+          <th>Địa chỉ</th>
+          <th>Công ty</th>
+          <th>Số điện thoại</th>
+          <th>MGTB</th>
+          <th>Số dư TK chính</th>
+          <th>Số dư TK KM</th>
+          <th>Điểm thưởng</th>
+          <th class="text-center">Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-customer>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+          </td>
+          <!--          <td>{{i + 1}}</td>-->
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.address }}</td>
+          <td>{{ customer.company }}</td>
+          <td>{{ customer.phoneNumber }}</td>
+          <td>{{ customer.insurance }}</td>
+          <td>{{ customer.mainAccountBalance }}</td>
+          <td>{{ customer.promotionAccountBalance }}</td>
+          <td>{{ customer.rewardPoints }}</td>
+          <td>
+            <button pButton icon="pi pi-bars" pTooltip="Xem số dư" (click)="viewBalance(customer.name)"
+                    class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
+            <button pButton icon="pi pi-trash" pTooltip="Xóa"
+                    class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

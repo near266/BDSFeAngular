@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="grid p-3 border-line">
+    <div class="field col-12 md:col-5">
+      <div class="title">
+        <label>Tên khách hàng</label>
+      </div>
+      <input type="text" pInputText>
+    </div>
+    <div class="field col-12 md:col-5">
+      <div class="title">
+        <label>Thời gian</label>
+      </div>
+      <p-calendar selectionMode="range" [readonlyInput]="true" inputId="range"
+      [showIcon]="true"></p-calendar>
+    </div>
+    <div class="col-12 md:col-2">
+      <button pButton label="Tìm kiếm" icon="pi pi-search"></button>
+    </div>
+  </div>
+  <div class="grid p-3">
+    <div class="col-12 md:col-10">
+      <div class="title-content">
+        <label>DANH SÁCH KHÁCH HÀNG </label>
+        <span>(3103 bài đăng)</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3">
+    <div class="mr-2">
+      <button pButton label="Xóa"
+              icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+    </div>
+  </div>
+  <div class="p-3">
+    <p-table [value]="mockCustomerData">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Mã KH</th>
+          <th>Khách hàng</th>
+          <th>Số điện thoại</th>
+          <th>Ảnh minh chứng</th>
+          <th>Trạng thái</th>
+          <th pSortableColumn="timestamp">
+            <p-sortIcon field="timestamp"></p-sortIcon>
+            Thời gian
+          </th>
+          <th>Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-customerData>
+        <tr>
+          <td>{{ customerData.id }}</td>
+          <td>{{ customerData.customerName }}</td>
+          <td>{{ customerData.phoneNumber }}</td>
+          <td>
+            <img [src]="customerData.proofImage" alt="Ảnh minh chứng">
+          </td>
+          <td>{{ customerData.status }}</td>
+          <td>{{ customerData.timestamp | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền"
+                    class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
+            <button pButton icon="pi pi-times" pTooltip="Từ chối"
+                    class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
