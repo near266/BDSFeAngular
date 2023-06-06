@@ -5,7 +5,9 @@
     "2": "Từ chối",
     "3": "Đã bán",
     "4": "Đã hạ tin",
-    "5": "Hết hạn"
+    "5": "Hết hạn",
+        "": ""
+
   },
   "listStatus": [
     {
@@ -29,8 +31,10 @@
       "label": "Hết hạn"
     }
   ],
-  "type": {
+  "typeNews": {
     "0": "Thường",
-    "1": "VIP"
+    "1": "VIP",
+    "2": "VIP Nổi bật",
+    "": ""
   }
 }

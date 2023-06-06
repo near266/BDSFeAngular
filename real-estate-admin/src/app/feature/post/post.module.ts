@@ -28,6 +28,8 @@ import {CardModule} from "primeng/card";
 import {ImageModule} from "primeng/image";
 import { PostUpdateComponent } from './post-update/post-update.component';
 import {PaginatorModule} from "primeng/paginator";
+import {CalendarModule} from "primeng/calendar";
+import {ShareModule} from "../../share/share.module";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import {PaginatorModule} from "primeng/paginator";
     InputTextareaModule,
     CardModule,
     ImageModule,
-    PaginatorModule
+    PaginatorModule,
+    CalendarModule,
+    ShareModule
   ],
   providers: [
     {

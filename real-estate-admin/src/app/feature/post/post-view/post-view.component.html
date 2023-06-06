@@ -13,7 +13,7 @@
       <div class="secondary-form-control">
         <label>Loại tin</label>
         <div class="view-content">
-          <span>content here</span>
+          <span>{{'typeNews.' + detailData?.type | translate}}</span>
         </div>
       </div>
     </div>
@@ -29,15 +29,16 @@
       <div class="secondary-form-control">
         <label>Ngày hết hạn</label>
         <div class="view-content">
-          <span>{{detailData.dueDate | date: 'dd/MM/yyyy'}}</span>
+          <span>{{detailData?.dueDate | date: 'dd/MM/yyyy'}}</span>
         </div>
       </div>
     </div>
     <div class="col-12 md:col-2">
       <div class="secondary-form-control">
-        <label>Loại bài</label>
+        <label>Ngày duyệt</label>
         <div class="view-content">
-          <span>{{'type.' + detailData.type | date: 'dd/MM/yyyy'}}</span>
+          <span>{{(detailData?.approveDate| date: 'dd/MM/yyyy') ||
+            'BE trả approveDate là ăn '}}</span>
         </div>
       </div>
     </div>
@@ -45,7 +46,7 @@
       <div class="secondary-form-control">
         <label>Người đăng</label>
         <div class="view-content">
-          <span>{{detailData.fullName}}</span>
+          <span>{{detailData?.fullName}}</span>
         </div>
       </div>
     </div>
@@ -53,7 +54,7 @@
       <div class="secondary-form-control">
         <label>Trạng thái</label>
         <div class="view-content">
-          <span>{{'status.' + detailData.status | translate }}</span>
+          <span>{{'status.' + detailData?.status | translate }}</span>
         </div>
       </div>
     </div>
@@ -76,16 +77,18 @@
     <div class="secondary-form-control">
       <label for="">Ảnh</label>
       <div class="grid justify-content-center p-3">
-        <div class="grid justify-content-center align-items-center">
+        <div class="grid justify-content-center align-items-center"
+             *ngIf="isAtRightEdge()" (click)="previousPage()">
           <i class="pi pi-angle-left" style="font-size: 2rem; color: #30A0E0"></i>
         </div>
         <div class="grid">
 
-          <div class="p-3" *ngFor="let im of detailData.image">
+          <div class="p-3" *ngFor="let im of getItems()">
             <p-image [src]="im" alt="Image" [preview]="true" height="300" width="300"></p-image>
           </div>
         </div>
-        <div class="grid justify-content-center align-items-center">
+        <div class="grid justify-content-center align-items-center"
+             *ngIf="isAtLeftEdge()" (click)="nextPage()">
           <i class="pi pi-angle-right" style="font-size: 2rem; color: #30A0E0"></i>
         </div>
       </div>

@@ -1,12 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ImageInputUploadComponent} from './image-input-upload/image-input-upload.component';
+import {ImageModule} from "primeng/image";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ImageInputUploadComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ImageModule
+  ],
+  exports: [
+    ImageInputUploadComponent
   ]
 })
-export class ShareModule { }
+export class ShareModule {
+}

@@ -82,9 +82,9 @@ export class PostDataComponent implements OnInit {
       ...approveModal,
       accept: () => {
         const bodyApprove = {
-          postType: this.isBuy ? 1 : 0,
+          postType: this.isBuy ? 0 : 1,
           listId: [id],
-          status: 2,
+          status: 1,
         }
         this.postService.approve(bodyApprove).subscribe(res => {
           this.isShowRejectReason = false;
@@ -97,8 +97,8 @@ export class PostDataComponent implements OnInit {
 
   /*
   * input: Action
-  * Approve = 2
-  * Reject = 0
+  * Approve = 1
+  * Reject = 2
   * */
   doChangeAction(action: number) {
     let listId: any[] = [];
@@ -106,7 +106,7 @@ export class PostDataComponent implements OnInit {
       listId.push(el.id);
     })
     const bodyApprove = {
-      postType: this.isBuy ? 1 : 0,
+      postType: this.isBuy ? 0 : 1,
       listId,
       status: action,
       reason: this.reason
@@ -126,7 +126,7 @@ export class PostDataComponent implements OnInit {
   reject(listId: any) {
     this.isShowRejectReason = true;
     this.bodyApproveOne = {
-      postType: this.isBuy ? 1 : 0,
+      postType: this.isBuy ? 0 : 1,
       listId: [listId],
       status: 2,
       reason: ''

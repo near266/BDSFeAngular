@@ -61,7 +61,7 @@
             <p-tableCheckbox [value]="product"></p-tableCheckbox>
           </td>
           <td>{{ product.id }}</td>
-          <td>{{ product.type }}</td>
+          <td>{{ 'typeNews.' + product.type | translate}}</td>
           <td><span class="hyper-link" (click)="goToView(product.id)">{{ product.titile }}</span></td>
           <td>{{ product.createdBy }}</td>
           <td>

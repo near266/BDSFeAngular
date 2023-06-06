@@ -9,6 +9,7 @@ import {FeatureModule} from "./feature/feature.module";
 import {HandleModule} from "./handle/handle.module";
 import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
+import {ShareModule} from "./share/share.module";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
     AuthModule,
     CoreModule,
     FeatureModule,
+    ShareModule
     // HandleModule
   ],
   providers: [

@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-form.component.scss']
 })
 export class PostFormComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
