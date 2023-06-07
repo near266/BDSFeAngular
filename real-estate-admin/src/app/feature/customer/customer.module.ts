@@ -27,6 +27,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { ListPaymentComponent } from './list-payment/list-payment.component';
 import { ListBalanceComponent } from './list-balance/list-balance.component';
 import {LANGUAGE_FILE_PATH} from "../../core/translate.loader";
+import {ShareModule} from "../../share/share.module";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {LANGUAGE_FILE_PATH} from "../../core/translate.loader";
     ImageModule,
     PaginatorModule,
     CalendarModule,
-    InputNumberModule
+    InputNumberModule,
+    ShareModule
   ],
   providers: [
     {

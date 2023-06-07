@@ -13,7 +13,15 @@ import {deleteModal} from "../model/modal";
 export class ListCustomerComponent implements OnInit {
   dataSelection: any[] = [];
   dataCustomers: any[] = [];
-  searchCustomer = {};
+  searchCustomer = {
+    keyword: '',
+    phone: '',
+    page: 1,
+    pageSize: 10
+  };
+  totalRecord = 0;
+  pageSize = 10;
+  page = 1;
 
   constructor(
     private router: Router,
@@ -27,13 +35,13 @@ export class ListCustomerComponent implements OnInit {
     this.getListCustomer();
   }
 
-  getListCustomer() {
-    this.searchCustomer = {
-      pagesize: 10,
-      page: 1
+  getListCustomer(isSearch?: boolean) {
+    if (isSearch){
+      this.searchCustomer.page = 1;
     }
     this.customerService.getCustomer(this.searchCustomer).subscribe(res => {
       this.dataCustomers = res.data;
+      this.totalRecord = res.totalCount;
     })
   }
 
@@ -44,15 +52,35 @@ export class ListCustomerComponent implements OnInit {
     this.confirmationService.confirm({
       ...deleteModal, accept: () => {
         this.customerService.deleteCustomer(body).subscribe(res => {
-          console.log(res);
           this.messageService.add({severity: 'success', summary: '', detail: 'Thao tác thành công'})
+          this.getListCustomer();
         })
       }
     })
   }
-  deleteAll(){
-    console.log(this.dataSelection)
+
+  deleteAll() {
+    let listId: any[] = [];
+    this.dataSelection.forEach(el => {
+      if (el && el.customer.id) {
+        listId.push(el.customer.id);
+      }
+    });
+    this.customerService.deleteCustomer({listId: listId}).subscribe(res => {
+      this.messageService.add({severity: 'success', detail: 'Thao tác thành công'})
+      this.getListCustomer();
+    })
   }
+
+  paginate(evt: any) {
+    if (this.searchCustomer.pageSize !== evt.rows) {
+      this.page = 0;
+    }
+    this.searchCustomer.page = evt.page + 1;
+    this.searchCustomer.pageSize = evt.rows;
+    this.getListCustomer();
+  }
+
   viewBalance(id: any) {
     this.router.navigate(['customers', 'balance'])
   }
