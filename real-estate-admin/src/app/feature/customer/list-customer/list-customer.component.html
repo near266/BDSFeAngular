@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="p-3">
-    <p-table [value]="mockCustomers" [(selection)]="dataSelection"
+    <p-table [value]="dataCustomers" [(selection)]="dataSelection"
              dataKey="id">
       <ng-template pTemplate="header">
         <tr>
@@ -50,24 +50,24 @@
           <th class="text-center">Thao tác</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-customer>
+      <ng-template pTemplate="body" let-item>
         <tr>
           <td>
-            <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+            <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
           <!--          <td>{{i + 1}}</td>-->
-          <td>{{ customer.name }}</td>
-          <td>{{ customer.address }}</td>
-          <td>{{ customer.company }}</td>
-          <td>{{ customer.phoneNumber }}</td>
-          <td>{{ customer.insurance }}</td>
-          <td>{{ customer.mainAccountBalance }}</td>
-          <td>{{ customer.promotionAccountBalance }}</td>
-          <td>{{ customer.rewardPoints }}</td>
+          <td>{{item.customer?.customerName }}</td>
+          <td>{{item.customer?.address }}</td>
+          <td>{{item.customer?.company }}</td>
+          <td>{{item.customer?.phone }}</td>
+          <td>{{item.customer?.insurance }}</td>
+          <td>{{item.wallet?.amount }}</td>
+          <td>{{item.walletPromotional?.amount }}</td>
+          <td>{{ item.customer.rewardPoints }}</td>
           <td>
-            <button pButton icon="pi pi-bars" pTooltip="Xem số dư" (click)="viewBalance(customer.name)"
+            <button pButton icon="pi pi-bars" pTooltip="Xem số dư" (click)="viewBalance(item)"
                     class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
-            <button pButton icon="pi pi-trash" pTooltip="Xóa"
+            <button pButton icon="pi pi-trash" pTooltip="Xóa" (click)="delete(item.customer.id)"
                     class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
           </td>
         </tr>

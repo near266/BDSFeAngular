@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Customer} from "../model/customer";
 import {Router} from "@angular/router";
+import {CustomerService} from "../service/customer.service";
+import {DialogService} from "primeng/dynamicdialog";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {deleteModal} from "../model/modal";
 
 @Component({
   selector: 'app-list-customer',
@@ -8,240 +11,49 @@ import {Router} from "@angular/router";
   styleUrls: ['./list-customer.component.scss']
 })
 export class ListCustomerComponent implements OnInit {
-  mockCustomers: Customer[]
   dataSelection: any[] = [];
+  dataCustomers: any[] = [];
+  searchCustomer = {};
 
   constructor(
-    private router: Router
+    private router: Router,
+    private customerService: CustomerService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {
   }
 
   ngOnInit(): void {
-    this.mockCustomers = [
-      {
-        id: 1,
-        name: "John Doe",
-        address: "123 Main Streetd.ạhkfnl,hj,ksFEkjhniuz,rf,bhz",
-        company: "ABC Company",
-        phoneNumber: "123-456-7890",
-        insurance: "XYZ Insurance",
-        mainAccountBalance: 1000,
-        promotionAccountBalance: 500,
-        rewardPoints: 100,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      {
-        id: 2,
-        name: "Jane Smith",
-        address: "456 Elm Street",
-        company: "DEF Company",
-        phoneNumber: "987-654-3210",
-        insurance: "PQR Insurance",
-        mainAccountBalance: 2000,
-        promotionAccountBalance: 1000,
-        rewardPoints: 200,
-      },
-      // Thêm các khách hàng khác tại đây nếu cần
-    ];
+    this.getListCustomer();
   }
-  viewBalance(id: any){
+
+  getListCustomer() {
+    this.searchCustomer = {
+      pagesize: 10,
+      page: 1
+    }
+    this.customerService.getCustomer(this.searchCustomer).subscribe(res => {
+      this.dataCustomers = res.data;
+    })
+  }
+
+  delete(id: string) {
+    const body = {
+      listId: [id]
+    }
+    this.confirmationService.confirm({
+      ...deleteModal, accept: () => {
+        this.customerService.deleteCustomer(body).subscribe(res => {
+          console.log(res);
+          this.messageService.add({severity: 'success', summary: '', detail: 'Thao tác thành công'})
+        })
+      }
+    })
+  }
+  deleteAll(){
+    console.log(this.dataSelection)
+  }
+  viewBalance(id: any) {
     this.router.navigate(['customers', 'balance'])
   }
 }
