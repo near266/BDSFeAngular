@@ -82,6 +82,6 @@ export class ListCustomerComponent implements OnInit {
   }
 
   viewBalance(id: any) {
-    this.router.navigate(['customers', 'balance'])
+    this.router.navigate(['customers', 'balance', id])
   }
 }

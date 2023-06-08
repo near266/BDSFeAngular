@@ -9,3 +9,11 @@ export interface Customer {
   promotionAccountBalance: number;
   rewardPoints: number;
 }
+export interface Balance {
+  id: any;
+  from: any;
+  to: any;
+  type: any;
+  page:number;
+  pageSize: number;
+}

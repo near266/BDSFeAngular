@@ -1,0 +1,25 @@
+{
+  "typeList": [
+    {
+      "value": 0,
+      "label": "Nạp tiền"
+    },
+    {
+      "value": 1,
+      "label": "Trừ tiền"
+    },
+    {
+      "value": 2,
+      "label": "Hoàn tiền"
+    }
+  ],
+  "type": {
+    "0":  "Nạp tiền",
+    "1":  "Trừ tiền",
+    "2":   "Hoàn tiền"
+  },
+  "walletType": {
+    "0": "Ví chính",
+    "1": "Ví khuyến mại"
+  }
+}

@@ -24,8 +24,8 @@ import {ImageModule} from "primeng/image";
 import {PaginatorModule} from "primeng/paginator";
 import {CalendarModule} from "primeng/calendar";
 import {InputNumberModule} from 'primeng/inputnumber';
-import { ListPaymentComponent } from './list-payment/list-payment.component';
-import { ListBalanceComponent } from './list-balance/list-balance.component';
+import {ListPaymentComponent} from './list-payment/list-payment.component';
+import {ListBalanceComponent} from './list-balance/list-balance.component';
 import {LANGUAGE_FILE_PATH} from "../../core/translate.loader";
 import {ShareModule} from "../../share/share.module";
 
@@ -64,7 +64,7 @@ import {ShareModule} from "../../share/share.module";
   providers: [
     {
       provide: LANGUAGE_FILE_PATH,
-      useValue: { path: './assets/i18n/news/' }
+      useValue: {path: './assets/i18n/customers/'}
     },
   ]
 })

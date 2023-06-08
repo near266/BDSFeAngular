@@ -35,4 +35,7 @@ export class CustomerService extends BaseService {
   deleteCustomer(body: any): Observable<any> {
     return this.doPost('customer/delete', body).pipe(map((res: any) => res));
   }
+  getBalance(body: any): Observable<any>{
+    return this.doPost('/gw/Walllet/wallet/searchTransaction', body).pipe(map((res: any) => res));
+  }
 }

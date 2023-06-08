@@ -14,7 +14,7 @@ const routes: Routes = [
         component: TabviewCustomerComponent
       },
       {
-        path: 'balance',
+        path: 'balance/:id',
         component: ListBalanceComponent
       }
     ]

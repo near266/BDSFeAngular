@@ -67,7 +67,7 @@
           <td>{{item.walletPromotional?.amount }}</td>
           <td>{{ item.customer.point }}</td>
           <td>
-            <button pButton icon="pi pi-bars" pTooltip="Xem số dư" (click)="viewBalance(item)"
+            <button pButton icon="pi pi-bars" pTooltip="Xem số dư" (click)="viewBalance(item.customer.id)"
                     class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
             <button pButton icon="pi pi-trash" pTooltip="Xóa" (click)="delete(item.customer.id)"
                     class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
