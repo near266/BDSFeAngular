@@ -33,7 +33,13 @@ export abstract class BaseService {
       params: httpParams
     });
   }
-
+  protected doPut(url: string, body: any, httpParams?: HttpParams, httpHeaders?: HttpHeaders): Observable<ApiResultResponse> {
+    const requestUrl = `${this.baseUrl}${this.basePath}${url}`;
+    return this.getHttp().put<ApiResultResponse>(requestUrl, body || {}, {
+      headers: httpHeaders,
+      params: httpParams
+    });
+  }
   protected postDataBlob(url: string, body: any, header?: HttpHeaders, inputParams?: HttpParams): Observable<any> {
     const requestUrl = `${this.baseUrl}${this.basePath}${url}`;
     return this.getHttp().post<any>(requestUrl, body, { headers: header, params: inputParams, responseType: 'blob' as 'json' });
