@@ -1,4 +1,8 @@
 {
+  "typePost": {
+    "true": "Tin mua",
+    "false": "Tin bán"
+  },
   "status": {
     "0": "Chưa duyệt",
     "1": "Đang hiển thị",
@@ -6,8 +10,7 @@
     "3": "Đã bán",
     "4": "Đã hạ tin",
     "5": "Hết hạn",
-        "": ""
-
+    "": ""
   },
   "listStatus": [
     {
