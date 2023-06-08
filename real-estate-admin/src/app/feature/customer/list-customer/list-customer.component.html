@@ -5,14 +5,14 @@
         <label>Tên khách hàng</label>
       </div>
       <input type="text" pInputText [(ngModel)]="searchCustomer.keyword"
-      (keydown.enter)="getListCustomer(true)">
+             (keydown.enter)="getListCustomer(true)">
     </div>
     <div class="field col-12 md:col-5">
       <div class="title">
         <label>Số điện thoại</label>
       </div>
       <input type="text" pInputText [(ngModel)]="searchCustomer.phone" appNumberOnly
-       (keydown.enter)="getListCustomer(true)">
+             (keydown.enter)="getListCustomer(true)">
     </div>
     <div class="col-12 md:col-2">
       <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getListCustomer(true)"></button>
@@ -62,10 +62,10 @@
           <td>{{item.customer?.address }}</td>
           <td>{{item.customer?.company }}</td>
           <td>{{item.customer?.phone }}</td>
-          <td>{{item.customer?.insurance }}</td>
+          <td>{{item.customer?.exchangeDescription }}</td>
           <td>{{item.wallet?.amount }}</td>
           <td>{{item.walletPromotional?.amount }}</td>
-          <td>{{ item.customer.rewardPoints }}</td>
+          <td>{{ item.customer.point }}</td>
           <td>
             <button pButton icon="pi pi-bars" pTooltip="Xem số dư" (click)="viewBalance(item)"
                     class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
@@ -76,7 +76,7 @@
       </ng-template>
     </p-table>
   </div>
-   <div class="grid p-3">
+  <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
                  [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
                  #paginator
