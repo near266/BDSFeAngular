@@ -6,13 +6,16 @@
     "3": "Đã bán",
     "4": "Đã hạ tin",
     "5": "Hết hạn",
-        "": ""
-
+    "": ""
   },
   "listStatus": [
     {
       "code": null,
       "label": "Tất cả"
+    },
+    {
+      "code": 0,
+      "label": "Chưa duyệt"
     },
     {
       "code": 1,
