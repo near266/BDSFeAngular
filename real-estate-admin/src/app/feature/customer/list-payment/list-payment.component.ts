@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {PaymentConfirm} from "../model/payment-confirm";
 import {Router} from "@angular/router";
 import {CustomerService} from "../service/customer.service";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {cancelModal} from "../model/modal";
 
 @Component({
   selector: 'app-list-payment',
@@ -20,8 +21,8 @@ export class ListPaymentComponent implements OnInit {
   };
   paymentRequest = {
     customerId: '',
-    amountWallet: '',
-    amountWalletPromotional: '',
+    amountWallet: 0,
+    amountWalletPromotional: 0,
     currency: ''
   };
   customerName = '';
@@ -29,21 +30,25 @@ export class ListPaymentComponent implements OnInit {
   pageSize = 10;
   dateTime = [];
   page = 1;
-
+  isPayment = false;
+  isShowImg = false;
+  srcShowImg = '';
   constructor(
     private router: Router,
     private customerService: CustomerService,
     private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {
   }
 
-  isPayment = false;
 
   ngOnInit(): void {
     this.doGetListDeposit();
   }
 
   doGetListDeposit() {
+    this.depositReq.dateFrom =  this.dateTime[0] || '';
+    this.depositReq.dateTo =  this.dateTime[1] || '';
     this.customerService.getDepositRequest(this.depositReq).subscribe(res => {
       this.paymentData = res.data;
       this.totalRecord = res.totalCount;
@@ -63,6 +68,8 @@ export class ListPaymentComponent implements OnInit {
     this.paymentRequest.customerId = customer.id;
     this.paymentRequest.currency = 'VND';
     this.customerName = customer.customerName;
+    this.paymentRequest.amountWallet = 0;
+    this.paymentRequest.amountWalletPromotional = 0;
     this.isPayment = true;
   }
 
@@ -71,5 +78,20 @@ export class ListPaymentComponent implements OnInit {
       this.isPayment = false;
       this.messageService.add({severity: 'success', detail: 'Thao tác thành công '})
     })
+  }
+
+  cancelTransaction(id: any) {
+    this.confirmationService.confirm({
+      ...cancelModal, accept: () => {
+        this.customerService.deposit({id, status: 2}).subscribe(res => {
+          this.messageService.add({severity: 'success', detail: 'Thao tác thành công '})
+          this.doGetListDeposit();
+        })
+      }
+    })
+  }
+  doShowImg(src: string){
+    this.isShowImg= true;
+    this.srcShowImg = src;
   }
 }

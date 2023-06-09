@@ -78,19 +78,10 @@ html, body {
     font-weight: 700;
   }
 
-  input, textarea {
+  input, textarea,  p-inputNumber, .p-inputnumber, p-dropdown, .p-dropdown, p-calendar, .p-calendar {
     border: none;
     width: 100%;
   }
-
-  p-dropdown {
-    width: 100%;
-
-    .p-dropdown {
-      width: 100%;
-    }
-  }
-
   .view-content {
     height: 5vh;
     display: flex;

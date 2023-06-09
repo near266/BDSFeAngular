@@ -11,17 +11,19 @@
         <label>Thời gian</label>
       </div>
       <p-calendar selectionMode="range" [readonlyInput]="true" inputId="range"
-      [showIcon]="true" [(ngModel)]="dateTime"></p-calendar>
+                  [showIcon]="true" [(ngModel)]="dateTime"
+      dateFormat="dd/mm/yy"></p-calendar>
     </div>
     <div class="col-12 md:col-2">
-      <button pButton label="Tìm kiếm" icon="pi pi-search"></button>
+      <button pButton label="Tìm kiếm" icon="pi pi-search"
+      (click)="doGetListDeposit()"></button>
     </div>
   </div>
   <div class="grid p-3">
     <div class="col-12 md:col-10">
       <div class="title-content">
-        <label>DANH SÁCH KHÁCH HÀNG </label>
-        <span>(3103 bài đăng)</span>
+        <label>DANH SÁCH NẠP TIỀN </label>
+        <span>({{totalRecord}} yêu cầu)</span>
       </div>
     </div>
   </div>
@@ -53,21 +55,21 @@
           <td>{{ customerData.customer.customerName }}</td>
           <td>{{ customerData.phoneNumber }}</td>
           <td>
-            <img [src]="customerData.image" alt="Ảnh minh chứng">
+            <span class="hyper-link"  (click)="doShowImg(customerData.image)">{{customerData.image}}aaaaaaaaaaaaaaaâ</span>
           </td>
-          <td>{{ 'status.'+ customerData.status | translate }}</td>
+          <td>{{ 'status.' + customerData.status | translate }}</td>
           <td>{{ customerData.createdDate | date: 'dd/MM/yyyy' }}</td>
           <td>
             <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(customerData.customer)"
                     class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
-            <button pButton icon="pi pi-times" pTooltip="Từ chối"
+            <button pButton icon="pi pi-times" pTooltip="Từ chối" (click)="cancelTransaction(customerData.id)"
                     class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
           </td>
         </tr>
       </ng-template>
     </p-table>
   </div>
-     <div class="grid p-3">
+  <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
                  [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
                  #paginator
@@ -75,7 +77,7 @@
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [(visible)]="isPayment"[modal]="true" [draggable]="false"
+<p-dialog [(visible)]="isPayment" [modal]="true" [draggable]="false"
           [resizable]="false" [showHeader]="false" [style]="{'width': '40vw'}">
   <div class="payment">
     <div class="col-12">
@@ -85,27 +87,34 @@
     <div class="col-12">
       <div class="secondary-form-control">
         <label for="">TK chính</label>
-        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWallet">
+        <!--        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWallet">-->
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet"
+                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
       </div>
     </div>
     <div class="col-12">
       <div class="secondary-form-control">
         <label for="">TK Khuyến mãi</label>
-        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWalletPromotional">
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWalletPromotional"
+                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
       </div>
     </div>
     <div class="col-12">
-    <div class="flex justify-content-between">
-      <label class="header-title">Điểm thưởng</label>
-      <span class="p-text-warning">0(điểm)</span>
-    </div>
-    <div class="flex justify-content-end mt-2">
-      <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2"
-      (click)="isPayment = false"></button>
-      <button pButton (click)="confirmRequest()"
-              label="Nạp tiền" class="p-button-sm p-button-primary"></button>
-    </div>
+      <div class="flex justify-content-between">
+        <label class="header-title">Điểm thưởng</label>
+        <span class="p-text-warning">0(điểm)</span>
+      </div>
+      <div class="flex justify-content-end mt-2">
+        <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2"
+                (click)="isPayment = false"></button>
+        <button pButton (click)="confirmRequest()"
+                label="Nạp tiền" class="p-button-sm p-button-primary"></button>
+      </div>
 
     </div>
   </div>
+</p-dialog>
+<p-dialog [(visible)]="isShowImg" [modal]="true" [draggable]="false"
+          [resizable]="false"  [style]="{'width': '40vw', 'height': '40vh'}">
+  <img [src]="srcShowImg" alt="">
 </p-dialog>
