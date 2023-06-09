@@ -1,7 +1,7 @@
 <div class="container">
   <div class="grid align-items-center justify-content-between p-3">
     <div class="">
-      <h2 style=" color: #30A0E0">Chi tiết bài đăng</h2>
+      <h2 style=" color: #30A0E0">Chi tiết {{'typePost.' + isBuy | translate  }}</h2>
     </div>
   </div>
   <div class="grid">
@@ -78,13 +78,18 @@
         <div class="p-3">
           <p-image src="../../../../assets/resouces/300.PNG" alt="Image" [preview]="true"></p-image>
         </div>
+        <div class="p-3">
+          <div class="">
+            do add img
+          </div>
+        </div>
         <div class="grid justify-content-center align-items-center">
           <i class="pi pi-angle-right" style="font-size: 2rem; color: #30A0E0"></i>
         </div>
       </div>
     </div>
   </div>
-<!--  <app-image-input-upload [maxFiles]="5"></app-image-input-upload>-->
+  <!--  <app-image-input-upload [maxFiles]="5"></app-image-input-upload>-->
   <div class="grid justify-content-center mt-2">
     <button pButton label="Hủy" class="p-button-secondary mr-2"></button>
     <button pButton label="Lưu thông tin" class="p-button-primary"></button>

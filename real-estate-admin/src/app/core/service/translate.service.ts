@@ -40,7 +40,8 @@ export class AppTranslateService {
       localStorage.setItem(Language.LOCAL_KEY, language);
       this.translate.use(language);
       if (reload) {
-        this.router.navigate([this.router.routerState.snapshot.url]);
+        // this.router.navigate([this.router.routerState.snapshot.url]);
+        window.location.reload();
       }
       this.onLanguageChanged.next(language);
     }

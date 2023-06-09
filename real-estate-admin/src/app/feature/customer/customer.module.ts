@@ -11,7 +11,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {TableModule} from "primeng/table";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
-import {TranslateModule} from "@ngx-translate/core";
+import {MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TabViewModule} from "primeng/tabview";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
@@ -28,6 +28,14 @@ import {ListPaymentComponent} from './list-payment/list-payment.component';
 import {ListBalanceComponent} from './list-balance/list-balance.component';
 import {LANGUAGE_FILE_PATH} from "../../core/translate.loader";
 import {ShareModule} from "../../share/share.module";
+import {HttpClient} from "@angular/common/http";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {CustomMissingTranslationHandler} from "../../core/translate.missing";
+import {AppTranslateService} from "../../core/service/translate.service";
+
+export function createTranslateLoader(http: HttpClient, filePath: string) {
+  return new TranslateHttpLoader(http, '/assets/i18n/customers/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -59,7 +67,14 @@ import {ShareModule} from "../../share/share.module";
     PaginatorModule,
     CalendarModule,
     InputNumberModule,
-    ShareModule
+    ShareModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient, LANGUAGE_FILE_PATH]
+      }
+    }),
   ],
   providers: [
     {
@@ -69,4 +84,8 @@ import {ShareModule} from "../../share/share.module";
   ]
 })
 export class CustomerModule {
+  constructor(private translateService: TranslateService) {
+    // Tải lại ngôn ngữ khi module được chuyển đổi
+    this.translateService.use(this.translateService.currentLang);
+  }
 }
