@@ -21,5 +21,9 @@
   "walletType": {
     "0": "Ví chính",
     "1": "Ví khuyến mại"
+  },
+  "status": {
+    "1": "Đã xác nhận ",
+    "2": "Huỷ bỏ"
   }
 }

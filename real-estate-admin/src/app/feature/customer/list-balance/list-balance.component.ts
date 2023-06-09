@@ -12,7 +12,6 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./list-balance.component.scss']
 })
 export class ListBalanceComponent implements OnInit {
-  mockTransactions: Transaction[];
   requestBalance: any = {
     id: '',
     from: '',
@@ -21,7 +20,7 @@ export class ListBalanceComponent implements OnInit {
     page: 1,
     pageSize: 10
   }
-  dateTime: any;
+  dateTime: any = [];
   typeList: any[];
   pageSize = 10;
   totalRecord: number;
@@ -40,27 +39,6 @@ export class ListBalanceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mockTransactions = [
-      {
-        time: "2023-06-01 10:30 AM",
-        transactionType: "Deposit",
-        content: "Deposit from bank transfer",
-        change: 5000,
-        mainAccountBalance: 10000,
-        promotionAccountBalance: 0,
-        rewardPoints: 10,
-      },
-      {
-        time: "2023-06-02 02:45 PM",
-        transactionType: "Withdrawal",
-        content: "Withdrawal for shopping",
-        change: -2500,
-        mainAccountBalance: 7500,
-        promotionAccountBalance: 0,
-        rewardPoints: 5,
-      },
-      // Thêm các giao dịch khác tại đây nếu cần
-    ];
     this.translateService.get('typeList').subscribe(res => {
       this.typeList = res;
     })
@@ -71,6 +49,8 @@ export class ListBalanceComponent implements OnInit {
   }
 
   getBalance() {
+    this.requestBalance.to =  this.dateTime[0] || '';
+    this.requestBalance.from =  this.dateTime[1] || '';
     this.customerService.getBalance(this.requestBalance).subscribe(res => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;
