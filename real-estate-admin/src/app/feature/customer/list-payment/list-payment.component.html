@@ -58,7 +58,7 @@
           <td>{{ 'status.'+ customerData.status | translate }}</td>
           <td>{{ customerData.createdDate | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền"
+            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(customerData.customer)"
                     class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
             <button pButton icon="pi pi-times" pTooltip="Từ chối"
                     class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
@@ -75,3 +75,37 @@
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
+<p-dialog [(visible)]="isPayment"[modal]="true" [draggable]="false"
+          [resizable]="false" [showHeader]="false" [style]="{'width': '40vw'}">
+  <div class="payment">
+    <div class="col-12">
+      <h1>Cộng tài khoản</h1>
+      <label for="" class="header-title">Khách hàng: </label><span>{{customerName}}</span>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label for="">TK chính</label>
+        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWallet">
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label for="">TK Khuyến mãi</label>
+        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWalletPromotional">
+      </div>
+    </div>
+    <div class="col-12">
+    <div class="flex justify-content-between">
+      <label class="header-title">Điểm thưởng</label>
+      <span class="p-text-warning">0(điểm)</span>
+    </div>
+    <div class="flex justify-content-end mt-2">
+      <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2"
+      (click)="isPayment = false"></button>
+      <button pButton (click)="confirmRequest()"
+              label="Nạp tiền" class="p-button-sm p-button-primary"></button>
+    </div>
+
+    </div>
+  </div>
+</p-dialog>
