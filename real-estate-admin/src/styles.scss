@@ -321,3 +321,12 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+p-calendar {
+ span{
+   button {
+     background: none !important;
+     color: #30A0E0 !important;
+     border: none !important;
+   }
+ }
+}

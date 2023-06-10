@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import {CustomerRoutingModule} from './customer-routing.module';
 import {CustomerComponent} from './customer.component';
@@ -90,6 +90,7 @@ export function createTranslateLoader(http: HttpClient, filePath: string) {
       provide: LANGUAGE_FILE_PATH,
       useValue: {path: './assets/i18n/customers/'}
     },
+    DatePipe
   ]
 })
 export class CustomerModule extends BaseModule{

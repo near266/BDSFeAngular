@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-list-balance',
@@ -34,7 +35,8 @@ export class ListBalanceComponent implements OnInit {
     private translateService: TranslateService,
     private router: Router,
     private customerService: CustomerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
   ) {
   }
 
@@ -49,8 +51,9 @@ export class ListBalanceComponent implements OnInit {
   }
 
   getBalance() {
-    this.requestBalance.to =  this.dateTime[0] || '';
-    this.requestBalance.from =  this.dateTime[1] || '';
+    console.log(this.dateTime)
+    this.requestBalance.to =  this.datePipe.transform(this.dateTime[0], 'dd/MM/yyyy') || '';
+    this.requestBalance.from =   this.datePipe.transform(this.dateTime[1], 'dd/MM/yyyy') || '';
     this.customerService.getBalance(this.requestBalance).subscribe(res => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;

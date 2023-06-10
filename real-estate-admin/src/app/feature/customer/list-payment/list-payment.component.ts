@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {CustomerService} from "../service/customer.service";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {cancelModal} from "../model/modal";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-list-payment',
@@ -37,7 +38,8 @@ export class ListPaymentComponent implements OnInit {
     private router: Router,
     private customerService: CustomerService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private datePipe: DatePipe
   ) {
   }
 
@@ -47,8 +49,8 @@ export class ListPaymentComponent implements OnInit {
   }
 
   doGetListDeposit() {
-    this.depositReq.dateFrom =  this.dateTime[0] || '';
-    this.depositReq.dateTo =  this.dateTime[1] || '';
+    this.depositReq.dateFrom =  this.datePipe.transform(this.dateTime[0], 'dd/MM/yyyy') || '';
+    this.depositReq.dateTo =  this.datePipe.transform(this.dateTime[1], 'dd/MM/yyyy') || '';
     this.customerService.getDepositRequest(this.depositReq).subscribe(res => {
       this.paymentData = res.data;
       this.totalRecord = res.totalCount;
