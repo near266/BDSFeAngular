@@ -26,12 +26,14 @@ import {CalendarModule} from "primeng/calendar";
 import {InputNumberModule} from 'primeng/inputnumber';
 import {ListPaymentComponent} from './list-payment/list-payment.component';
 import {ListBalanceComponent} from './list-balance/list-balance.component';
-import {LANGUAGE_FILE_PATH} from "../../core/translate.loader";
+import {CustomTranslateLoader, LANGUAGE_FILE_PATH} from "../../core/translate.loader";
 import {ShareModule} from "../../share/share.module";
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {CustomMissingTranslationHandler} from "../../core/translate.missing";
 import {AppTranslateService} from "../../core/service/translate.service";
+import {Router} from "@angular/router";
+import {BaseModule} from "../../core/base-module";
 
 export function createTranslateLoader(http: HttpClient, filePath: string) {
   return new TranslateHttpLoader(http, '/assets/i18n/customers/', '.json');
@@ -69,11 +71,18 @@ export function createTranslateLoader(http: HttpClient, filePath: string) {
     InputNumberModule,
     ShareModule,
     TranslateModule.forChild({
+      // missingTranslationHandler: {
+      //   provide: MissingTranslationHandler,
+      //   useClass: CustomMissingTranslationHandler,
+      //   deps: [AppTranslateService]
+      // },
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient, LANGUAGE_FILE_PATH]
-      }
+        useFactory: (CustomTranslateLoader),
+        deps: [LANGUAGE_FILE_PATH, HttpClient]
+      },
+      isolate: true,
+      useDefaultLang: false
     }),
   ],
   providers: [
@@ -83,9 +92,8 @@ export function createTranslateLoader(http: HttpClient, filePath: string) {
     },
   ]
 })
-export class CustomerModule {
-  constructor(private translateService: TranslateService) {
-    // Tải lại ngôn ngữ khi module được chuyển đổi
-    this.translateService.use(this.translateService.currentLang);
+export class CustomerModule extends BaseModule{
+  constructor(translateService: TranslateService, private router: Router) {
+    super(translateService, router)
   }
 }
