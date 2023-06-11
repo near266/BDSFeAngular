@@ -41,10 +41,10 @@ export class PostService extends BaseService {
   }
 
   delete(body: any, isBuy: boolean): Observable<any> {
-    if (isBuy){
-          return this.doPost('salepost/deleteBPost', body).pipe(map((res: any) => res)) // tin bán
+    if (isBuy) {
+      return this.doPost('boughtpost/deleteBPost', body).pipe(map((res: any) => res))// tin mua
     }
-        return this.doPost('boughtpost/deleteBPost', body).pipe(map((res: any) => res))// tin mua
+    return this.doPost('salepost/deleteSPost', body).pipe(map((res: any) => res)) // tin bán
 
   }
 }

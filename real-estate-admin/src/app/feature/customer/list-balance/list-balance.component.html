@@ -53,9 +53,16 @@
           <td>{{ 'type.' + transaction.transactionHistory.type | translate}}</td>
           <td>{{ transaction.transactionHistory.content }}</td>
           <td>{{ transaction.transactionHistory.transactionAmount }}</td>
-          <td>{{ transaction.wallet.amount }}</td>
-          <td>{{ transaction.walletPromotional.amount }}</td>
-          <td>{{ transaction.transactionHistory.rewardPoints }}</td>
+          <td>
+          <span
+            [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount }} </span>
+          </td>
+          <td><span
+            [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{ transaction.walletPromotional.amount }}</span>
+          </td>
+          <td><span
+          >{{ transaction.transactionHistory.rewardPoints }}</span>
+          </td>
         </tr>
       </ng-template>
     </p-table>

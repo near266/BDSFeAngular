@@ -60,7 +60,7 @@
           <td>
             <p-tableCheckbox [value]="product"></p-tableCheckbox>
           </td>
-          <td>{{index + 1 + ((listRequest.page-1) * listRequest.pageSize)}}</td>
+          <td>{{index + 1 + ((listRequest.page - 1) * listRequest.pageSize)}}</td>
           <td *ngIf="!isBuy">{{ 'typeNews.' + product.type | translate}}</td>
           <td><span class="hyper-link" (click)="goToView(product.id)">{{ product.titile }}</span></td>
           <td>{{ product.createdBy }}</td>
@@ -69,7 +69,7 @@
               [ngClass]="'new-status-' + product.status">{{ 'status.' + product.status | translate}}</span>
           </td>
           <td>{{ product.createdDate | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ product.dueDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ product.LastModifiedDate | date: 'dd/MM/yyyy' }}</td>
           <td>
             <div class="flex">
               <button pButton (click)="delete(product.id)" icon="pi pi-trash" pTooltip="Xóa"
