@@ -20,14 +20,10 @@ export class PostDataComponent implements OnInit {
   dataSelection: NewsItem[] = [];
   @ViewChild('checkAll') checkAll: TableHeaderCheckbox;
   @ViewChild('paginator', {static: false}) paginator: Paginator;
-  isCheckAll = false;
   isShowModalApprove = false;
   isShowModalReject = false;
-  listDoNotAction = [3, 4, 5]
   isShowRejectReason = false;
   listStatus = [];
-  pageSize = 10;
-  page = 1;
   totalRecord = 0;
   listRequest = {
     title: '',
@@ -70,7 +66,7 @@ export class PostDataComponent implements OnInit {
 
   paginate(evt: any) {
     if (this.listRequest.pageSize !== evt.rows) {
-      this.page = 0;
+      this.listRequest.page = 0;
     }
     this.listRequest.page = evt.page + 1;
     this.listRequest.pageSize = evt.rows;
@@ -160,9 +156,9 @@ export class PostDataComponent implements OnInit {
     })
   }
 
-  isValidateApprove() {
+  isValidateAction() {
     for (let s of this.dataSelection) {
-      if (s.status === 1 || this.listDoNotAction.includes(s.status)) {
+      if (s.status !== 1) {
         this.messageService.add({
           severity: 'error',
           summary: '',
@@ -174,28 +170,15 @@ export class PostDataComponent implements OnInit {
     return false;
   }
 
-  isValidateReject() {
-    for (let s of this.dataSelection) {
-      if (s.status === 2 || this.listDoNotAction.includes(s.status)) {
-        this.messageService.add({
-          severity: 'error',
-          summary: '',
-          detail: 'Một số bản ghi không thể từ chối hoặc đã từ chối'
-        })
-        return true;
-      }
-    }
-    return false;
-  }
 
   approveAll() {
-    if (!this.isValidateApprove()) {
+    if (!this.isValidateAction()) {
       this.isShowModalApprove = true;
     }
   }
 
   rejectAll() {
-    if (!this.isValidateReject()) {
+    if (!this.isValidateAction()) {
       this.isShowModalReject = true;
     }
   }

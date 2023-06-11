@@ -40,7 +40,7 @@
           <th>
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
-          <!--          <th>STT</th>-->
+          <th>STT</th>
           <th>Khách hàng</th>
           <th>Địa chỉ</th>
           <th>Công ty</th>
@@ -52,12 +52,12 @@
           <th class="text-center">Thao tác</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-item>
+      <ng-template pTemplate="body" let-item let-index="rowIndex">
         <tr>
           <td>
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
-          <!--          <td>{{i + 1}}</td>-->
+          <td>{{index + 1 + ((searchCustomer.page - 1) * searchCustomer.pageSize)}}</td>
           <td>{{item.customer?.customerName }}</td>
           <td>{{item.customer?.address }}</td>
           <td>{{item.customer?.company }}</td>
@@ -78,7 +78,7 @@
   </div>
   <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
-                 [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
+                 [showCurrentPageReport]="true" (onPageChange)="paginate($event)" [hidden]="dataCustomers.length < 10"
                  #paginator
                  currentPageReportTemplate=
                    "{currentPage} of {totalPages}"></p-paginator>

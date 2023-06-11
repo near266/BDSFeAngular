@@ -45,7 +45,7 @@
           <th style="width: 4rem">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
-          <th>Mã tin</th>
+          <th>STT</th>
           <th *ngIf="!isBuy">Loại bài</th>
           <th class="text-center">Tiêu đề</th>
           <th>Người đăng</th>
@@ -55,12 +55,12 @@
           <th class="text-center">Thao tác</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-product>
+      <ng-template pTemplate="body" let-product let-index="rowIndex">
         <tr>
           <td>
             <p-tableCheckbox [value]="product"></p-tableCheckbox>
           </td>
-          <td>{{ product.id }}</td>
+          <td>{{index + 1 + ((listRequest.page-1) * listRequest.pageSize)}}</td>
           <td *ngIf="!isBuy">{{ 'typeNews.' + product.type | translate}}</td>
           <td><span class="hyper-link" (click)="goToView(product.id)">{{ product.titile }}</span></td>
           <td>{{ product.createdBy }}</td>
@@ -75,10 +75,10 @@
               <button pButton (click)="delete(product.id)" icon="pi pi-trash" pTooltip="Xóa"
                       class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
               <button pButton (click)="reject(product.id)" icon="pi pi-times" pTooltip="Từ chối"
-                      [disabled]="product.status === 2 || listDoNotAction.includes(product.status)"
+                      [disabled]="product.status !== 0"
                       class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
               <button pButton (click)="approve(product.id)" icon="pi pi-check" pTooltip="Duyệt"
-                      [disabled]="product.status === 1 || listDoNotAction.includes(product.status)"
+                      [disabled]="product.status !== 0"
                       class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
             </div>
           </td>
@@ -87,9 +87,9 @@
     </p-table>
   </div>
   <div class="grid p-3">
-    <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
+    <p-paginator [rows]="listRequest.pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
                  [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
-                 #paginator
+                 #paginator [hidden]="totalRecord < 10"
                  currentPageReportTemplate=
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>

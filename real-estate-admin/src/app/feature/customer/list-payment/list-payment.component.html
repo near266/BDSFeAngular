@@ -37,20 +37,22 @@
     <p-table [value]="paymentData">
       <ng-template pTemplate="header">
         <tr>
+          <th>STT</th>
           <th>Mã KH</th>
           <th>Khách hàng</th>
           <th>Số điện thoại</th>
-          <th>Ảnh minh chứng</th>
+          <th class="text-center">Ảnh minh chứng</th>
           <th>Trạng thái</th>
-          <th pSortableColumn="timestamp">
-            <p-sortIcon field="timestamp"></p-sortIcon>
+          <th pSortableColumn="customerData.createdDate">
+            <p-sortIcon field="customerData.createdDate"></p-sortIcon>
             Thời gian
           </th>
           <th>Thao tác</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-customerData>
+      <ng-template pTemplate="body" let-customerData let-index="rowIndex">
         <tr>
+          <td>{{index + 1 + ((depositReq.page - 1) * depositReq.pageSize)}}</td>
           <td>{{ customerData.id }}</td>
           <td>{{ customerData.customer.customerName }}</td>
           <td>{{ customerData.phoneNumber }}</td>
@@ -72,7 +74,7 @@
   <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
                  [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
-                 #paginator
+                 #paginator [hidden]="paymentData.length < 10"
                  currentPageReportTemplate=
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
@@ -102,7 +104,7 @@
     <div class="col-12">
       <div class="flex justify-content-between">
         <label class="header-title">Điểm thưởng</label>
-        <span class="p-text-warning">{{paymentRequest.amountWallet /100000 | number: '1.0-1'}}(điểm)</span>
+        <span class="p-text-warning">{{paymentRequest.amountWallet / 100000 | number: '1.0-1'}}(điểm)</span>
       </div>
       <div class="flex justify-content-end mt-2">
         <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2"
@@ -117,6 +119,6 @@
 <p-dialog [(visible)]="isShowImg" [modal]="true" [draggable]="false"
           [resizable]="false" [header]="'Ảnh minh chứng'">
   <div class="img-container">
-      <img [src]="srcShowImg" alt="">
+    <img [src]="srcShowImg" alt="">
   </div>
 </p-dialog>

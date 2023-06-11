@@ -18,6 +18,7 @@ Phố Châu Long, Phường Trúc Bạch, Ba Đình, Hà Nội`;
   itemsPerPage = 3;
   maxPage = 0;
   isBuy: boolean;
+
   constructor(
     private router: Router,
     private postService: PostService,
@@ -51,12 +52,13 @@ Phố Châu Long, Phường Trúc Bạch, Ba Đình, Hà Nội`;
       this.currentPage++;
     }
   }
+
   isAtLeftEdge(): boolean {
-    return this.currentPage === 0;
+    return this.currentPage === 0 && this.getItems() > 3;
   }
 
   isAtRightEdge(): boolean {
-    return this.currentPage === this.maxPage;
+    return this.currentPage === this.maxPage && this.getItems() > 3;
   }
 
   update() {

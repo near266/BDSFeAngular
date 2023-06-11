@@ -27,19 +27,22 @@ export class FeatureComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
+      if (event instanceof NavigationEnd) {
         for (let f of this.featureList) {
           f.isSelected = event.url.replace('/', '').includes(f.routerLink[0]) && f.routerLink[0] !== '';
         }
       }
     });
+    for (let f of this.featureList) {
+      f.isSelected = this.router.url.replace('/', '').includes(f.routerLink[0]) && f.routerLink[0] !== '';
+    }
     this.authService.getInfo().subscribe(res => {
       this.infoUser = res;
       this.items = [
         {
           label: 'Đăng xuất',
           command: () => {
-           this.authService.logOut();
+            this.authService.logOut();
           }
 
         }
@@ -49,9 +52,6 @@ export class FeatureComponent implements OnInit {
     this.showNavigation()
   }
 
-  save() {
-
-  }
 
   routerLink(link: any) {
     this.router.navigate(link.routerLink);
