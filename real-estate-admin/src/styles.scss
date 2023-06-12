@@ -86,7 +86,7 @@ html, body {
     height: 5vh;
     display: flex;
     align-items: center;
-    padding: 10%;
+    padding: 4%;
   }
 }
 
@@ -329,4 +329,7 @@ p-calendar {
      border: none !important;
    }
  }
+}
+.p-disabled, .p-component:disabled {
+  color: #6c757d !important;
 }

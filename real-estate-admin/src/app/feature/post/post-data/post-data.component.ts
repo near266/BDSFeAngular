@@ -151,6 +151,7 @@ export class PostDataComponent implements OnInit {
       accept: () => {
         this.postService.delete(body, this.isBuy).subscribe(res => {
           this.successMessage();
+          this.getListPost();
         })
       }
     })

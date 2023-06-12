@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="grid">
-    <div class="col-12 md:col-2" *ngIf="!isBuy">
+    <div class="col-12 md:col-6" *ngIf="!isBuy">
       <div class="secondary-form-control">
         <label>Loại bài</label>
         <div class="view-content">
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Ngày đăng</label>
         <div class="view-content">
@@ -25,7 +25,15 @@
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Ngày duyệt</label>
+        <div class="view-content">
+          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6" *ngIf="!isBuy">
       <div class="secondary-form-control">
         <label>Ngày hết hạn</label>
         <div class="view-content">
@@ -33,16 +41,32 @@
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="col-12 md:col-6">
       <div class="secondary-form-control">
-        <label>Ngày duyệt</label>
+        <label>Ngày sửa gần nhất</label>
         <div class="view-content">
-          <span>{{(detailData?.approveDate| date: 'dd/MM/yyyy') ||
-            'BE trả approveDate là ăn '}}</span>
+          <span>{{detailData?.lastModifiedDate | date: 'dd/MM/yyyy'}}</span>
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="col-12 md:col-6" *ngIf="!isBuy">
+      <div class="secondary-form-control">
+        <label>Ngày bán</label>
+        <div class="view-content">
+          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6" *ngIf="isBuy">
+      <div class="secondary-form-control">
+        <label>Ngày mua</label>
+        <div class="view-content">
+          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Người đăng</label>
         <div class="view-content">
@@ -50,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Trạng thái</label>
         <div class="view-content">
