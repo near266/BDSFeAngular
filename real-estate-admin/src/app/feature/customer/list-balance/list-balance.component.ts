@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Transaction} from "../model/transaction";
 import {CustomerService} from "../service/customer.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
 import {DatePipe} from "@angular/common";
+import {responseTran, Transaction} from "../model/transaction";
 
 @Component({
   selector: 'app-list-balance',
@@ -26,7 +26,10 @@ export class ListBalanceComponent implements OnInit {
   pageSize = 10;
   totalRecord: number;
   page = 1;
-  transactionList = [];
+  transactionList: Transaction[];
+  maxDate = new Date();
+  dateFrom = '';
+  dateTo = '';
 
   constructor(
     private dialog: DialogService,
@@ -51,9 +54,12 @@ export class ListBalanceComponent implements OnInit {
   }
 
   getBalance() {
-    console.log(this.dateTime)
-    this.requestBalance.to =  this.datePipe.transform(this.dateTime[0], 'dd/MM/yyyy') || '';
-    this.requestBalance.from =   this.datePipe.transform(this.dateTime[1], 'dd/MM/yyyy') || '';
+     if (this.dateFrom && this.dateTo && this.dateFrom > this.dateTo) {
+      this.messageService.add({severity: 'error', detail: 'Từ ngày phải nhỏ hơn đến ngày'});
+      return;
+    }
+    this.requestBalance.to =  this.datePipe.transform(this.dateTo, 'dd/MM/yyyy') || '';
+    this.requestBalance.from =   this.datePipe.transform(this.dateFrom, 'dd/MM/yyyy') || '';
     this.customerService.getBalance(this.requestBalance).subscribe(res => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;

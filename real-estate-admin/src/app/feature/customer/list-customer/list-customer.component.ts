@@ -22,6 +22,7 @@ export class ListCustomerComponent implements OnInit {
   totalRecord = 0;
   pageSize = 10;
   page = 1;
+  isDeleteAll = false;
 
   constructor(
     private router: Router,
@@ -36,7 +37,7 @@ export class ListCustomerComponent implements OnInit {
   }
 
   getListCustomer(isSearch?: boolean) {
-    if (isSearch){
+    if (isSearch) {
       this.searchCustomer.page = 1;
     }
     this.customerService.getCustomer(this.searchCustomer).subscribe(res => {
@@ -59,6 +60,10 @@ export class ListCustomerComponent implements OnInit {
     })
   }
 
+  doDelete() {
+    this.isDeleteAll = true;
+  }
+
   deleteAll() {
     let listId: any[] = [];
     this.dataSelection.forEach(el => {
@@ -69,6 +74,7 @@ export class ListCustomerComponent implements OnInit {
     this.customerService.deleteCustomer({listId: listId}).subscribe(res => {
       this.messageService.add({severity: 'success', detail: 'Thao tác thành công'})
       this.getListCustomer();
+      this.isDeleteAll = false;
     })
   }
 

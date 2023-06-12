@@ -1,19 +1,28 @@
 <div class="container">
   <div class="grid p-3 border-line">
-    <div class="field col-12 md:col-5">
+    <div class="field col-12 md:col-3">
       <div class="title">
         <label>Loại giao dịch</label>
       </div>
       <p-dropdown optionValue="code" [options]="typeList" [(ngModel)]="requestBalance.type"></p-dropdown>
     </div>
-    <div class="field col-12 md:col-5">
+    <div class="field col-12 md:col-3">
       <div class="title">
-        <label>Thời gian</label>
+        <label>Từ ngày</label>
       </div>
-      <p-calendar selectionMode="range" [readonlyInput]="true" inputId="range"
-                  dateFormat="dd/mm/yy" [showIcon]="true" [(ngModel)]="dateTime"></p-calendar>
+      <p-calendar [readonlyInput]="true" inputId="toDate"
+                  [showIcon]="true" [(ngModel)]="dateFrom"
+                  dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="field col-12 md:col-3">
+      <div class="title">
+        <label>Đến ngày</label>
+      </div>
+      <p-calendar [readonlyInput]="true" inputId="fromDate"
+                  [showIcon]="true" [(ngModel)]="dateTo"
+                  dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
+    </div>
+    <div class="col-12 md:col-3">
       <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getBalance()"></button>
     </div>
   </div>
@@ -35,9 +44,9 @@
     <p-table [value]="transactionList">
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="time">
+          <th pSortableColumn="transactionHistory.createdDate">
             Thời gian
-            <p-sortIcon field="time"></p-sortIcon>
+            <p-sortIcon field="transactionHistory.createdDate"></p-sortIcon>
           </th>
           <th>Loại giao dịch</th>
           <th>Nội dung</th>

@@ -29,11 +29,13 @@ export class ListPaymentComponent implements OnInit {
   customerName = '';
   totalRecord = 0;
   pageSize = 10;
-  dateTime = [];
+  dateFrom = '';
+  dateTo = '';
   page = 1;
   isPayment = false;
   isShowImg = false;
   srcShowImg = '';
+  maxDate = new Date();
   constructor(
     private router: Router,
     private customerService: CustomerService,
@@ -49,8 +51,13 @@ export class ListPaymentComponent implements OnInit {
   }
 
   doGetListDeposit() {
-    this.depositReq.dateFrom =  this.datePipe.transform(this.dateTime[0], 'dd/MM/yyyy') || '';
-    this.depositReq.dateTo =  this.datePipe.transform(this.dateTime[1], 'dd/MM/yyyy') || '';
+
+    if (this.dateFrom && this.dateTo && this.dateFrom > this.dateTo) {
+      this.messageService.add({severity: 'error', detail: 'Từ ngày phải nhỏ hơn đến ngày'});
+      return;
+    }
+    this.depositReq.dateFrom = this.datePipe.transform(this.dateFrom, 'dd/MM/yyyy') || '';
+    this.depositReq.dateTo = this.datePipe.transform(this.dateTo, 'dd/MM/yyyy') || '';
     this.customerService.getDepositRequest(this.depositReq).subscribe(res => {
       this.paymentData = res.data;
       this.totalRecord = res.totalCount;
@@ -92,8 +99,9 @@ export class ListPaymentComponent implements OnInit {
       }
     })
   }
-  doShowImg(src: string){
-    this.isShowImg= true;
+
+  doShowImg(src: string) {
+    this.isShowImg = true;
     this.srcShowImg = src;
   }
 }

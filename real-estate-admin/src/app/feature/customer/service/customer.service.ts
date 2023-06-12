@@ -3,6 +3,7 @@ import {BaseService} from "../../../core/service/base.service";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {responseTran, Transaction} from "../model/transaction";
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class CustomerService extends BaseService {
     return this.doPost('customer/delete', body).pipe(map((res: any) => res));
   }
 
-  getBalance(body: any): Observable<any> {
+  getBalance(body: any): Observable<responseTran> {
     return this.doPost('/gw/Walllet/wallet/searchTransaction', body).pipe(map((res: any) => res));
   }
 
