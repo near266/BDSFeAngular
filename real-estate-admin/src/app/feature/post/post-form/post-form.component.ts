@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PostService} from "../service/post.service";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-post-form',
@@ -17,7 +18,8 @@ export class PostFormComponent implements OnInit {
   constructor(
     private router: Router,
     private postService: PostService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
@@ -55,6 +57,12 @@ export class PostFormComponent implements OnInit {
     return this.currentPage === this.maxPage;
   }
   onFileChange(event: any){
-    console.log(event)
+    console.log(event.target.files)
+    const files =event.target.files;
+     const objUrl = window.URL.createObjectURL(files[0]);
+    const previewUrl = this.sanitizer.bypassSecurityTrustUrl(objUrl);
+    console.log(previewUrl)
+    this.detailData?.image.push(previewUrl);
+    console.log(this.detailData?.image)
   }
 }
