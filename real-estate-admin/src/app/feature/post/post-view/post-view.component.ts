@@ -18,7 +18,7 @@ Phố Châu Long, Phường Trúc Bạch, Ba Đình, Hà Nội`;
   itemsPerPage = 3;
   maxPage = 0;
   isBuy: boolean;
-
+  params: any;
   constructor(
     private router: Router,
     private postService: PostService,
@@ -29,6 +29,7 @@ Phố Châu Long, Phường Trúc Bạch, Ba Đình, Hà Nội`;
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: any) => {
       this.isBuy = params.isBuy === 'true';
+      this.params = params;
       this.postService.getDetail(params.id, params.isBuy === 'true').subscribe(res => {
         this.detailData = res;
         this.maxPage = Math.floor((this.detailData.image.length - 1) / this.itemsPerPage);
@@ -54,14 +55,14 @@ Phố Châu Long, Phường Trúc Bạch, Ba Đình, Hà Nội`;
   }
 
   isAtLeftEdge(): boolean {
-    return this.currentPage === 0 && this.getItems() > 3;
+    return this.currentPage === 0;
   }
 
   isAtRightEdge(): boolean {
-    return this.currentPage === this.maxPage && this.getItems() > 3;
+    return this.currentPage === this.maxPage;
   }
 
   update() {
-    this.router.navigate(['news', 'edit']);
+    this.router.navigate(['news', 'edit'], {queryParams: this.params});
   }
 }

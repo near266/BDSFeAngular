@@ -159,7 +159,7 @@ export class PostDataComponent implements OnInit {
 
   isValidateAction() {
     for (let s of this.dataSelection) {
-      if (s.status !== 1) {
+      if (s.status !== 0) {
         this.messageService.add({
           severity: 'error',
           summary: '',

@@ -1,0 +1,14 @@
+.new-item-btn {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: aliceblue;
+  i {
+    font-size: 5rem;
+  }
+}
+.new-item-btn:hover {
+  background-color: #6c757d;
+}
