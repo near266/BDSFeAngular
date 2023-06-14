@@ -41,6 +41,7 @@
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th>STT</th>
+          <th>Mã khách hàng</th>
           <th>Khách hàng</th>
           <th>Địa chỉ</th>
           <th>Công ty</th>
@@ -58,6 +59,7 @@
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
           <td>{{index + 1 + ((searchCustomer.page - 1) * searchCustomer.pageSize)}}</td>
+          <td>{{item.customer?.customerCode }}</td>
           <td>{{item.customer?.customerName }}</td>
           <td>{{item.customer?.address }}</td>
           <td>{{item.customer?.company }}</td>
