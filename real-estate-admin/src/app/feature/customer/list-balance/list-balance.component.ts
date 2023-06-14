@@ -14,23 +14,19 @@ import {responseTran, Transaction} from "../model/transaction";
 })
 export class ListBalanceComponent implements OnInit {
   requestBalance: any = {
-    id: '',
+    userId: '',
     from: '',
     to: '',
     type: 0,
     page: 1,
     pageSize: 10
   }
-  dateTime: any = [];
   typeList: any[];
   pageSize = 10;
   totalRecord: number;
   page = 1;
   transactionList: Transaction[];
   maxDate = new Date();
-  dateFrom = '';
-  dateTo = '';
-
   constructor(
     private dialog: DialogService,
     private confirmationService: ConfirmationService,
@@ -48,18 +44,16 @@ export class ListBalanceComponent implements OnInit {
       this.typeList = res;
     })
     this.route.paramMap.subscribe(params => {
-      this.requestBalance.id = params.get('id');
+      this.requestBalance.userId = params.get('id');
     });
     this.getBalance();
   }
 
   getBalance() {
-     if (this.dateFrom && this.dateTo && this.dateFrom > this.dateTo) {
+     if (this.requestBalance.from && this.requestBalance.to && this.requestBalance.from > this.requestBalance.to) {
       this.messageService.add({severity: 'error', detail: 'Từ ngày phải nhỏ hơn đến ngày'});
       return;
     }
-    this.requestBalance.to =  this.datePipe.transform(this.dateTo, 'dd/MM/yyyy') || '';
-    this.requestBalance.from =   this.datePipe.transform(this.dateFrom, 'dd/MM/yyyy') || '';
     this.customerService.getBalance(this.requestBalance).subscribe(res => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;

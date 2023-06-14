@@ -11,7 +11,7 @@
         <label>Từ ngày</label>
       </div>
       <p-calendar [readonlyInput]="true" inputId="toDate"
-                  [showIcon]="true" [(ngModel)]="dateFrom"
+                  [showIcon]="true" [(ngModel)]="requestBalance.from"
                   dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
     </div>
     <div class="field col-12 md:col-3">
@@ -19,7 +19,7 @@
         <label>Đến ngày</label>
       </div>
       <p-calendar [readonlyInput]="true" inputId="fromDate"
-                  [showIcon]="true" [(ngModel)]="dateTo"
+                  [showIcon]="true" [(ngModel)]="requestBalance.to"
                   dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
     </div>
     <div class="col-12 md:col-3">

@@ -52,12 +52,10 @@ export class ListPaymentComponent implements OnInit {
 
   doGetListDeposit() {
 
-    if (this.dateFrom && this.dateTo && this.dateFrom > this.dateTo) {
+    if (this.depositReq.dateFrom && this.depositReq.dateTo && this.depositReq.dateFrom > this.depositReq.dateTo) {
       this.messageService.add({severity: 'error', detail: 'Từ ngày phải nhỏ hơn đến ngày'});
       return;
     }
-    this.depositReq.dateFrom = this.datePipe.transform(this.dateFrom, 'dd/MM/yyyy') || '';
-    this.depositReq.dateTo = this.datePipe.transform(this.dateTo, 'dd/MM/yyyy') || '';
     this.customerService.getDepositRequest(this.depositReq).subscribe(res => {
       this.paymentData = res.data;
       this.totalRecord = res.totalCount;
