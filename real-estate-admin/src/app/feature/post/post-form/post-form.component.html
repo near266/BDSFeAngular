@@ -61,30 +61,14 @@
   <div class="col-12">
     <div class="primary-form-control">
       <label for="">Ảnh</label>
-      <div class="grid justify-content-center p-3">
-        <div class="grid justify-content-center align-items-center"
-             *ngIf="isAtRightEdge()" (click)="previousPage()">
-          <i class="pi pi-angle-left" style="font-size: 2rem; color: #30A0E0"></i>
-        </div>
-         <div class="p-3" *ngFor="let im of getItems()">
-            <p-image [src]="im" alt="Image" [preview]="true" height="300" width="300"></p-image>
-          </div>
-         <div class="grid justify-content-center align-items-center"
-             *ngIf="isAtLeftEdge()" (click)="nextPage()">
-          <i class="pi pi-angle-right" style="font-size: 2rem; color: #30A0E0"></i>
-        </div>
+      <div class="grid p-4">
+        <aw-image-upload [maxFiles]="6" [previewUrl]="detailData?.image"></aw-image-upload>
       </div>
     </div>
   </div>
-  <!--  <app-image-input-upload [maxFiles]="5"></app-image-input-upload>-->
   <div class="grid justify-content-center mt-2">
     <button pButton label="Hủy" class="p-button-secondary mr-2"></button>
     <button pButton label="Lưu thông tin" class="p-button-primary"></button>
   </div>
 </div>
-        <div class="p-3"  *ngIf="isAtRightEdge()" (click)="file.click()">
-          <div class="new-item-btn">
-            <i class="pi pi-plus"></i>
-            <input #file type="file" name="" id="" style="display: none" (change)="onFileChange($event)">
-          </div>
-        </div>
+

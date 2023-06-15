@@ -18,8 +18,7 @@ export class PostFormComponent implements OnInit {
   constructor(
     private router: Router,
     private postService: PostService,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer) {
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -32,37 +31,4 @@ export class PostFormComponent implements OnInit {
     });
   }
 
-  previousPage() {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-    }
-  }
-
-  getItems() {
-    const start = this.currentPage * this.itemsPerPage;
-    return this.detailData?.image.slice(start, start + this.itemsPerPage);
-  }
-
-  nextPage() {
-    if (this.currentPage < this.maxPage) {
-      this.currentPage++;
-    }
-  }
-
-  isAtLeftEdge(): boolean {
-    return this.currentPage === 0;
-  }
-
-  isAtRightEdge(): boolean {
-    return this.currentPage === this.maxPage;
-  }
-  onFileChange(event: any){
-    console.log(event.target.files)
-    const files =event.target.files;
-     const objUrl = window.URL.createObjectURL(files[0]);
-    const previewUrl = this.sanitizer.bypassSecurityTrustUrl(objUrl);
-    console.log(previewUrl)
-    this.detailData?.image.push(previewUrl);
-    console.log(this.detailData?.image)
-  }
 }

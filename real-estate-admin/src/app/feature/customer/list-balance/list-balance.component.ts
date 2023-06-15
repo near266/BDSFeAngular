@@ -17,7 +17,7 @@ export class ListBalanceComponent implements OnInit {
     userId: '',
     from: '',
     to: '',
-    type: 0,
+    type: null,
     page: 1,
     pageSize: 10
   }
