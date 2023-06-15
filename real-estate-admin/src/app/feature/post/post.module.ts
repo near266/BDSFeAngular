@@ -10,7 +10,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {CheckboxModule} from "primeng/checkbox";
 import {TableModule} from "primeng/table";
 import {DropdownModule} from "primeng/dropdown";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CustomTranslateLoader, LANGUAGE_FILE_PATH} from "../../core/translate.loader";
 import {MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TabViewModule} from "primeng/tabview";
@@ -67,6 +67,7 @@ import {Router} from "@angular/router";
     PaginatorModule,
     CalendarModule,
     ShareModule,
+    ReactiveFormsModule,
     TranslateModule.forChild({
       missingTranslationHandler: {
         provide: MissingTranslationHandler,

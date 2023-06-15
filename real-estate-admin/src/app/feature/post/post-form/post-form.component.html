@@ -1,74 +1,109 @@
 <div class="container">
   <div class="grid align-items-center justify-content-between p-3">
     <div class="">
-      <h2 style=" color: #30A0E0">Chi tiết {{'typePost.' + isBuy | translate  }}</h2>
+      <h2 style=" color: #30A0E0">`Cập nhật {{'typePost.' + isBuy | translate  }}</h2>
     </div>
   </div>
-  <div class="grid">
-    <div class="col-12 md:col-2">
-      <div class="primary-form-control">
-        <label>Loại tin</label>
-        <input type="text" pInputText>
-      </div>
-    </div>
-    <div class="col-12 md:col-2">
-      <div class="primary-form-control">
-        <label>Ngày đăng</label>
-        <p-calendar [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
-      </div>
-    </div>
-    <div class="col-12 md:col-2">
-      <div class="primary-form-control">
-        <label>Ngày hết hạn</label>
-        <p-calendar [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
-      </div>
-    </div>
-    <div class="col-12 md:col-2">
-      <div class="primary-form-control">
+  <div class="grid" [formGroup]="updateForm">
+    <div class="col-12 md:col-6" *ngIf="!isBuy">
+      <div class="secondary-form-control">
         <label>Loại bài</label>
-        <input type="text" pInputText>
-
+        <div class="view-content">
+          <span>{{'typeNews.' + detailData?.type | translate}}</span>
+        </div>
       </div>
     </div>
-    <div class="col-12 md:col-2">
-      <div class="primary-form-control">
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Ngày đăng</label>
+        <div class="view-content">
+          <span>{{detailData?.createdDate | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Ngày duyệt</label>
+        <div class="view-content">
+          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6" *ngIf="!isBuy">
+      <div class="secondary-form-control">
+        <label>Ngày hết hạn</label>
+        <div class="view-content">
+          <span>{{detailData?.dueDate | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Ngày sửa gần nhất</label>
+        <div class="view-content">
+          <span>{{detailData?.lastModifiedDate | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6" *ngIf="!isBuy">
+      <div class="secondary-form-control">
+        <label>Ngày bán</label>
+        <div class="view-content">
+          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6" *ngIf="isBuy">
+      <div class="secondary-form-control">
+        <label>Ngày mua</label>
+        <div class="view-content">
+          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
         <label>Người đăng</label>
-        <input type="text" pInputText>
+        <div class="view-content">
+          <span>{{detailData?.fullName}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Trạng thái</label>
+        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
 
       </div>
     </div>
-    <div class="col-12 md:col-2">
-      <div class="warning-form-control">
-        <label style="z-index: 2">Trạng thái</label>
-        <p-dropdown></p-dropdown>
-      </div>
-    </div>
-  </div>
-  <div class="">
-    <div class="col12 md:col-12">
-      <div class="primary-form-control">
-        <label for="">Lí do</label>
-        <textarea pInputTextarea [autoResize]="true"></textarea>
-      </div>
-    </div>
-    <div class="col12 md:col-12">
-      <div class="primary-form-control">
-        <label for="">Mô tả</label>
-        <textarea pInputTextarea rows="5" [autoResize]="true"></textarea>
-      </div>
-    </div>
-  </div>
-  <div class="col-12">
-    <div class="primary-form-control">
-      <label for="">Ảnh</label>
-      <div class="grid p-4">
-        <aw-image-upload [maxFiles]="6" [previewUrl]="detailData?.image"></aw-image-upload>
-      </div>
-    </div>
-  </div>
-  <div class="grid justify-content-center mt-2">
-    <button pButton label="Hủy" class="p-button-secondary mr-2"></button>
-    <button pButton label="Lưu thông tin" class="p-button-primary"></button>
   </div>
 </div>
+
+<div class="" [formGroup]="updateForm">
+  <div class="col12 md:col-12">
+    <div class="primary-form-control">
+      <label for="">Tiêu đề</label>
+      <textarea pInputTextarea [autoResize]="true" formControlName="titile"></textarea>
+    </div>
+  </div>
+  <div class="col12 md:col-12">
+    <div class="primary-form-control">
+      <label for="">Mô tả</label>
+      <textarea pInputTextarea rows="5" [autoResize]="true" formControlName="description"></textarea>
+    </div>
+  </div>
+</div>
+<div class="col-12">
+  <div class="primary-form-control">
+    <label for="">Ảnh</label>
+    <div class="grid p-4">
+      <aw-image-upload [maxFiles]="6" [previewUrl]="detailData?.image"></aw-image-upload>
+    </div>
+  </div>
+</div>
+<div class="grid justify-content-center mt-2">
+  <button pButton label="Hủy" class="p-button-secondary mr-2"></button>
+  <button pButton label="Lưu thông tin" class="p-button-primary" (click)="doUpdate()"></button>
+</div>
+
 

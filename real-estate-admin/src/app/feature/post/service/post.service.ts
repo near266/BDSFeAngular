@@ -45,6 +45,11 @@ export class PostService extends BaseService {
       return this.doPost('boughtpost/deleteBPost', body).pipe(map((res: any) => res))// tin mua
     }
     return this.doPost('salepost/deleteSPost', body).pipe(map((res: any) => res)) // tin bán
-
+  }
+  update(body: any, isBuy: boolean): Observable<any> {
+    if (isBuy) {
+      return this.doPost('boughtpost/deleteBPost', body).pipe(map((res: any) => res))// tin mua
+    }
+    return this.doPost('bought/updateAdmin', body).pipe(map((res: any) => res)) // tin bán
   }
 }
