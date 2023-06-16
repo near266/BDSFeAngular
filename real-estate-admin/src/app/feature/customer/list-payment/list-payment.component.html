@@ -61,7 +61,7 @@
       <ng-template pTemplate="body" let-customerData let-index="rowIndex">
         <tr>
           <td>{{index + 1 + ((depositReq.page - 1) * depositReq.pageSize)}}</td>
-          <td>{{ customerData.id }}</td>
+          <td>{{ customerData.customer.customerCode }}</td>
           <td>{{ customerData.customer.customerName }}</td>
           <td>{{ customerData.phoneNumber }}</td>
           <td>

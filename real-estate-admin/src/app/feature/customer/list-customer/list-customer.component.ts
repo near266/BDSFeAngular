@@ -19,6 +19,14 @@ export class ListCustomerComponent implements OnInit {
     page: 1,
     pageSize: 10
   };
+  customerName = '';
+   paymentRequest = {
+    customerId: '',
+    amountWallet: 0,
+    amountWalletPromotional: 0,
+    currency: ''
+  }
+  isPayment = false;
   totalRecord = 0;
   pageSize = 10;
   page = 1;
@@ -90,4 +98,20 @@ export class ListCustomerComponent implements OnInit {
   viewBalance(id: any) {
     this.router.navigate(['customers', 'balance', id])
   }
+  openPayment(customer: any) {
+    this.paymentRequest.customerId = customer.id;
+    this.paymentRequest.currency = 'VND';
+    this.customerName = customer.customerName;
+    this.paymentRequest.amountWallet = 0;
+    this.paymentRequest.amountWalletPromotional = 0;
+    this.isPayment = true;
+  }
+
+  confirmRequest() {
+    this.customerService.paymentRequest(this.paymentRequest).subscribe(res => {
+      this.isPayment = false;
+      this.messageService.add({severity: 'success', detail: 'Thao tác thành công '})
+    })
+  }
+
 }

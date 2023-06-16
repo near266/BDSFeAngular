@@ -62,19 +62,21 @@ export class PostFormComponent implements OnInit {
   }
 
   getFile(evt: any) {
-    console.log(evt)
     this.listFileUpload = evt;
   }
-  clearFile(evt: any){
-    console.log(evt)
+
+  clearFile(evt: any) {
     this.detailData.image = evt;
   }
+
   doUpdate() {
     let arrImg: any[] = [];
     if (this.listFileUpload) {
       this.mediaService.uploadFile(this.listFileUpload).subscribe(res => {
         for (let i of this.detailData.image) {
-          arrImg.push(i);
+          if (typeof i === "string") {
+            arrImg.push(i)
+          }
         }
         for (let i of res) {
           arrImg.push(i)
