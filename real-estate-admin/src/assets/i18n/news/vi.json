@@ -26,6 +26,10 @@
       "label": "Đang hiển thị"
     },
     {
+      "code": 2,
+      "label": "Từ chối"
+    },
+    {
       "code": 3,
       "label": "Đã bán"
     },

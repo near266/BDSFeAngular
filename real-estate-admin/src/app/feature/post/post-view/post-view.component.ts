@@ -33,6 +33,7 @@ Phố Châu Long, Phường Trúc Bạch, Ba Đình, Hà Nội`;
       this.postService.getDetail(params.id, params.isBuy === 'true').subscribe(res => {
         this.detailData = res;
         this.maxPage = Math.floor((this.detailData.image.length - 1) / this.itemsPerPage);
+        console.log(this.maxPage)
       })
     });
   }

@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {forkJoin} from "rxjs";
 import {MessageService} from "primeng/api";
+import {MediaService} from "../../../core/service/media.service";
 
 @Component({
   selector: 'app-post-form',
@@ -17,14 +18,17 @@ export class PostFormComponent implements OnInit {
   detailData: any;
   updateForm: FormGroup;
   listStatus: any[];
-  params: any
+  params: any;
+  listFileUpload: any;
+
   constructor(
     private router: Router,
     private postService: PostService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private translateService: TranslateService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private mediaService: MediaService) {
     this.initForm();
   }
 
@@ -57,14 +61,39 @@ export class PostFormComponent implements OnInit {
     })
   }
 
+  getFile(evt: any) {
+    console.log(evt)
+    this.listFileUpload = evt;
+  }
+  clearFile(evt: any){
+    console.log(evt)
+    this.detailData.image = evt;
+  }
   doUpdate() {
-    const arrImg = [];
-    for (let i of this.detailData.image) {
-      arrImg.push(i.changingThisBreaksApplicationSecurity || i);
+    let arrImg: any[] = [];
+    if (this.listFileUpload) {
+      this.mediaService.uploadFile(this.listFileUpload).subscribe(res => {
+        for (let i of this.detailData.image) {
+          arrImg.push(i);
+        }
+        for (let i of res) {
+          arrImg.push(i)
+        }
+        console.log(arrImg)
+        const body = {
+          ...this.updateForm.value, image: arrImg
+        }
+        this.update(body);
+      })
+    } else {
+      const body = {
+        ...this.updateForm.value, image: this.detailData.image
+      }
+      this.update(body)
     }
-    const body = {
-      ...this.updateForm.value, image: arrImg
-    }
+  }
+
+  update(body: any) {
     this.postService.update(body, this.isBuy).subscribe(res => {
       this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
       this.router.navigate(['news', 'view'], {queryParams: this.params})

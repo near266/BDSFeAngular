@@ -97,7 +97,8 @@
   <div class="primary-form-control">
     <label for="">Ảnh</label>
     <div class="grid p-4">
-      <aw-image-upload [maxFiles]="6" [previewUrl]="detailData?.image"></aw-image-upload>
+      <aw-image-upload [maxFiles]="6" [previewUrl]="detailData?.image" (changeFile)="getFile($event)"
+      (clearFile)="clearFile($event)"></aw-image-upload>
     </div>
   </div>
 </div>

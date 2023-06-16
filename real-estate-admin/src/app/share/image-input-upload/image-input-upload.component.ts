@@ -97,7 +97,7 @@ export class ImageInputUploadComponent implements OnInit {
 
   clearImage(i: any) {
     this.previewUrl = this.previewUrl.filter(el => el !== i);
-    this.clearFile.emit();
+    this.clearFile.emit(this.previewUrl);
   }
 
   previewFile(files: any) {

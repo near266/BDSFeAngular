@@ -12,7 +12,7 @@ export const environment = {
   logServer: false,
   logClient: true,
   version: '1.0.0',
-  mediaUrl: 'http://192.168.1.44:10023/upload/',
+  mediaUrl: 'https://cdn.eztek.net/',
   clientTimeout: 10000, // 10s
   importExportTimeout: 300000, // 5m
   idleTimeout: 1800

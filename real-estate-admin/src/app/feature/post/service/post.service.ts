@@ -48,8 +48,8 @@ export class PostService extends BaseService {
   }
   update(body: any, isBuy: boolean): Observable<any> {
     if (isBuy) {
-      return this.doPost('boughtpost/deleteBPost', body).pipe(map((res: any) => res))// tin mua
-    }
     return this.doPost('bought/updateAdmin', body).pipe(map((res: any) => res)) // tin bán
+    }
+      return this.doPost('sale/updateAdmin', body).pipe(map((res: any) => res))// tin mua
   }
 }

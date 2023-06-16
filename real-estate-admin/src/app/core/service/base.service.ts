@@ -11,10 +11,11 @@ export abstract class BaseService {
 
   private baseUrl = '';
   private basePath = '';
-
+  private mediaUrl = '';
   constructor() {
     this.baseUrl = environment.baseUrl;
     this.basePath = environment.basePath;
+    this.mediaUrl = environment.mediaUrl;
   }
 
   abstract getHttp(): HttpClient;
@@ -35,6 +36,13 @@ export abstract class BaseService {
   }
   protected doPut(url: string, body: any, httpParams?: HttpParams, httpHeaders?: HttpHeaders): Observable<ApiResultResponse> {
     const requestUrl = `${this.baseUrl}${this.basePath}${url}`;
+    return this.getHttp().put<ApiResultResponse>(requestUrl, body || {}, {
+      headers: httpHeaders,
+      params: httpParams
+    });
+  }
+  protected doPutDataBlob(url: string, body: any, httpParams?: HttpParams, httpHeaders?: HttpHeaders): Observable<ApiResultResponse> {
+    const requestUrl = `${this.mediaUrl}${this.basePath}${url}`;
     return this.getHttp().put<ApiResultResponse>(requestUrl, body || {}, {
       headers: httpHeaders,
       params: httpParams
