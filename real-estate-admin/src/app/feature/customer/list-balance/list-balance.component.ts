@@ -27,6 +27,7 @@ export class ListBalanceComponent implements OnInit {
   page = 1;
   transactionList: Transaction[];
   maxDate = new Date();
+  balanceInfo: any  = {};
   constructor(
     private dialog: DialogService,
     private confirmationService: ConfirmationService,
@@ -57,6 +58,7 @@ export class ListBalanceComponent implements OnInit {
     this.customerService.getBalance(this.requestBalance).subscribe(res => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;
+      this.balanceInfo = this.transactionList[0];
     })
 
   }

@@ -26,6 +26,42 @@
       <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getBalance()"></button>
     </div>
   </div>
+  <div class="p-3">
+    <div class="secondary-form-control">
+      <label for="">Thông tin tài khoản</label>
+      <div class="p-3">
+
+        <div class="col-12">
+          <div class="flex justify-content-between">
+            <div class="">Tài khoản chính:</div>
+            <div class=""><span class="price-text">{{balanceInfo.walletAmount}}</span></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="flex justify-content-between">
+            <div class="">Tài khoản khuyến mãi:</div>
+            <div class=""><span class="price-text">{{balanceInfo.walletPromotion}}</span></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="flex justify-content-between">
+            <div class="">Point:</div>
+            <div class=""><span class="price-text">{{balanceInfo.poin}}</span></div>
+          </div>
+        </div>
+        <div class="col-12 mt-3 total-box">
+          <div class="flex justify-content-between">
+            <div class="price-text">Tổng cộng:</div>
+            <div class="text-right">
+              <div class="total-text">{{balanceInfo.totalAmount}}</div>
+              <div class="price-text">{{balanceInfo.poin}} (point)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <div class="grid p-3">
     <div class="col-12 md:col-10">
       <div class="title-content">
@@ -58,10 +94,10 @@
       </ng-template>
       <ng-template pTemplate="body" let-transaction>
         <tr>
-          <td>{{ transaction.transactionHistory.createdDate  | date: 'dd/MM/yyyy'}}</td>
-          <td>{{ 'type.' + transaction.transactionHistory.type | translate}}</td>
-          <td>{{ transaction.transactionHistory.content }}</td>
-          <td>{{ transaction.transactionHistory.transactionAmount }}</td>
+          <td>{{ transaction.transactionHistorys.createdDate  | date: 'dd/MM/yyyy'}}</td>
+          <td>{{ 'type.' + transaction.transactionHistorys.type | translate}}</td>
+          <td>{{ transaction.transactionHistorys.content }}</td>
+          <td>{{ transaction.transactionHistorys.transactionAmount }}</td>
           <td>
           <span
             [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount }} </span>
@@ -70,18 +106,18 @@
             [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{ transaction.walletPromotional.amount }}</span>
           </td>
           <td><span
-          >{{ transaction.transactionHistory.rewardPoints }}</span>
+          >{{ transaction.transactionHistorys.rewardPoints }}</span>
           </td>
         </tr>
       </ng-template>
-        <ng-template pTemplate="emptymessage">
+      <ng-template pTemplate="emptymessage">
         <tr>
           <td [attr.colspan]="7" class="text-center">
             <span>Không có dữ liệu</span>
           </td>
         </tr>
       </ng-template>
-  </p-table>
+    </p-table>
   </div>
   <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"

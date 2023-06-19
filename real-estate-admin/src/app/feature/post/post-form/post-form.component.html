@@ -4,77 +4,80 @@
       <h2 style=" color: #30A0E0">`Cập nhật {{'typePost.' + isBuy | translate  }}</h2>
     </div>
   </div>
-  <div class="grid" [formGroup]="updateForm">
-    <div class="col-12 md:col-6" *ngIf="!isBuy">
-      <div class="secondary-form-control">
-        <label>Loại bài</label>
-        <div class="view-content">
-          <span>{{'typeNews.' + detailData?.type | translate}}</span>
+  <div class="col-12 md:col-12">
+    <div class="grid" [formGroup]="updateForm">
+      <div class="col-12 md:col-6" *ngIf="!isBuy">
+        <div class="secondary-form-control">
+          <label>Loại bài</label>
+          <div class="view-content">
+            <span>{{'typeNews.' + detailData?.type | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Ngày đăng</label>
+          <div class="view-content">
+            <span>{{detailData?.createdDate | date: 'dd/MM/yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Ngày duyệt</label>
+          <div class="view-content">
+            <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6" *ngIf="!isBuy">
+        <div class="secondary-form-control">
+          <label>Ngày hết hạn</label>
+          <div class="view-content">
+            <span>{{detailData?.dueDate | date: 'dd/MM/yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Ngày sửa gần nhất</label>
+          <div class="view-content">
+            <span>{{detailData?.lastModifiedDate | date: 'dd/MM/yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6" *ngIf="!isBuy">
+        <div class="secondary-form-control">
+          <label>Ngày bán</label>
+          <div class="view-content">
+            <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6" *ngIf="isBuy">
+        <div class="secondary-form-control">
+          <label>Ngày mua</label>
+          <div class="view-content">
+            <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Người đăng</label>
+          <div class="view-content">
+            <span>{{detailData?.fullName}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Trạng thái</label>
+          <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-6">
-      <div class="secondary-form-control">
-        <label>Ngày đăng</label>
-        <div class="view-content">
-          <span>{{detailData?.createdDate | date: 'dd/MM/yyyy'}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="secondary-form-control">
-        <label>Ngày duyệt</label>
-        <div class="view-content">
-          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6" *ngIf="!isBuy">
-      <div class="secondary-form-control">
-        <label>Ngày hết hạn</label>
-        <div class="view-content">
-          <span>{{detailData?.dueDate | date: 'dd/MM/yyyy'}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="secondary-form-control">
-        <label>Ngày sửa gần nhất</label>
-        <div class="view-content">
-          <span>{{detailData?.lastModifiedDate | date: 'dd/MM/yyyy'}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6" *ngIf="!isBuy">
-      <div class="secondary-form-control">
-        <label>Ngày bán</label>
-        <div class="view-content">
-          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6" *ngIf="isBuy">
-      <div class="secondary-form-control">
-        <label>Ngày mua</label>
-        <div class="view-content">
-          <span>{{detailData?.order | date: 'dd/MM/yyyy'}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="secondary-form-control">
-        <label>Người đăng</label>
-        <div class="view-content">
-          <span>{{detailData?.fullName}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="secondary-form-control">
-        <label>Trạng thái</label>
-        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
-      </div>
-    </div>
+
   </div>
 </div>
 
@@ -97,17 +100,19 @@
       <input type="text" pInputText>
     </div>
   </div>
-  <div class="grid">
-    <div class="col-12 md:col-8">
-      <div class="secondary-form-control">
-        <label>Trạng thái</label>
-        <input type="text" pInputText>
+  <div class="col-12 md:col-12">
+    <div class="grid">
+      <div class="col-12 md:col-8">
+        <div class="secondary-form-control">
+          <label>Mức giá</label>
+          <input type="text" pInputText>
+        </div>
       </div>
-    </div>
-    <div class="col-12 md:col-4">
-      <div class="secondary-form-control">
-        <label>Trạng thái</label>
-        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
+      <div class="col-12 md:col-4">
+        <div class="secondary-form-control">
+          <label>Đơn vị</label>
+          <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
+        </div>
       </div>
     </div>
 
@@ -122,31 +127,34 @@
     </div>
   </div>
 </div>
-<div class="grid">
-  <div class="col-12 md:col-6">
-    <div class="secondary-form-control">
-      <label>Tên liên hệ</label>
-      <input type="text" pInputText>
+<div class="col-12">
+  <div class="grid">
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Tên liên hệ</label>
+        <input type="text" pInputText>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Số điện thoại</label>
+        <input type="text" pInputText>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Địa chỉ</label>
+        <input type="text" pInputText>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="secondary-form-control">
+        <label>Email</label>
+        <input type="text" pInputText>
+      </div>
     </div>
   </div>
-  <div class="col-12 md:col-6">
-    <div class="secondary-form-control">
-      <label>Số điện thoại</label>
-      <input type="text" pInputText>
-    </div>
-  </div>
-  <div class="col-12 md:col-6">
-    <div class="secondary-form-control">
-      <label>Địa chỉ</label>
-      <input type="text" pInputText>
-    </div>
-  </div>
-  <div class="col-12 md:col-6">
-    <div class="secondary-form-control">
-      <label>Email</label>
-      <input type="text" pInputText>
-    </div>
-  </div>
+
 </div>
 <div class="grid justify-content-center mt-2">
   <button pButton label="Hủy" class="p-button-secondary mr-2"></button>

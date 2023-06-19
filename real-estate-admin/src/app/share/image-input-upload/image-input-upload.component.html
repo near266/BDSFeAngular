@@ -1,10 +1,11 @@
 <div class="ui-g">
-  <div
-    draggable="true" class="{{zoneFileClass}} ui-g-12">
+  <div style="display: flex; align-items: center"
+       draggable="true" class="{{zoneFileClass}} ui-g-12">
     <div class="p-text-center">
-      <a href="javascript:void('select file');" (click)="file.click()">
-        <i class="pi pi-upload"></i> {{uploadTitle}}
-      </a>
+      <!--        <a href="javascript:void('select file');" (click)="file.click()">-->
+      <!--          <i class="pi pi-upload"></i> {{uploadTitle}}-->
+      <!--        </a>-->
+      <button pButton icon="pi pi-upload" label="{{uploadTitle}}" (click)="file.click()"></button>
       <input type="file" #file [accept]="fileExt" [multiple]="(maxFiles > 1)" (change)="onFileChange($event)"
              style="display:none"/>
     </div>
