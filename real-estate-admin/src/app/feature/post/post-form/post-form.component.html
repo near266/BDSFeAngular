@@ -73,24 +73,44 @@
       <div class="secondary-form-control">
         <label>Trạng thái</label>
         <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
-
       </div>
     </div>
   </div>
 </div>
 
 <div class="" [formGroup]="updateForm">
-  <div class="col12 md:col-12">
+  <div class="col-12 md:col-12">
     <div class="primary-form-control">
       <label for="">Tiêu đề</label>
       <textarea pInputTextarea [autoResize]="true" formControlName="titile"></textarea>
     </div>
   </div>
-  <div class="col12 md:col-12">
+  <div class="col-12 md:col-12">
     <div class="primary-form-control">
       <label for="">Mô tả</label>
       <textarea pInputTextarea rows="5" [autoResize]="true" formControlName="description"></textarea>
     </div>
+  </div>
+  <div class="col-12 md:col-12">
+    <div class="secondary-form-control">
+      <label>Diện tích</label>
+      <input type="text" pInputText>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-12 md:col-8">
+      <div class="secondary-form-control">
+        <label>Trạng thái</label>
+        <input type="text" pInputText>
+      </div>
+    </div>
+    <div class="col-12 md:col-4">
+      <div class="secondary-form-control">
+        <label>Trạng thái</label>
+        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
+      </div>
+    </div>
+
   </div>
 </div>
 <div class="col-12">
@@ -98,7 +118,33 @@
     <label for="">Ảnh</label>
     <div class="grid p-4">
       <aw-image-upload [maxFiles]="6" [previewUrl]="detailData?.image" (changeFile)="getFile($event)"
-      (clearFile)="clearFile($event)"></aw-image-upload>
+                       (clearFile)="clearFile($event)"></aw-image-upload>
+    </div>
+  </div>
+</div>
+<div class="grid">
+  <div class="col-12 md:col-6">
+    <div class="secondary-form-control">
+      <label>Tên liên hệ</label>
+      <input type="text" pInputText>
+    </div>
+  </div>
+  <div class="col-12 md:col-6">
+    <div class="secondary-form-control">
+      <label>Số điện thoại</label>
+      <input type="text" pInputText>
+    </div>
+  </div>
+  <div class="col-12 md:col-6">
+    <div class="secondary-form-control">
+      <label>Địa chỉ</label>
+      <input type="text" pInputText>
+    </div>
+  </div>
+  <div class="col-12 md:col-6">
+    <div class="secondary-form-control">
+      <label>Email</label>
+      <input type="text" pInputText>
     </div>
   </div>
 </div>
