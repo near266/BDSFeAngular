@@ -76,12 +76,35 @@
           <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
         </div>
       </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Quận/Huyện</label>
+          <div class="view-content">
+            <span>{{detailData?.region}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Phường/Xã</label>
+          <div class="view-content">
+            <span>{{detailData?.ward }}</span>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
 
 <div class="" [formGroup]="updateForm">
+  <div class="col-12 md:col-12">
+    <div class="secondary-form-control">
+      <label>Địa chỉ hiển thị trên tin đăng</label>
+      <div class="view-content">
+        <span>{{detailData?.address }}</span>
+      </div>
+    </div>
+  </div>
   <div class="col-12 md:col-12">
     <div class="primary-form-control">
       <label for="">Tiêu đề</label>

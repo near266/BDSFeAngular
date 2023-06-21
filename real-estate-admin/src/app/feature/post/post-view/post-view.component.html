@@ -66,7 +66,6 @@
           </div>
         </div>
       </div>
-
       <div class="col-12 md:col-6">
         <div class="secondary-form-control">
           <label>Người đăng</label>
@@ -83,10 +82,35 @@
           </div>
         </div>
       </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Quận/Huyện</label>
+          <div class="view-content">
+            <span>{{detailData?.region}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="secondary-form-control">
+          <label>Phường/Xã</label>
+          <div class="view-content">
+            <span>{{detailData?.ward }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
   <div class="">
+    <div class="col-12 md:col-12">
+      <div class="secondary-form-control">
+        <label>Địa chỉ hiển thị trên tin đăng</label>
+        <div class="view-content">
+          <span>{{detailData?.address }}</span>
+        </div>
+      </div>
+    </div>
+
     <div class="col-12 md:col-12">
       <div class="secondary-form-control">
         <label for="">Tiêu đề</label>
@@ -105,7 +129,7 @@
       <label>Diện tích</label>
       <!--      <input type="text" pInputText>-->
       <div class="view-content">
-        <span>{{'typeNews.' + detailData?.type | translate}}</span>
+        <span>{{detailData?.area}}</span>
       </div>
     </div>
   </div>
@@ -116,7 +140,7 @@
           <label>Mức giá</label>
           <!--        <input type="text" pInputText>-->
           <div class="view-content">
-            <span>{{'typeNews.' + detailData?.type | translate}}</span>
+            <span>{{detailData?.price | currency: 'VND' }}</span>
           </div>
         </div>
       </div>
@@ -125,7 +149,7 @@
           <label>Đơn vị</label>
           <!--        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>-->
           <div class="view-content">
-            <span>{{'typeNews.' + detailData?.type | translate}}</span>
+            <span>VND</span>
           </div>
         </div>
       </div>
@@ -158,7 +182,7 @@
         <div class="secondary-form-control">
           <label>Số điện thoại</label>
           <div class="view-content">
-            <span>{{detailData?.fullName}}</span>
+            <span>{{detailData?.phoneNumber}}</span>
           </div>
         </div>
       </div>
@@ -166,7 +190,7 @@
         <div class="secondary-form-control">
           <label>Địa chỉ</label>
           <div class="view-content">
-            <span>{{detailData?.fullName}}</span>
+            <span>{{detailData?.address}}</span>
           </div>
         </div>
       </div>
@@ -174,7 +198,7 @@
         <div class="secondary-form-control">
           <label>Email</label>
           <div class="view-content">
-            <span>{{detailData?.fullName}}</span>
+            <span>{{detailData?.email}}</span>
           </div>
         </div>
       </div>
