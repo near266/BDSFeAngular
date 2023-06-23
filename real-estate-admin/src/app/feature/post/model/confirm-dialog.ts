@@ -18,3 +18,19 @@ export const deleteModal = {
   rejectLabel: 'Huỷ',
   rejectButtonStyleClass: 'p-button-outlined p-button-danger'
 }
+export const exitModal = {
+  key: 'errorDialog',
+  header: 'Quay lại',
+  message: 'Bạn có muốn dừng chỉnh sửa không?',
+  acceptLabel: 'Đồng ý',
+  rejectLabel: 'Huỷ',
+  rejectButtonStyleClass: 'p-button-outlined p-button-danger'
+}
+export const confirmSaveModal = {
+  key: 'errorDialog',
+  header: 'Quay lại',
+  message: 'Bạn có muốn lưu thay đổi vừa thực hiện không?',
+  acceptLabel: 'Xác nhận',
+  rejectLabel: 'Huỷ bỏ',
+  rejectButtonStyleClass: 'p-button-outlined p-button-danger'
+}

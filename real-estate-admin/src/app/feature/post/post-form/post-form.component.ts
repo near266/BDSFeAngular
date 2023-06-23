@@ -5,8 +5,9 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {forkJoin} from "rxjs";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {MediaService} from "../../../core/service/media.service";
+import {confirmSaveModal, exitModal} from "../model/confirm-dialog";
 
 @Component({
   selector: 'app-post-form',
@@ -24,6 +25,7 @@ export class PostFormComponent implements OnInit {
   constructor(
     private router: Router,
     private postService: PostService,
+    private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private translateService: TranslateService,
@@ -42,7 +44,7 @@ export class PostFormComponent implements OnInit {
   }
 
   getSData(params: any) {
-    forkJoin([this.translateService.get('listStatus'), this.postService.getDetail(params.id, params.isBuy === 'true')]).subscribe(
+    forkJoin([this.translateService.get('listStatusUpdate'), this.postService.getDetail(params.id, params.isBuy === 'true')]).subscribe(
       (res: any) => {
         this.listStatus = res[0];
         this.detailData = res[1];
@@ -81,7 +83,6 @@ export class PostFormComponent implements OnInit {
         for (let i of res) {
           arrImg.push(i)
         }
-        console.log(arrImg)
         const body = {
           ...this.updateForm.value, image: arrImg
         }
@@ -99,6 +100,21 @@ export class PostFormComponent implements OnInit {
     this.postService.update(body, this.isBuy).subscribe(res => {
       this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
       this.router.navigate(['news', 'view'], {queryParams: this.params})
+    })
+  }
+
+  back() {
+    this.confirmationService.confirm({
+      ...exitModal, accept: () => {
+        this.router.navigate(['post', 'view'])
+      }
+    })
+  }
+  confirmUpdate(){
+    this.confirmationService.confirm({
+      ...confirmSaveModal, accept: () => {
+       this.doUpdate()
+      }
     })
   }
 }

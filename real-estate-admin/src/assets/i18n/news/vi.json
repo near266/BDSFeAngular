@@ -42,6 +42,36 @@
       "label": "Hết hạn"
     }
   ],
+  "listStatusUpdate": [
+    {
+      "code": null,
+      "label": "Tất cả"
+    },
+    {
+      "code": 0,
+      "label": "Chưa duyệt"
+    },
+    {
+      "code": 1,
+      "label": "Đang hiển thị"
+    },
+    {
+      "code": 2,
+      "label": "Không duyệt"
+    },
+    {
+      "code": 3,
+      "label": "Đã bán"
+    },
+    {
+      "code": 4,
+      "label": "Đã hạ"
+    },
+    {
+      "code": 5,
+      "label": "Hết hạn"
+    }
+  ],
   "typeNews": {
     "0": "Thường",
     "1": "VIP",
