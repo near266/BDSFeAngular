@@ -120,15 +120,17 @@
   <div class="col-12 md:col-12">
     <div class="secondary-form-control">
       <label>Diện tích</label>
-      <input type="text" pInputText>
+      <p-inputNumber inputId="mile" suffix="m" formControlName="area">
+      </p-inputNumber>
     </div>
   </div>
   <div class="col-12 md:col-12">
-    <div class="grid">
+    <div class="grid" [formGroup]="updateForm">
       <div class="col-12 md:col-8">
         <div class="secondary-form-control">
           <label>Mức giá</label>
-          <input type="text" pInputText>
+             <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
+                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
         </div>
       </div>
       <div class="col-12 md:col-4">
@@ -151,29 +153,31 @@
   </div>
 </div>
 <div class="col-12">
-  <div class="grid">
+  <div class="grid" [formGroup]="updateForm">
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Tên liên hệ</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText formControlName="fullName">
       </div>
     </div>
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Số điện thoại</label>
-        <input type="text" pInputText>
+        <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false"
+        formControlName="phoneNumber">
+        </p-inputNumber>
       </div>
     </div>
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Địa chỉ</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText formControlName="address">
       </div>
     </div>
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Email</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText formControlName="email">
       </div>
     </div>
   </div>
