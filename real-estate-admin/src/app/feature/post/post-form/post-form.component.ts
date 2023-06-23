@@ -21,6 +21,7 @@ export class PostFormComponent implements OnInit {
   listStatus: any[];
   params: any;
   listFileUpload: any;
+  listUnit: any[]
 
   constructor(
     private router: Router,
@@ -44,10 +45,13 @@ export class PostFormComponent implements OnInit {
   }
 
   getSData(params: any) {
-    forkJoin([this.translateService.get('listStatusUpdate'), this.postService.getDetail(params.id, params.isBuy === 'true')]).subscribe(
+    forkJoin([this.translateService.get('listStatusUpdate'),
+      this.postService.getDetail(params.id, params.isBuy === 'true'),
+      this.translateService.get(params.isBuy === 'true' ? 'unitBoughtNews' : 'unitSaleNews')]).subscribe(
       (res: any) => {
         this.listStatus = res[0];
         this.detailData = res[1];
+        this.listUnit = res[2];
         this.updateForm.patchValue(this.detailData);
       }
     )
@@ -66,7 +70,7 @@ export class PostFormComponent implements OnInit {
       email: [],
       address: [],
       phoneNumber: [],
-
+      unit: []
     })
   }
 
@@ -113,14 +117,15 @@ export class PostFormComponent implements OnInit {
   back() {
     this.confirmationService.confirm({
       ...exitModal, accept: () => {
-        this.router.navigate(['post', 'view'])
+        this.router.navigate(['news'])
       }
     })
   }
-  confirmUpdate(){
+
+  confirmUpdate() {
     this.confirmationService.confirm({
       ...confirmSaveModal, accept: () => {
-       this.doUpdate()
+        this.doUpdate()
       }
     })
   }

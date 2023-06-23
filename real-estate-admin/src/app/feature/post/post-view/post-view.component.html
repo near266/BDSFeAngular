@@ -135,7 +135,7 @@
   </div>
   <div class="col-12 md:col-12">
     <div class="grid">
-      <div class="col-12 md:col-8">
+      <div class="col-12 md:col-8" *ngIf="!isBuy">
         <div class="secondary-form-control">
           <label>Mức giá</label>
           <!--        <input type="text" pInputText>-->
@@ -144,12 +144,21 @@
           </div>
         </div>
       </div>
+      <div class="col-12 md:col-8" *ngIf="isBuy">
+        <div class="secondary-form-control">
+          <label>Tài chính dự kiến</label>
+          <!--        <input type="text" pInputText>-->
+          <div class="view-content">
+            <span>{{detailData?.rangePrice }}</span>
+          </div>
+        </div>
+      </div>
       <div class="col-12 md:col-4">
         <div class="secondary-form-control">
           <label>Đơn vị</label>
           <!--        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>-->
           <div class="view-content">
-            <span>VND</span>
+            <span>{{detailData?.unit}}</span>
           </div>
         </div>
       </div>

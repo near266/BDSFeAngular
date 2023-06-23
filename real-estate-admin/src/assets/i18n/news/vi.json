@@ -72,6 +72,38 @@
       "label": "Hết hạn"
     }
   ],
+  "unitSaleNews": [
+    {
+      "code": "price",
+      "label": "VND"
+    },
+    {
+      "code": "priceTo",
+      "label": "Giá/m2"
+    }
+  ],
+  "unitBoughtNews": [
+    {
+      "code": "price 0 PriceTo 500000000",
+      "label": "Dưới 500"
+    },
+    {
+      "code": "500-800tr",
+      "label": " 500000000-800000000"
+    },
+    {
+      "code": "Trên 10 tỷ",
+      "label": "100000000000000"
+    },
+    {
+      "code": "price",
+      "label": "tài chính mở"
+    },
+    {
+      "code": "giá cụ thể",
+      "label": "PriceTo "
+    }
+  ],
   "typeNews": {
     "0": "Thường",
     "1": "VIP",
