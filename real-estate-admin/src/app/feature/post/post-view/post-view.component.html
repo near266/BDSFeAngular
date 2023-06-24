@@ -124,7 +124,7 @@
       </div>
     </div>
   </div>
-  <div class="col-12 md:col-12">
+  <div class="col-12 md:col-12" *ngIf="!isBuy">
     <div class="secondary-form-control">
       <label>Diện tích</label>
       <!--      <input type="text" pInputText>-->
@@ -199,7 +199,7 @@
         <div class="secondary-form-control">
           <label>Địa chỉ</label>
           <div class="view-content">
-            <span>{{detailData?.address}}</span>
+            <span>{{detailData?.addressUser}}</span>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@
         <label *ngIf="!isBuy">Tin tìm bán đất</label>
         <label *ngIf="isBuy">Tin tìm mua đất</label>
       </div>
-      <input type="text" pInputText [(ngModel)]="listRequest.title">
+      <input type="text" pInputText [(ngModel)]="listRequest.title" placeholder="VD: HL123...">
     </div>
     <div class="col-12 md:col-2">
       <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getListPost()"></button>
@@ -46,6 +46,7 @@
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th>STT</th>
+          <th>Mã tin</th>
           <th *ngIf="!isBuy">Loại bài</th>
           <th class="text-center">Tiêu đề</th>
           <th>Người đăng</th>
@@ -61,6 +62,7 @@
             <p-tableCheckbox [value]="product"></p-tableCheckbox>
           </td>
           <td>{{index + 1 + ((listRequest.page - 1) * listRequest.pageSize)}}</td>
+          <td>{{product.id}}</td>
           <td *ngIf="!isBuy">{{ 'typeNews.' + product.type | translate}}</td>
           <td><span class="hyper-link" (click)="goToView(product.id)">{{ product.titile }}</span></td>
           <td>{{ product.createdBy }}</td>
@@ -68,8 +70,8 @@
             <span
               [ngClass]="'new-status-' + product.status">{{ 'status.' + product.status | translate}}</span>
           </td>
-          <td>{{ product.createdDate | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ product.LastModifiedDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ product.order | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>
             <div class="flex">
               <button pButton (click)="delete(product.id)" icon="pi pi-trash" pTooltip="Xóa"

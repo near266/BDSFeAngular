@@ -129,26 +129,27 @@
       <div class="col-12 md:col-8" *ngIf="!isBuy">
         <div class="secondary-form-control">
           <label>Mức giá</label>
-             <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
-                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+          <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
+                         mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
         </div>
         <span *ngIf="!isBuy">Giá <b>{{updateForm.value?.price | currency: 'VND'}}/m2</b> (Tổng trị giá <b>~
-          {{updateForm.value?.unit === 'price' ? ((updateForm.value?.price * (updateForm.value?.area || 1)) | currency: 'VND')
-            :( (updateForm.value?.price / (updateForm.value?.area || 1)) | currency: 'VND')}} </b>)</span>
+          {{updateForm.value?.unit === 'price' ? convertUnit((updateForm.value?.price * (updateForm.value?.area || 1))) :
+            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}} </b>)</span>
 
       </div>
       <div class="col-12 md:col-8" *ngIf="isBuy">
         <div class="secondary-form-control">
           <label>Tài chính dự kiến</label>
-             <p-inputNumber inputId="integeronly" [maxlength]="20"
-                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+           <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
+                         mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
         </div>
 
       </div>
       <div class="col-12 md:col-4">
         <div class="secondary-form-control">
           <label>Đơn vị</label>
-          <p-dropdown [options]="listUnit" formControlName="status" optionValue="code" formControlName="unit"></p-dropdown>
+          <p-dropdown [options]="listUnit" optionValue="code"
+                      formControlName="unit"></p-dropdown>
         </div>
       </div>
     </div>
@@ -176,7 +177,7 @@
       <div class="secondary-form-control">
         <label>Số điện thoại</label>
         <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false"
-        formControlName="phoneNumber">
+                       formControlName="phoneNumber">
         </p-inputNumber>
       </div>
     </div>
