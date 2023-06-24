@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, CurrencyPipe} from '@angular/common';
 
 import {PostRoutingModule} from './post-routing.module';
 import {PostComponent} from './post.component';
@@ -88,6 +88,7 @@ import {Router} from "@angular/router";
       provide: LANGUAGE_FILE_PATH,
       useValue: {path: './assets/i18n/news/'}
     },
+    CurrencyPipe
   ]
 })
 

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="grid align-items-center justify-content-between p-3">
     <div class="">
-      <h2 style=" color: #30A0E0">`Cập nhật {{'typePost.' + isBuy | translate  }}</h2>
+      <h2 style=" color: #30A0E0">`Chỉnh sửa {{'typePost.' + isBuy | translate  }}</h2>
     </div>
   </div>
   <div class="col-12 md:col-12">
@@ -117,24 +117,39 @@
       <textarea pInputTextarea rows="5" [autoResize]="true" formControlName="description"></textarea>
     </div>
   </div>
-  <div class="col-12 md:col-12">
+  <div class="col-12 md:col-12" *ngIf="!isBuy">
     <div class="secondary-form-control">
       <label>Diện tích</label>
-      <input type="text" pInputText>
+      <p-inputNumber inputId="mile" suffix="m2" formControlName="area">
+      </p-inputNumber>
     </div>
   </div>
   <div class="col-12 md:col-12">
-    <div class="grid">
-      <div class="col-12 md:col-8">
+    <div class="grid" [formGroup]="updateForm">
+      <div class="col-12 md:col-8" *ngIf="!isBuy">
         <div class="secondary-form-control">
           <label>Mức giá</label>
-          <input type="text" pInputText>
+          <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
+                         mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
         </div>
+        <span *ngIf="!isBuy">Giá <b>{{updateForm.value?.price | currency: 'VND'}}/m2</b> (Tổng trị giá <b>~
+          {{updateForm.value?.unit === 'price' ? convertUnit((updateForm.value?.price * (updateForm.value?.area || 1))) :
+            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}} </b>)</span>
+
+      </div>
+      <div class="col-12 md:col-8" *ngIf="isBuy">
+        <div class="secondary-form-control">
+          <label>Tài chính dự kiến</label>
+           <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
+                         mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+        </div>
+
       </div>
       <div class="col-12 md:col-4">
         <div class="secondary-form-control">
           <label>Đơn vị</label>
-          <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>
+          <p-dropdown [options]="listUnit" optionValue="code"
+                      formControlName="unit"></p-dropdown>
         </div>
       </div>
     </div>
@@ -151,37 +166,39 @@
   </div>
 </div>
 <div class="col-12">
-  <div class="grid">
+  <div class="grid" [formGroup]="updateForm">
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Tên liên hệ</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText formControlName="fullName">
       </div>
     </div>
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Số điện thoại</label>
-        <input type="text" pInputText>
+        <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false"
+                       formControlName="phoneNumber">
+        </p-inputNumber>
       </div>
     </div>
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Địa chỉ</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText formControlName="address">
       </div>
     </div>
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Email</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText formControlName="email">
       </div>
     </div>
   </div>
 
 </div>
 <div class="grid justify-content-center mt-2">
-  <button pButton label="Hủy" class="p-button-secondary mr-2"></button>
-  <button pButton label="Lưu thông tin" class="p-button-primary" (click)="doUpdate()"></button>
+  <button pButton label="Hủy" class="p-button-secondary mr-2" (click)="back()"></button>
+  <button pButton label="Lưu thông tin" class="p-button-primary" (click)="confirmUpdate()"></button>
 </div>
 
 

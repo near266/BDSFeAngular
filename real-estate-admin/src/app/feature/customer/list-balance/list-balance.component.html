@@ -80,9 +80,9 @@
     <p-table [value]="transactionList">
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="transactionHistory.createdDate">
+          <th pSortableColumn="transactionHistorys.createdDate">
             Thời gian
-            <p-sortIcon field="transactionHistory.createdDate"></p-sortIcon>
+            <p-sortIcon field="transactionHistorys.createdDate"></p-sortIcon>
           </th>
           <th>Loại giao dịch</th>
           <th>Nội dung</th>
@@ -94,16 +94,21 @@
       </ng-template>
       <ng-template pTemplate="body" let-transaction>
         <tr>
-          <td>{{ transaction.transactionHistorys.createdDate  | date: 'dd/MM/yyyy'}}</td>
+          <td>{{ transaction.transactionHistorys.createdDate  | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
           <td>{{ 'type.' + transaction.transactionHistorys.type | translate}}</td>
           <td>{{ transaction.transactionHistorys.content }}</td>
-          <td>{{ transaction.transactionHistorys.transactionAmount }}</td>
+          <td>
+            <span
+              [ngClass]=" transaction.transactionHistorys.status === 'Up' ?'primary-text-color' : 'danger-text-color'">
+              {{ transaction.transactionHistorys.status === 'Up' ? '+' + (transaction.transactionHistorys.transactionAmount | currency: 'VND'  ) :
+              '-' + transaction.transactionHistorys.transactionAmount | currency: 'VND'}}</span>
+          </td>
           <td>
           <span
-            [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount }} </span>
+            [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount | currency: 'VND'}} </span>
           </td>
           <td><span
-            [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{ transaction.walletPromotional.amount }}</span>
+            [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{ transaction.walletPromotional.amount | currency: 'VND'}}</span>
           </td>
           <td><span
           >{{ transaction.transactionHistorys.rewardPoints }}</span>
@@ -122,7 +127,7 @@
   <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
                  [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
-                 #paginator [hidden]="transactionList.length < 10"
+                 #paginator [hidden]=" transactionList &&   transactionList.length < 10"
                  currentPageReportTemplate=
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
