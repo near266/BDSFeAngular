@@ -17,6 +17,7 @@ export class ListCustomerComponent implements OnInit {
     keyword: '',
     phone: '',
     code: '',
+    id: '',
     page: 1,
     pageSize: 10
   };
