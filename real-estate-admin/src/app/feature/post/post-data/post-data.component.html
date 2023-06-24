@@ -8,18 +8,24 @@
     </div>
   </div>
   <div class="grid p-3 border-line">
-    <div class="field col-12 md:col-4">
+    <div class="field col-12 md:col-3">
       <div class="title">
         <label>Trạng thái</label>
       </div>
       <p-dropdown [options]="listStatus" [(ngModel)]="listRequest.status" optionValue="code"></p-dropdown>
     </div>
-    <div class="field col-12 md:col-6">
+    <div class="field col-12 md:col-3">
       <div class="title">
         <label *ngIf="!isBuy">Tin tìm bán đất</label>
         <label *ngIf="isBuy">Tin tìm mua đất</label>
       </div>
-      <input type="text" pInputText [(ngModel)]="listRequest.title" placeholder="VD: HL123...">
+      <input type="text" pInputText [(ngModel)]="listRequest.title" placeholder="Tiêu đề">
+    </div>
+    <div class="field col-12 md:col-3">
+      <div class="title">
+        <label> Mã tin</label>
+      </div>
+      <input type="text" pInputText [(ngModel)]="listRequest.title" placeholder="VD: 654321">
     </div>
     <div class="col-12 md:col-2">
       <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getListPost()"></button>

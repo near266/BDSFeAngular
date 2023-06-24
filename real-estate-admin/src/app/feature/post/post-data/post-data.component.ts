@@ -27,6 +27,7 @@ export class PostDataComponent implements OnInit {
   totalRecord = 0;
   listRequest = {
     title: '',
+    cdoe: '',
     status: null,
     page: 1,
     pageSize: 10

@@ -165,13 +165,13 @@ export class PostFormComponent implements OnInit {
   }
 
   convertUnit(unit: number): string {
-    this.currencyPipe.transform(unit, 'VND');
-    if (unit > 1000000 && unit < 1000000000000) {
-      return unit / 1000000 + ' triệu';
+    if (unit > 1000000000) {
+      return (unit / 1000000000).toFixed() + ' tỷ';
     }
-    if (unit > 1000000000000) {
-      return unit / 1000000000000 + ' tỷ';
+    if (unit > 1000000 && unit < 1000000000) {
+      return (unit / 1000000).toFixed() + ' triệu';
     }
+
     return this.currencyPipe.transform(unit, 'VND') + '';
   }
 
