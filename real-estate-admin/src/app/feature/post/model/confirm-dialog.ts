@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler-cli/src/transformers/util';
 export enum ConfirmDialog {
 }
 
@@ -18,19 +19,11 @@ export const deleteModal = {
   rejectLabel: 'Huỷ',
   rejectButtonStyleClass: 'p-button-outlined p-button-danger'
 }
-export const exitModal = {
+export const errorModal = {
   key: 'errorDialog',
-  header: 'Quay lại',
-  message: 'Bạn có muốn dừng chỉnh sửa không?',
+  header: 'Lỗi',
+  message: 'Vui lòng nhập đúng thông tin',
   acceptLabel: 'Đồng ý',
   rejectLabel: 'Huỷ',
-  rejectButtonStyleClass: 'p-button-outlined p-button-danger'
-}
-export const confirmSaveModal = {
-  key: 'errorDialog',
-  header: 'Quay lại',
-  message: 'Bạn có muốn lưu thay đổi vừa thực hiện không?',
-  acceptLabel: 'Xác nhận',
-  rejectLabel: 'Huỷ bỏ',
   rejectButtonStyleClass: 'p-button-outlined p-button-danger'
 }
