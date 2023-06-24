@@ -43,3 +43,4 @@ export const confirmSaveModal = {
   rejectLabel: 'Huỷ bỏ',
   rejectButtonStyleClass: 'p-button-outlined p-button-danger'
 }
+

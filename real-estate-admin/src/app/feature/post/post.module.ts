@@ -58,6 +58,7 @@ import {Router} from "@angular/router";
     TabViewModule,
     ConfirmDialogModule,
     ToastModule,
+    
     DialogModule,
     TooltipModule,
     MessagesModule,
