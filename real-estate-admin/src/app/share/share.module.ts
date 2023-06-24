@@ -2,14 +2,16 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ImageInputUploadComponent} from './image-input-upload/image-input-upload.component';
 import {ImageModule} from "primeng/image";
-import { NumberOnlyDirective } from './number-only.directive';
+import {NumberOnlyDirective} from './number-only.directive';
 import {ButtonModule} from "primeng/button";
+import {VnCurrencyPipe} from './vnd-currency.pipe';
 
 
 @NgModule({
   declarations: [
     ImageInputUploadComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    VnCurrencyPipe
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import {ButtonModule} from "primeng/button";
   ],
   exports: [
     ImageInputUploadComponent,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    VnCurrencyPipe
   ]
 })
 export class ShareModule {

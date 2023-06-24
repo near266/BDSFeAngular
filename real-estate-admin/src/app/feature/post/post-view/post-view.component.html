@@ -140,7 +140,7 @@
           <label>Mức giá</label>
           <!--        <input type="text" pInputText>-->
           <div class="view-content">
-            <span>{{detailData?.price | currency: 'VND' }}</span>
+            <span>{{detailData?.price | vnCurrency}}</span>
           </div>
         </div>
       </div>
@@ -158,7 +158,7 @@
           <label>Đơn vị</label>
           <!--        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>-->
           <div class="view-content">
-            <span>{{detailData?.unit}}</span>
+            <span>{{detailData?.unit || 'VNĐ'}}</span>
           </div>
         </div>
       </div>

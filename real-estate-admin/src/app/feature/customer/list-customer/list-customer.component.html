@@ -72,8 +72,8 @@
           <td>{{item.customer?.company }}</td>
           <td>{{item.customer?.phone }}</td>
           <td>{{item.customer?.exchangeDescription }}</td>
-          <td>{{item.wallet?.amount }}</td>
-          <td>{{item.walletPromotional?.amount }}</td>
+          <td>{{item.wallet?.amount | vnCurrency }}</td>
+          <td>{{item.walletPromotional?.amount | vnCurrency}}</td>
           <td>{{ item.customer.point }}</td>
           <td>
              <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(item.customer)"

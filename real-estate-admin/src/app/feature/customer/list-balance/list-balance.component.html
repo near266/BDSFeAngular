@@ -100,15 +100,15 @@
           <td>
             <span
               [ngClass]=" transaction.transactionHistorys.status === 'Up' ?'primary-text-color' : 'danger-text-color'">
-              {{ transaction.transactionHistorys.status === 'Up' ? '+' + (transaction.transactionHistorys.transactionAmount | currency: 'VND'  ) :
-              '-' + transaction.transactionHistorys.transactionAmount | currency: 'VND'}}</span>
+              {{ transaction.transactionHistorys.status === 'Up' ? '+' + (transaction.transactionHistorys.transactionAmount | vnCurrency  ) :
+              '-' + (transaction.transactionHistorys.transactionAmount | vnCurrency)}}</span>
           </td>
           <td>
           <span
-            [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount | currency: 'VND'}} </span>
+            [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount | vnCurrency}} </span>
           </td>
           <td><span
-            [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{ transaction.walletPromotional.amount | currency: 'VND'}}</span>
+            [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{ transaction.walletPromotional.amount | vnCurrency}}</span>
           </td>
           <td><span
           >{{ transaction.transactionHistorys.rewardPoints }}</span>
