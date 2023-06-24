@@ -52,4 +52,5 @@ export class PostService extends BaseService {
     }
       return this.doPost('sale/updateAdmin', body).pipe(map((res: any) => res))// tin mua
   }
+  
 }
