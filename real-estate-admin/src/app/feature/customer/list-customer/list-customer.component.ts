@@ -16,6 +16,7 @@ export class ListCustomerComponent implements OnInit {
   searchCustomer = {
     keyword: '',
     phone: '',
+    code: '',
     page: 1,
     pageSize: 10
   };

@@ -1,13 +1,20 @@
 <div class="container">
   <div class="grid p-3 border-line">
-    <div class="field col-12 md:col-5">
+    <div class="field col-12 md:col-3">
       <div class="title">
-        <label>Tên khách hàng</label>
+        <label>Mã khách hàng</label>
       </div>
       <input type="text" pInputText [(ngModel)]="searchCustomer.keyword"
              (keydown.enter)="getListCustomer(true)">
     </div>
-    <div class="field col-12 md:col-5">
+    <div class="field col-12 md:col-3">
+      <div class="title">
+        <label>Tên khách hàng</label>
+      </div>
+      <input type="text" pInputText [(ngModel)]="searchCustomer.code"
+             (keydown.enter)="getListCustomer(true)">
+    </div>
+    <div class="field col-12 md:col-3">
       <div class="title">
         <label>Số điện thoại</label>
       </div>
