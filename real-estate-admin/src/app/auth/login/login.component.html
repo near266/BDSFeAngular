@@ -34,7 +34,7 @@
         <div class="col-12">
           <div class="danger-form-control">
             <label>Mật khẩu</label>
-            <input [type]="passwordType" pInputText formControlName="password"/>
+            <input [type]="passwordType" pInputText formControlName="password" (keydown.enter)="doLogin()"/>
             <i class="pi pi-eye" style="position: absolute; top: 15px; right: 15px;" (click)="changeTypePass()"
                (keyup.enter)="doLogin()"></i>
           </div>
