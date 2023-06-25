@@ -1,6 +1,10 @@
 {
   "typeList": [
     {
+      "value": 2,
+      "label": "Tất cả"
+    },
+    {
       "value": 0,
       "label": "Nạp tiền"
     },
@@ -10,6 +14,10 @@
     },
     {
       "value": 2,
+      "label": "Cộng tiền"
+    },
+    {
+      "value": 3,
       "label": "Hoàn tiền"
     }
   ],

@@ -27,7 +27,7 @@ export class PostDataComponent implements OnInit {
   totalRecord = 0;
   listRequest = {
     title: '',
-    cdoe: '',
+    // code: '',
     id: '',
     status: null,
     page: 1,

@@ -73,7 +73,8 @@ export class PostFormComponent implements OnInit {
       email: [],
       address: [],
       phoneNumber: [],
-      unit: []
+      unit: [],
+      addressUser: []
     })
   }
 

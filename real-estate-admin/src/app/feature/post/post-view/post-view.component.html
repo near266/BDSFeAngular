@@ -46,7 +46,7 @@
         <div class="secondary-form-control">
           <label>Ngày sửa gần nhất</label>
           <div class="view-content">
-            <span>{{detailData?.lastModifiedDate | date: 'dd/MM/yyyy'}}</span>
+            <span>{{detailData?.lastModifiedDate ? (detailData?.lastModifiedDate | date: 'dd/MM/yyyy') : 'Giá trị chưa cập nhật'}}</span>
           </div>
         </div>
       </div>

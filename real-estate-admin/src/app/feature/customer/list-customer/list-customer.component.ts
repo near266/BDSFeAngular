@@ -17,12 +17,12 @@ export class ListCustomerComponent implements OnInit {
     keyword: '',
     phone: '',
     code: '',
-    id: '',
+    customerCode: '',
     page: 1,
     pageSize: 10
   };
   customerName = '';
-   paymentRequest = {
+  paymentRequest = {
     customerId: '',
     amountWallet: 0,
     amountWalletPromotional: 0,
@@ -100,6 +100,7 @@ export class ListCustomerComponent implements OnInit {
   viewBalance(id: any) {
     this.router.navigate(['customers', 'balance', id])
   }
+
   openPayment(customer: any) {
     this.paymentRequest.customerId = customer.id;
     this.paymentRequest.currency = 'VND';
