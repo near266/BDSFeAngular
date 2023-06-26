@@ -101,6 +101,10 @@ export class ListCustomerComponent implements OnInit {
     this.router.navigate(['customers', 'balance', id])
   }
 
+  createCustomer(){
+    this.router.navigate(['customers', 'create'])
+  }
+
   openPayment(customer: any) {
     this.paymentRequest.customerId = customer.id;
     this.paymentRequest.currency = 'VND';

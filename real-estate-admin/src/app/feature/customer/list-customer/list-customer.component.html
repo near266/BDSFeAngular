@@ -33,10 +33,22 @@
       </div>
     </div>
   </div>
-  <div class="p-3">
-    <div class="mr-2">
-      <button pButton label="Xóa" (click)="doDelete()" [disabled]="dataSelection.length < 2"
-              icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+  <div class="p-3 grid justify-content-between">
+    <div class="flex">
+      <div class="flex align-items-center mr-2">
+        Đã chọn: {{dataSelection.length}}
+      </div>
+      <div class="mr-2">
+        <button pButton label="Xóa" (click)="doDelete()" [disabled]="dataSelection.length < 2"
+                icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+      </div>
+    </div>
+    <div class="">
+      <div class="mr-2">
+        <button pButton label="Thêm mới" (click)="createCustomer()"
+                icon="pi pi-plus" class="p-button-outlined p-button-primary"></button>
+      </div>
+
     </div>
   </div>
   <div class="p-3">
@@ -76,7 +88,7 @@
           <td>{{item.walletPromotional?.amount | vnCurrency}}</td>
           <td>{{ item.customer.point }}</td>
           <td>
-             <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(item.customer)"
+            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(item.customer)"
                     class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
             <button pButton icon="pi pi-bars" pTooltip="Xem số dư" (click)="viewBalance(item.customer.id)"
                     class="p-button-sm p-button-warning p-button-outlined mr-2"></button>

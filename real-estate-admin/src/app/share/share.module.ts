@@ -5,13 +5,15 @@ import {ImageModule} from "primeng/image";
 import {NumberOnlyDirective} from './number-only.directive';
 import {ButtonModule} from "primeng/button";
 import {VnCurrencyPipe} from './vnd-currency.pipe';
+import { SingleImageUploadComponent } from './single-image-upload/single-image-upload.component';
 
 
 @NgModule({
   declarations: [
     ImageInputUploadComponent,
     NumberOnlyDirective,
-    VnCurrencyPipe
+    VnCurrencyPipe,
+    SingleImageUploadComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import {VnCurrencyPipe} from './vnd-currency.pipe';
   exports: [
     ImageInputUploadComponent,
     NumberOnlyDirective,
-    VnCurrencyPipe
+    VnCurrencyPipe,
+    SingleImageUploadComponent
   ]
 })
 export class ShareModule {

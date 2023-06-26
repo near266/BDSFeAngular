@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="title-content p-3">
+    <label>THÊM MỚI KHÁCH HÀNG</label>
+  </div>
+  <div class="p-3">
+    <div class="flex">
+      <div class="col-4">
+        <div class="avatar flex justify-content-center">
+          <img src="./assets/resouces/300.PNG" height="250" width="250"/>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="grid">
+          <div class="col-12 md:col-12">
+            <div class="secondary-form-control">
+              <label>Tên khách hàng</label>
+              <input type="text" pInputText>
+            </div>
+          </div>
+          <div class="col-12 md:col-12">
+            <div class="secondary-form-control">
+              <label>Số điện thoại</label>
+              <input type="text" pInputText>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-3">
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label>Địa chỉ</label>
+        <input type="text" pInputText>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label>Công ty</label>
+        <input type="text" pInputText>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label>Sàn</label>
+        <input type="text" pInputText>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="grid">
+        <div class="col-12 md:col-4">
+          <div class="secondary-form-control">
+            <label>Môi giới tiêu biểu</label>
+            <p-dropdown></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="secondary-form-control">
+            <label>Trạng thái</label>
+            <p-dropdown></p-dropdown>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="secondary-form-control">
+            <label>Thời gian duy trì</label>
+            <p-dropdown></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-12">
+      <div class="secondary-form-control">
+        <label for="">Mô tả môi giới tiêu biểu</label>
+        <textarea pInputTextarea rows="5" [autoResize]="true"></textarea>
+      </div>
+    </div>
+    <div class="p-3">
+      <div class="secondary-form-control">
+        <label for="">Chung</label>
+        <div class="p-3">
+          <div class="col-12">
+            <div class="flex justify-content-between">
+              <div class="">Created Date: 20/10/2023</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="flex justify-content-between">
+              <div class="">Last Updated:</div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="flex justify-content-between">
+              <div class="">Người tạo: Admin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="p-3 grid justify-content-end">
+      <button pButton label="Huỷ bỏ" class="mr-3 p-button-outlined p-button-secondary"></button>
+      <button pButton label="Thêm mới"></button>
+    </div>
+  </div>
+
+</div>
