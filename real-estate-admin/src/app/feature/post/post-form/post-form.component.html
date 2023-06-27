@@ -134,7 +134,7 @@
         </div>
         <span *ngIf="!isBuy">Giá <b>
           {{updateForm.value?.unit === 1 ? (updateForm.value?.price |vnCurrency) :
-            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}}
+            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1))) + '/m2'}}
         </b>
           ({{updateForm.value?.unit === 0  ? 'Tổng trị giá' : '' }}<b>~
           {{updateForm.value?.unit === 0 ? (updateForm.value?.price |vnCurrency) :
