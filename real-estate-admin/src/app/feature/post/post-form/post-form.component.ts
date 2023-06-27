@@ -54,7 +54,6 @@ export class PostFormComponent implements OnInit {
         this.listStatus = res[0];
         this.detailData = res[1];
         this.listUnit = res[2];
-        this.updateForm.get('unit')?.setValue(this.convertPrice(this.detailData.price, this.detailData.priceTo).code);
         this.updateForm.patchValue(this.detailData);
       }
     )
@@ -73,7 +72,8 @@ export class PostFormComponent implements OnInit {
       email: [],
       address: [],
       phoneNumber: [],
-      unit: []
+      unit: [],
+      addressUser: []
     })
   }
 

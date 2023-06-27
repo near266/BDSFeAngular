@@ -34,6 +34,7 @@ import {CustomMissingTranslationHandler} from "../../core/translate.missing";
 import {AppTranslateService} from "../../core/service/translate.service";
 import {Router} from "@angular/router";
 import {BaseModule} from "../../core/base-module";
+import { FormCustomerComponent } from './form-customer/form-customer.component';
 
 export function createTranslateLoader(http: HttpClient, filePath: string) {
   return new TranslateHttpLoader(http, '/assets/i18n/customers/', '.json');
@@ -45,7 +46,8 @@ export function createTranslateLoader(http: HttpClient, filePath: string) {
     ListCustomerComponent,
     TabviewCustomerComponent,
     ListPaymentComponent,
-    ListBalanceComponent
+    ListBalanceComponent,
+    FormCustomerComponent
   ],
   imports: [
     CommonModule,

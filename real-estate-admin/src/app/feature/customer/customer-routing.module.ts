@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CustomerComponent} from "./customer.component";
 import {TabviewCustomerComponent} from "./tabview-customer/tabview-customer.component";
 import {ListBalanceComponent} from "./list-balance/list-balance.component";
+import {FormCustomerComponent} from "./form-customer/form-customer.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'balance/:id',
         component: ListBalanceComponent
+      },
+      {
+        path: 'create',
+        component: FormCustomerComponent
       }
     ]
   }

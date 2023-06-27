@@ -74,14 +74,18 @@
   ],
   "unitSaleNews": [
     {
-      "code": "price",
+      "code": 0,
       "label": "VND"
     },
     {
-      "code": "priceTo",
+      "code": 1,
       "label": "Giá/m2"
     }
   ],
+  "unitName": {
+    "0": "VND",
+    "1": "Giá/m2"
+  },
   "unitBoughtNews": [
     {
       "code": 0,

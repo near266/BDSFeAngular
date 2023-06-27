@@ -50,8 +50,14 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(this.loginForm.value).subscribe((res: any) => {
       if (res) {
+        if(res && res.roles.includes('ROLE_ADMIN')){
         this.authService.setToken(res.id_token, new Date().getTime());
         this.goToView();
+        }else {
+           this.msgInvalid = [
+        {severity: 'error', summary: '', detail: 'Bạn không có quyền truy cập hệ thống'},
+      ];
+        }
       }
     }, err => {
       if (err instanceof ApiErrorTokenInvalid){
