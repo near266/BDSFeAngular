@@ -158,7 +158,7 @@
           <label>Đơn vị</label>
           <!--        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>-->
           <div class="view-content">
-            <span>{{detailData?.unit || 'VNĐ'}}</span>
+            <span>{{isBuy ? detailData?.unit : ('unitName.' + detailData?.unit | translate)}}</span>
           </div>
         </div>
       </div>

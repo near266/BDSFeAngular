@@ -132,7 +132,7 @@ export class PostDataComponent implements OnInit {
   }
 
   doReject() {
-    this.bodyApproveOne.reason = this.reason;
+    this.bodyApproveOne.reason = this.reason || this.reasonOne;
     this.postService.approve(this.bodyApproveOne).subscribe(res => {
       this.isShowRejectReason = false;
       this.successMessage();

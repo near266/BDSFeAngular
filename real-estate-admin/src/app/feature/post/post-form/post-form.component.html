@@ -132,9 +132,15 @@
           <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
                          mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
         </div>
-        <span *ngIf="!isBuy">Giá <b>{{updateForm.value?.price |vnCurrency}}/m2</b> (Tổng trị giá <b>~
-          {{updateForm.value?.unit === 'price' ? convertUnit((updateForm.value?.price * (updateForm.value?.area || 1))) :
-            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}} </b>)</span>
+        <span *ngIf="!isBuy">Giá <b>
+          {{updateForm.value?.unit === 1 ? (updateForm.value?.price |vnCurrency) :
+            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}}
+        </b>
+          ({{updateForm.value?.unit === 0  ? 'Tổng trị giá' : '' }}<b>~
+          {{updateForm.value?.unit === 0 ? (updateForm.value?.price |vnCurrency) :
+            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}}{{updateForm.value?.unit === 1  ? '/m2' : '' }} </b>)
+
+        </span>
 
       </div>
       <div class="col-12 md:col-8" *ngIf="isBuy">
