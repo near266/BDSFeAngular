@@ -8,10 +8,13 @@ import { SlotCreateComponent } from './slot-create/slot-create.component';
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import { SlotdataComponent } from './slotdata/slotdata.component';
-import { TableModule } from 'primeng/table';
-import { FormsModule } from '@angular/forms';
+import { FrozenColumn, TableModule } from 'primeng/table';
+;
 import { Paginator } from 'primeng/paginator';
 import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 
 
 @NgModule({
@@ -29,7 +32,12 @@ import { DialogModule } from 'primeng/dialog';
     ButtonModule,
     FormsModule,
     PaginatorModule,
-    DialogModule
+    DialogModule,
+    ToastModule,
+    ReactiveFormsModule,
+    
+    
+    
  
   ]
 })

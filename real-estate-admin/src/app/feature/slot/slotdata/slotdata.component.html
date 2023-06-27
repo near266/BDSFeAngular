@@ -1,10 +1,18 @@
 <div class="container">
-  <div class="grid p-3">
+  <div class="grid p-3 border-line">
     <div class="col-12 md:col-4">
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon">Khu vực</span>
-        <input type="text" pInputText [(ngModel)]="RequestSearch.name" />
+      <div class="grid">
+        <div class="col-12 md:col-3">
+          <span class="p-inputgroup-addon">Khu vực</span>
+        </div>
+        <div class="col-12 md:col-9 ">
+          <p-dropdown [options]="ListDist" placeholder="Chọn khu vực" [(ngModel)]="RequestSearch.name"
+            optionLabel="name" optionValue="name"></p-dropdown>
+        </div>
       </div>
+
+
+
     </div>
     <div class="col-12 md:col-6">
       <div class="p-inputgroup">
@@ -25,17 +33,18 @@
     </div>
     <div class="col-12 md:col-2">
 
-    <button pButton label="Thêm mới" icon="pi pi-plus" (click)="ShowModel(1);getAllDistrict()" ></button>
+      <button pButton label="Thêm mới" icon="pi pi-plus" (click)="ShowModel(1)"></button>
     </div>
   </div>
   <div class="grid p-3">
     <div class=" col-12 md:col-10">
       <div class="mb-2" style="display: inline-block;">
-        <span> Đã chọn :</span>
+        <span> Đã chọn : {{dataSelection.length}}</span>
       </div>
       <button class="ml-2 mr-2 p-button-outlined text-[#FFB43F] p-button-secondary" pButton label="Xóa tất cả"
-        icon="pi pi-times"></button>
-      <button pButton label="Hủy chọn" class="p-button-outlined  p-button-secondary"></button>
+        icon="pi pi-times" (click)="deleteAll()" [disabled]="dataSelection.length < 2"></button>
+      <button pButton label="Hủy chọn" (click)="Cancle()" [disabled]="dataSelection.length < 2"
+        class="p-button-outlined  p-button-secondary"></button>
     </div>
 
 
@@ -64,7 +73,7 @@
             <p-tableCheckbox [value]="product"></p-tableCheckbox>
           </td>
           <td>{{index + 1 + ((RequestGetList.page - 1) * RequestGetList.pageSize)}}</td>
-          <td>{{product.name}}</td>
+          <td class="hyper-link " (click)="ViewDetail(1,product.id)">{{product.name}}</td>
           <td class="text-center">{{product.district.name}}</td>
           <td class="text-center">{{product.order}}</td>
           <td class="text-center">{{product.createdBy}}</td>
@@ -102,11 +111,12 @@
   <ng-template pTemplate="body">
     <div class="mt-2">
       <label class="ml-4 " style="font-weight: 500;font-family: Roboto;">Tên khu đất</label>
-      <input pInputText type="text"[(ngModel)]="AddRequest.name" placeholder="Nhập tên khu đất" style="width: 100%;" />
+      <input pInputText  type="text" [(ngModel)]="AddRequest.name" placeholder="Nhập tên khu đất" style="width: 100%;" />
     </div>
     <div class="mt-2">
       <label class="ml-4" style="font-weight: 500;font-family: Roboto;">Khu vực</label>
-      <p-dropdown [options]="ListDist" [(ngModel)]="AddRequest.districtId" optionLabel="name" optionValue="id"></p-dropdown>
+      <p-dropdown [options]="ListDist" [(ngModel)]="AddRequest.districtId" optionLabel="name"
+        optionValue="id"></p-dropdown>
     </div>
     <div class="mt-2">
       <label class="ml-4 " style="font-weight: 500;font-family: Roboto;">Độ ưu tiên</label>
@@ -114,13 +124,71 @@
     </div>
 
 
-
     <div class="mt-4" style="display: flex; justify-content: end;">
-      <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary"(click)="ShowModel(2)" style="color: rgba(80, 80, 80, 1);"
-        styleClass="p-button-sm"></button>
+      <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary" (click)="ShowModel(2)"
+        style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm"></button>
       <button pButton label="Thêm mới" (click)="AddSLot()" class=" ml-3" style="color:rgba(255, 255, 255, 1);"
         styleClass="p-button-sm"></button>
     </div>
+
   </ng-template>
+
+
+</p-dialog>
+<p-dialog [(visible)]="IsUpdateShow" [modal]="true" class="width">
+  <ng-template pTemplate="header">
+    <div>
+      <i class="pi pi-plus-circle" style="color: slateblue"></i>
+      <span class="justify-items-start">CHỈNH SỬA KHU ĐẤT</span>
+    </div>
+
+  </ng-template>
+  <ng-template pTemplate="body">
+    <div class="" [formGroup]="updateForm">
+
+      <div class="secondary-form-control">
+        <label>Tên khu đất</label>
+        
+        <input type="text" [disabled]="true"  pInputText  formControlName="name">
+        
+      </div>
+      <div [formGroupName]="'district'">
+      
+        <div class="secondary-form-control">
+          <label>Khu vực</label>
+          <input type="text"  pInputText  formControlName="name">
+  
+        </div>
+      
+      </div>
+
+
+
+      <div class="secondary-form-control">
+        <label>Độ ưu tiên</label>
+        <input type="text"  pInputText  formControlName="order" [disabled]="true">
+
+
+      </div>
+
+
+      <div class="secondary-form-control">
+        <label>Menu trái</label>
+
+        <input type="text"  pInputText  formControlName="order">
+
+
+      </div>
+    </div>
+
+
+    <div class="mt-4" style="display: flex; justify-content: end;">
+      <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary" (click)="ViewDetail(2,{})"
+        style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm"></button>
+      <button pButton label="Lưu thông tin" (click)="ConfirmUpdate()" class=" ml-3"
+        style="color:rgba(255, 255, 255, 1);" styleClass="p-button-sm"></button>
+    </div>
+  </ng-template>
+
 
 </p-dialog>

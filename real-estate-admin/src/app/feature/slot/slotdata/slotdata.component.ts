@@ -7,8 +7,13 @@ import { ward } from '../model/ward';
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from "primeng/paginator";
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { deleteModal, errorModal } from '../../post/model/confirm-dialog';
+import { confirmSaveModal, deleteModal, errorModal } from '../../post/model/confirm-dialog';
 import { toUpper } from 'lodash-es';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AddModal, confirm } from '../model/confirm';
 
 
 @Component({
@@ -21,12 +26,18 @@ export class SlotdataComponent implements OnInit {
   data: ward[] = [];
   ListDist: district[] = [];
   dataSelection: ward[] = [];
+  IsUpdateShow :boolean;
+  updateForm:FormGroup;
+  DetailWard :any;
+  params:any
   listStatus = [];
   IsShowDialog: boolean;
   select: string | undefined;
   @ViewChild('paginator', { static: false }) paginator: Paginator;
   @Input() typecheck: number;
   totalRecord = 0;
+  isDeleteAll = false;
+  //#region Request
   RequestGetList = {
     name: '',
     page: 1,
@@ -42,27 +53,52 @@ export class SlotdataComponent implements OnInit {
     name: '',
     districtId: '',
     description: '',
-    order: 0
+    order: 0,
+  
+    
 
   }
+  //#endregion
 
   constructor(
     private slotServiceService: SlotServiceService,
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private fb :FormBuilder,
+    private route: ActivatedRoute,
 
 
 
-  ) { }
+  ) { 
+  this.initForm();
+  }
 
   ngOnInit(): void {
     this.translateService.get('listStatus').subscribe(res => {
       this.listStatus = res;
     })
     this.getListSLot();
+    this.getAllDistrict();
+    
   }
-
+  initForm() {
+    this.updateForm = this.fb.group({
+      id: [],
+      name: [],
+      districtId:[] ,
+      district : this.fb.group({
+      id:[],
+      name:[],
+      order:[],
+      }),
+    
+      description: [],
+      order:[],
+      
+     
+    })
+  }
   getListSLot() {
     this.slotServiceService.getListSlot(this.RequestGetList)
       .subscribe((res: any) => {
@@ -101,7 +137,7 @@ export class SlotdataComponent implements OnInit {
     this.messageService.add({ severity: 'success', detail: 'thao tác thành công' });
   }
   errorMessage() {
-    this.messageService.add({ severity: 'success', detail: 'vui lòng nhập đúng thông tin' });
+    this.messageService.add({ severity: 'error', detail: 'vui lòng nhập đúng thông tin' });
   }
   delete(id: any) {
     const body = {
@@ -137,9 +173,43 @@ export class SlotdataComponent implements OnInit {
     }
     else {
       this.slotServiceService.Add(this.AddRequest).subscribe((res: any) => {
-      });
+      res;
+      this.confirmationService.confirm({
+      ...AddModal,
+      accept: ()=>{
+      this.successMessage();
+      this.ShowModel(2);
       this.getListSLot();
+      }
+      })
+      }),((e:any)=>{if(e.status===500){
+      
+        this.confirmationService.confirm({
+          ...AddModal,
+          accept: ()=>{
+          this.successMessage();
+          this.ShowModel(2);
+          this.getListSLot();
+          }
+          })
+      }});
+      
     }
+  }
+  ViewDetail(type:number,id:any) {
+  if(type===1){
+  
+    this.IsUpdateShow=true;
+    this.slotServiceService.ViewDetailWard(id).subscribe((res)=>{this.DetailWard=res;
+    this.updateForm.patchValue(this.DetailWard=res);
+    console.log(this.updateForm.value.district.name);
+    })
+    
+  };
+  if(type==2){
+    this.IsUpdateShow=false
+  };
+ 
   }
   ShowModel(type: number) {
     if (type === 1) {
@@ -147,7 +217,49 @@ export class SlotdataComponent implements OnInit {
       this.IsShowDialog = true;
     }
     if (type === 2) {
-      this, this.IsShowDialog = false;
+      this.IsShowDialog = false;
     }
+  }
+  doDeleteAll() {
+    this.isDeleteAll = true;
+  }
+  deleteAll() {
+    let listId: any[] = [];
+    this.dataSelection.forEach(el => {
+
+      if (el && el.id) {
+        listId.push(el.id);
+      }
+    });
+    this.slotServiceService.Delete({ listId: listId }).subscribe((res: any) => {
+      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
+      this.getListSLot();
+      this.isDeleteAll = false;
+    })
+  }
+  Cancle(){
+  this.dataSelection =[];
+  
+  }
+  
+  updateWard(){
+  const body={
+  ...this.updateForm.value
+  }
+  this.slotServiceService.UpdateWard(body).subscribe(res=>{
+  this.getListSLot();
+  this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
+    
+  })
+
+  }
+  ConfirmUpdate(){
+  this.confirmationService.confirm({
+  ...confirmSaveModal,accept:()=>{
+  this.updateWard();
+  this.IsUpdateShow=false;
+  
+  }
+  })
   }
 }

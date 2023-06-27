@@ -1,5 +1,6 @@
+import { AnimateTimings } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { BaseService } from 'src/app/core/service/base.service';
 
@@ -35,5 +36,11 @@ export class SlotServiceService extends BaseService {
   }
   GetAllDistrict() : Observable<any> {
   return this.doPost(`district/search`,{}).pipe(map((res:any)=>res));
+  }
+  ViewDetailWard(id : any){
+  return this.doGet(`ward/ViewDetail?Id=${id}`).pipe(map((res:any)=>res));
+  }
+  UpdateWard(body:any){
+  return this.doPut(`ward/update`,body).pipe(map((res:any)=>{res}));
   }
 }

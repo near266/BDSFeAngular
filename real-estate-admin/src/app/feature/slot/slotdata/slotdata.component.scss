@@ -30,3 +30,16 @@ height: 21.5px;
 width: 100%;
 
 }
+:host ::ng-deep .p-dropdown-label {
+display: block;
+width: 100%;
+right: 0;
+
+}
+:host ::ng-deep .p-dialog {
+color: #FFB43F;
+width: 568px;
+height: 491px;
+border-radius: 8px;
+
+}
