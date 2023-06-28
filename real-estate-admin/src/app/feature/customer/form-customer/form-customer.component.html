@@ -5,21 +5,34 @@
   <div class="p-3">
     <div class="flex">
       <div class="col-4">
-        <div class="avatar flex justify-content-center">
-          <img src="./assets/resouces/300.PNG" height="250" width="250"/>
+        <div class="flex justify-content-center align-items-center" style="height: 100%">
+          <!--          <img src="./assets/resouces/300.PNG" height="250" width="250"/>-->
+          <adm-image-upload></adm-image-upload>
         </div>
       </div>
       <div class="col-8">
         <div class="grid">
-          <div class="col-12 md:col-12">
+          <div class="col-12 md:col-6">
             <div class="secondary-form-control">
-              <label>Tên khách hàng</label>
+              <label><span class="p-text-warning">*</span> Tên khách hàng</label>
               <input type="text" pInputText>
             </div>
           </div>
-          <div class="col-12 md:col-12">
+          <div class="col-12 md:col-6">
             <div class="secondary-form-control">
-              <label>Số điện thoại</label>
+              <label>Mã giới thiệu</label>
+              <input type="text" pInputText>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="secondary-form-control">
+              <label><span class="p-text-warning">*</span> Số điện thoại</label>
+              <input type="text" pInputText>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="secondary-form-control">
+              <label><span class="p-text-warning">*</span> Email</label>
               <input type="text" pInputText>
             </div>
           </div>
@@ -51,19 +64,19 @@
         <div class="col-12 md:col-4">
           <div class="secondary-form-control">
             <label>Môi giới tiêu biểu</label>
-            <p-dropdown></p-dropdown>
+            <p-dropdown [options]="listTypicalBroker"></p-dropdown>
           </div>
         </div>
         <div class="col-12 md:col-4">
           <div class="secondary-form-control">
             <label>Trạng thái</label>
-            <p-dropdown></p-dropdown>
+            <p-dropdown [options]="listStatus"></p-dropdown>
           </div>
         </div>
         <div class="col-12 md:col-4">
           <div class="secondary-form-control">
             <label>Thời gian duy trì</label>
-            <p-dropdown></p-dropdown>
+            <input type="text" pInputText>
           </div>
         </div>
       </div>

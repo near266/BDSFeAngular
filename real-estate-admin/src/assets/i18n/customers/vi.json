@@ -33,5 +33,27 @@
   "status": {
     "1": "Đã xác nhận ",
     "2": "Huỷ bỏ"
+  },
+  "createCustomers": {
+    "status": [
+      {
+        "code": 1,
+        "label": "Active"
+      },
+      {
+        "code": 2,
+        "label": "Deactive"
+      }
+    ],
+    "typicalBroker": [
+      {
+        "code": 0,
+        "label": "Có"
+      },
+      {
+        "code": 1,
+        "label": "Không"
+      }
+    ]
   }
 }
