@@ -32,7 +32,7 @@ export class SlotdataComponent implements OnInit {
   params: any
   listStatus = [];
   IsShowDialog: boolean;
-  IsDeleteModal : boolean;
+  IsDeleteModal =false;
   select: string | undefined;
   @ViewChild('paginator', { static: false }) paginator: Paginator;
   @Input() typecheck: number;
@@ -182,6 +182,7 @@ export class SlotdataComponent implements OnInit {
               this.ShowModel(2);
               this.AddRequest.name='';
               this.getListSLot();
+
               
             
         
@@ -189,15 +190,7 @@ export class SlotdataComponent implements OnInit {
         this.IsDeleteModal=true;
         this.ShowModel(2);
         this.AddRequest.name='';
-          // this.confirmationService.confirm({
-          //   ...ErrorModalSlot,
-          //   accept: () => {
-          //     this.errorMessage();
-          //     this.ShowModel(2);
-          //     this.AddRequest.name='';
-          //     this.getListSLot();
-          //   }
-          // })
+      
           
         }
   
@@ -289,8 +282,8 @@ export class SlotdataComponent implements OnInit {
   CancleAddSlot(type :number){
   if(type ===1){
 
+    this.IsDeleteModal = false;
     this.ShowModel(1);
-    this.IsDeleteModal = true;
   }
   else{
     this.ShowModel(2);
