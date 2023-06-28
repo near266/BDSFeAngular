@@ -12,8 +12,8 @@ import { toUpper } from 'lodash-es';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { AddModal, confirm } from '../model/confirm';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { AddModal, ErrorModalSlot, confirm } from '../model/confirm';
 
 
 @Component({
@@ -26,10 +26,10 @@ export class SlotdataComponent implements OnInit {
   data: ward[] = [];
   ListDist: district[] = [];
   dataSelection: ward[] = [];
-  IsUpdateShow :boolean;
-  updateForm:FormGroup;
-  DetailWard :any;
-  params:any
+  IsUpdateShow: boolean;
+  updateForm: FormGroup;
+  DetailWard: any;
+  params: any
   listStatus = [];
   IsShowDialog: boolean;
   select: string | undefined;
@@ -54,8 +54,8 @@ export class SlotdataComponent implements OnInit {
     districtId: '',
     description: '',
     order: 0,
-  
-    
+
+
 
   }
   //#endregion
@@ -65,13 +65,13 @@ export class SlotdataComponent implements OnInit {
     private translateService: TranslateService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private fb :FormBuilder,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
 
 
 
-  ) { 
-  this.initForm();
+  ) {
+    this.initForm();
   }
 
   ngOnInit(): void {
@@ -80,23 +80,23 @@ export class SlotdataComponent implements OnInit {
     })
     this.getListSLot();
     this.getAllDistrict();
-    
+
   }
   initForm() {
     this.updateForm = this.fb.group({
       id: [],
       name: [],
-      districtId:[] ,
-      district : this.fb.group({
-      id:[],
-      name:[],
-      order:[],
+      districtId: [],
+      district: this.fb.group({
+        id: [],
+        name: [],
+        order: [],
       }),
-    
+
       description: [],
-      order:[],
-      
-     
+      order: [],
+
+
     })
   }
   getListSLot() {
@@ -107,14 +107,14 @@ export class SlotdataComponent implements OnInit {
       })
   }
   search() {
-    if (this.RequestGetList.name != '') {
+    if (this.RequestGetList.name != '' ) {
       this.slotServiceService.getListSlot(this.RequestGetList)
         .subscribe((res: any) => {
           this.data = res.data;
           this.totalRecord = res.totalCount;
         })
     }
-    if (this.RequestSearch.name != '') {
+    else if(this.RequestSearch.name != '') {
       this.slotServiceService.SearchDistrict(this.RequestSearch).subscribe((res: any) => {
         this.data = res.data;
         this.totalRecord = res.totalCount;
@@ -173,43 +173,47 @@ export class SlotdataComponent implements OnInit {
     }
     else {
       this.slotServiceService.Add(this.AddRequest).subscribe((res: any) => {
-      res;
-      this.confirmationService.confirm({
-      ...AddModal,
-      accept: ()=>{
-      this.successMessage();
-      this.ShowModel(2);
-      this.getListSLot();
-      }
-      })
-      }),((e:any)=>{if(e.status===500){
-      
-        this.confirmationService.confirm({
-          ...AddModal,
-          accept: ()=>{
-          this.successMessage();
-          this.ShowModel(2);
-          this.getListSLot();
-          }
+        if(res===1){
+          this.confirmationService.confirm({
+            ...AddModal,
+            accept: () => {
+              this.successMessage();
+              this.ShowModel(2);
+              this.AddRequest.name='';
+              this.getListSLot();
+            }
           })
-      }});
-      
+        }else{
+          this.confirmationService.confirm({
+            ...ErrorModalSlot,
+            accept: () => {
+              this.errorMessage();
+              this.ShowModel(2);
+              this.AddRequest.name='';
+              this.getListSLot();
+            }
+          })
+        }
+  
+      });
+
     }
   }
-  ViewDetail(type:number,id:any) {
-  if(type===1){
-  
-    this.IsUpdateShow=true;
-    this.slotServiceService.ViewDetailWard(id).subscribe((res)=>{this.DetailWard=res;
-    this.updateForm.patchValue(this.DetailWard=res);
-    console.log(this.updateForm.value.district.name);
-    })
-    
-  };
-  if(type==2){
-    this.IsUpdateShow=false
-  };
- 
+  ViewDetail(type: number, id: any) {
+    if (type === 1) {
+
+      this.IsUpdateShow = true;
+      this.slotServiceService.ViewDetailWard(id).subscribe((res) => {
+        this.DetailWard = res;
+        this.updateForm.patchValue(this.DetailWard = res);
+       
+      })
+
+    };
+    if (type == 2) {
+      this.IsUpdateShow = false
+    };
+
   }
   ShowModel(type: number) {
     if (type === 1) {
@@ -233,33 +237,34 @@ export class SlotdataComponent implements OnInit {
     });
     this.slotServiceService.Delete({ listId: listId }).subscribe((res: any) => {
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
+      this.Cancle();
       this.getListSLot();
       this.isDeleteAll = false;
     })
   }
-  Cancle(){
-  this.dataSelection =[];
-  
-  }
-  
-  updateWard(){
-  const body={
-  ...this.updateForm.value
-  }
-  this.slotServiceService.UpdateWard(body).subscribe(res=>{
-  this.getListSLot();
-  this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
-    
-  })
+  Cancle() {
+    this.dataSelection = [];
 
   }
-  ConfirmUpdate(){
-  this.confirmationService.confirm({
-  ...confirmSaveModal,accept:()=>{
-  this.updateWard();
-  this.IsUpdateShow=false;
-  
+
+  updateWard() {
+    const body = {
+      ...this.updateForm.value
+    }
+    this.slotServiceService.UpdateWard(body).subscribe(res => {
+      this.getListSLot();
+      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
+
+    })
+
   }
-  })
+  ConfirmUpdate() {
+    this.confirmationService.confirm({
+      ...confirmSaveModal, accept: () => {
+        this.updateWard();
+        this.IsUpdateShow = false;
+
+      }
+    })
   }
 }
