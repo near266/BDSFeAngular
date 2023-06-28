@@ -100,7 +100,7 @@
       currentPageReportTemplate="{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [(visible)]="IsShowDialog" [modal]="true">
+<p-dialog [(visible)]="IsShowDialog" [modal]="false">
   <ng-template pTemplate="header">
     <div>
       <i class="pi pi-plus-circle" style="color: slateblue"></i>
@@ -135,7 +135,7 @@
 
 
 </p-dialog>
-<p-dialog [(visible)]="IsUpdateShow" [modal]="true" class="width">
+<p-dialog [(visible)]="IsUpdateShow" [modal]="true">
   <ng-template pTemplate="header">
     <div>
       <i class="pi pi-plus-circle" style="color: slateblue"></i>
@@ -149,7 +149,7 @@
       <div class="secondary-form-control">
         <label>Tên khu đất</label>
         
-        <input type="text" [disabled]="true"  pInputText  formControlName="name">
+        <input type="text"  pInputText  formControlName="name">
         
       </div>
       <div [formGroupName]="'district'">
@@ -191,4 +191,24 @@
   </ng-template>
 
 
+</p-dialog>
+
+<p-dialog [(visible)]="IsDeleteModal" [modal]="true" [style]="{'width': '544px','height': '231px'}">
+  <ng-template pTemplate="header">
+    <div style="display: flex;margin: auto;align-items: center;">
+      <i class="pi pi-exclamation-circle" style="color: rgba(255, 180, 63, 1)"></i>
+      <span class="justify-items-start">THÊM KHÔNG THÀNH CÔNG</span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="body">
+  <div class="mt-4">
+    <span style="font-weight: 700;font-size: 14px;display: flex;justify-content: center;">Khu đất {{AddRequest.name}} đã có trong hệ thống</span>
+  </div>
+  <div class="mt-4" style="display: flex; justify-content: center;">
+    <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary" (click)="CancleAddSlot(2)"
+      style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm"></button>
+    <button pButton label="Xác nhận" (click)="CancleAddSlot(1)" class=" ml-3"
+      style="color:rgba(255, 255, 255, 1);" styleClass="p-button-sm"></button>
+  </div>
+  </ng-template>
 </p-dialog>

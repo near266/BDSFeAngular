@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { AddModal, ErrorModalSlot, confirm } from '../model/confirm';
+import { AddModal, DeleteModalSlot, ErrorModalSlot, confirm } from '../model/confirm';
 
 
 @Component({
@@ -32,6 +32,7 @@ export class SlotdataComponent implements OnInit {
   params: any
   listStatus = [];
   IsShowDialog: boolean;
+  IsDeleteModal : boolean;
   select: string | undefined;
   @ViewChild('paginator', { static: false }) paginator: Paginator;
   @Input() typecheck: number;
@@ -172,30 +173,39 @@ export class SlotdataComponent implements OnInit {
       })
     }
     else {
+    this.confirmationService.confirm({
+    ...AddModal,accept:()=>{
+      
       this.slotServiceService.Add(this.AddRequest).subscribe((res: any) => {
-        if(res===1){
-          this.confirmationService.confirm({
-            ...AddModal,
-            accept: () => {
+        if(res===1){         
               this.successMessage();
               this.ShowModel(2);
               this.AddRequest.name='';
               this.getListSLot();
-            }
-          })
-        }else{
-          this.confirmationService.confirm({
-            ...ErrorModalSlot,
-            accept: () => {
-              this.errorMessage();
-              this.ShowModel(2);
-              this.AddRequest.name='';
-              this.getListSLot();
-            }
-          })
+              
+            
+        
+        }else if (res ===0){
+        this.IsDeleteModal=true;
+        this.ShowModel(2);
+        this.AddRequest.name='';
+          // this.confirmationService.confirm({
+          //   ...ErrorModalSlot,
+          //   accept: () => {
+          //     this.errorMessage();
+          //     this.ShowModel(2);
+          //     this.AddRequest.name='';
+          //     this.getListSLot();
+          //   }
+          // })
+          
         }
   
       });
+    }
+    
+    })
+      
 
     }
   }
@@ -236,10 +246,17 @@ export class SlotdataComponent implements OnInit {
       }
     });
     this.slotServiceService.Delete({ listId: listId }).subscribe((res: any) => {
-      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
-      this.Cancle();
-      this.getListSLot();
-      this.isDeleteAll = false;
+      this.confirmationService.confirm({
+        ...DeleteModalSlot,
+        accept: () => {
+          this.successMessage();
+       
+          
+          this.Cancle();
+          this.getListSLot();
+          this.isDeleteAll = false;
+        }
+      })
     })
   }
   Cancle() {
@@ -267,4 +284,19 @@ export class SlotdataComponent implements OnInit {
       }
     })
   }
+  //#region  Function
+  
+  CancleAddSlot(type :number){
+  if(type ===1){
+
+    this.ShowModel(1);
+    this.IsDeleteModal = true;
+  }
+  else{
+    this.ShowModel(2);
+    this.IsDeleteModal = false;
+  
+  }
+  }
+  //#endregion
 }
