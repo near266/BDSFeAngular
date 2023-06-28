@@ -1,10 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ImageInputUploadComponent} from './image-input-upload/image-input-upload.component';
+
 import {ImageModule} from "primeng/image";
-import {NumberOnlyDirective} from './number-only.directive';
 import {ButtonModule} from "primeng/button";
+
+import {NumberOnlyDirective} from './number-only.directive';
+import { Split3NumberPipe } from './split-number.pipe';
 import {VnCurrencyPipe} from './vnd-currency.pipe';
+
+import {ImageInputUploadComponent} from './image-input-upload/image-input-upload.component';
 import { SingleImageUploadComponent } from './single-image-upload/single-image-upload.component';
 
 
@@ -13,6 +17,7 @@ import { SingleImageUploadComponent } from './single-image-upload/single-image-u
     ImageInputUploadComponent,
     NumberOnlyDirective,
     VnCurrencyPipe,
+    Split3NumberPipe,
     SingleImageUploadComponent
   ],
   imports: [
@@ -24,6 +29,7 @@ import { SingleImageUploadComponent } from './single-image-upload/single-image-u
     ImageInputUploadComponent,
     NumberOnlyDirective,
     VnCurrencyPipe,
+    Split3NumberPipe,
     SingleImageUploadComponent
   ]
 })

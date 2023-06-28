@@ -29,32 +29,32 @@
   <div class="p-3">
     <div class="secondary-form-control">
       <label for="">Thông tin tài khoản</label>
-      <div class="p-3">
+      <div class="p-3 text-lg">
 
         <div class="col-12">
           <div class="flex justify-content-between">
             <div class="">Tài khoản chính:</div>
-            <div class=""><span class="price-text">{{balanceInfo.walletAmount}}</span></div>
+            <div class=""><span class="price-text">{{balanceInfo?.walletAmount}}</span></div>
           </div>
         </div>
         <div class="col-12">
           <div class="flex justify-content-between">
             <div class="">Tài khoản khuyến mãi:</div>
-            <div class=""><span class="price-text">{{balanceInfo.walletPromotion}}</span></div>
+            <div class=""><span class="price-text">{{balanceInfo?.walletPromotion}}</span></div>
           </div>
         </div>
         <div class="col-12">
           <div class="flex justify-content-between">
             <div class="">Point:</div>
-            <div class=""><span class="price-text">{{balanceInfo.poin}}</span></div>
+            <div class=""><span class="price-text">{{balanceInfo?.poin}}</span></div>
           </div>
         </div>
         <div class="col-12 mt-3 total-box">
           <div class="flex justify-content-between">
             <div class="price-text">Tổng cộng:</div>
             <div class="text-right">
-              <div class="total-text">{{balanceInfo.totalAmount}}</div>
-              <div class="price-text">{{balanceInfo.poin}} (point)</div>
+              <div class="total-text">{{balanceInfo?.totalAmount}}</div>
+              <div class="price-text">{{balanceInfo?.poin}} (point)</div>
             </div>
           </div>
         </div>
