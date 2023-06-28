@@ -9,3 +9,11 @@ export const AddModal = {
     rejectLabel: 'Huỷ bỏ',
     rejectButtonStyleClass: 'p-button-outlined p-button-danger'
   }
+  export const ErrorModalSlot = {
+    key: 'errorDialog',
+    header: 'Có lỗi xảy ra',
+    message: 'Khu vực này đã tồn tại',
+    acceptLabel: 'Xác nhận',
+    rejectLabel: 'Huỷ bỏ',
+    rejectButtonStyleClass: 'p-button-outlined p-button-danger'
+  }

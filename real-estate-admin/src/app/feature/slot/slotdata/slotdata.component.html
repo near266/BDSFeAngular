@@ -6,8 +6,8 @@
           <span class="p-inputgroup-addon">Khu vực</span>
         </div>
         <div class="col-12 md:col-9 ">
-          <p-dropdown [options]="ListDist" placeholder="Chọn khu vực" [(ngModel)]="RequestSearch.name"
-            optionLabel="name" optionValue="name"></p-dropdown>
+          <p-dropdown [options]="ListDist" placeholder="Tất cả" [(ngModel)]="RequestSearch.name"
+            optionLabel="name" optionValue="name" [showClear]="true"></p-dropdown>
         </div>
       </div>
 
@@ -77,8 +77,8 @@
           <td class="text-center">{{product.district.name}}</td>
           <td class="text-center">{{product.order}}</td>
           <td class="text-center">{{product.createdBy}}</td>
-          <td class="text-center">{{product.createdDate | date: 'dd/MM/yyyy' }}</td>
-          <td class="text-center">{{product.lastModifiedDate | date: 'dd/MM/yyyy' }}</td>
+          <td class="text-center">{{product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td class="text-center">{{product.lastModifiedDate ? product.lastModifiedDate : product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td class="text-center">
             <button pButton icon="pi pi-times" pTooltip="Xóa" class="p-button-sm p-button-danger p-button-outlined mr-2"
               (click)="delete(product.id)"></button>
