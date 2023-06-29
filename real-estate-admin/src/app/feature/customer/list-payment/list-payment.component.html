@@ -68,7 +68,7 @@
             <span class="hyper-link" (click)="doShowImg(customerData.image)">{{customerData.image}}</span>
           </td>
           <td>{{ 'status.' + customerData.status | translate }}</td>
-          <td>{{ customerData.createdDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ customerData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>
             <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(customerData.customer)"
                     class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
