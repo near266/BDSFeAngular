@@ -18,7 +18,8 @@ import {CustomerModule} from "./customer/customer.module";
     FeatureRoutingModule,
     SlotModule,
     PostModule,
-    CustomerModule
+    CustomerModule,
+   
   ]
 })
 export class FeatureModule { }
