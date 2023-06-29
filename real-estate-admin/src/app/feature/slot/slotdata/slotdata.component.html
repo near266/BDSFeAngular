@@ -78,7 +78,9 @@
           <td class="text-center">{{product.order}}</td>
           <td class="text-center">{{product.createdBy}}</td>
           <td class="text-center">{{product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-          <td class="text-center">{{product.lastModifiedDate ? product.lastModifiedDate  : product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+
+          <td class="text-center">{{(product.lastModifiedDate ? product.lastModifiedDate : product.createdDate) | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+
           <td class="text-center">
             <button pButton icon="pi pi-times" pTooltip="Xóa" class="p-button-sm p-button-danger p-button-outlined mr-2"
               (click)="delete(product.id)"></button>
@@ -100,7 +102,7 @@
       currentPageReportTemplate="{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [(visible)]="IsShowDialog" [modal]="false">
+<p-dialog [dismissableMask]="true" [(visible)]="IsShowDialog" [modal]="true">
   <ng-template pTemplate="header">
     <div>
       <i class="pi pi-plus-circle" style="color: slateblue"></i>
@@ -135,7 +137,7 @@
 
 
 </p-dialog>
-<p-dialog [(visible)]="IsUpdateShow" [modal]="true">
+<p-dialog [dismissableMask]="true" [(visible)]="IsUpdateShow" [modal]="true">
   <ng-template pTemplate="header">
     <div>
       <i class="pi pi-plus-circle" style="color: slateblue"></i>
@@ -148,18 +150,18 @@
 
       <div class="secondary-form-control">
         <label>Tên khu đất</label>
-        
+
         <input type="text"  pInputText  formControlName="name">
-        
+
       </div>
       <div [formGroupName]="'district'">
-      
+
         <div class="secondary-form-control">
           <label>Khu vực</label>
           <input type="text"  pInputText  formControlName="name">
-  
+
         </div>
-      
+
       </div>
 
 
@@ -193,7 +195,7 @@
 
 </p-dialog>
 
-<p-dialog [(visible)]="IsDeleteModal" [modal]="true" [style]="{'width': '544px','height': '231px'}">
+<p-dialog [dismissableMask]="true" [(visible)]="IsDeleteModal" [modal]="true" [style]="{'width': '544px','height': '231px'}">
   <ng-template pTemplate="header">
     <div style="display: flex;margin: auto;align-items: center;">
       <i class="pi pi-exclamation-circle" style="color: rgba(255, 180, 63, 1)"></i>

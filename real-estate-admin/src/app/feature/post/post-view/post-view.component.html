@@ -8,6 +8,15 @@
               label="Chỉnh sửa" icon="pi pi pencil" (click)="update()"></button>
     </div>
   </div>
+  <div class="col-12 md:col-12" *ngIf="detailData?.status===2">
+    <div class="secondary-form-control">
+      <label>Lý do từ chối</label>
+      <!--      <input type="text" pInputText>-->
+      <div class="view-content">
+        <span>{{detailData?.reason}}</span>
+      </div>
+    </div>
+  </div>
   <div class="col-12 md:col-12">
     <div class="grid">
       <div class="col-12 md:col-6" *ngIf="!isBuy">
@@ -140,7 +149,7 @@
           <label>Mức giá</label>
           <!--        <input type="text" pInputText>-->
           <div class="view-content">
-            <span>{{detailData?.price | vnCurrency}}</span>
+            <span>{{detailData?.price | split3Number}}</span>
           </div>
         </div>
       </div>
@@ -158,7 +167,7 @@
           <label>Đơn vị</label>
           <!--        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>-->
           <div class="view-content">
-            <span>{{isBuy ? detailData?.unit : ('unitName.' + detailData?.unit | translate)}}</span>
+            <span>{{isBuy ? detailData?.unit : (detailData?.unit === 0 ? 'VNĐ' : (detailData?.unit === 1 ? 'Giá/m2' : ''))}}</span>
           </div>
         </div>
       </div>
@@ -213,5 +222,13 @@
       </div>
     </div>
   </div>
-
+  <div class="col-12 md:col-12">
+    <div class="secondary-form-control">
+      <label>Người sửa cuối</label>
+      <!--      <input type="text" pInputText>-->
+      <div class="view-content">
+        <span>{{detailData?.lastModifiedBy}}</span>
+      </div>
+    </div>
+  </div>
 </div>

@@ -25,7 +25,6 @@ export class FormCustomerComponent implements OnInit {
       this.translateService.get('createCustomers.status'),
       this.translateService.get('createCustomers.typicalBroker')
     ]).subscribe(res => {
-      console.log(res)
       this.listStatus = res[0];
       this.listTypicalBroker = res[1];
     })
