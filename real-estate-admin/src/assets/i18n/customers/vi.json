@@ -31,6 +31,7 @@
     "1": "Ví khuyến mại"
   },
   "status": {
+    "0": "Chưa xử lý",
     "1": "Đã xác nhận ",
     "2": "Huỷ bỏ"
   },

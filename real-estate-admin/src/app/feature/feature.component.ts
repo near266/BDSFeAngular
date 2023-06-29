@@ -16,6 +16,13 @@ export class FeatureComponent implements OnInit {
   isShowNavigation: boolean = true;
   navigationClass = 'feature-navigation';
   infoUser: any;
+  routenow = this.router.url
+  menuidnowheight: any
+  positionY: any
+  lastheight: any
+  lastY: any
+  menutoheight: any
+  menutoY: any
 
   constructor(
     private authService: AuthService,
@@ -26,6 +33,13 @@ export class FeatureComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let v = setInterval(() => {
+      if (document.getElementById('menunow') !== null) {
+        this.positionY = document.getElementById('menunow')?.offsetTop;
+        this.menuidnowheight = document.getElementById('menunow')?.offsetHeight
+        clearInterval(v)
+      }
+    }, 450)
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         for (let f of this.featureList) {
@@ -88,6 +102,28 @@ export class FeatureComponent implements OnInit {
     } else {
       this.isShowNavigation = true;
       this.navigationClass = 'feature-navigation';
+    }
+  }
+  load(url: string) {
+    document.getElementById('menuidnow')!.classList.remove('slip')
+    this.routenow = url
+    let v = setInterval(() => {
+      if (document.getElementById('menunow') !== null) {
+        this.lastheight = this.menuidnowheight
+        this.lastY = this.positionY
+        this.menutoY = document.getElementById('menunow')?.offsetTop
+        this.menutoheight = document.getElementById('menunow')?.offsetHeight
+        document.getElementById('menuidnow')!.classList.add('slip')
+        setTimeout(() => {
+          this.positionY = document.getElementById('menunow')?.offsetTop
+          this.menuidnowheight = document.getElementById('menunow')?.offsetHeight
+          document.getElementById('menuidnow')!.classList.remove('slip')
+          clearInterval(v)
+        }, 450)
+      }
+    }, 0)
+    if (this.router.url == url) {
+      window.location.reload()
     }
   }
 }

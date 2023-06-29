@@ -72,3 +72,24 @@
 .hidden-feature-navigation {
   width: 0 !important;
 }
+#menuidnow {
+  border-radius: 50px 0px 0px 50px;
+  background: #fff;
+  height: var(--menuidnowheight);
+  top: var(--menuidnowtop);
+}
+.slip {
+  animation: slip 0.5s;
+}
+
+@keyframes slip {
+  0% {
+    height: var(--lastheight);
+    top: var(--lasttop);
+  }
+
+  100% {
+    height: var(--menutoheight);
+    top: var(--menutotop);
+  }
+}

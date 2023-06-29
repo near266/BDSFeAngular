@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {FeatureComponent} from "./feature.component";
+
 import {AuthGuard} from "../auth/auth.guard";
+
+import {FeatureComponent} from "./feature.component";
 
 const routes: Routes = [
   {
@@ -21,7 +23,10 @@ const routes: Routes = [
         path: 'customers',
         loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)
       },
-  
+      {
+        path: 'real-estate-new',
+        loadChildren: () => import('./real-estate-news/real-estate-news.module').then(m => m.RealEstateNewsModule)
+      },
       {
         path: 'account',
         component: FeatureComponent

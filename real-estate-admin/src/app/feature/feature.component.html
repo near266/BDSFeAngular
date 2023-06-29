@@ -9,6 +9,29 @@
         <i class="pi pi-chevron-left"></i>
       </div>
     </div>
+    <!-- <div class="flex flex-col w-full relative">
+      <div class="absolute w-full ml-[30px]" id="menuidnow" [style.--menuidnowheight]="menuidnowheight+'px'"
+        [style.--menutoheight]="menutoheight+'px'" [style.--menutotop]="menutoY+'px'"
+        [style.--lastheight]="lastheight+'px'" [style.--lasttop]="lastY+'px'" [style.--menuidnowtop]="positionY+'px'">
+        <div class="absolute w-[20px] h-[20px] top-[-20px] bg-white right-[30px]">
+          <div class="w-[40px] h-[40px] absolute rounded-full top-[-20px] left-[-20px] bg-[#0071AF]">
+          </div>
+        </div>
+        <div class="absolute w-[20px] h-[20px] bottom-[-20px] bg-white right-[30px]">
+          <div class="w-[40px] h-[40px] absolute rounded-full bottom-[-20px] left-[-20px] bg-[#0071AF]">
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let menu of featureList" class="pl-[45px] z-50 cursor-pointer"
+        [id]="routenow.includes(menu.routerLink)?'menunow':''">
+        <div class="flex flex-row items-center py-[13px] pl-[10px] h-max min-h-[45px]"
+          [routerLink]="menu.routerLink" (click)="load(menu.routerLink);"
+          [ngClass]="{'text-[#0071AF]':routenow.includes(menu.routerLink)}">
+          <i [ngClass]="{'text-[#0071AF]':routenow.includes(menu.routerLink)}" [class]="menu.icon"></i>
+          <span class="menu_label w-full">{{menu.label}}</span>
+        </div>
+      </div>
+    </div> -->
     <div class="col p-0 ml-5" *ngFor="let f of featureList">
       <div class="flex justify-content-center h-3rem align-items-center items" (click)="routerLink(f)"
            [class.router-selected]="f.isSelected">
