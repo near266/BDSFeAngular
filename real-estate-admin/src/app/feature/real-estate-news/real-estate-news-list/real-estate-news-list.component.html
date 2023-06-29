@@ -1,1 +1,115 @@
-<p>real-estate-news-list works!</p>
+<div class="container">
+  <div class="grid p-3 border-line">
+    <div class="field col-12 md:col-9 flex flex-row align-items-center">
+      <label class="min-w-max mr-2 font-medium">Tiêu đề</label>
+      <input type="text" class="w-full" pInputText [(ngModel)]="newpostReq.title">
+    </div>
+    <div class="col-12 md:col-3">
+      <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="doGetListPostNew()"></button>
+    </div>
+  </div>
+  <div class="grid p-3">
+    <div class="col-12 flex justify-content-between align-items-center">
+      <div class="title-content">
+        <label>DANH SÁCH TIN TỨC </label>
+      </div>
+      <button pButton label="Thêm mới" icon="pi pi-plus" class="p-button-outlined p-button-primary" [routerLink]="'/real-estate-new/create'"></button>
+    </div>
+  </div>
+  <!-- <div class="p-3">
+    <div class="mr-2">
+      <button pButton label="Xóa" icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+    </div>
+  </div> -->
+  <div class="p-3">
+    <p-table [value]="postNewData">
+      <ng-template pTemplate="header">
+        <tr>
+          <th></th>
+          <th>STT</th>
+          <th>Tiêu đề</th>
+          <th>Người đăng</th>
+          <th pSortableColumn="createdDate">
+            Created Date
+            <p-sortIcon field="createdDate"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastModifiedDate">
+            Last Updated
+            <p-sortIcon field="lastModifiedDate"></p-sortIcon>
+          </th>
+          <th>Thao tác</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-postNewData let-index="rowIndex">
+        <tr>
+          <td></td>
+          <td>{{index + 1 + ((newpostReq.page - 1) * newpostReq.pageSize)}}</td>
+          <td>{{ postNewData.title }}</td>
+          <td>{{ postNewData.createdBy }}</td>
+          <td>{{ postNewData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td>{{ postNewData.lastModifiedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td>
+            <button pButton icon="pi pi-eye" pTooltip="Xem chi tiết"
+                    class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
+            <button pButton icon="pi pi-times" pTooltip="Xóa"
+                    class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td [attr.colspan]="8" class="text-center">
+            <span>Không có dữ liệu</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="grid p-3">
+    <p-paginator [rows]="newpostReq.pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
+      [showCurrentPageReport]="true" (onPageChange)="paginate($event)" #paginator [hidden]="postNewData.length < newpostReq.pageSize"
+      currentPageReportTemplate="{currentPage} of {totalPages}"></p-paginator>
+  </div>
+</div>
+<p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false" [resizable]="false"
+  [showHeader]="false" [style]="{'width': '40vw'}">
+  <div class="payment">
+    <div class="col-12">
+      <h1>Cộng tài khoản</h1>
+      <label for="" class="header-title">Khách hàng: </label><span>{{customerName}}</span>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label for="">TK chính</label>
+        <!--        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWallet">-->
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet" [maxlength]="20" mode="currency"
+          currency="VND" locale="vi-VN"></p-inputNumber>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label for="">TK Khuyến mãi</label>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWalletPromotional" mode="currency"
+          currency="VND" locale="vi-VN" [maxlength]="20"></p-inputNumber>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="flex justify-content-between">
+        <label class="header-title">Điểm thưởng</label>
+        <span class="p-text-warning">{{paymentRequest.amountWallet / 1000 | number: '1.0-1'}}(điểm)</span>
+      </div>
+      <div class="flex justify-content-end mt-2">
+        <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2" (click)="isPayment = false"></button>
+        <!-- <button pButton (click)="confirmRequest()"
+                label="Nạp tiền" class="p-button-sm p-button-primary"></button> -->
+      </div>
+
+    </div>
+  </div>
+</p-dialog>
+<p-dialog [dismissableMask]="true" [(visible)]="isShowImg" [modal]="true" [draggable]="false" [resizable]="false"
+  [header]="'Ảnh minh chứng'">
+  <div class="img-container">
+    <img [src]="srcShowImg" alt="">
+  </div>
+</p-dialog>

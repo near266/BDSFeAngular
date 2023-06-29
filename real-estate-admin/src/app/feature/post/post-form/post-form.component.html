@@ -1,7 +1,7 @@
 <div class="container">
   <div class="grid align-items-center justify-content-between p-3">
     <div class="">
-      <h2 style=" color: #30A0E0">Chỉnh sửa {{'typePost.' + isBuy | translate  }}</h2>
+      <h2 style=" color: #30A0E0">Chỉnh sửa {{'typePost.' + isBuy | translate }}</h2>
     </div>
   </div>
   <div class="col-12 md:col-12">
@@ -129,16 +129,18 @@
       <div class="col-12 md:col-8" *ngIf="!isBuy">
         <div class="secondary-form-control">
           <label>Mức giá</label>
-          <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
-                         mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+          <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price" mode="currency" currency="VND"
+            locale="vi-VN"></p-inputNumber>
         </div>
-        <span *ngIf="!isBuy">Giá <b>
-          {{updateForm.value?.unit === 1 ? (updateForm.value?.price |vnCurrency) :
-            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1))) + '/m2'}}
-        </b>
-          ({{updateForm.value?.unit === 0  ? 'Tổng trị giá' : '' }}<b>~
-          {{updateForm.value?.unit === 0 ? (updateForm.value?.price |vnCurrency) :
-            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}}{{updateForm.value?.unit === 1  ? '/m2' : '' }} </b>)
+        <span *ngIf="!isBuy">Giá
+          <b>
+            {{updateForm.value?.unit === 0 ? (updateForm.value?.price |vnCurrency) :
+            (updateForm.value?.price | vnCurrency) + '/m2'}}
+          </b>
+          ({{updateForm.value?.unit === 1 ? 'Tổng trị giá' : '' }}<b>~
+            {{updateForm.value?.unit === 1 ? (updateForm.value?.price * updateForm.value?.area |vnCurrency) :
+            convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}}{{updateForm.value?.unit === 0 ?
+            '/m2' : '' }} </b>)
 
         </span>
 
@@ -146,16 +148,15 @@
       <div class="col-12 md:col-8" *ngIf="isBuy">
         <div class="secondary-form-control">
           <label>Tài chính dự kiến</label>
-           <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price"
-                         mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+          <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price" mode="currency" currency="VND"
+            locale="vi-VN"></p-inputNumber>
         </div>
 
       </div>
       <div class="col-12 md:col-4">
         <div class="secondary-form-control">
           <label>Đơn vị</label>
-          <p-dropdown [options]="listUnit" optionValue="code"
-                      formControlName="unit"></p-dropdown>
+          <p-dropdown [options]="listUnit" optionValue="code" formControlName="unit"></p-dropdown>
         </div>
       </div>
     </div>
@@ -167,7 +168,7 @@
     <label for="">Ảnh</label>
     <div class="grid p-4">
       <aw-image-upload [maxFiles]="6" [previewUrl]="detailData?.image" (changeFile)="getFile($event)"
-                       (clearFile)="clearFile($event)"></aw-image-upload>
+        (clearFile)="clearFile($event)"></aw-image-upload>
     </div>
   </div>
 </div>
@@ -182,8 +183,7 @@
     <div class="col-12 md:col-6">
       <div class="secondary-form-control">
         <label>Số điện thoại</label>
-        <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false"
-                       formControlName="phoneNumber">
+        <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false" formControlName="phoneNumber">
         </p-inputNumber>
       </div>
     </div>
@@ -206,5 +206,3 @@
   <button pButton label="Hủy" class="p-button-secondary mr-2" (click)="back()"></button>
   <button pButton label="Lưu thông tin" class="p-button-primary" (click)="confirmUpdate()"></button>
 </div>
-
-

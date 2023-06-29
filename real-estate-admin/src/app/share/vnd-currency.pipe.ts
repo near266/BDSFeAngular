@@ -17,11 +17,11 @@ export class VnCurrencyPipe implements PipeTransform {
     const stringValue = value.toString() || '';
 
     // Thêm dấu phân cách hàng nghìn
-    const parts = stringValue.split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const parts = stringValue.split(',');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
     // Kết hợp lại và thêm đơn vị tiền tệ (VND)
-    const formattedValue = parts.join('.');
+    const formattedValue = parts.join(',');
     return formattedValue + ' VNĐ';
   }
 }

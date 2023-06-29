@@ -1,14 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {PostService} from "../service/post.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {TranslateService} from "@ngx-translate/core";
-import {forkJoin} from "rxjs";
-import {ConfirmationService, MessageService} from "primeng/api";
-import {MediaService} from "../../../core/service/media.service";
-import {confirmSaveModal, exitModal} from "../model/confirm-dialog";
 import {CurrencyPipe} from "@angular/common";
+
+import {TranslateService} from "@ngx-translate/core";
+
+import {forkJoin} from "rxjs";
+
+import {ConfirmationService, MessageService} from "primeng/api";
+
+import {confirmSaveModal, exitModal} from "../model/confirm-dialog";
+import {PostService} from "../service/post.service";
+import {MediaService} from "../../../core/service/media.service";
 
 @Component({
   selector: 'app-post-form',
@@ -172,7 +176,7 @@ export class PostFormComponent implements OnInit {
       return (unit / 1000000).toFixed() + ' triệu';
     }
 
-    return this.currencyPipe.transform(unit, 'VND') + '';
+    return this.currencyPipe.transform(unit, 'VND')?.replace('.','*')?.replace(',','.')?.replace('*',',') + '';
   }
 
 }
