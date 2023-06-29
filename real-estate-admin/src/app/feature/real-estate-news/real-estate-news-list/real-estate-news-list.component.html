@@ -49,7 +49,7 @@
           <td>{{ postNewData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>{{ postNewData.lastModifiedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>
-            <button pButton icon="pi pi-eye" pTooltip="Xem chi tiết"
+            <button pButton icon="pi pi-eye" pTooltip="Xem chi tiết" [routerLink]="'/real-estate-new/view'" [queryParams]="{id:postNewData?.id}"
                     class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
             <button pButton icon="pi pi-times" pTooltip="Xóa"
                     class="p-button-sm p-button-danger p-button-outlined mr-2"></button>

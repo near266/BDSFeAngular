@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -26,12 +26,12 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ShareModule } from 'src/app/share/share.module';
 import { CustomTranslateLoader, LANGUAGE_FILE_PATH } from 'src/app/core/translate.loader';
 
+import { QuillModule } from 'ngx-quill';
+
 import { RealEstateNewsRoutingModule } from './real-estate-news-routing.module';
 
-import { RealEstateNewsListComponent } from './real-estate-news-list/real-estate-news-list.component';
 import { RealEstateNewsCrudComponent } from './real-estate-news-crud/real-estate-news-crud.component';
-
-
+import { RealEstateNewsListComponent } from './real-estate-news-list/real-estate-news-list.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { RealEstateNewsCrudComponent } from './real-estate-news-crud/real-estate
     TableModule,
     DropdownModule,
     FormsModule,
+    ReactiveFormsModule,
     TranslateModule,
     TabViewModule,
     ConfirmDialogModule,
@@ -75,6 +76,7 @@ import { RealEstateNewsCrudComponent } from './real-estate-news-crud/real-estate
       isolate: true,
       useDefaultLang: false
     }),
+    QuillModule.forRoot()
   ]
 })
 export class RealEstateNewsModule { }

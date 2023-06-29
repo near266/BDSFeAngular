@@ -7,21 +7,19 @@ import { RealEstateNewsListComponent } from './real-estate-news-list/real-estate
 const routes: Routes = [
   {
     path: '',
-    component: RealEstateNewsListComponent,
-    children: [
-      {
-        path: 'create',
-        component: RealEstateNewsCrudComponent
-      },
-      {
-        path: 'view',
-        component: RealEstateNewsCrudComponent,
-      },
-      {
-        path: 'edit',
-        component: RealEstateNewsCrudComponent
-      }
-    ]
+    component: RealEstateNewsListComponent
+  },
+  {
+    path: 'create',
+    component: RealEstateNewsCrudComponent
+  },
+  {
+    path: 'view',
+    component: RealEstateNewsCrudComponent
+  },
+  {
+    path: 'edit',
+    component: RealEstateNewsCrudComponent
   }
 ];
 
