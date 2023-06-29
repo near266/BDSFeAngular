@@ -222,9 +222,11 @@ export class SlotdataComponent implements OnInit {
     if (type === 1) {
 
       this.IsShowDialog = true;
+      
     }
     if (type === 2) {
       this.IsShowDialog = false;
+      this.AddRequest.name='';
     }
   }
   doDeleteAll() {

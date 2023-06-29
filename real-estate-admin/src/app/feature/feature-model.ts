@@ -30,5 +30,6 @@ export const feature =[
     label: 'Tài khoản',
     routerLink: ['account'],
     isSelected: false
-  }
+  },
+
 ]
