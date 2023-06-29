@@ -94,7 +94,7 @@
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [(visible)]="isPayment" [modal]="true" [draggable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false"
           [resizable]="false" [showHeader]="false" [style]="{'width': '40vw'}">
   <div class="payment">
     <div class="col-12">
@@ -131,7 +131,7 @@
     </div>
   </div>
 </p-dialog>
-<p-dialog [(visible)]="isShowImg" [modal]="true" [draggable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isShowImg" [modal]="true" [draggable]="false"
           [resizable]="false" [header]="'Ảnh minh chứng'">
   <div class="img-container">
     <img [src]="srcShowImg" alt="">

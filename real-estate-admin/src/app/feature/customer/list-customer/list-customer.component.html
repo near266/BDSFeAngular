@@ -114,7 +114,7 @@
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [(visible)]="isDeleteAll" [modal]="true" [draggable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isDeleteAll" [modal]="true" [draggable]="false"
           [resizable]="false">
   <div class="p-3">
     <p-table [value]="dataSelection">
@@ -141,7 +141,7 @@
             icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
   </div>
 </p-dialog>
-<p-dialog [(visible)]="isPayment" [modal]="true" [draggable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false"
           [resizable]="false" [showHeader]="false" [style]="{'width': '40vw'}">
   <div class="payment">
     <div class="col-12">

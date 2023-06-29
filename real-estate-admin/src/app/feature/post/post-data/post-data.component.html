@@ -109,7 +109,7 @@
                    "{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [(visible)]="isShowModalApprove" [modal]="true" [draggable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isShowModalApprove" [modal]="true" [draggable]="false"
           [resizable]="false" header="Duyệt nhiều">
   <div class="">
     <p-table [value]="dataSelection"
@@ -134,7 +134,7 @@
     <button pButton label="Duyệt" (click)="doChangeAction(1)"></button>
   </div>
 </p-dialog>
-<p-dialog [(visible)]="isShowModalReject" [modal]="true" [draggable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isShowModalReject" [modal]="true" [draggable]="false"
           [resizable]="false" header="Từ chối nhiều">
   <div class="">
     <p-table [value]="dataSelection"
@@ -167,7 +167,7 @@
             class="p-button-outlined p-button-warning"></button>
   </div>
 </p-dialog>
-<p-dialog [(visible)]="isShowRejectReason" [modal]="true" [draggable]="false" [resizable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isShowRejectReason" [modal]="true" [draggable]="false" [resizable]="false"
           header="Lí do từ chối" [style]="{width: '35vw'}">
   <div class="">
     Bạn chắc chắn muốn từ chối bản ghi
