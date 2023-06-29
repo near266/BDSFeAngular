@@ -31,11 +31,11 @@ export const feature =[
     routerLink: ['account'],
     isSelected: false
   },
-  // {
-  //   icon: 'pi pi-image',
-  //   label: 'Tin tức',
-  //   routerLink: ['real-estate-new'],
-  //   isSelected: false
-  // },
+  {
+    icon: 'pi pi-image',
+    label: 'Tin tức',
+    routerLink: ['real-estate-new'],
+    isSelected: false
+  },
 
 ]
