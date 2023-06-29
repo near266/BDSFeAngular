@@ -143,9 +143,7 @@ export class SlotdataComponent implements OnInit {
       this.RequestSearch.pageSize = evt.rows;
       this.SearchDistrictID();
     }
-    // this.RequestGetList.page = evt.page + 1;
-    // this.RequestGetList.pageSize = evt.rows;
-    // this.getListSLot();
+  
    
   }
   successMessage() {
@@ -200,10 +198,8 @@ export class SlotdataComponent implements OnInit {
               this.ShowModel(2);
               this.AddRequest.name='';
               this.getListSLot();
-
-              
-            
         
+  
         }else if (res ===0){
         this.IsDeleteModal=true;
         this.ShowModel(2);
