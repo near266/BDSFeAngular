@@ -20,7 +20,8 @@ import {SlotModule} from "./slot/slot.module";
     FeatureRoutingModule,
     SlotModule,
     PostModule,
-    CustomerModule
+    CustomerModule,
+   
   ]
 })
 export class FeatureModule { }
