@@ -79,7 +79,7 @@ export class SlotdataComponent implements OnInit {
     this.translateService.get('listStatus').subscribe(res => {
       this.listStatus = res;
     })
-    this.getListSLot();
+    this.search();
     this.getAllDistrict();
 
   }
@@ -108,20 +108,22 @@ export class SlotdataComponent implements OnInit {
       })
   }
   search() {
-    if (this.RequestGetList.name != '' ) {
+   
+    if (this.RequestGetList.name !=='') {
       this.slotServiceService.getListSlot(this.RequestGetList)
         .subscribe((res: any) => {
           this.data = res.data;
           this.totalRecord = res.totalCount;
         })
     }
-    else if(this.RequestSearch.name != '') {
+    else if(this.RequestSearch.name !==null) {
       this.slotServiceService.SearchDistrict(this.RequestSearch).subscribe((res: any) => {
         this.data = res.data;
         this.totalRecord = res.totalCount;
+        
       })
     }
-    if (this.RequestGetList.name == '' && this.RequestSearch.name == '') {
+    if (this.RequestGetList.name == '' && this.RequestSearch.name ==null ) {
 
       this.getListSLot();
     }
@@ -130,9 +132,21 @@ export class SlotdataComponent implements OnInit {
     if (this.RequestGetList.pageSize !== evt.rows) {
       this.RequestGetList.page = 0;
     }
-    this.RequestGetList.page = evt.page + 1;
+    if(this.RequestSearch.name==null){
+          this.RequestGetList.page = evt.page + 1;
     this.RequestGetList.pageSize = evt.rows;
     this.getListSLot();
+    }
+    else{
+      
+      this.RequestSearch.page =evt.page+1;
+      this.RequestSearch.pageSize = evt.rows;
+      this.SearchDistrictID();
+    }
+    // this.RequestGetList.page = evt.page + 1;
+    // this.RequestGetList.pageSize = evt.rows;
+    // this.getListSLot();
+   
   }
   successMessage() {
     this.messageService.add({ severity: 'success', detail: 'thao tác thành công' });
@@ -140,6 +154,7 @@ export class SlotdataComponent implements OnInit {
   errorMessage() {
     this.messageService.add({ severity: 'error', detail: 'vui lòng nhập đúng thông tin' });
   }
+  
   delete(id: any) {
     const body = {
       listId: [id]
@@ -161,6 +176,9 @@ export class SlotdataComponent implements OnInit {
       this.ListDist = res;
     });
   }
+  
+  
+  
   AddSLot() {
 
     if (this.AddRequest.name === '') {
@@ -277,6 +295,13 @@ export class SlotdataComponent implements OnInit {
         this.IsUpdateShow = false;
 
       }
+    })
+  }
+  SearchDistrictID(){
+    this.slotServiceService.SearchDistrict(this.RequestSearch).subscribe((res: any) => {
+      this.data = res.data;
+      this.totalRecord = res.totalCount;
+      
     })
   }
   //#region  Function
