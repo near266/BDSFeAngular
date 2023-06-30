@@ -20,7 +20,7 @@
   </div>
 </form>
 <div class="col-12 flex flex-row justify-content-end mt-3 pl-3 pr-3" *ngIf="title !== 'CHI TIẾT TIN TỨC'">
-  <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="''"></button>
+  <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" [routerLink]="'/real-estate-new'"></button>
   <button pButton (click)="add(form.getRawValue())" *ngIf="title === 'THÊM TIN TỨC MỚI'" label="Thêm mới"
     class="p-button-sm p-button-primary"></button>
   <button pButton (click)="update(form.getRawValue())" *ngIf="title === 'CHỈNH SỬA TIN TỨC'" label="Xác nhận"
