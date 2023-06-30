@@ -3,8 +3,8 @@
     <div class="title-content">
       <label>{{title}}</label>
     </div>
-    <!-- <button pButton label="Thêm mới" icon="pi pi-plus" class="p-button-outlined p-button-primary"
-      [routerLink]="'/real-estate-new/create'"></button> -->
+    <button pButton class="p-button-warning p-button-outlined" label="Chỉnh sửa" icon="pi pi pencil"
+      *ngIf="title === 'CHI TIẾT TIN TỨC'" (click)="edit(form.getRawValue().id)"></button>
   </div>
 </div>
 <form [formGroup]="form" class="pl-3 pr-3">
@@ -14,6 +14,15 @@
   </div>
   <div class="secondary-form-control mb-2">
     <label>Nội dung</label>
-    <quill-editor [modules]="quillConfig" class="w-full" #disciplineQE id="discipline-qe"></quill-editor>
+    <quill-editor [modules]="quillConfig" class="w-full" #disciplineQE id="discipline-qe" formControlName="description"
+      *ngIf="title !== 'CHI TIẾT TIN TỨC'"></quill-editor>
+    <quill-view [content]="form.value.description" *ngIf="title === 'CHI TIẾT TIN TỨC'" format="html"></quill-view>
   </div>
 </form>
+<div class="col-12 flex flex-row justify-content-end mt-3 pl-3 pr-3" *ngIf="title !== 'CHI TIẾT TIN TỨC'">
+  <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="''"></button>
+  <button pButton (click)="add(form.getRawValue())" *ngIf="title === 'THÊM TIN TỨC MỚI'" label="Thêm mới"
+    class="p-button-sm p-button-primary"></button>
+  <button pButton (click)="update(form.getRawValue())" *ngIf="title === 'CHỈNH SỬA TIN TỨC'" label="Xác nhận"
+    class="p-button-sm p-button-primary"></button>
+</div>

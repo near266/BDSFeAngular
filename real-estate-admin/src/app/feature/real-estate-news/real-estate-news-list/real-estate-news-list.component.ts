@@ -14,6 +14,8 @@ import { RealEstateNewsService } from '../service/real-estate-news.service';
 export class RealEstateNewsListComponent implements OnInit {
 
   postNewData: any[] = [];
+  listDeleteId: any[] = []
+  selectedAll = false
   newpostReq = {
     title: undefined,
     page: 1,
@@ -25,11 +27,12 @@ export class RealEstateNewsListComponent implements OnInit {
     amountWalletPromotional: 0,
     currency: ''
   };
-  customerName = '';
+  typeDelete = '';
+  element?: any
   totalRecord = 0;
   dateFrom = '';
   dateTo = '';
-  isPayment = false;
+  isDelete = false;
   isShowImg = false;
   srcShowImg = '';
   maxDate = new Date();
@@ -57,9 +60,80 @@ export class RealEstateNewsListComponent implements OnInit {
 
   doGetListPostNew() {
     this.postNewService.getPostNew(this.newpostReq).subscribe(res => {
-      this.postNewData = res.data;
+      this.listDeleteId = []
+      this.postNewData = res.data?.map((v: any) => {
+        if (this.listDeleteId.includes(v.id)) {
+          v.selectedToDelete = true
+        }
+        else {
+          v.selectedToDelete = false
+        }
+        return v
+      });
+      this.selectedAll = this.checkAll(this.postNewData)
       this.totalRecord = res.totalCount;
     })
+  }
+
+  matchAll(list: any[]) {
+    list.forEach((v: any) => {
+      if (this.selectedAll) {
+        v.selectedToDelete = true
+        if (!this.listDeleteId.includes(v.id)) {
+          this.listDeleteId.push(v.id)
+        }
+      }
+      else {
+        v.selectedToDelete = false
+        this.listDeleteId = this.listDeleteId.filter((e: any) => { if (e !== v.id) { return e.id } })
+      }
+    })
+  }
+
+  matchElement(v: any) {
+    if (v.selectedToDelete) {
+      if (!this.listDeleteId.includes(v.id)) {
+        this.listDeleteId.push(v.id)
+      }
+    }
+    else {
+      v.selectedToDelete = false
+      this.listDeleteId = this.listDeleteId.filter((e: any) => { if (e !== v.id) { return e.id } })
+    }
+  }
+
+  checkAll(list: any[]) {
+    for (let i = 0; i < list.length; i++) {
+      if (!list[i].selectedToDelete) {
+        return false
+      }
+    }
+    return true
+  }
+
+  confirmDelete() {
+    if (this.typeDelete === 'list') {
+      this.postNewService.deletePostNew({
+        listId: this.listDeleteId
+      }).subscribe(data => {
+        this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
+        this.isDelete = false
+        this.doGetListPostNew()
+      }, (v: any) => {
+        this.messageService.add({ severity: 'error', detail: 'Thất bại' })
+      })
+    }
+    if (this.typeDelete === 'element') {
+      this.postNewService.deletePostNew({
+        listId: [this.element]
+      }).subscribe(data => {
+        this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
+        this.isDelete = false
+        this.doGetListPostNew()
+      }, (v: any) => {
+        this.messageService.add({ severity: 'error', detail: 'Thất bại' })
+      })
+    }
   }
 
 }

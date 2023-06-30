@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
+
 import { ApiResultResponse } from '../model/result-response';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -53,9 +55,9 @@ export abstract class BaseService {
     return this.getHttp().post<any>(requestUrl, body, { headers: header, params: inputParams, responseType: 'blob' as 'json' });
   }
 
-  protected doDelete(url: string, httpParams?: HttpParams, httpHeaders?: HttpHeaders) {
+  protected doDelete(url: string, body?: any, httpParams?: HttpParams, httpHeaders?: HttpHeaders) {
     const requestUrl = `${this.baseUrl}${this.basePath}${url}`;
-    return this.getHttp().delete<ApiResultResponse>(requestUrl, { headers: httpHeaders, params: httpParams });
+    return this.getHttp().delete<ApiResultResponse>(requestUrl, { headers: httpHeaders, params: httpParams, body: body });
   }
 
   public logDebug(value: any) {

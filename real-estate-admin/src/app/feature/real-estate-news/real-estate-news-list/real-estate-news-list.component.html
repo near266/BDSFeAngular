@@ -10,10 +10,23 @@
   </div>
   <div class="grid p-3">
     <div class="col-12 flex justify-content-between align-items-center">
-      <div class="title-content">
+      <div class="title-content flex flex-column">
         <label>DANH SÁCH TIN TỨC </label>
+        <div class="mt-3 flex flex-row align-items-center">
+          <span class="text-lg mr-2">Đã chọn: {{listDeleteId.length}}</span>
+          <button class="flex flex-row align-items-center pr-3 py-2 border-round-sm border-300 cursor-pointer"
+            (click)="isDelete = true; typeDelete='list'" style="color: #505050; font-weight: 600; background-color: white;">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8.26474 9.36981C7.95964 9.06471 7.95964 8.57005 8.26474 8.26496C8.56984 7.95986 9.0645 7.95986 9.36959 8.26496L12.5 11.3954L15.6304 8.26496C15.9355 7.95986 16.4302 7.95986 16.7353 8.26496C17.0404 8.57005 17.0404 9.06471 16.7353 9.36981L13.6049 12.5002L16.7353 15.6307C17.0404 15.9357 17.0404 16.4304 16.7353 16.7355C16.4302 17.0406 15.9355 17.0406 15.6304 16.7355L12.5 13.6051L9.36958 16.7355C9.06449 17.0406 8.56983 17.0406 8.26473 16.7355C7.95963 16.4304 7.95963 15.9358 8.26473 15.6307L11.3952 12.5002L8.26474 9.36981Z"
+                fill="#FFB43F" />
+            </svg>
+            <p class="m-0">Xóa tất cả</p>
+          </button>
+        </div>
       </div>
-      <button pButton label="Thêm mới" icon="pi pi-plus" class="p-button-outlined p-button-primary" [routerLink]="'/real-estate-new/create'"></button>
+      <button pButton label="Thêm mới" icon="pi pi-plus" class="p-button-outlined p-button-primary"
+        [routerLink]="'/real-estate-new/create'"></button>
     </div>
   </div>
   <!-- <div class="p-3">
@@ -25,7 +38,9 @@
     <p-table [value]="postNewData">
       <ng-template pTemplate="header">
         <tr>
-          <th></th>
+          <th>
+            <input type="checkbox" (change)="matchAll(postNewData)" [(ngModel)]="selectedAll">
+          </th>
           <th>STT</th>
           <th>Tiêu đề</th>
           <th>Người đăng</th>
@@ -40,19 +55,22 @@
           <th>Thao tác</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-postNewData let-index="rowIndex">
+      <ng-template pTemplate="body" let-postData let-index="rowIndex">
         <tr>
-          <td></td>
-          <td>{{index + 1 + ((newpostReq.page - 1) * newpostReq.pageSize)}}</td>
-          <td>{{ postNewData.title }}</td>
-          <td>{{ postNewData.createdBy }}</td>
-          <td>{{ postNewData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
-          <td>{{ postNewData.lastModifiedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>
-            <button pButton icon="pi pi-eye" pTooltip="Xem chi tiết" [routerLink]="'/real-estate-new/view'" [queryParams]="{id:postNewData?.id}"
-                    class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
-            <button pButton icon="pi pi-times" pTooltip="Xóa"
-                    class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
+            <input type="checkbox" [(ngModel)]="postData.selectedToDelete"
+              (change)="selectedAll=checkAll(postNewData);matchElement(postData)">
+          </td>
+          <td>{{index + 1 + ((newpostReq.page - 1) * newpostReq.pageSize)}}</td>
+          <td>{{ postData.title }}</td>
+          <td>{{ postData.createdBy }}</td>
+          <td>{{ postData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td>{{ postData.lastModifiedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td>
+            <button pButton icon="pi pi-eye" pTooltip="Xem chi tiết" [routerLink]="'/real-estate-new/view'"
+              [queryParams]="{id:postData?.id}" class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
+            <button pButton icon="pi pi-times" pTooltip="Xóa" (click)="isDelete = true; typeDelete='element';element=postData.id"
+              class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
           </td>
         </tr>
       </ng-template>
@@ -67,43 +85,35 @@
   </div>
   <div class="grid p-3">
     <p-paginator [rows]="newpostReq.pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
-      [showCurrentPageReport]="true" (onPageChange)="paginate($event)" #paginator [hidden]="postNewData.length < newpostReq.pageSize"
+      [showCurrentPageReport]="true" (onPageChange)="paginate($event)" #paginator
+      [hidden]="postNewData.length < newpostReq.pageSize"
       currentPageReportTemplate="{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false" [resizable]="false"
+<p-dialog [dismissableMask]="true" [(visible)]="isDelete" [modal]="true" [draggable]="false" [resizable]="false"
   [showHeader]="false" [style]="{'width': '40vw'}">
-  <div class="payment">
-    <div class="col-12">
-      <h1>Cộng tài khoản</h1>
-      <label for="" class="header-title">Khách hàng: </label><span>{{customerName}}</span>
+  <div class="py-4 px-2">
+    <div class="col-12 title-content flex flex-row justify-content-center mt-4">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 6.25C12.4142 6.25 12.75 6.58579 12.75 7V13C12.75 13.4142 12.4142 13.75 12 13.75C11.5858 13.75 11.25 13.4142 11.25 13V7C11.25 6.58579 11.5858 6.25 12 6.25Z"
+          fill="#FFB43F" />
+        <path
+          d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z"
+          fill="#FFB43F" />
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"
+          fill="#FFB43F" />
+      </svg>
+      <label class="ml-2">XÓA TIN TỨC </label>
     </div>
-    <div class="col-12">
-      <div class="secondary-form-control">
-        <label for="">TK chính</label>
-        <!--        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWallet">-->
-        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet" [maxlength]="20" mode="currency"
-          currency="VND" locale="vi-VN"></p-inputNumber>
-      </div>
+    <div class="col-12 flex flex-row justify-content-center">
+      <span>Bạn có chắc chắn muốn xoá tin tức đã chọn không?</span>
     </div>
-    <div class="col-12">
-      <div class="secondary-form-control">
-        <label for="">TK Khuyến mãi</label>
-        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWalletPromotional" mode="currency"
-          currency="VND" locale="vi-VN" [maxlength]="20"></p-inputNumber>
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="flex justify-content-between">
-        <label class="header-title">Điểm thưởng</label>
-        <span class="p-text-warning">{{paymentRequest.amountWallet / 1000 | number: '1.0-1'}}(điểm)</span>
-      </div>
-      <div class="flex justify-content-end mt-2">
-        <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2" (click)="isPayment = false"></button>
-        <!-- <button pButton (click)="confirmRequest()"
-                label="Nạp tiền" class="p-button-sm p-button-primary"></button> -->
-      </div>
-
+    <div class="col-12 flex flex-row justify-content-center mt-3">
+      <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="isDelete = false"></button>
+      <button pButton (click)="confirmDelete()"
+                label="Xác nhận" class="p-button-sm p-button-primary"></button>
     </div>
   </div>
 </p-dialog>

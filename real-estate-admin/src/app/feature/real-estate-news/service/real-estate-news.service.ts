@@ -33,11 +33,11 @@ export class RealEstateNewsService extends BaseService {
     return this.doPut('newpost/update', body).pipe(map((res: any) => res));
   }
 
-  deposit(body: any): Observable<any> {
-    return this.doPut('depositRequest', body).pipe(map((res: any) => res));
+  addPostNew(body: any): Observable<any> {
+    return this.doPost('newpost/add', body).pipe(map((res: any) => res));
   }
 
   deletePostNew(body: any): Observable<any> {
-    return this.doPost('newpost/delete', body).pipe(map((res: any) => res));
+    return this.doDelete('newpost/delete', body).pipe(map((res: any) => res));
   }
 }
