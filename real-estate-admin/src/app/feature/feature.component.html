@@ -1,6 +1,6 @@
 <div class="feature-container">
-  <div class="" *ngIf="isShowNavigation"
-       [ngClass]="navigationClass">
+  <div class="" *ngIf="isShowNavigation" [ngClass]="navigationClass"
+    style="width: max-content; max-width: 25%; min-width: 200px;">
     <div class="flex justify-content-center">
       <div class="">
         <h1>YOUR LOGO</h1>
@@ -32,14 +32,49 @@
         </div>
       </div>
     </div> -->
-    <div class="col p-0 ml-5" *ngFor="let f of featureList">
-      <div class="flex justify-content-center h-3rem align-items-center items" (click)="routerLink(f)"
-           [class.router-selected]="f.isSelected">
-        <div class="col-2">
-          <i [class]="f.icon"></i>
+    <div class="flex flex-column w-full h-full relative overflow-x-hidden">
+      <div class="p-0 py-2 pl-5 h-max z-2" *ngFor="let f of featureList" (click)="load(f.routerLink[0])"
+        [id]="routenow.includes(f.routerLink[0])?'menunow':''" [routerLink]="f.routerLink[0]"
+        [ngClass]="routenow.includes(f.routerLink[0])?'router-selected':''">
+        <div class="flex justify-content-start h-max align-items-center items pl-3">
+          <!-- <div class="flex justify-content-start h-3rem align-items-center items pl-3" (click)="routerLink(f)"
+                [class.router-selected]="f.isSelected"> -->
+          <div class="col-2">
+            <i [class]="f.icon"></i>
+          </div>
+          <div class="min-w-max">
+            <label for="" class="min-w-max"> {{f.label}}</label>
+          </div>
         </div>
-        <div class="col-6">
-          <label for=""> {{f.label}}</label>
+      </div>
+      <div class="absolute w-full ml-4 z-0" id="menuidnow" [style.--menuidnowheight]="menuidnowheight+'px'"
+        [style.--menutoheight]="menutoheight+'px'" [style.--menutotop]="menutoY+'px'"
+        [style.--lastheight]="lastheight+'px'" [style.--lasttop]="lastY+'px'" [style.--menuidnowtop]="positionY+'px'">
+        <div class="absolute" style="background-color: white;
+        width: 20px;
+        height:20px;
+        top: -20px;
+        right: 20px;">
+          <div class="absolute" style="background-color: #30A0E0;
+          width: 40px;
+          height:40px;
+          border-radius: 50%;
+          top: -20px;
+          right: 0px">
+          </div>
+        </div>
+        <div class="absolute" style="background-color: white;
+        width: 20px;
+        height:20px;
+        bottom: -20px;
+        right: 20px;">
+          <div class="absolute" style="background-color: #30A0E0;
+          width: 40px;
+          height:40px;
+          border-radius: 50%;
+          bottom: -20px;
+          right: 0px">
+          </div>
         </div>
       </div>
     </div>
@@ -50,9 +85,8 @@
         <i class="pi pi-list"></i>
       </div>
       <div class="info-toggle">
-        <p-splitButton
-          styleClass="p-button-outlined"
-          label="{{infoUser?.firstName}}" icon="pi pi-user" [model]="items"></p-splitButton>
+        <p-splitButton styleClass="p-button-outlined" label="{{infoUser?.firstName}}" icon="pi pi-user"
+          [model]="items"></p-splitButton>
       </div>
     </div>
     <div class="feature-content-body p-2">

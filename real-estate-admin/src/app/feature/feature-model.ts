@@ -1,12 +1,12 @@
 export enum FeatureModel {
 }
 export const feature =[
-  {
-    icon: 'pi pi-home',
-    label: 'Trang chủ',
-    routerLink: [''],
-    isSelected: false
-  },
+  // {
+  //   icon: 'pi pi-home',
+  //   label: 'Trang chủ',
+  //   routerLink: [''],
+  //   isSelected: false
+  // },
   {
     icon: 'pi pi-align-justify',
     label: 'Khu đất',

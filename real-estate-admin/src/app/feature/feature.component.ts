@@ -1,9 +1,13 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {AuthService} from "../auth/service/auth.service";
-import {feature} from "./feature-model";
 import {ActivatedRoute, NavigationEnd, NavigationError, NavigationStart, Router} from "@angular/router";
+
 import {filter} from "rxjs/operators";
+
 import {MenuItem} from "primeng/api";
+
+import {AuthService} from "../auth/service/auth.service";
+
+import {feature} from "./feature-model";
 
 @Component({
   selector: 'app-feature',
@@ -117,6 +121,8 @@ export class FeatureComponent implements OnInit {
         setTimeout(() => {
           this.positionY = document.getElementById('menunow')?.offsetTop
           this.menuidnowheight = document.getElementById('menunow')?.offsetHeight
+          console.log(document.getElementById('menunow')?.offsetTop)
+          console.log(document.getElementById('menunow')?.offsetHeight)
           document.getElementById('menuidnow')!.classList.remove('slip')
           clearInterval(v)
         }, 450)
