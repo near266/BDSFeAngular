@@ -278,7 +278,14 @@ export class SlotdataComponent implements OnInit {
       ...this.updateForm.value
     }
     this.slotServiceService.UpdateWard(body).subscribe(res => {
+    if(this.RequestSearch.name ==null && this.RequestGetList.name !== ''){
+
       this.getListSLot();
+    }
+    else{
+
+      this.SearchDistrictID();
+    }
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
 
     })
