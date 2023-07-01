@@ -74,6 +74,6 @@ export class LoginComponent implements OnInit {
   }
 
   goToView() {
-    this.router.navigate([''])
+    this.router.navigate(['/slot'])
   }
 }
