@@ -7,7 +7,7 @@ export const environment = {
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: 'https://api-bds.eztek.net/',
+  baseUrl: 'https://api.hoalac123.xyz/',
   basePath: '',
   logServer: false,
   logClient: true,
