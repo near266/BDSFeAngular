@@ -1,10 +1,16 @@
-import {ErrorHandler, Injectable, NgZone} from '@angular/core';
-import {BaseErrorHandle} from './base-error-handle';
-import {TranslateService} from '@ngx-translate/core';
-import {environment} from '../../environments/environment';
-import {UtilService} from './service/util.service';
-import {HttpErrorResponse} from '@angular/common/http';
-import {ConfirmationService} from 'primeng/api';
+import { ErrorHandler, Injectable, NgZone } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NavigationError, Router } from '@angular/router';
+
+import { TranslateService } from '@ngx-translate/core';
+
+import { ConfirmationService } from 'primeng/api';
+
+import { environment } from '../../environments/environment';
+import { AuthService } from "../auth/service/auth.service";
+
+import { BaseErrorHandle } from './base-error-handle';
+
 import {
   ApiErrorArgsInvalid,
   ApiErrorForbidden,
@@ -12,9 +18,8 @@ import {
   ApiErrorResponse,
   ApiErrorTokenInvalid
 } from './model/error-response';
-import {NavigationError, Router} from '@angular/router';
-import {IdleService} from './service/idle.service';
-import {AuthService} from "../auth/service/auth.service";
+import { IdleService } from './service/idle.service';
+import { UtilService } from './service/util.service';
 
 /**
  * @author TruongNH
@@ -38,9 +43,11 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
   handleError(err: any): void {
     switch (err.constructor) {
       case HttpErrorResponse: {
+        console.log(err);
+
         this.showDialog(
-          this.translate.instant('err.http.title'),
-          this.translate.instant(`err.http.${this.getHttpStatusCode(err)}`)
+          this.translate.instant('Error'),
+          this.translate.instant(err.error ? err.error : `err.http.${this.getHttpStatusCode(err)}`)
         );
         break;
       }
@@ -70,7 +77,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
         // this.auth.logOut();
         this.ngzone.run(() => {
           // bypass form leave guard with queryParams expired is 1
-          this.router.navigate(['auth', 'login'], {queryParams: {expired: '1'}});
+          this.router.navigate(['auth', 'login'], { queryParams: { expired: '1' } });
         });
         // }
         break;
