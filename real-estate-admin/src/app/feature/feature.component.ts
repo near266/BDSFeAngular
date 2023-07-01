@@ -121,8 +121,6 @@ export class FeatureComponent implements OnInit {
         setTimeout(() => {
           this.positionY = document.getElementById('menunow')?.offsetTop
           this.menuidnowheight = document.getElementById('menunow')?.offsetHeight
-          console.log(document.getElementById('menunow')?.offsetTop)
-          console.log(document.getElementById('menunow')?.offsetHeight)
           document.getElementById('menuidnow')!.classList.remove('slip')
           clearInterval(v)
         }, 450)
