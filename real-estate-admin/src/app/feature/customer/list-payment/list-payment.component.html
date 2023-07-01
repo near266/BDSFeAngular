@@ -47,9 +47,11 @@
         <tr>
           <th>STT</th>
           <th>Mã KH</th>
+          <th>Mã nạp tiền</th>
           <th>Khách hàng</th>
+          <th>Số tiền nạp</th>
           <th>Số điện thoại</th>
-          <th class="text-center">Ảnh minh chứng</th>
+          <th>Ảnh minh chứng</th>
           <th>Trạng thái</th>
           <th pSortableColumn="createdDate">
             Thời gian
@@ -62,7 +64,9 @@
         <tr>
           <td>{{index + 1 + ((depositReq.page - 1) * depositReq.pageSize)}}</td>
           <td>{{ customerData.customer.customerCode }}</td>
+          <td>{{ customerData.depositCode }}</td>
           <td>{{ customerData.customer.customerName }}</td>
+          <td>{{ customerData.amount }}</td>
           <td>{{ customerData.phoneNumber }}</td>
           <td>
             <span class="hyper-link" (click)="doShowImg(customerData.image)">Xem ảnh</span>

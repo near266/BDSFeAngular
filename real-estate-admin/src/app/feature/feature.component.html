@@ -2,8 +2,8 @@
   <div class="" *ngIf="isShowNavigation" [ngClass]="navigationClass"
     style="width: max-content; max-width: 25%; min-width: 200px;">
     <div class="flex justify-content-center">
-      <div class="">
-        <h1>YOUR LOGO</h1>
+      <div class="pt-4">
+        <img src="./assets/resouces/LOGO TRẮNG.png" style="width: 180px;">
       </div>
       <div class="close-toggle" (click)="showNavigationToggle()" *ngIf="isMobile() && isShowNavigation">
         <i class="pi pi-chevron-left"></i>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div> -->
-    <div class="flex flex-column w-full h-full relative overflow-x-hidden">
+    <div class="flex flex-column w-full h-full relative overflow-x-hidden pt-3">
       <div class="p-0 py-2 pl-5 h-max z-2" *ngFor="let f of featureList" (click)="load(f.routerLink[0])"
         [id]="routenow.includes(f.routerLink[0])?'menunow':''" [routerLink]="f.routerLink[0]"
         [ngClass]="routenow.includes(f.routerLink[0])?'router-selected':''">

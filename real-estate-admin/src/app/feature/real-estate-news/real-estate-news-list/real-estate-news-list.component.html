@@ -65,7 +65,7 @@
           <td>{{ postData.title }}</td>
           <td>{{ postData.createdBy }}</td>
           <td>{{ postData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
-          <td>{{ postData.lastModifiedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+          <td>{{ (postData.lastModifiedDate ? postData.lastModifiedDate: postData.createdDate) | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>
             <button pButton icon="pi pi-eye" pTooltip="Xem chi tiết" [routerLink]="'/real-estate-new/view'"
               [queryParams]="{id:postData?.id}" class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
