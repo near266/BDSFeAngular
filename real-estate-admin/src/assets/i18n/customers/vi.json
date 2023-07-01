@@ -24,7 +24,8 @@
   "type": {
     "0":  "Nạp tiền",
     "1":  "Trừ tiền",
-    "2":   "Hoàn tiền"
+    "2":   "Hoàn tiền",
+    "3":   "Cộng tiền"
   },
   "walletType": {
     "0": "Ví chính",
