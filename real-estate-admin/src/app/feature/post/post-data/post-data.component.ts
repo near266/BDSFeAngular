@@ -1,13 +1,16 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {NewsItem} from "../model/new-item";
+import {Router} from "@angular/router";
+
+import {TranslateService} from "@ngx-translate/core";
+
 import {Table, TableHeaderCheckbox} from "primeng/table";
 import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {approveModal, deleteModal} from "../model/confirm-dialog";
-import {TranslateService} from "@ngx-translate/core";
-import {Router} from "@angular/router";
-import {PostService} from "../service/post.service";
 import {Paginator} from "primeng/paginator";
+
+import {approveModal, deleteModal} from "../model/confirm-dialog";
+import {NewsItem} from "../model/new-item";
+import {PostService} from "../service/post.service";
 
 @Component({
   selector: 'app-post-data',
@@ -171,6 +174,14 @@ export class PostDataComponent implements OnInit {
       }
     }
     return false;
+  }
+
+
+  update(body: any) {
+    this.postService.update(body, this.isBuy).subscribe(res => {
+      this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
+      this.getListPost()
+    })
   }
 
 
