@@ -27,6 +27,7 @@ export class PostFormComponent implements OnInit {
   params: any;
   listFileUpload: any;
   listUnit: any[]
+  
 
   constructor(
     private router: Router,
@@ -51,6 +52,7 @@ export class PostFormComponent implements OnInit {
   }
 
   getSData(params: any) {
+  
     forkJoin([this.translateService.get('listStatusUpdate'),
       this.postService.getDetail(params.id, params.isBuy === 'true'),
       this.translateService.get(params.isBuy === 'true' ? 'unitBoughtNews' : 'unitSaleNews')]).subscribe(
@@ -59,6 +61,7 @@ export class PostFormComponent implements OnInit {
         this.detailData = res[1];
         this.listUnit = res[2];
         this.updateForm.patchValue(this.detailData);
+        console.log(this.listUnit)
       }
     )
   }
