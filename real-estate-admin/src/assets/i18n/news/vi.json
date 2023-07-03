@@ -80,11 +80,16 @@
     {
       "code": 1,
       "label": "Giá/m2"
+    },
+    {
+      "code": 3,
+      "label": "Thỏa thuận"
     }
   ],
   "unitName": {
     "0": "VND",
-    "1": "Giá/m2"
+    "1": "Giá/m2",
+    "3": "Thỏa thuận"
   },
   "unitBoughtNews": [
     {
