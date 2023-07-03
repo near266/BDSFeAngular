@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./real-estate-news/real-estate-news.module').then(m => m.RealEstateNewsModule)
       },
       {
+        path: 'config',
+        loadChildren: () => import('./config/config.module').then(m => m.ConfigModule)
+      },
+      {
         path: 'account',
         component: FeatureComponent
       },
