@@ -61,7 +61,7 @@ export class PostFormComponent implements OnInit {
         this.detailData = res[1];
         this.listUnit = res[2];
         this.updateForm.patchValue(this.detailData);
-        console.log(this.listUnit)
+      
       }
     )
   }
