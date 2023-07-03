@@ -80,6 +80,11 @@
           <td>{{ product.order | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>
             <div class="flex">
+              <button pButton (click)="update({
+                id: product.id,
+                titile: product.titile
+              })" icon="pi pi-arrow-up" pTooltip="Đẩy tin"
+                      class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
               <button pButton (click)="delete(product.id)" icon="pi pi-trash" pTooltip="Xóa"
                       class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
               <button pButton (click)="reject(product.id)" icon="pi pi-times" pTooltip="Từ chối"
