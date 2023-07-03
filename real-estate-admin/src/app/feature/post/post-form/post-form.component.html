@@ -129,19 +129,28 @@
       <div class="col-12 md:col-8" *ngIf="!isBuy">
         <div class="secondary-form-control">
           <label>Mức giá</label>
-          <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price" mode="currency" currency="VND"
+          <p-inputNumber *ngIf="updateForm.value?.unit !==3; else accecpt" inputId="integeronly" [maxlength]="20" formControlName="price" mode="currency" currency="VND"
             locale="vi-VN"></p-inputNumber>
+            <ng-template #accecpt>
+          <p-inputNumber [disabled]="true"></p-inputNumber>
+            </ng-template>
         </div>
         <span *ngIf="!isBuy">Giá
-          <b>
+          <b *ngIf="updateForm.value?.unit !==3; else accecpt">
             {{updateForm.value?.unit === 0 ? (updateForm.value?.price |vnCurrency) :
             (updateForm.value?.price | vnCurrency) + '/m2'}}
+
           </b>
-          ({{updateForm.value?.unit === 1 ? 'Tổng trị giá' : '' }}<b>~
+          <ng-template #accecpt>
+
+          </ng-template>
+          ({{updateForm.value?.unit === 1 ? 'Tổng trị giá' : '' }}<b *ngIf="updateForm.value?.unit !==3; else accecpt1">~
             {{updateForm.value?.unit === 1 ? (updateForm.value?.price * updateForm.value?.area |vnCurrency) :
             convertUnit((updateForm.value?.price / (updateForm.value?.area || 1)))}}{{updateForm.value?.unit === 0 ?
             '/m2' : '' }} </b>)
-
+            <ng-template #accecpt1>
+              <span>Thỏa thuận</span>
+             </ng-template>
         </span>
 
       </div>
