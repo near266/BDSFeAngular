@@ -10,9 +10,14 @@ import {CustomerModule} from "./customer/customer.module";
 import {PostModule} from "./post/post.module";
 import {SlotModule} from "./slot/slot.module";
 
+
+
+
 @NgModule({
   declarations: [
-    FeatureComponent
+    FeatureComponent,
+
+    
   ],
   imports: [
     CommonModule,
@@ -21,6 +26,7 @@ import {SlotModule} from "./slot/slot.module";
     SlotModule,
     PostModule,
     CustomerModule,
+  
    
   ]
 })
