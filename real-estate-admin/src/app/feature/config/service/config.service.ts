@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable, map } from 'rxjs';
+
 import { BaseService } from 'src/app/core/service/base.service';
 
 @Injectable({
@@ -20,7 +22,7 @@ export class ConfigService extends BaseService {
   }
 
   getConfig(body: any): Observable<any> {
-    return this.doPost('typeprice/getall', body).pipe(map((res: any) => res));
+    return this.doPost('admin/priceconfiguration/getall', body).pipe(map((res: any) => res));
   }
 
   getDetailConfig(id: any): Observable<any> {

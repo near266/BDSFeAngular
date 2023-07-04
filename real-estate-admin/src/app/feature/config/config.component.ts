@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
+
 import { ConfigService } from './service/config.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { ConfigService } from './service/config.service';
   styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent implements OnInit {
+
+  listConfig: any[] = []
 
   constructor(
     private router: Router,
@@ -20,7 +24,9 @@ export class ConfigComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.configService.getConfig({}).subscribe((data: any) => { console.log(data) })
+    this.configService.getConfig({}).subscribe((data: any) => {
+      this.listConfig = data
+    })
   }
 
 }
