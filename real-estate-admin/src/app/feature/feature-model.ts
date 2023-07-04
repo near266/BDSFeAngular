@@ -38,10 +38,9 @@ export const feature =[
     isSelected: false
   },
   {
-    icon: 'pi pi-cog',
-    label: 'Cấu hình',
-    routerLink: ['config'],
+    icon: 'pi pi-book',
+    label: 'Điều khoản',
+    routerLink: ['real-estate-term'],
     isSelected: false
   },
-
 ]
