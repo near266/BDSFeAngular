@@ -43,4 +43,10 @@ export const feature =[
     routerLink: ['real-estate-term'],
     isSelected: false
   },
+  {
+    icon: 'pi pi-cog',
+    label: 'Cấu hình',
+    routerLink: ['config'],
+    isSelected: false
+  },
 ]

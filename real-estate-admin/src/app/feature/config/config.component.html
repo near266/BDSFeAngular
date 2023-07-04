@@ -18,6 +18,51 @@
     </div>
   </div>
   <div *ngFor="let config of listConfig" class="p-3">
-    <app-config-pack-list [config]="config" [index]="listConfig!.indexOf(config) + 1"></app-config-pack-list>
+    <app-config-pack-list [config]="config" [index]="listConfig!.indexOf(config) + 1" (edit)="edit($event)"></app-config-pack-list>
   </div>
 </div>
+
+<p-dialog [dismissableMask]="true" [(visible)]="isUpdate" [modal]="true" [draggable]="false"
+          [resizable]="false">
+  <div class="p-3">
+  </div>
+  <div class="p-3 flex justify-content-center">
+    <!-- <button pButton label="Xóa" (click)="deleteAll()"
+            icon="pi pi-trash" class="p-button-outlined p-button-danger"></button> -->
+  </div>
+</p-dialog>
+<!-- <p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false"
+          [resizable]="false" [showHeader]="false" [style]="{'width': '40vw'}">
+  <div class="payment">
+    <div class="col-12">
+      <h1>Cộng tài khoản</h1>
+      <label for="" class="header-title">Khách hàng: </label><span>{{customerName}}</span>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label for="">TK chính</label>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet" [maxlength]="20"
+                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label for="">TK Khuyến mãi</label>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWalletPromotional"
+                       mode="currency" currency="VND" locale="vi-VN" [maxlength]="20"></p-inputNumber>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="flex justify-content-between">
+        <label class="header-title">Điểm thưởng</label>
+        <span class="p-text-warning">{{paymentRequest.amountWallet / 1000 | number: '1.0-1'}}(điểm)</span>
+      </div>
+      <div class="flex justify-content-end mt-2">
+        <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2"
+                (click)="isPayment = false"></button>
+        <button pButton (click)="confirmRequest()"
+                label="Nạp tiền" class="p-button-sm p-button-primary"></button>
+      </div>
+    </div>
+  </div>
+</p-dialog> -->

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-config-pack-list',
@@ -7,13 +7,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ConfigPackListComponent implements OnInit {
 
-  @Input() config:any
-  @Input() index:any
+  @Input() config: any
+  @Input() index: any
+  @Output() edit: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.config)
+  }
+
+  Edit(){
+    this.edit.emit(this.config)
   }
 
 }

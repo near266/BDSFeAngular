@@ -33,6 +33,10 @@ const routes: Routes = [
         loadChildren: () => import('./real-estate-term/real-estate-term.module').then(m => m.RealEstateTermModule)
       },
       {
+        path: 'config',
+        loadChildren: () => import('./config/config.module').then(m => m.ConfigModule)
+      },
+      {
         path: 'account',
         component: FeatureComponent
       },

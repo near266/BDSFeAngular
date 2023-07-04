@@ -14,6 +14,9 @@ import { ConfigService } from './service/config.service';
 export class ConfigComponent implements OnInit {
 
   listConfig: any[] = []
+  isUpdate = false
+
+  configDetail = {}
 
   constructor(
     private router: Router,
@@ -27,6 +30,12 @@ export class ConfigComponent implements OnInit {
     this.configService.getConfig({}).subscribe((data: any) => {
       this.listConfig = data
     })
+  }
+
+  edit(e:any){
+    this.isUpdate = true
+    this.configDetail=e
+    console.log(this.configDetail);
   }
 
 }
