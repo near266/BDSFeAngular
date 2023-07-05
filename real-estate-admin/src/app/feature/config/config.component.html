@@ -3,7 +3,7 @@
     <div class="col-12 flex justify-content-between align-items-center">
       <div class="title-content flex flex-row align-items-center">
         <label>DANH SÁCH GÓI</label>
-        <button (click)="isAdd=true"
+        <button (click)="add()"
           class="flex flex-row align-items-center pr-3 py-2 ml-3 border-round-sm border-bluegray-200 border-solid cursor-pointer"
           style="color: #505050; font-weight: 600; background-color: white;">
           <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,12 +39,14 @@
     <div class="col-4 flex flex-column" *ngFor="let price of configDetail?.config; let i=index">
       <div class="w-full h-max">
         <div class="secondary-form-control">
-          <label>{{i===0?'Tin Thường':i===1?'Tin VIP':'Tin VIP Đặc Biệt'}}</label>
-          <!-- <div class="view-content">
-            <span>{{configDetail.config[i].priceDefault | vnCurrency}}</span>
-          </div> -->
-          <p-inputNumber inputId="integeronly" [maxlength]="20" [(ngModel)]="configDetail.config[i].priceDefault" ngDefaultControl mode="currency" currency="VND"
-            locale="vi-VN"></p-inputNumber>
+          <label>{{price.type===0?'Tin Thường':price.type===1?'Tin VIP':'Tin VIP Đặc Biệt'}}</label>
+          <input p-inputtext type="number" style='
+          border-radius:10px;
+          outline:0;
+          padding:0.62rem 0.75rem 0.62rem 0.75rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+          font-size: 1rem;
+          color: #495057;' [(ngModel)]="configDetail.config[i].priceDefault" ngDefaultControl>
         </div>
       </div>
       <div class="flex w-full h-max flex-row justify-items-between h-max mt-3"
@@ -52,33 +54,39 @@
         <div class="pl-0 col-4">
           <div class="secondary-form-control mt-1">
             <label>Số ngày</label>
-            <div class="view-content">
-              <span>{{priceConfig?.date}}</span>
-            </div>
+            <input p-inputtext type="number" style='
+            border-radius:10px;
+            outline:0;
+            padding:0.62rem 0.75rem 0.62rem 0.75rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1rem;
+            color: #495057;' [(ngModel)]="priceConfig.date" ngDefaultControl>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-5">
           <div class="secondary-form-control mt-1">
             <label>Giá trị</label>
-            <div class="view-content">
-              <span>{{priceConfig?.unit === 1?(priceConfig?.discount):priceConfig?.unit === 2?(priceConfig?.discount |
-                vnCurrency):''}}</span>
-            </div>
+            <input p-inputtext type="number" style='
+            border-radius:10px;
+            outline:0;
+            padding:0.62rem 0.75rem 0.62rem 0.75rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1rem;
+            color: #495057;' [(ngModel)]="priceConfig.discount" ngDefaultControl>
           </div>
         </div>
-        <div class="pr-0 col-2">
+        <div class="pr-0 col-3">
           <div class="secondary-form-control mt-1">
-            <div class="view-content">
-              <span>{{priceConfig?.unit === 1?'%':priceConfig?.unit === 2?'VNĐ':''}}</span>
-            </div>
+            <p-dropdown [options]="listUnit" optionValue="value" [(ngModel)]="priceConfig.unit" ngDefaultControl></p-dropdown>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="p-3 flex justify-content-center">
-    <!-- <button pButton label="Xóa" (click)="deleteAll()"
-            icon="pi pi-trash" class="p-button-outlined p-button-danger"></button> -->
+  <div class="p-3 flex justify-content-end">
+    <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="isUpdate=false"></button>
+    <button pButton label="Lưu thông tin" (click)="update({rq:configDetail})"
+      class="p-button-sm p-button-primary"></button>
   </div>
 </p-dialog>
 <p-dialog [dismissableMask]="true" [(visible)]="isAdd" [modal]="true" [draggable]="false" [resizable]="false"
@@ -86,36 +94,65 @@
   <div class="flex justify-content-center pt-3" style="font-size:18px; font-weight: 600; color: #006BBB">
     THÊM GÓI MỚI
   </div>
-  <!-- <div class="payment">
-    <div class="col-12">
-      <h1>Cộng tài khoản</h1>
-      <label for="" class="header-title">Khách hàng: </label><span>{{customerName}}</span>
-    </div>
+  <div class="grid">
     <div class="col-12">
       <div class="secondary-form-control">
-        <label for="">TK chính</label>
-        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet" [maxlength]="20"
-                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+        <label>Tên gói</label>
+        <input type="text" pInputText [(ngModel)]="configDetail.name">
       </div>
     </div>
-    <div class="col-12">
-      <div class="secondary-form-control">
-        <label for="">TK Khuyến mãi</label>
-        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWalletPromotional"
-                       mode="currency" currency="VND" locale="vi-VN" [maxlength]="20"></p-inputNumber>
+    <div class="col-4 flex flex-column" *ngFor="let price of configDetail?.config; let i=index">
+      <div class="w-full h-max">
+        <div class="secondary-form-control">
+          <label>{{price.type===1?'Tin Thường':price.type===2?'Tin VIP':'Tin VIP Đặc Biệt'}}</label>
+          <input p-inputtext type="number" style='
+          border-radius:10px;
+          outline:0;
+          padding:0.62rem 0.75rem 0.62rem 0.75rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+          font-size: 1rem;
+          color: #495057;' [(ngModel)]="configDetail.config[i].priceDefault" ngDefaultControl>
+        </div>
+      </div>
+      <div class="flex w-full h-max flex-row justify-items-between h-max mt-3"
+        *ngFor="let priceConfig of price?.typePri">
+        <div class="pl-0 col-4">
+          <div class="secondary-form-control mt-1">
+            <label>Số ngày</label>
+            <input p-inputtext type="number" style='
+            border-radius:10px;
+            outline:0;
+            padding:0.62rem 0.75rem 0.62rem 0.75rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1rem;
+            color: #495057;' [(ngModel)]="priceConfig.date" ngDefaultControl>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="secondary-form-control mt-1">
+            <label>Giá trị</label>
+            <input p-inputtext type="number" style='
+            border-radius:10px;
+            outline:0;
+            padding:0.62rem 0.75rem 0.62rem 0.75rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1rem;
+            color: #495057;' [(ngModel)]="priceConfig.discount" ngDefaultControl>
+          </div>
+        </div>
+        <div class="pr-0 col-3">
+          <div class="secondary-form-control mt-1">
+            <p-dropdown [options]="listUnit" optionValue="value" [(ngModel)]="priceConfig.unit" ngDefaultControl></p-dropdown>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-12">
-      <div class="flex justify-content-between">
-        <label class="header-title">Điểm thưởng</label>
-        <span class="p-text-warning">{{paymentRequest.amountWallet / 1000 | number: '1.0-1'}}(điểm)</span>
-      </div>
-      <div class="flex justify-content-end mt-2">
-        <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2"
-                (click)="isPayment = false"></button>
-        <button pButton (click)="confirmRequest()"
-                label="Nạp tiền" class="p-button-sm p-button-primary"></button>
-      </div>
-    </div>
-  </div> -->
+  </div>
+  <div class="p-3 flex justify-content-end">
+    <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="isAdd=false"></button>
+    <button pButton label="Thêm mới" (click)="addList({rq:configDetail})"
+      class="p-button-sm p-button-primary"></button>
+  </div>
 </p-dialog>
+
+<p-toast></p-toast>

@@ -25,12 +25,8 @@ export class ConfigService extends BaseService {
     return this.doPost('admin/priceconfiguration/getall', body).pipe(map((res: any) => res));
   }
 
-  getDetailConfig(id: any): Observable<any> {
-    return this.doGet(`newpost/id?Id=${id}`).pipe(map((res: any) => res));
-  }
-
   updateConfig(body: any): Observable<any> {
-    return this.doPut('newpost/update', body).pipe(map((res: any) => res));
+    return this.doPut('priceconfiguration/update', body).pipe(map((res: any) => res));
   }
 
   addConfig(body: any): Observable<any> {
@@ -38,6 +34,6 @@ export class ConfigService extends BaseService {
   }
 
   deleteConfig(body: any): Observable<any> {
-    return this.doDelete('newpost/delete', body).pipe(map((res: any) => res));
+    return this.doDelete('priceconfiguration/delete', body).pipe(map((res: any) => res));
   }
 }

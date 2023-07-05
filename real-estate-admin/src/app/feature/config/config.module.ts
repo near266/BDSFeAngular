@@ -11,6 +11,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 import { ShareModule } from "../../share/share.module";
 
@@ -59,6 +62,9 @@ const routes: Routes = [
     TranslateModule,
     ShareModule,
     DialogModule,
+    TooltipModule,
+    MessagesModule,
+    ToastModule,
   ]
 })
 export class ConfigModule { }
