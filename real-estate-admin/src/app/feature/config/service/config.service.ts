@@ -34,7 +34,7 @@ export class ConfigService extends BaseService {
   }
 
   addConfig(body: any): Observable<any> {
-    return this.doPost('newpost/add', body).pipe(map((res: any) => res));
+    return this.doPost('priceconfiguration/addlist', body).pipe(map((res: any) => res));
   }
 
   deleteConfig(body: any): Observable<any> {

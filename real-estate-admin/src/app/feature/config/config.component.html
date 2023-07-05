@@ -3,7 +3,8 @@
     <div class="col-12 flex justify-content-between align-items-center">
       <div class="title-content flex flex-row align-items-center">
         <label>DANH SÁCH GÓI</label>
-        <button class="flex flex-row align-items-center pr-3 py-2 ml-3 border-round-sm border-bluegray-200 border-solid cursor-pointer"
+        <button (click)="isAdd=true"
+          class="flex flex-row align-items-center pr-3 py-2 ml-3 border-round-sm border-bluegray-200 border-solid cursor-pointer"
           style="color: #505050; font-weight: 600; background-color: white;">
           <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -18,22 +19,74 @@
     </div>
   </div>
   <div *ngFor="let config of listConfig" class="p-3">
-    <app-config-pack-list [config]="config" [index]="listConfig!.indexOf(config) + 1" (edit)="edit($event)"></app-config-pack-list>
+    <app-config-pack-list [config]="config" [index]="listConfig!.indexOf(config) + 1"
+      (edit)="edit($event)"></app-config-pack-list>
   </div>
 </div>
 
-<p-dialog [dismissableMask]="true" [(visible)]="isUpdate" [modal]="true" [draggable]="false"
-          [resizable]="false">
-  <div class="p-3">
+<p-dialog [dismissableMask]="true" [(visible)]="isUpdate" [modal]="true" [draggable]="false" [resizable]="false"
+  [showHeader]="false" [style]="{'width': '90vw'}">
+  <div class="flex justify-content-center pt-3" style="font-size:18px; font-weight: 600; color: #006BBB">
+    CHỈNH SỬA GÓI
+  </div>
+  <div class="grid">
+    <div class="col-12">
+      <div class="secondary-form-control">
+        <label>Tên gói</label>
+        <input type="text" pInputText [(ngModel)]="configDetail.name">
+      </div>
+    </div>
+    <div class="col-4 flex flex-column" *ngFor="let price of configDetail?.config; let i=index">
+      <div class="w-full h-max">
+        <div class="secondary-form-control">
+          <label>{{i===0?'Tin Thường':i===1?'Tin VIP':'Tin VIP Đặc Biệt'}}</label>
+          <!-- <div class="view-content">
+            <span>{{configDetail.config[i].priceDefault | vnCurrency}}</span>
+          </div> -->
+          <p-inputNumber inputId="integeronly" [maxlength]="20" [(ngModel)]="configDetail.config[i].priceDefault" ngDefaultControl mode="currency" currency="VND"
+            locale="vi-VN"></p-inputNumber>
+        </div>
+      </div>
+      <div class="flex w-full h-max flex-row justify-items-between h-max mt-3"
+        *ngFor="let priceConfig of price?.typePri">
+        <div class="pl-0 col-4">
+          <div class="secondary-form-control mt-1">
+            <label>Số ngày</label>
+            <div class="view-content">
+              <span>{{priceConfig?.date}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="secondary-form-control mt-1">
+            <label>Giá trị</label>
+            <div class="view-content">
+              <span>{{priceConfig?.unit === 1?(priceConfig?.discount):priceConfig?.unit === 2?(priceConfig?.discount |
+                vnCurrency):''}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="pr-0 col-2">
+          <div class="secondary-form-control mt-1">
+            <div class="view-content">
+              <span>{{priceConfig?.unit === 1?'%':priceConfig?.unit === 2?'VNĐ':''}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="p-3 flex justify-content-center">
     <!-- <button pButton label="Xóa" (click)="deleteAll()"
             icon="pi pi-trash" class="p-button-outlined p-button-danger"></button> -->
   </div>
 </p-dialog>
-<!-- <p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false"
-          [resizable]="false" [showHeader]="false" [style]="{'width': '40vw'}">
-  <div class="payment">
+<p-dialog [dismissableMask]="true" [(visible)]="isAdd" [modal]="true" [draggable]="false" [resizable]="false"
+  [showHeader]="false" [style]="{'width': '90vw'}">
+  <div class="flex justify-content-center pt-3" style="font-size:18px; font-weight: 600; color: #006BBB">
+    THÊM GÓI MỚI
+  </div>
+  <!-- <div class="payment">
     <div class="col-12">
       <h1>Cộng tài khoản</h1>
       <label for="" class="header-title">Khách hàng: </label><span>{{customerName}}</span>
@@ -64,5 +117,5 @@
                 label="Nạp tiền" class="p-button-sm p-button-primary"></button>
       </div>
     </div>
-  </div>
-</p-dialog> -->
+  </div> -->
+</p-dialog>

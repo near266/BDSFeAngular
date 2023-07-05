@@ -24,10 +24,10 @@
       </div>
     </div>
   </div>
-  <div class="col-4 flex flex-column" *ngFor="let price of config.priceConfiguration">
+  <div class="col-4 flex flex-column" *ngFor="let price of config.priceConfiguration; let i=index">
     <div class="w-full h-max">
       <div class="secondary-form-control">
-        <label>Phí {{price.priceConfig[0]?.description}}</label>
+        <label>{{i===0?'Tin Thường':i===1?'Tin VIP':'Tin VIP Đặc Biệt'}}</label>
         <div class="view-content">
           <span>{{price.priceConfig[0]?.priceDefault | vnCurrency}}</span>
         </div>
