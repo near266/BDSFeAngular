@@ -304,4 +304,15 @@ export class ConfigComponent implements OnInit {
       this.messageService.add({ severity: 'error', detail: 'Thất bại' });
     }))
   }
+  delete(body:any){
+    this.configService.deleteConfig(body).subscribe((data: any) => {
+      this.isUpdate = false
+      this.configService.getConfig({}).subscribe((data: any) => {
+        this.listConfig = data
+      })
+      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
+    }, (() => {
+      this.messageService.add({ severity: 'error', detail: 'Thất bại' });
+    }))
+  }
 }

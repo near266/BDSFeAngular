@@ -77,16 +77,20 @@
         </div>
         <div class="pr-0 col-3">
           <div class="secondary-form-control mt-1">
-            <p-dropdown [options]="listUnit" optionValue="value" [(ngModel)]="priceConfig.unit" ngDefaultControl></p-dropdown>
+            <p-dropdown [options]="listUnit" optionValue="value" [(ngModel)]="priceConfig.unit"
+              ngDefaultControl></p-dropdown>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="p-3 flex justify-content-end">
-    <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="isUpdate=false"></button>
-    <button pButton label="Lưu thông tin" (click)="update({rq:configDetail})"
-      class="p-button-sm p-button-primary"></button>
+  <div class="p-3 flex justify-content-between">
+    <button pButton label="Xóa gói" class="p-button-sm p-button-secondary mr-2" (click)="delete({listId:[configDetail.id]})"></button>
+    <div class="flex justify-content-end">
+      <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="isUpdate=false"></button>
+      <button pButton label="Lưu thông tin" (click)="update({rq:configDetail})"
+        class="p-button-sm p-button-primary"></button>
+    </div>
   </div>
 </p-dialog>
 <p-dialog [dismissableMask]="true" [(visible)]="isAdd" [modal]="true" [draggable]="false" [resizable]="false"
@@ -142,7 +146,8 @@
         </div>
         <div class="pr-0 col-3">
           <div class="secondary-form-control mt-1">
-            <p-dropdown [options]="listUnit" optionValue="value" [(ngModel)]="priceConfig.unit" ngDefaultControl></p-dropdown>
+            <p-dropdown [options]="listUnit" optionValue="value" [(ngModel)]="priceConfig.unit"
+              ngDefaultControl></p-dropdown>
           </div>
         </div>
       </div>
@@ -150,8 +155,7 @@
   </div>
   <div class="p-3 flex justify-content-end">
     <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="isAdd=false"></button>
-    <button pButton label="Thêm mới" (click)="addList({rq:configDetail})"
-      class="p-button-sm p-button-primary"></button>
+    <button pButton label="Thêm mới" (click)="addList({rq:configDetail})" class="p-button-sm p-button-primary"></button>
   </div>
 </p-dialog>
 
