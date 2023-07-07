@@ -1,26 +1,87 @@
-<div class="max-w-[1600px] mx-auto flex">
-<div class="w-1/4 pl-[50px] hidden sm:block">
-<div class="w-full"> 
-    <p-button icon="pi pi-plus"  label="Thêm mới"></p-button>
-    <div>
-    <h3>Về chúng tôi</h3>
-    <span>Giới thiệu</span>
+<div class="grid">
+    <div class="w-1/8 pl-[50px] hidden sm:block border-line max-h-full col-3 ">
+        <div class="w-full">
+        <div class="pl-6 pr-4">
+           <div class="mt-2">
+               <p-button  class="mt-4" icon="pi pi-plus" label="Thêm mới"></p-button>
+           </div>
+            <!-- <div style="border-bottom: 2px solid rgba(216, 216, 216, 1);">
+                <div class="grid mt-4">
+                    <div style="background-color: rgba(48, 160, 224, 1); color: rgba(255, 255, 255, 1);"
+                        class="border-circle w-2rem h-2rem m-2 font-bold flex align-items-center justify-content-center">
+                        1</div>
+                    <div class="flex align-items-center justify-content-start"
+                        style="font-weight: 500; font-family: Roboto; color: rgba(48, 160, 224, 1);font-size: 18px;">
+                        Về chúng tôi
+                    </div>
+                </div>
+                <div class="pt-2 pb-2 mt-2 mb-4" style="padding: 36.5px; ">
+                    <span style=" font-size: 14px; font-weight: 400; width: 100%; ">Giới thiệu</span>
+                </div>
+            </div> -->
+            <!-- 2 -->
+            <div>
+                <div *ngFor="let t of data;let i =index" class="grid mt-4" style="border-bottom: 2px solid rgba(216, 216, 216, 1);">
+                    <div  style="background-color: rgba(48, 160, 224, 1); color: rgba(255, 255, 255, 1);"
+                        class="col-12 border-circle w-2rem h-2rem m-2 font-bold flex align-items-center justify-content-center">
+                        {{i+1}}</div>
+                    <div class="flex align-items-center justify-content-center"
+                        style="font-weight: 500; font-family: Roboto; color: rgba(48, 160, 224, 1);font-size: 18px;">
+                      {{t.name}}
+                    </div>
+                    <div  *ngFor="let a of t?.termConfig,let i=index" style=" padding-left: 36.5px;" class=" col-12 align-items-center justify-content-start pt-2 pb-2 mt-2 mb-4">
+                        
+                        <div  [routerLink]="'regulation'" [queryParams]="{id: a.id}" style=" display: block;font-size: 14px; font-weight: 400;">{{a.title}}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quy che -->
+            <!-- <div style="border-bottom: 2px solid rgba(216, 216, 216, 1);">
+                <div class="grid mt-4">
+                    <div style="background-color: rgba(48, 160, 224, 1); color: rgba(255, 255, 255, 1);"
+                        class="border-circle w-2rem h-2rem m-2 font-bold flex align-items-center justify-content-center">
+                        3</div>
+                    <div class="flex align-items-center justify-content-center"
+                        style="font-weight: 500; font-family: Roboto; color: rgba(48, 160, 224, 1);font-size: 18px;">
+                        Quy chế hoạt động
+                    </div>
+                </div>
+                
+                    <div  [routerLink]="'regulation'" style=" padding-left: 36.5px;" class="flex align-items-center justify-content-start pt-2 pb-2 mt-2 mb-2">
+                        <span style="font-size: 14px; font-weight: 400; ">Quy định đăng tin</span>
+                    </div>
+                     <div style=" padding-left: 36.5px;" class="flex align-items-center justify-content-start pt-2 pb-2 mt-2 mb-2">
+                        <span style="font-size: 14px; font-weight: 400;">Chính sách bảo mật</span>
+                    </div>
+                     <div style=" padding-left: 36.5px;" class="flex align-items-center justify-content-start pt-2 pb-2 mt-2 mb-2">
+                        <span style="font-size: 14px; font-weight: 400;">Điều khoản sử dụng</span>
+                    </div>
+                     <div style=" padding-left: 36.5px;" class="flex align-items-center justify-content-start pt-2 pb-2 mt-2 mb-2">
+                        <span style="font-size: 14px; font-weight: 400;">Hướng dẫn nạp tiền</span>
+                    </div>
+                     <div style=" padding-left: 36.5px;" class="flex align-items-center justify-content-start pt-2 pb-2 mt-2 mb-2">
+                        <span style="font-size: 14px; font-weight: 400;">Quyền khuyến nại</span>
+                    </div>
+               
+            </div> -->
+            <!-- <div>
+                <div class="grid mt-4">
+                    <div style="background-color: rgba(48, 160, 224, 1); color: rgba(255, 255, 255, 1);"
+                        class="border-circle w-2rem h-2rem m-2 font-bold flex align-items-center justify-content-center">
+                        4</div>
+                    <div class="flex align-items-center justify-content-center"
+                        style="font-weight: 500; font-family: Roboto; color: rgba(48, 160, 224, 1);font-size: 18px;">
+                        Điều khoản khác
+                    </div>
+                </div>
+
+            </div> -->
+            
+        </div>
     </div>
-    
-    <div>
-    <h3>Chi phí đăng tin</h3>
-     <span>Chi phí đăng tin</span>
-     <span>Các gói hiện tại</span>
-     <span>Chương trình khuyến mãi</span>
     </div>
-    
-    <div>
-     <h3>Quy chế hoạt động</h3>
-     <span>Quy định đăng tin</span>
-     <span>Chính sách bảo mật</span>
-     <span>Điều khoản sử dụng</span>
-     <span>Điều khoản sử dụng</span>
+    <div class="max-h-full col-9">
+      <router-outlet></router-outlet>
     </div>
-</div>
-</div>
-</div>
+    </div>
