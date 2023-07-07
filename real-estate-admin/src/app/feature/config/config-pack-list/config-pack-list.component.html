@@ -46,14 +46,14 @@
         <div class="secondary-form-control mt-1">
           <label>Giá trị</label>
           <div class="view-content">
-            <span>{{priceConfig?.unit === 1?(priceConfig?.discount):priceConfig?.unit === 2?(priceConfig?.discount | vnCurrency):''}}</span>
+            <span>{{priceConfig?.unit === 1?(priceConfig?.discount):priceConfig?.unit === 0?(priceConfig?.discount | vnCurrency):''}}</span>
           </div>
         </div>
       </div>
       <div class="pr-0 col-2">
         <div class="secondary-form-control mt-1">
           <div class="view-content">
-            <span>{{priceConfig?.unit === 1?'%':priceConfig?.unit === 2?'VNĐ':''}}</span>
+            <span>{{priceConfig?.unit === 1?'%':priceConfig?.unit === 0?'VNĐ':''}}</span>
           </div>
         </div>
       </div>

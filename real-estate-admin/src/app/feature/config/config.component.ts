@@ -93,7 +93,7 @@ export class ConfigComponent implements OnInit {
     },
     {
       label: 'VNĐ',
-      value: 2
+        value: 0
     }]
 
   constructor(
