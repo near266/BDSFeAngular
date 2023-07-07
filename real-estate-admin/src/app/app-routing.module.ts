@@ -14,6 +14,8 @@ const routes: Routes = [
     path: 'error',
     loadChildren: () =>import('../../src/app/handle/handle-routing.module').then(m => m.HandleRoutingModule)
   },
+  
+
   {
     path: '**',
     redirectTo: 'error/not-found'

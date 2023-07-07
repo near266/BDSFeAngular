@@ -139,10 +139,10 @@
           <b *ngIf="updateForm.value?.unit !==3; else accecpt">
             {{updateForm.value?.unit === 0 ? (updateForm.value?.price |vnCurrency) :
             (updateForm.value?.price | vnCurrency) + '/m2'}}
-
+            
           </b>
           <ng-template #accecpt>
-
+          
           </ng-template>
           ({{updateForm.value?.unit === 1 ? 'Tổng trị giá' : '' }}<b *ngIf="updateForm.value?.unit !==3; else accecpt1">~
             {{updateForm.value?.unit === 1 ? (updateForm.value?.price * updateForm.value?.area |vnCurrency) :
