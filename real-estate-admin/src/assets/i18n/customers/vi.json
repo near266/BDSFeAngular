@@ -1,7 +1,7 @@
 {
   "typeList": [
     {
-      "value": 2,
+      "value": "",
       "label": "Tất cả"
     },
     {
@@ -14,11 +14,11 @@
     },
     {
       "value": 2,
-      "label": "Cộng tiền"
+      "label": "Hoàn tiền"
     },
     {
       "value": 3,
-      "label": "Hoàn tiền"
+      "label": "Cộng tiền"
     }
   ],
   "type": {

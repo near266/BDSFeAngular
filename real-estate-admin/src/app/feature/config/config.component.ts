@@ -93,7 +93,7 @@ export class ConfigComponent implements OnInit {
     },
     {
       label: 'VNĐ',
-        value: 0
+      value: 0
     }]
 
   constructor(
@@ -106,6 +106,18 @@ export class ConfigComponent implements OnInit {
 
   ngOnInit(): void {
     this.configService.getConfig({}).subscribe((data: any) => {
+      data = data?.map((v: any) => {
+        v.priceConfiguration?.map((e: any) => {
+          e.priceConfig?.map((element: any) => {
+            if (element.unit === 0) {
+              element.discount = Math.round(element.discount * element.date)
+            }
+            return element
+          })
+          return e
+        });
+        return v
+      })
       this.listConfig = data
     })
   }
@@ -247,25 +259,40 @@ export class ConfigComponent implements OnInit {
       id: c.rq.id,
       name: c.rq.name,
       config: c.rq.config?.map((v: any) => {
-        if (v.priceDefault > 0) {
-          return {
-            type: v.type,
-            priceDefault: v.priceDefault,
-            typePri: v.typePri?.filter((f: any) => {
-              if (f.date > 0) {
-                return f
-              }
-            })
-          }
+        // if (v.priceDefault > 0) {
+        return {
+          type: v.type,
+          priceDefault: v.priceDefault,
+          typePri: v.typePri?.map((f: any) => {
+            // if (f.date > 0) {
+            if (f.unit === 0) {
+              f.discount = f.discount / f.date
+            }
+            return f
+            // }
+          })
         }
-        else {
-          return undefined
-        }
+        // }
+        // else {
+        //   return undefined
+        // }
       })?.filter((v: any) => { if (v) { return v } })
     }
     this.configService.updateConfig(c).subscribe((data: any) => {
       this.isUpdate = false
       this.configService.getConfig({}).subscribe((data: any) => {
+        data = data?.map((v: any) => {
+          v.priceConfiguration?.map((e: any) => {
+            e.priceConfig?.map((element: any) => {
+              if (element.unit === 0) {
+                element.discount = Math.round(element.discount * element.date)
+              }
+              return element
+            })
+            return e
+          });
+          return v
+        })
         this.listConfig = data
       })
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
@@ -278,25 +305,40 @@ export class ConfigComponent implements OnInit {
     c.rq = {
       name: c.rq.name,
       config: c.rq.config?.map((v: any) => {
-        if (v.priceDefault > 0) {
-          return {
-            type: v.type,
-            priceDefault: v.priceDefault,
-            typePri: v.typePri?.filter((f: any) => {
-              if (f.date > 0) {
-                return f
-              }
-            })
-          }
+        // if (v.priceDefault > 0) {
+        return {
+          type: v.type,
+          priceDefault: v.priceDefault,
+          typePri: v.typePri?.map((f: any) => {
+            // if (f.date > 0) {
+            if (f.unit === 0) {
+              f.discount = f.discount / f.date
+            }
+            return f
+            // }
+          })
         }
-        else {
-          return undefined
-        }
+        // }
+        // else {
+        //   return undefined
+        // }
       })?.filter((v: any) => { if (v) { return v } })
     }
     this.configService.addConfig(c).subscribe((data: any) => {
       this.isAdd = false
       this.configService.getConfig({}).subscribe((data: any) => {
+        data = data?.map((v: any) => {
+          v.priceConfiguration?.map((e: any) => {
+            e.priceConfig?.map((element: any) => {
+              if (element.unit === 0) {
+                element.discount = Math.round(element.discount * element.date)
+              }
+              return element
+            })
+            return e
+          });
+          return v
+        })
         this.listConfig = data
       })
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
@@ -304,10 +346,22 @@ export class ConfigComponent implements OnInit {
       this.messageService.add({ severity: 'error', detail: 'Thất bại' });
     }))
   }
-  delete(body:any){
+  delete(body: any) {
     this.configService.deleteConfig(body).subscribe((data: any) => {
       this.isUpdate = false
       this.configService.getConfig({}).subscribe((data: any) => {
+        data = data?.map((v: any) => {
+          v.priceConfiguration?.map((e: any) => {
+            e.priceConfig?.map((element: any) => {
+              if (element.unit === 0) {
+                element.discount = Math.round(element.discount * element.date)
+              }
+              return element
+            })
+            return e
+          });
+          return v
+        })
         this.listConfig = data
       })
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });

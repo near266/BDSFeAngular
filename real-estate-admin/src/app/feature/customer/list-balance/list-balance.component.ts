@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerService} from "../service/customer.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
+
+import {TranslateService} from "@ngx-translate/core";
+
 import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {TranslateService} from "@ngx-translate/core";
-import {DatePipe} from "@angular/common";
+
 import {responseTran, Transaction} from "../model/transaction";
+import {CustomerService} from "../service/customer.service";
 
 @Component({
   selector: 'app-list-balance',
