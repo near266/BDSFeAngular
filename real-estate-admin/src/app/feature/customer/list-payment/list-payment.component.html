@@ -74,7 +74,7 @@
           <td>{{ 'status.' + customerData.status | translate }}</td>
           <td>{{ customerData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>
-            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(customerData.customer)"
+            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(customerData.customer); customerDataId=customerData.id"
                     class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
             <button pButton icon="pi pi-times" pTooltip="Từ chối" (click)="cancelTransaction(customerData.id)"
                     class="p-button-sm p-button-danger p-button-outlined mr-2"></button>

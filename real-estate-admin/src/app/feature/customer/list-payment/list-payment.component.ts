@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {PaymentConfirm} from "../model/payment-confirm";
-import {Router} from "@angular/router";
-import {CustomerService} from "../service/customer.service";
-import {ConfirmationService, MessageService} from "primeng/api";
-import {cancelModal} from "../model/modal";
-import {DatePipe} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { DatePipe } from "@angular/common";
+
+import { ConfirmationService, MessageService } from "primeng/api";
+
+import { cancelModal } from "../model/modal";
+import { PaymentConfirm } from "../model/payment-confirm";
+import { CustomerService } from "../service/customer.service";
 
 @Component({
   selector: 'app-list-payment',
@@ -35,6 +37,7 @@ export class ListPaymentComponent implements OnInit {
   isPayment = false;
   isShowImg = false;
   srcShowImg = '';
+  customerDataId: any
   maxDate = new Date();
   constructor(
     private router: Router,
@@ -53,7 +56,7 @@ export class ListPaymentComponent implements OnInit {
   doGetListDeposit() {
 
     if (this.depositReq.dateFrom && this.depositReq.dateTo && this.depositReq.dateFrom > this.depositReq.dateTo) {
-      this.messageService.add({severity: 'error', detail: 'Từ ngày phải nhỏ hơn đến ngày'});
+      this.messageService.add({ severity: 'error', detail: 'Từ ngày phải nhỏ hơn đến ngày' });
       return;
     }
     this.customerService.getDepositRequest(this.depositReq).subscribe(res => {
@@ -83,15 +86,19 @@ export class ListPaymentComponent implements OnInit {
   confirmRequest() {
     this.customerService.paymentRequest(this.paymentRequest).subscribe(res => {
       this.isPayment = false;
-      this.messageService.add({severity: 'success', detail: 'Thao tác thành công '})
+      this.customerService.deposit({ id: this.customerDataId, status: 1 }).subscribe(res => {
+        this.doGetListDeposit();
+      })
+      this.customerDataId = null
+      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
     })
   }
 
   cancelTransaction(id: any) {
     this.confirmationService.confirm({
       ...cancelModal, accept: () => {
-        this.customerService.deposit({id, status: 2}).subscribe(res => {
-          this.messageService.add({severity: 'success', detail: 'Thao tác thành công '})
+        this.customerService.deposit({ id, status: 2 }).subscribe(res => {
+          this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
           this.doGetListDeposit();
         })
       }

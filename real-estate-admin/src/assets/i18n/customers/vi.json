@@ -33,7 +33,7 @@
   },
   "status": {
     "0": "Chưa xử lý",
-    "1": "Đã xác nhận ",
+    "1": "Đã xử lý",
     "2": "Huỷ bỏ"
   },
   "createCustomers": {
