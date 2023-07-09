@@ -39,11 +39,11 @@
   "createCustomers": {
     "status": [
       {
-        "code": 1,
+        "code": true,
         "label": "Active"
       },
       {
-        "code": 2,
+        "code": false,
         "label": "Deactive"
       }
     ],

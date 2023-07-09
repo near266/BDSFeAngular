@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
-import {BaseService} from "../../../core/service/base.service";
 import {HttpClient} from "@angular/common/http";
+
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
+
 import {responseTran, Transaction} from "../model/transaction";
+import {BaseService} from "../../../core/service/base.service";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,10 @@ export class CustomerService extends BaseService {
 
   getCustomer(body: any): Observable<any> {
     return this.doPost('customer/search', body).pipe(map((res: any) => res));
+  }
+
+  addCustomer(body: any): Observable<any> {
+    return this.doPost('api/register', body).pipe(map((res: any) => res));
   }
 
   getDetailCustomer(id: any): Observable<any> {
