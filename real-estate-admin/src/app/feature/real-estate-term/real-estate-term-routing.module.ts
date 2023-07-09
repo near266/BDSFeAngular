@@ -17,7 +17,10 @@ children :[
 },
 {
 path:'regulationUpdate',component:RegulationUpdateComponent
-}
+},
+{
+  path:'regulationCreate',component:RegulationUpdateComponent
+  }
 ]
 @NgModule({
     imports: [RouterModule.forChild(router)],

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 
@@ -13,6 +14,8 @@ import { QuillModule } from 'ngx-quill';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { CustomTranslateLoader, LANGUAGE_FILE_PATH } from 'src/app/core/translate.loader';
 import { HttpClient } from '@angular/common/http';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -31,6 +34,8 @@ import { HttpClient } from '@angular/common/http';
    FormsModule,
    QuillModule,
    FormsModule,
+   ToastModule,
+   DialogModule,
    ReactiveFormsModule,
    TranslateModule.forChild({
     // missingTranslationHandler: {
@@ -51,4 +56,6 @@ import { HttpClient } from '@angular/common/http';
 })
    
  
-export class RealEstateTermModule { }
+export class RealEstateTermModule {
+
+}

@@ -35,4 +35,11 @@ export class RealEstateTermService extends BaseService {
   {
   return this.doGet(`termconditionconfiguration/ViewDetail?Id=${id}`).pipe(map((res:any)=>res));
   }
+ AddDetailTerm(body:any){
+ return this.doPost('termconditionconfiguration/add',body).pipe(map((res:any)=>res));
+ }
+ Delete(body:any){
+ return this.doDelete('termconditionconfiguration/delete',body).pipe(map((res:any)=>res));
+ 
+ }
 }
