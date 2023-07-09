@@ -1,16 +1,16 @@
 <div class="container">
-<div class="header">
-  <div class="grid">
-    <div class="col-10 flex justify-content-center align-items-center">
-    <h2 style="font-weight: 500; font-family: Roboto; line-height: 28.13px; font-size: 24px;">{{result.title}}</h2>
-    </div>
-    <div class="col-2 flex justify-content-center align-items-center">
-    <p-button  label="Chỉnh sửa" (click)="edit()"></p-button>
+  <div class="header">
+    <div class="grid">
+      <div class="col-10 flex justify-content-center align-items-center">
+      
+        <h2 style="font-weight: 500; font-family: Roboto;margin-top: 50px; line-height: 28.13px; font-size: 24px;">{{result?.title}}</h2>
+      </div>
+     
+        <p-button style=" margin-top: 14px;" label="Chỉnh sửa" [routerLink]="'/real-estate-term/regulationUpdate'"
+          [queryParams]="{id:getId()}"></p-button>
+      
     </div>
   </div>
-</div>
-<p>
-{{result.description}}
-</p>
+  <quill-view [content]="result?.description" format="html"></quill-view>
 
 </div>

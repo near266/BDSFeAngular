@@ -12,6 +12,7 @@ import { TypeTerm } from '../model/TypeTerm';
 export class RealEstateTermMenuComponent implements OnInit {
   [x: string]: any;
   data: TypeTerm[] = [];
+  Id='';
   constructor(
     private router: Router,
     private queryParam: ActivatedRoute,
@@ -25,6 +26,12 @@ export class RealEstateTermMenuComponent implements OnInit {
   }
   GetTypeTerm() {
     this.TermService.getTypeTerm().subscribe((res: any) => { this.data = res; });
+    this.navi();
   }
+  
+  navi(){
+  
+    this.router.navigate(['/real-estate-term/regulation'], { queryParams: { id: 'a61edc9d-3128-4523-bda3-2fa965bcef7d'} });
+    }
 
 }

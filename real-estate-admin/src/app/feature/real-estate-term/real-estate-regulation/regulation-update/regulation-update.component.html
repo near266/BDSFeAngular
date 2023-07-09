@@ -1,25 +1,87 @@
 <div class="container pt-6 pl-4 pr-2">
-<form [formGroup]="form">
-    <div class="grid pr-2">
-        <div class="secondary-form-control col-7 ">
-            <label>Tiêu đề</label>
-            <input type="text" pInputText formControlName="title">
-        </div>
-        
-        <div class="col-2"></div>
-        <div class="secondary-form-control col-3" style="display: flex; align-items: center;justify-items: end;">
-            <label>Tiêu đề</label>
-            <p-dropdown></p-dropdown>
-        </div>
-        
-    </div>
-    <div class="secondary-form-control mb-2">
-        <label>Nội dung</label>
-        <quill-editor [modules]="quillConfig" class="w-full" #disciplineQE id="discipline-qe" formControlName="description"
-        ></quill-editor>
-        <quill-view [content]="" *ngIf="" format="html"></quill-view>
-      </div>
-</form>
-    
-</div>
+    <form [formGroup]="form">
+        <div class="grid pr-2">
+            <div class="secondary-form-control col-7 flex align-items-center justify-content-center">
+                <label>Tiêu đề</label>
+                <input type="text" pInputText formControlName="title">
+            </div>
 
+            <div class="col-2"></div>
+            <div class="secondary-form-control col-3" style="display: flex; align-items: center;justify-items: end;">
+                <label>Danh mục</label>
+                <p-dropdown [options]="data" optionLabel="name" optionValue="id"
+                    formControlName="typeTermId"></p-dropdown>
+            </div>
+
+        </div>
+        <div class="secondary-form-control mb-2">
+            <label>Nội dung</label>
+            <quill-editor [modules]="quillConfig" class="w-full" #disciplineQE id="discipline-qe"
+                formControlName="description"></quill-editor>
+        </div>
+    </form>
+    <div style="margin-top: 400px;">
+        <div class="col-12 flex flex-row justify-content-between mt-3 pl-3 pr-3">
+            <button *ngIf="titlebtn !=='Thêm mới'" pButton label="Xóa" class="p-button-outlined  p-button-secondary"
+                style="color: rgba(80, 80, 80, 1);"
+                (click)="ShowDelete()"></button>
+            <span>
+                <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" (click)="navi(2)"></button>
+                <button pButton label={{titlebtn}} class="p-button-sm p-button-primary" (click)="Show(1)"></button>
+            </span>
+        </div>
+    </div>
+</div>
+<p-dialog [(visible)]="IsShow" [modal]="false">
+    <ng-template pTemplate="header">
+        <div style="display: flex;margin: auto;align-items: center;">
+            <i class="pi pi-exclamation-circle" style="color: rgba(255, 180, 63, 1)"></i>
+            <span class="justify-items-start">{{title}}</span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <div class="mt-4">
+            <span style="font-weight: 700;font-size: 14px;display: flex;justify-content: center;">{{decDialog}}</span>
+        </div>
+        <div *ngIf="titlebtn !=='Thêm mới';else add" class="mt-4" style="display: flex; justify-content: center;">
+
+            <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary"
+                style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm" (click)="navi(1);Show(2);"></button>
+            <button  pButton label="Xác nhận"  (click)="update(form.getRawValue()) " class=" ml-3"
+                style="color:rgba(255, 255, 255, 1);" styleClass="p-button-sm"></button>
+        </div>
+        <ng-template #add>
+            <div class="mt-4" style="display: flex; justify-content: center;">
+                <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary"
+                    style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm" (click)="navi(1);Show(2);"></button>
+                <button pButton label="Thêm mới" (click)="Add(form.getRawValue())" class=" ml-3"
+                    style="color:rgba(255, 255, 255, 1);" styleClass="p-button-sm"></button>
+            </div>
+        </ng-template>
+    </ng-template>
+
+</p-dialog>
+
+
+<p-dialog [(visible)]="IsDel" [modal]="false">
+    <ng-template pTemplate="header">
+        <div style="display: flex;margin: auto;align-items: center;">
+            <i class="pi pi-exclamation-circle" style="color: rgba(255, 180, 63, 1)"></i>
+            <span class="justify-items-start">{{title}}</span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <div class="mt-4">
+            <span style="font-weight: 700;font-size: 14px;display: flex;justify-content: center;">{{decDialog}}</span>
+        </div>
+        <div class="mt-4" style="display: flex; justify-content: center;">
+
+            <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary"
+                style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm" (click)="navi(1);Show(2);"></button>
+            <button  pButton label="Xác nhận"  (click)=" Delete(form.getRawValue().id) " class=" ml-3"
+                style="color:rgba(255, 255, 255, 1);" styleClass="p-button-sm"></button>
+        </div>
+        
+    </ng-template>
+
+</p-dialog>

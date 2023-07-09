@@ -28,13 +28,13 @@ export class RealEstateRegulationComponent implements OnInit {
     if(params){
     this.Id=params.id;
     this.getDetail(this.Id);
+    this.getId();
     }
     else{
     this.router.navigate(['/real-estate-term']);
 
     }
     });
-    console.log(this.Id);
     
   }
  getRegualtion(){
@@ -42,10 +42,14 @@ export class RealEstateRegulationComponent implements OnInit {
  }
  
  getDetail(Id:any){
- this.termService.DetailTerm(Id).subscribe((res:any)=>{this.result=res});
+ this.termService.DetailTerm(Id).subscribe((res:any)=>{this.result=res;});
  }
- edit(){
-  this.router.navigate(['/real-estate-term/regulationUpdate']);
-  }
+  getId():string{
+  return this.Id;
+ }
+navi(){
+
+this.router.navigate(['/real-estate-term/regulation'])
+}
 
 }

@@ -1,5 +1,5 @@
 export class Term{
-id : string;
+id ='';
 title: string;
 description : string;
 typeTermId: string;
