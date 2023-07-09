@@ -4,21 +4,21 @@
       <div class="title">
         <label>Mã khách hàng</label>
       </div>
-      <input type="text" pInputText [(ngModel)]="searchCustomer.customerCode"
+      <input pInputText [(ngModel)]="searchCustomer.customerCode"
              (keydown.enter)="getListCustomer(true)">
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
         <label>Tên khách hàng</label>
       </div>
-      <input type="text" pInputText [(ngModel)]="searchCustomer.keyword"
+      <input pInputText [(ngModel)]="searchCustomer.keyword"
              (keydown.enter)="getListCustomer(true)">
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
         <label>Số điện thoại</label>
       </div>
-      <input type="text" pInputText [(ngModel)]="searchCustomer.phone" appNumberOnly
+      <input pInputText [(ngModel)]="searchCustomer.phone"
              (keydown.enter)="getListCustomer(true)">
     </div>
     <div class="col-12 md:col-2">
