@@ -29,9 +29,11 @@
                         style="font-weight: 500; font-family: Roboto; color: rgba(48, 160, 224, 1);font-size: 18px;">
                       {{t.name}}
                     </div>
-                    <div   *ngFor="let a of t?.termConfig,let i=index" style=" padding-left: 36.5px;" class=" col-12 align-items-center justify-content-start pt-2 pb-2 mt-2 mb-4 cursor-pointer">
+                    <div   *ngFor="let a of t?.termConfig,let j=index" style=" padding-left: 36.5px;" 
+                    class=" col-12 align-items-center justify-content-start pt-2 pb-2 mt-2 mb-4 cursor-pointer"
+                    >
                         
-                        <div   [routerLink]="'regulation'" [queryParams]="{id: a.id}" style=" display: block;font-size: 14px; font-weight: 400;">{{a.title}}</div>
+                        <div  [routerLink]="'regulation'" [queryParams]="{id: a.id}" style=" display: block;font-size: 14px; font-weight: 400;">{{a.title}}</div>
                     </div>
                 </div>
             </div>
