@@ -11,3 +11,23 @@ margin-top: 24px;
     transform: scale(1.1);
     background-color: rgba(48, 160, 224, 0.1);
   }
+  
+  .my-element {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .my-element.active {
+    background-color: red;
+  }
+  
+  .my-element:hover {
+    background-color: green;
+  }
+  
+  .red-color{
+    
+    background-color: rgba(48, 160, 224, 0.1);
+  }

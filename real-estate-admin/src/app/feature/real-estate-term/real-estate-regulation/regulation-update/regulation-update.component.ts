@@ -89,7 +89,7 @@ export class RegulationUpdateComponent implements OnInit {
   this.sevice.AddDetailTerm(body).subscribe(data=>{
   this.messageService.add({severity:'success',detail :'Thao tác thành công'})
   this.Show(2);
-  this.router.navigate(['/real-estate-term'])
+  this.router.navigate(['/real-estate-term/regulationCreate'])
   },(v:any)=>{
     this.messageService.add({ severity: 'error', detail: 'Thất bại' })
   })
@@ -99,9 +99,17 @@ export class RegulationUpdateComponent implements OnInit {
     if (type === 1) {
       this.router.navigate(['/real-estate-term/regulationUpdate'], { queryParams: { id: this.Id } });
     }
+    if(type==3){
+      this.router.navigate(['/real-estate-term/regulationCreate']);
+    }
     else {
+      if(this.titlebtn==='Thêm mới'){
+        this.router.navigate(['/real-estate-term/regulationCreate']);
+      }
+      else{
 
-      this.router.navigate(['/real-estate-term/regulation'], { queryParams: { id: this.Id } });
+        this.router.navigate(['/real-estate-term/regulation'], { queryParams: { id: this.Id } });
+      }
     }
   }
   ShowDelete(){
@@ -117,9 +125,9 @@ export class RegulationUpdateComponent implements OnInit {
     
     }
   this.sevice.Delete(body).subscribe((res:any)=>{
-    this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
     this.Show(2);
-    this.navi(2);
+    this.router.navigate(['/real-estate-term/regulationCreate']);
+    this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' });
     
   
   },(v:any)=>{
