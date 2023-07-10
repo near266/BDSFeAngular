@@ -27,7 +27,7 @@
   <div class="col-4 flex flex-column" *ngFor="let price of config.priceConfiguration; let i=index">
     <div class="w-full h-max">
       <div class="secondary-form-control">
-        <label>{{price.type===0?'Tin Thường':price.type===1?'Tin VIP':'Tin VIP Đặc Biệt'}}</label>
+        <label>{{price.type===1?'Tin Thường':price.type===2?'Tin VIP':'Tin VIP Đặc Biệt'}}</label>
         <div class="view-content">
           <span>{{price.priceConfig[0]?.priceDefault | vnCurrency}}</span>
         </div>
