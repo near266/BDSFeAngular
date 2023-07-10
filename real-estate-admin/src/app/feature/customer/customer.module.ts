@@ -39,6 +39,7 @@ import {ListBalanceComponent} from './list-balance/list-balance.component';
 import {ListCustomerComponent} from './list-customer/list-customer.component';
 import {ListPaymentComponent} from './list-payment/list-payment.component';
 import {TabviewCustomerComponent} from './tabview-customer/tabview-customer.component';
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
 
 export function createTranslateLoader(http: HttpClient, filePath: string) {
   return new TranslateHttpLoader(http, '/assets/i18n/customers/', '.json');
@@ -51,7 +52,8 @@ export function createTranslateLoader(http: HttpClient, filePath: string) {
     TabviewCustomerComponent,
     ListPaymentComponent,
     ListBalanceComponent,
-    FormCustomerComponent
+    FormCustomerComponent,
+    ViewCustomerComponent
   ],
   imports: [
     CommonModule,

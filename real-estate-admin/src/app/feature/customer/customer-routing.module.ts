@@ -1,9 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+
 import {CustomerComponent} from "./customer.component";
-import {TabviewCustomerComponent} from "./tabview-customer/tabview-customer.component";
-import {ListBalanceComponent} from "./list-balance/list-balance.component";
+
 import {FormCustomerComponent} from "./form-customer/form-customer.component";
+import {ListBalanceComponent} from "./list-balance/list-balance.component";
+import {TabviewCustomerComponent} from "./tabview-customer/tabview-customer.component";
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: FormCustomerComponent
+      },
+      {
+        path: 'view',
+        component: ViewCustomerComponent
       }
     ]
   }
