@@ -1,0 +1,27 @@
+.box-wrap {
+  border: 1px solid #ccc;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.text-ct1 {
+  color: #006bbb;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.img-ct {
+  width: 165px;
+  height: 165px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.text-absolute {
+  position: absolute;
+  top: -12px;
+  background-color: #fff;
+  padding: 0 10px;
+}

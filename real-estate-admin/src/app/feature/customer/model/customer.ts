@@ -17,3 +17,22 @@ export interface Balance {
   page:number;
   pageSize: number;
 }
+
+export interface CustomerDetail {
+  id: string,
+  customerName: string,
+  customerCode: string,
+  address: string,
+  phone: string,
+  company: string,
+  isUnique: false,
+  avatar: string,
+  point: number,
+  status: boolean,
+  totalSalePost: number,
+  totalBoughtPost: number,
+  referalCode: string,
+  firstName: string,
+  phoneNumber: string,
+  email: string,
+}

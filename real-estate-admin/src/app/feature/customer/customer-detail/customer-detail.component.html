@@ -1,0 +1,77 @@
+<div *ngIf="data" class="p-5">
+  <div class="flex justify-content-between">
+    <p class="text-ct1">THÔNG TIN CHI TIẾT</p>
+    <div class="box-wrap" style="padding: 10px; display: flex; align-items: center; height: fit-content;">
+      <i class="pi pi-pencil" style="color: #30A0E0; margin-right: 6px;"></i>
+      <p style="margin: 0;">Chỉnh sửa</p>
+    </div>
+  </div>
+  <div>
+    <div class="flex justify-content-between align-items-center" style="margin-bottom: 40px;">
+      <img class="img-ct" src={{data.avatar}} alt="">
+      <div class="box-wrap flex justify-content-between" style="width: 85%; padding: 20px; position: relative;">
+        <div class="text-absolute flex align-items-center">
+          <i class="pi pi-cog" style="color: #FFB43F; margin-right: 6px; font-size: 18px; margin-top: 2px;"></i>
+          <p class="text-ct1" style="margin: 0;">THÔNG TIN CÁ NHÂN</p>
+        </div>
+        <div style="width: 50%; padding-right: 20px;">
+          <div class="flex justify-content-between">
+            <p>Tên khách hàng:</p>
+            <p>{{data.customerName}}</p>
+          </div>
+          <div class="flex justify-content-between">
+            <p>Số điện thoại:</p>
+            <p>{{data.phone}}</p>
+          </div>
+        </div>
+        <div style="width: 50%; padding-left: 20px;">
+          <div class="flex justify-content-between">
+            <p>Email:</p>
+            <p>{{data.email}}</p>
+          </div>
+          <div class="flex justify-content-between">
+            <p>Mã giới thiệu:</p>
+            <p>{{data.referalCode}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-wrap" style="margin-bottom: 40px; position: relative;">
+    <div class="text-absolute flex align-items-center">
+      <i class="pi pi-money-bill" style="color: #FFB43F; margin-right: 6px; font-size: 18px; margin-top: 2px;"></i>
+      <p class="text-ct1" style="margin: 0;">THÔNG TIN CHI TIẾT</p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Địa chỉ:</p>
+      <p>aaa</p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Công ty:</p>
+      <p>aaa</p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Trạng thái:</p>
+      <p> {{data.status ? "Active" :"Deactive"}}</p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Môi giới tiêu biểu:</p>
+      <p>aaa</p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Thời gian duy trì:</p>
+      <p>aaa</p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Mô tả môi giới tiêu biểu:</p>
+      <p>aaa</p>
+    </div>
+  </div>
+  <div class="box-wrap" style="position: relative;">
+    <div class="text-ct1 text-absolute">KHÁC</div>
+    <p>Created Date: aaa</p>
+    <p>Last Updated: aaa</p>
+    <p>Người tạo: aaa</p>
+    <p>Người sửa cuối: aaa</p>
+  </div>
+</div>

@@ -31,10 +31,6 @@ export class CustomerService extends BaseService {
     return this.doPost('api/register', body).pipe(map((res: any) => res));
   }
 
-  getDetailCustomer(id: any): Observable<any> {
-    return this.doGet(`customer/id?Id=${id}`).pipe(map((res: any) => res));
-  }
-
   updateCustomer(body: any): Observable<any> {
     return this.doPut('customer/update', body).pipe(map((res: any) => res));
   }
@@ -47,6 +43,10 @@ export class CustomerService extends BaseService {
     return this.doPost('customer/delete', body).pipe(map((res: any) => res));
   }
 
+  unBanCustomer(id: any): Observable<any> {
+    return this.doGet(`api/activate?Id=${id}`).pipe(map((res: any) => res));
+  }
+
   getBalance(body: any): Observable<responseTran> {
     return this.doPost('/gw/Walllet/wallet/searchTransaction', body).pipe(map((res: any) => res));
   }
@@ -57,5 +57,9 @@ export class CustomerService extends BaseService {
 
   paymentRequest(body: any): Observable<any> {
     return this.doPut('wallet/updateAmount', body).pipe(map((res: any) => res));
+  }
+
+  getCustomerDetail(id: any): Observable<any> {
+    return this.doGet(`customer/id?Id=${id}`).pipe(map((res: any) => res));
   }
 }

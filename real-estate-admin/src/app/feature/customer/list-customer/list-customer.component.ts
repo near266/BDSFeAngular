@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {CustomerService} from "../service/customer.service";
 import {DialogService} from "primeng/dynamicdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {deleteModal} from "../model/modal";
+import {deleteModal, unBanModal} from "../model/modal";
 
 @Component({
   selector: 'app-list-customer',
@@ -56,13 +56,24 @@ export class ListCustomerComponent implements OnInit {
     })
   }
 
-  delete(id: string) {
+  ban(id: string) {
     const body = {
       listId: [id]
     }
     this.confirmationService.confirm({
       ...deleteModal, accept: () => {
         this.customerService.deleteCustomer(body).subscribe(res => {
+          this.messageService.add({severity: 'success', summary: '', detail: 'Thao tác thành công'})
+          this.getListCustomer();
+        })
+      }
+    })
+  }
+
+  unBan(id: string) {
+    this.confirmationService.confirm({
+      ...unBanModal, accept: () => {
+        this.customerService.unBanCustomer(id).subscribe(res => {
           this.messageService.add({severity: 'success', summary: '', detail: 'Thao tác thành công'})
           this.getListCustomer();
         })
@@ -121,4 +132,7 @@ export class ListCustomerComponent implements OnInit {
     })
   }
 
+  viewCustomerDetail(id: string) {
+    this.router.navigate(['/customers/customerDetail/', id]);
+  }
 }
