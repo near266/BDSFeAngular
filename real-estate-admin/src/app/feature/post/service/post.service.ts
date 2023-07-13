@@ -52,5 +52,12 @@ export class PostService extends BaseService {
     }
       return this.doPost('sale/updateAdmin', body).pipe(map((res: any) => res))// tin mua
   }
-  
+
+  getDistricts(body: any): Observable<any> {
+    return this.doPost('district/search', body).pipe(map((res: any) => res))
+  }
+
+  getWards(body: any): Observable<any> {
+    return this.doPost('ward/searchByDistrictId', body).pipe(map((res: any) => res))
+  }
 }

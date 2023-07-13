@@ -62,4 +62,8 @@ export class CustomerService extends BaseService {
   getCustomerDetail(id: any): Observable<any> {
     return this.doGet(`customer/id?Id=${id}`).pipe(map((res: any) => res));
   }
+
+  updateCustomerDetail(body: any): Observable<any> {
+    return this.doPut('customer/update', body).pipe(map((res: any) => res));
+  }
 }

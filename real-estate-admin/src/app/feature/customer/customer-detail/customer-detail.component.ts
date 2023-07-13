@@ -38,4 +38,11 @@ export class CustomerDetailComponent implements OnInit {
       }
     });
   }
+
+  editCustomer(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.CustomerId = params.get('id') ?? '';
+      this.router.navigate(['/customers/customerEdit', this.CustomerId]);
+    });
+  }
 }

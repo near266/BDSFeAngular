@@ -1,0 +1,66 @@
+<form *ngIf="data" class="p-5" [formGroup]="form">
+  <div class="flex justify-content-between">
+    <p class="text-ct1">CHỈNH SỬA THÔNG TIN</p>
+    <div>
+    </div>
+  </div>
+  <div>
+    <div class="flex justify-content-between align-items-center" style="margin-bottom: 40px;">
+      <img class="img-ct" src={{data.avatar}} alt="">
+      <div class="flex justify-content-between" style="width: 85%; padding: 20px; position: relative;">
+        <div style="width: 50%; padding-right: 20px;">
+          <div style="position: relative; margin-bottom: 30px;">
+            <p class="text-absolute2">* Tên khách hàng:</p>
+            <input formControlName="name" type="text" pInputText style="width: 100%;" />
+          </div>
+          <div style="position: relative;">
+            <p class="text-absolute2">* Số điện thoại:</p>
+            <input readonly formControlName="phone" type="text" pInputText style="width: 100%; cursor: no-drop;" />
+          </div>
+        </div>
+        <div style="width: 50%; padding-left: 20px;">
+          <div style="position: relative; margin-bottom: 30px;">
+            <p class="text-absolute2">* Email:</p>
+            <input readonly formControlName="email" type="text" pInputText style="width: 100%; cursor: no-drop;" />
+          </div>
+          <div style="position: relative; margin-bottom: 30px;">
+            <p class="text-absolute2">* Mã giới thiệu:</p>
+            <input readonly formControlName="referalCode" type="text" pInputText style="width: 100%; cursor: no-drop;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-wrap" style="margin-bottom: 40px; position: relative;">
+    <div style="position: relative; margin-bottom: 30px;">
+      <p class="text-absolute2">* Địa chỉ:</p>
+      <input formControlName="address" type="text" pInputText style="width: 100%;" />
+    </div>
+    <div style="position: relative; margin-bottom: 20px;">
+      <p class="text-absolute2">* Công ty:</p>
+      <input formControlName="company" type="text" pInputText style="width: 100%;" />
+    </div>
+    <div class="flex justify-content-between">
+      <p>Trạng thái:</p>
+      <p> {{data.status ? "Active" :"Deactive"}}</p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Môi giới tiêu biểu:</p>
+      <p></p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Thời gian duy trì:</p>
+      <p></p>
+    </div>
+    <div class="flex justify-content-between">
+      <p>Mô tả môi giới tiêu biểu:</p>
+      <p></p>
+    </div>
+  </div>
+  <div class="flex" style="justify-content: flex-end;">
+    <div class="flex">
+      <div class="button-wrap" (click)="backToDetail()">Hủy bỏ</div>
+      <div class="button-wrap" style="background-color: #30A0E0; color: #fff; margin-left: 16px;" (click)="saveEdit()">Lưu thông tin</div>
+    </div>
+  </div>
+</form>

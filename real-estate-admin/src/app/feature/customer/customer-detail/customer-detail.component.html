@@ -1,7 +1,7 @@
 <div *ngIf="data" class="p-5">
   <div class="flex justify-content-between">
     <p class="text-ct1">THÔNG TIN CHI TIẾT</p>
-    <div class="box-wrap" style="padding: 10px; display: flex; align-items: center; height: fit-content;">
+    <div class="box-wrap" style="padding: 10px; display: flex; align-items: center; height: fit-content; cursor: pointer;" (click)="editCustomer()">
       <i class="pi pi-pencil" style="color: #30A0E0; margin-right: 6px;"></i>
       <p style="margin: 0;">Chỉnh sửa</p>
     </div>
@@ -44,11 +44,11 @@
     </div>
     <div class="flex justify-content-between">
       <p>Địa chỉ:</p>
-      <p>aaa</p>
+      <p>{{data.address}}</p>
     </div>
     <div class="flex justify-content-between">
       <p>Công ty:</p>
-      <p>aaa</p>
+      <p>{{data.company}}</p>
     </div>
     <div class="flex justify-content-between">
       <p>Trạng thái:</p>
@@ -56,22 +56,22 @@
     </div>
     <div class="flex justify-content-between">
       <p>Môi giới tiêu biểu:</p>
-      <p>aaa</p>
+      <p></p>
     </div>
     <div class="flex justify-content-between">
       <p>Thời gian duy trì:</p>
-      <p>aaa</p>
+      <p></p>
     </div>
     <div class="flex justify-content-between">
       <p>Mô tả môi giới tiêu biểu:</p>
-      <p>aaa</p>
+      <p></p>
     </div>
   </div>
   <div class="box-wrap" style="position: relative;">
     <div class="text-ct1 text-absolute">KHÁC</div>
-    <p>Created Date: aaa</p>
-    <p>Last Updated: aaa</p>
-    <p>Người tạo: aaa</p>
-    <p>Người sửa cuối: aaa</p>
+    <p>Created Date: {{data.createdDate | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+    <p>Last Updated: {{data.lastModifiedDate | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+    <p>Người tạo: {{data.lastModifiedBy}}</p>
+    <p>Người sửa cuối: {{data.lastModifiedBy}}</p>
   </div>
 </div>

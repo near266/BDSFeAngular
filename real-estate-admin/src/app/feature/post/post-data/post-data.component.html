@@ -12,7 +12,13 @@
       <div class="title">
         <label>Trạng thái</label>
       </div>
-      <p-dropdown [options]="listStatus" [(ngModel)]="listRequest.status" optionValue="code"></p-dropdown>
+      <p-dropdown [showClear]="true" [options]="listStatus" [(ngModel)]="listRequest.status" optionValue="code"></p-dropdown>
+    </div>
+    <div *ngIf="!isBuy" class="field col-12 md:col-3">
+      <div class="title">
+        <label>Loại tin</label>
+      </div>
+      <p-dropdown [showClear]="true" [options]="listType" [(ngModel)]="listRequest.type" optionValue="code"></p-dropdown>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
@@ -23,9 +29,41 @@
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
-        <label> Mã tin</label>
+        <label>Tên người đăng</label>
       </div>
-      <input type="text" pInputText [(ngModel)]="listRequest.id" placeholder="VD: 654321">
+      <input type="text" pInputText [(ngModel)]="listRequest.createdBy" placeholder="Tên người đăng">
+    </div>
+    <div class="field col-12 md:col-3">
+      <div class="title">
+        <label>Ngày đăng</label>
+      </div>
+      <p-calendar [readonlyInput]="true" [showIcon]="true" [(ngModel)]="listRequest.createdDate"
+        dateFormat="dd/mm/yy"></p-calendar>
+    </div>
+    <div *ngIf="!isBuy" class="field col-12 md:col-3">
+      <div class="title">
+        <label>Ngày hết hạn</label>
+      </div>
+      <p-calendar style="width: 70%;" [readonlyInput]="true" [showIcon]="true" [(ngModel)]="listRequest.dueDate"
+        dateFormat="dd/mm/yy"></p-calendar>
+    </div>
+    <div class="field col-12 md:col-3">
+      <div class="title">
+        <label>Quận, huyện</label>
+      </div>
+      <p-dropdown (onChange)="onDropdownChange()"  [options]="listDistricts" [(ngModel)]="listRequest.ward" optionValue="name" optionLabel="name" [showClear]="true" placeholder="Tất cả"></p-dropdown>
+    </div>
+    <div class="field col-12 md:col-3">
+      <div class="title">
+        <label>Xã, phường</label>
+      </div>
+      <p-dropdown [options]="listWard" [(ngModel)]="listRequest.region" optionValue="name" optionLabel="name" [showClear]="true" placeholder="Tất cả"></p-dropdown>
+    </div>
+    <div class="field col-12 md:col-3">
+      <div class="title">
+        <label>Mã tin</label>
+      </div>
+      <input style="width: 100%;" type="text" pInputText [(ngModel)]="listRequest.id" placeholder="VD: 654321">
     </div>
     <div class="col-12 md:col-2">
       <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getListPost()"></button>
@@ -33,19 +71,16 @@
   </div>
   <div class="grid p-3 mt-2">
     <div class="mr-2">
-      <button pButton label="Duyệt" [disabled]="!(dataSelection.length > 1)"
-              icon="pi pi-check" class="p-button-outlined" (click)="approveAll()"></button>
+      <button pButton label="Duyệt" [disabled]="!(dataSelection.length > 1)" icon="pi pi-check"
+        class="p-button-outlined" (click)="approveAll()"></button>
     </div>
     <div class="mr-2">
-      <button pButton label="Từ chối" [disabled]="!(dataSelection.length > 1)"
-              icon="pi pi-times" class="p-button-outlined p-button-warning"
-              (click)="rejectAll()"></button>
+      <button pButton label="Từ chối" [disabled]="!(dataSelection.length > 1)" icon="pi pi-times"
+        class="p-button-outlined p-button-warning" (click)="rejectAll()"></button>
     </div>
   </div>
   <div class="p-3" style="overflow: auto">
-    <p-table [value]="data" [(selection)]="dataSelection"
-             dataKey="id"
-    >
+    <p-table [value]="data" [(selection)]="dataSelection" dataKey="id">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 4rem">
@@ -56,6 +91,7 @@
           <th *ngIf="!isBuy">Loại bài</th>
           <th class="text-center">Tiêu đề</th>
           <th>Người đăng</th>
+          <th>SĐT người đăng</th>
           <th>Trạng thái</th>
           <th>Created Date</th>
           <th>Last Updated</th>
@@ -72,24 +108,22 @@
           <td *ngIf="!isBuy">{{ 'typeNews.' + product.type | translate}}</td>
           <td><span class="hyper-link" (click)="goToView(product.id)">{{ product.titile }}</span></td>
           <td>{{ product.createdBy }}</td>
+          <td>{{ product.phoneNumber }}</td>
           <td>
-            <span
-              [ngClass]="'new-status-' + product.status">{{ 'status.' + product.status | translate}}</span>
+            <span [ngClass]="'new-status-' + product.status">{{ 'status.' + product.status | translate}}</span>
           </td>
           <td>{{ product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>{{ product.order | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>
             <div class="flex">
               <button pButton (click)="update(product)" icon="pi pi-arrow-up" pTooltip="Đẩy tin"
-                      class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
+                class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
               <button pButton (click)="delete(product.id)" icon="pi pi-trash" pTooltip="Xóa"
-                      class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
+                class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
               <button pButton (click)="reject(product.id)" icon="pi pi-times" pTooltip="Từ chối"
-                      [disabled]="product.status !== 0"
-                      class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
+                [disabled]="product.status !== 0" class="p-button-sm p-button-warning p-button-outlined mr-2"></button>
               <button pButton (click)="approve(product.id)" icon="pi pi-check" pTooltip="Duyệt"
-                      [disabled]="product.status !== 0"
-                      class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
+                [disabled]="product.status !== 0" class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
             </div>
           </td>
         </tr>
@@ -105,17 +139,14 @@
   </div>
   <div class="grid p-3">
     <p-paginator [rows]="listRequest.pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
-                 [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
-                 #paginator [hidden]="totalRecord < 10"
-                 currentPageReportTemplate=
-                   "{currentPage} of {totalPages}"></p-paginator>
+      [showCurrentPageReport]="true" (onPageChange)="paginate($event)" #paginator [hidden]="totalRecord < 10"
+      currentPageReportTemplate="{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
 <p-dialog [dismissableMask]="true" [(visible)]="isShowModalApprove" [modal]="true" [draggable]="false"
-          [resizable]="false" header="Duyệt nhiều">
+  [resizable]="false" header="Duyệt nhiều">
   <div class="">
-    <p-table [value]="dataSelection"
-    >
+    <p-table [value]="dataSelection">
       <ng-template pTemplate="header">
         <tr>
           <th>Mã tin</th>
@@ -137,10 +168,9 @@
   </div>
 </p-dialog>
 <p-dialog [dismissableMask]="true" [(visible)]="isShowModalReject" [modal]="true" [draggable]="false"
-          [resizable]="false" header="Từ chối nhiều">
+  [resizable]="false" header="Từ chối nhiều">
   <div class="">
-    <p-table [value]="dataSelection"
-    >
+    <p-table [value]="dataSelection">
       <ng-template pTemplate="header">
         <tr>
           <th>Mã tin</th>
@@ -165,12 +195,11 @@
     </div>
   </div>
   <div class="flex mt-2 justify-content-center">
-    <button pButton label="Từ chối" (click)="doChangeAction(2)"
-            class="p-button-outlined p-button-warning"></button>
+    <button pButton label="Từ chối" (click)="doChangeAction(2)" class="p-button-outlined p-button-warning"></button>
   </div>
 </p-dialog>
-<p-dialog [dismissableMask]="true" [(visible)]="isShowRejectReason" [modal]="true" [draggable]="false" [resizable]="false"
-          header="Lí do từ chối" [style]="{width: '35vw'}">
+<p-dialog [dismissableMask]="true" [(visible)]="isShowRejectReason" [modal]="true" [draggable]="false"
+  [resizable]="false" header="Lí do từ chối" [style]="{width: '35vw'}">
   <div class="">
     Bạn chắc chắn muốn từ chối bản ghi
   </div>

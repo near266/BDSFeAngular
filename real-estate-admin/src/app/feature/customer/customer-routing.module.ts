@@ -8,6 +8,7 @@ import {ListBalanceComponent} from "./list-balance/list-balance.component";
 import {TabviewCustomerComponent} from "./tabview-customer/tabview-customer.component";
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'customerDetail/:id',
         component: CustomerDetailComponent
+      },
+      {
+        path: 'customerEdit/:id',
+        component: CustomerEditComponent
       }
     ]
   }

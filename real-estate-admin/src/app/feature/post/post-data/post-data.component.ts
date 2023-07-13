@@ -1,48 +1,62 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { Router } from '@angular/router';
 
-import {TranslateService} from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
 
-import {Table, TableHeaderCheckbox} from "primeng/table";
-import {DialogService} from "primeng/dynamicdialog";
-import {ConfirmationService, MessageService} from "primeng/api";
-import {Paginator} from "primeng/paginator";
+import { Table, TableHeaderCheckbox } from 'primeng/table';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { Paginator } from 'primeng/paginator';
 
-import {approveModal, deleteModal} from "../model/confirm-dialog";
-import {NewsItem} from "../model/new-item";
-import {PostService} from "../service/post.service";
+import { approveModal, deleteModal } from '../model/confirm-dialog';
+import { NewsItem } from '../model/new-item';
+import { PostService } from '../service/post.service';
 
 @Component({
   selector: 'app-post-data',
   templateUrl: './post-data.component.html',
-  styleUrls: ['./post-data.component.scss']
+  styleUrls: ['./post-data.component.scss'],
 })
 export class PostDataComponent implements OnInit {
   @Input() isBuy: boolean;
   data: NewsItem[] = [];
   dataSelection: NewsItem[] = [];
   @ViewChild('checkAll') checkAll: TableHeaderCheckbox;
-  @ViewChild('paginator', {static: false}) paginator: Paginator;
+  @ViewChild('paginator', { static: false }) paginator: Paginator;
   isShowModalApprove = false;
   isShowModalReject = false;
   isShowRejectReason = false;
   listStatus = [];
+  listType = [];
+  listDistricts = [];
+  listWard = [];
   totalRecord = 0;
   listRequest = {
+    ward: '',
+    region: '',
     title: '',
-    // code: '',
+    createdBy: '',
     id: '',
     status: null,
+    type: null,
     page: 1,
-    pageSize: 10
-  }
+    pageSize: 10,
+    createdDate: '',
+    dueDate: '',
+  };
   reason: string = '';
   reasonOne: string = '';
   bodyApproveOne = {
     postType: 0,
     listId: [''],
     status: 2,
-    reason: ''
+    reason: '',
   };
 
   constructor(
@@ -52,21 +66,52 @@ export class PostDataComponent implements OnInit {
     private translateService: TranslateService,
     private router: Router,
     private postService: PostService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.translateService.get('listStatus').subscribe(res => {
+    this.translateService.get('listStatus').subscribe((res) => {
       this.listStatus = res;
-    })
+    });
+    this.translateService.get('listType').subscribe((res) => {
+      this.listType = res;
+    });
+    this.getListDistricts();
     this.getListPost();
   }
 
+  onDropdownChange() {
+    if (this.listRequest.ward != '' && this.listRequest.ward != null) {
+      this.getListWards(this.listRequest.ward);
+    } else {
+      this.getListWards("abcdxyz");     // nếu this.listRequest.ward = null thì trả về list xã, phường rỗng
+    }
+  }
+
+  getListDistricts() {
+    this.postService.getDistricts('').subscribe((res: any) => {
+      this.listDistricts = res;
+    });
+  }
+
+  getListWards(districtName: string) {
+    this.postService
+      .getWards({
+        name: districtName,
+        page: 1,
+        pageSize: 99999999,
+      })
+      .subscribe((res: any) => {
+        this.listWard = res.data;
+      });
+  }
+
   getListPost() {
-    this.postService.getListPost(this.listRequest, this.isBuy).subscribe((res: any) => {
-      this.data = res.data;
-      this.totalRecord = res.totalCount;
-    })
+    this.postService
+      .getListPost(this.listRequest, this.isBuy)
+      .subscribe((res: any) => {
+        this.data = res.data;
+        this.totalRecord = res.totalCount;
+      });
   }
 
   paginate(evt: any) {
@@ -86,33 +131,33 @@ export class PostDataComponent implements OnInit {
           postType: this.isBuy ? 0 : 1,
           listId: [id],
           status: 1,
-        }
-        this.postService.approve(bodyApprove).subscribe(res => {
+        };
+        this.postService.approve(bodyApprove).subscribe((res) => {
           this.isShowRejectReason = false;
           this.successMessage();
           this.getListPost();
-        })
-      }
-    })
+        });
+      },
+    });
   }
 
   /*
-  * input: Action
-  * Approve = 1
-  * Reject = 2
-  * */
+   * input: Action
+   * Approve = 1
+   * Reject = 2
+   * */
   doChangeAction(action: number) {
     let listId: any[] = [];
-    this.dataSelection.forEach(el => {
+    this.dataSelection.forEach((el) => {
       listId.push(el.id);
-    })
+    });
     const bodyApprove = {
       postType: this.isBuy ? 0 : 1,
       listId,
       status: action,
-      reason: this.reason
-    }
-    this.postService.approve(bodyApprove).subscribe(res => {
+      reason: this.reason,
+    };
+    this.postService.approve(bodyApprove).subscribe((res) => {
       if (action === 1) {
         this.isShowModalApprove = false;
       }
@@ -121,7 +166,7 @@ export class PostDataComponent implements OnInit {
       }
       this.successMessage();
       this.getListPost();
-    })
+    });
   }
 
   reject(listId: any) {
@@ -130,36 +175,39 @@ export class PostDataComponent implements OnInit {
       postType: this.isBuy ? 0 : 1,
       listId: [listId],
       status: 2,
-      reason: ''
-    }
+      reason: '',
+    };
   }
 
   doReject() {
     this.bodyApproveOne.reason = this.reason || this.reasonOne;
-    this.postService.approve(this.bodyApproveOne).subscribe(res => {
+    this.postService.approve(this.bodyApproveOne).subscribe((res) => {
       this.isShowRejectReason = false;
       this.successMessage();
       this.getListPost();
-    })
+    });
   }
 
   successMessage() {
-    this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
+    this.messageService.add({
+      severity: 'success',
+      detail: 'Thao tác thành công',
+    });
   }
 
   delete(id: any) {
     const body = {
-      listId: [id]
-    }
+      listId: [id],
+    };
     this.confirmationService.confirm({
       ...deleteModal,
       accept: () => {
-        this.postService.delete(body, this.isBuy).subscribe(res => {
+        this.postService.delete(body, this.isBuy).subscribe((res) => {
           this.successMessage();
           this.getListPost();
-        })
-      }
-    })
+        });
+      },
+    });
   }
 
   isValidateAction() {
@@ -168,22 +216,23 @@ export class PostDataComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: '',
-          detail: 'Một số bản ghi không thể duyệt hoặc đã duyệt'
-        })
+          detail: 'Một số bản ghi không thể duyệt hoặc đã duyệt',
+        });
         return true;
       }
     }
     return false;
   }
 
-
   update(body: any) {
-    this.postService.update(body, this.isBuy).subscribe(res => {
-      this.messageService.add({severity: 'success', detail: 'Thao tác thành công'});
-      this.getListPost()
-    })
+    this.postService.update(body, this.isBuy).subscribe((res) => {
+      this.messageService.add({
+        severity: 'success',
+        detail: 'Thao tác thành công',
+      });
+      this.getListPost();
+    });
   }
-
 
   approveAll() {
     if (!this.isValidateAction()) {
@@ -198,6 +247,8 @@ export class PostDataComponent implements OnInit {
   }
 
   goToView(id: string) {
-    this.router.navigate(['news', 'view'], {queryParams: {id, isBuy: this.isBuy}})
+    this.router.navigate(['news', 'view'], {
+      queryParams: { id, isBuy: this.isBuy },
+    });
   }
 }

@@ -42,6 +42,26 @@
       "label": "Hết hạn"
     }
   ],
+
+  "listType": [
+    {
+      "code": null,
+      "label": "Tất cả"
+    },
+    {
+      "code": 0,
+      "label": "Tin thường"
+    },
+    {
+      "code": 1,
+      "label": "Tin vip"
+    },
+    {
+      "code": 2,
+      "label": "Tin vip nổi bật"
+    }
+  ],
+
   "listStatusUpdate": [
     {
       "code": null,
