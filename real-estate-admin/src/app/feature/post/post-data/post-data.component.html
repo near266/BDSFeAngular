@@ -37,15 +37,15 @@
       <div class="title">
         <label>Ngày đăng</label>
       </div>
-      <p-calendar [readonlyInput]="true" [showIcon]="true" [(ngModel)]="listRequest.createdDate"
-        dateFormat="dd/mm/yy"></p-calendar>
+      <p-calendar [showIcon]="true" [(ngModel)]="listRequest.createdDate"
+        dateFormat="dd/mm/yy" placeholder="Ngày đăng"></p-calendar>
     </div>
     <div *ngIf="!isBuy" class="field col-12 md:col-3">
       <div class="title">
         <label>Ngày hết hạn</label>
       </div>
-      <p-calendar style="width: 70%;" [readonlyInput]="true" [showIcon]="true" [(ngModel)]="listRequest.dueDate"
-        dateFormat="dd/mm/yy"></p-calendar>
+      <p-calendar style="width: 70%;" [showIcon]="true" [(ngModel)]="listRequest.dueDate"
+        dateFormat="dd/mm/yy" placeholder="Ngày hết hạn"></p-calendar>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
@@ -93,7 +93,8 @@
           <th>Người đăng</th>
           <th>SĐT người đăng</th>
           <th>Trạng thái</th>
-          <th>Created Date</th>
+          <th>Ngày đăng</th>
+          <th *ngIf="!isBuy">Ngày hết hạn</th>
           <th>Last Updated</th>
           <th class="text-center">Thao tác</th>
         </tr>
@@ -113,6 +114,7 @@
             <span [ngClass]="'new-status-' + product.status">{{ 'status.' + product.status | translate}}</span>
           </td>
           <td>{{ product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td *ngIf="!isBuy">{{ product.dueDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>{{ product.order | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>
             <div class="flex">
@@ -130,7 +132,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td [attr.colspan]="9" class="text-center">
+          <td [attr.colspan]="12" class="text-center">
             <span>Không có dữ liệu</span>
           </td>
         </tr>
