@@ -5,6 +5,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "../auth/auth.guard";
 
 import {FeatureComponent} from "./feature.component";
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: FeatureComponent
+        component: AccountComponent
       },
     ]
   }
