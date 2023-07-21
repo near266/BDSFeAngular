@@ -52,7 +52,7 @@ export class CustomerService extends BaseService {
   }
 
   getDepositRequest(body: any): Observable<any> {
-    return this.doPost('/depositRequest/ViewAdmin', body).pipe(map((res: any) => res));
+    return this.doPost('depositRequest/ViewAdmin', body).pipe(map((res: any) => res));
   }
 
   paymentRequest(body: any): Observable<any> {

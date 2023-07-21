@@ -3,7 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerDetail, PramsEdit } from '../model/customer';
 import { CustomerService } from '../service/customer.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { deleteModal, unBanModal } from '../model/modal';
+import { HttpClient } from '@angular/common/http';
+import { tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer-edit',
@@ -11,6 +14,8 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./customer-edit.component.scss'],
 })
 export class CustomerEditComponent implements OnInit {
+  public imageUrl: string[] = [] || undefined;
+  public fileToUpload: File | null = null;
   public CustomerId: string;
   public data: CustomerDetail;
   public isLoading: boolean = false;
@@ -30,11 +35,77 @@ export class CustomerEditComponent implements OnInit {
     private customerService: CustomerService,
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.getCustomerDetail();
+  }
+
+  onFileSelected(event: any) {
+    this.fileToUpload = event.target.files[0];
+    this.onUpload();
+  }
+
+  onUpload() {
+    if (!this.fileToUpload) {
+      alert('Vui lòng chọn một tệp hình ảnh.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.fileToUpload);
+    formData.append('type', 'image');
+    formData.append('dimension', 'full');
+
+    this.http
+      .put<any>('https://cdn.eztek.net/gateway/Media/Upload', formData)
+      .pipe(
+        catchError((error) => {
+          console.error('Đã xảy ra lỗi khi tải lên ảnh: ', error);
+          return [];
+        })
+      )
+      .subscribe((response) => {
+        this.imageUrl = response;
+      });
+  }
+
+  ban(id: string) {
+    const body = {
+      listId: [id],
+    };
+    this.confirmationService.confirm({
+      ...deleteModal,
+      accept: () => {
+        this.customerService.deleteCustomer(body).subscribe((res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: '',
+            detail: 'Thao tác thành công',
+          });
+          this.router.navigate(['/customers/customerDetail', this.data.id]);
+        });
+      },
+    });
+  }
+
+  unBan(id: string) {
+    this.confirmationService.confirm({
+      ...unBanModal,
+      accept: () => {
+        this.customerService.unBanCustomer(id).subscribe((res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: '',
+            detail: 'Thao tác thành công',
+          });
+          this.router.navigate(['/customers/customerDetail', this.data.id]);
+        });
+      },
+    });
   }
 
   getCustomerDetail() {
@@ -70,6 +141,7 @@ export class CustomerEditComponent implements OnInit {
     this.params.email = this.form.get('email')?.value;
     this.params.address = this.form.get('address')?.value;
     this.params.company = this.form.get('company')?.value;
+    this.params.avatar = this.imageUrl[0];
     this.updateCustomer();
   }
 
