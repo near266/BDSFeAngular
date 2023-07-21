@@ -19,11 +19,34 @@
   line-height: normal;
 }
 
+.img-wrap {
+  position: relative;
+}
+
 .img-ct {
   width: 165px;
   height: 165px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.custom-upload input[type="file"] {
+  display: none;
+}
+
+.upload-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 165px;
+  height: 55px;
+  background-color: rgba(255, 255, 255, 0.20);
+  border-bottom-left-radius: 110px;
+  border-bottom-right-radius: 110px;
+  border-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .text-absolute {

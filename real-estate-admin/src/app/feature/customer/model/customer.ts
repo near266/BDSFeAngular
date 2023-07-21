@@ -48,7 +48,7 @@ export class PramsEdit {
   phone: string;
   company: string;
   isUnique: false;
-  avatar: string;
+  avatar: string | undefined;
   point: number;
   status: boolean;
   totalSalePost: number;

@@ -1,12 +1,25 @@
 <form *ngIf="data" class="p-5" [formGroup]="form">
-  <div class="flex justify-content-between">
+  <div class="flex justify-content-between align-items-center">
     <p class="text-ct1">CHỈNH SỬA THÔNG TIN</p>
-    <div>
-    </div>
+    <button pButton [icon]="data.status ? 'pi pi-lock' : 'pi pi-lock-open'"
+      [pTooltip]="data.status ? 'Chặn' : 'Bỏ chặn'" [class]="'p-button-sm p-button-danger p-button-outlined'"
+      (click)="data.status ? ban(data.id) : unBan(data.id)"
+      style="margin-right: 30px; width: 80px; margin-left: 16px; padding: 10px 15px;">
+      <p style="padding-right: 6px; margin: 0;">{{data.status ? 'Chặn' : 'Bỏ chặn'}}</p>
+    </button>
   </div>
   <div>
     <div class="flex justify-content-between align-items-center" style="margin-bottom: 40px;">
-      <img class="img-ct" src={{data.avatar}} alt="">
+      <div class="img-wrap">
+        <img class="img-ct" [src]="data.avatar" *ngIf="imageUrl.length === 0" alt="">
+        <img class="img-ct" [src]="imageUrl" *ngIf="imageUrl.length === 1" alt="">
+        <label class="custom-upload">
+          <div class="upload-bottom">
+            <i class="pi pi-camera" style="font-size: 1.5rem; color: #fff;"></i>
+          </div>
+          <input type="file" accept="image/*, video/*" name="file" (change)="onFileSelected($event)" />
+        </label>
+      </div>
       <div class="flex justify-content-between" style="width: 85%; padding: 20px; position: relative;">
         <div style="width: 50%; padding-right: 20px;">
           <div style="position: relative; margin-bottom: 30px;">
@@ -25,7 +38,8 @@
           </div>
           <div style="position: relative; margin-bottom: 30px;">
             <p class="text-absolute2">* Mã giới thiệu:</p>
-            <input readonly formControlName="referalCode" type="text" pInputText style="width: 100%; cursor: no-drop;" />
+            <input readonly formControlName="referalCode" type="text" pInputText
+              style="width: 100%; cursor: no-drop;" />
           </div>
         </div>
       </div>
@@ -60,7 +74,8 @@
   <div class="flex" style="justify-content: flex-end;">
     <div class="flex">
       <div class="button-wrap" (click)="backToDetail()">Hủy bỏ</div>
-      <div class="button-wrap" style="background-color: #30A0E0; color: #fff; margin-left: 16px;" (click)="saveEdit()">Lưu thông tin</div>
+      <div class="button-wrap" style="background-color: #30A0E0; color: #fff; margin-left: 16px;" (click)="saveEdit()">
+        Lưu thông tin</div>
     </div>
   </div>
 </form>
