@@ -16,17 +16,17 @@ export class RealEstateTermService extends BaseService {
   constructor(private http: HttpClient) {
   super();
   }
-  
+
   getAllTerm(body:any) : Observable<any>{
   return this.doPost('termconditionconfiguration/getall', body).pipe(map((res: any) => res));
-  
+
   }
   UpdateTerm(body:any) : Observable<any>{
   return this.doPut('termconditionconfiguration/update',body).pipe(map((res:any)=>res))
-  
+
   }
   getTypeTerm(): Observable<any> {
-  return this.doPost('/typeterm/getall',{}).pipe(map((res:any)=>res));
+  return this.doPost('typeterm/getall',{}).pipe(map((res:any)=>res));
   }
   getDetailTerm(body:any) :Observable<any>{
   return this.doPost('typeterm/getdetail',body).pipe(map((res:any)=>res));
@@ -40,6 +40,6 @@ export class RealEstateTermService extends BaseService {
  }
  Delete(body:any){
  return this.doDelete('termconditionconfiguration/delete',body).pipe(map((res:any)=>res));
- 
+
  }
 }

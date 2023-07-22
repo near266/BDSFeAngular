@@ -48,7 +48,7 @@ export class CustomerService extends BaseService {
   }
 
   getBalance(body: any): Observable<responseTran> {
-    return this.doPost('/gw/Walllet/wallet/searchTransaction', body).pipe(map((res: any) => res));
+    return this.doPost('gw/Walllet/wallet/searchTransaction', body).pipe(map((res: any) => res));
   }
 
   getDepositRequest(body: any): Observable<any> {
