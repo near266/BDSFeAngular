@@ -10,7 +10,28 @@
 <form [formGroup]="form" class="pl-3 pr-3">
   <div class="secondary-form-control mb-2">
     <label>Tiêu đề</label>
-    <input type="text" pInputText formControlName="title">
+    <input *ngIf="title !== 'CHI TIẾT TIN TỨC'" type="text" pInputText formControlName="title">
+    <div *ngIf="title === 'CHI TIẾT TIN TỨC'" style="padding: 14px 10px;">
+      {{form.get('title')?.value}}
+    </div>
+  </div>
+  <div class="secondary-form-control mb-2">
+    <label>Ảnh tiêu đề</label>
+    <input *ngIf="title !== 'CHI TIẾT TIN TỨC'" style="padding: 15px;" type="file" accept="image/*, video/*"
+      (change)="onFileSelected($event)" />
+    <div *ngIf="title === 'CHI TIẾT TIN TỨC'" style="padding: 14px 10px;">
+      <a target="_blank" [href]="form.get('imgDetail')?.value">{{form.get('imgDetail')?.value}}</a>
+    </div>
+    <div *ngIf="title === 'CHỈNH SỬA TIN TỨC'" style="padding: 0px 12px 14px 12px;">
+      <a target="_blank" [href]="imageUrl.length > 0 ? imageUrl[0] : form.get('imgDetail')?.value">{{imageUrl.length > 0 ? imageUrl[0] : form.get('imgDetail')?.value}}</a>
+    </div>
+  </div>
+  <div class="secondary-form-control mb-2" style="padding: 4px 0; margin-bottom: 30px !important;">
+    <label>Nội dung minh họa</label>
+    <input *ngIf="title !== 'CHI TIẾT TIN TỨC'" type="text" pInputText formControlName="descriptionForList">
+    <div *ngIf="title === 'CHI TIẾT TIN TỨC'" style="padding: 14px 10px;">
+      {{form.get('descriptionForList')?.value}}
+    </div>
   </div>
   <div class="secondary-form-control mb-2">
     <label>Nội dung</label>
@@ -21,8 +42,8 @@
 </form>
 <div class="col-12 flex flex-row justify-content-end mt-3 pl-3 pr-3" *ngIf="title !== 'CHI TIẾT TIN TỨC'">
   <button pButton label="Huỷ bỏ" class="p-button-sm p-button-secondary mr-2" [routerLink]="'/real-estate-new'"></button>
-  <button pButton (click)="add(form.getRawValue())" *ngIf="title === 'THÊM TIN TỨC MỚI'" label="Thêm mới"
+  <button pButton (click)="add()" *ngIf="title === 'THÊM TIN TỨC MỚI'" label="Thêm mới"
     class="p-button-sm p-button-primary"></button>
-  <button pButton (click)="update(form.getRawValue())" *ngIf="title === 'CHỈNH SỬA TIN TỨC'" label="Xác nhận"
+  <button pButton (click)="update()" *ngIf="title === 'CHỈNH SỬA TIN TỨC'" label="Xác nhận"
     class="p-button-sm p-button-primary"></button>
 </div>
