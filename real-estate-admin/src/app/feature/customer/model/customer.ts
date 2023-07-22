@@ -38,6 +38,7 @@ export interface CustomerDetail {
   createdDate: string;
   lastModifiedBy: string;
   lastModifiedDate: string;
+  createdBy: string;
 }
 
 export class PramsEdit {
