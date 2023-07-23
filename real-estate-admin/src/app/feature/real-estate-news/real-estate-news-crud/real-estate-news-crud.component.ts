@@ -14,6 +14,7 @@ import { MessageService } from 'primeng/api';
 import { RealEstateNewsService } from '../service/real-estate-news.service';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-real-estate-news-crud',
@@ -132,10 +133,10 @@ export class RealEstateNewsCrudComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.fileToUpload);
     formData.append('type', 'image');
-    formData.append('dimension', 'full');
+    formData.append("source", "real_estate");
 
     this.http
-      .put<any>('https://cdn.eztek.net/gateway/Media/Upload', formData)
+      .put<any>(environment.cdnUrl, formData)
       .pipe(
         catchError((error) => {
           console.error('Đã xảy ra lỗi khi tải lên ảnh: ', error);

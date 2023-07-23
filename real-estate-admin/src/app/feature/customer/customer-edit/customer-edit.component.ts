@@ -7,6 +7,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { deleteModal, unBanModal } from '../model/modal';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-customer-edit',
@@ -58,10 +59,10 @@ export class CustomerEditComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.fileToUpload);
     formData.append('type', 'image');
-    formData.append('dimension', 'full');
+    formData.append("source", "real_estate");
 
     this.http
-      .put<any>('https://cdn.eztek.net/gateway/Media/Upload', formData)
+      .put<any>(environment.cdnUrl, formData)
       .pipe(
         catchError((error) => {
           console.error('Đã xảy ra lỗi khi tải lên ảnh: ', error);
