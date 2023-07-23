@@ -10,21 +10,18 @@
       <div class="title">
         <label>Từ ngày</label>
       </div>
-      <p-calendar [readonlyInput]="true" inputId="toDate"
-                  [showIcon]="true" [(ngModel)]="depositReq.dateFrom"
-                  dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
+      <p-calendar [readonlyInput]="true" inputId="toDate" [showIcon]="true" [(ngModel)]="depositReq.dateFrom"
+        dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
         <label>Đến ngày</label>
       </div>
-      <p-calendar [readonlyInput]="true" inputId="fromDate"
-                  [showIcon]="true" [(ngModel)]="depositReq.dateTo"
-                  dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
+      <p-calendar [readonlyInput]="true" inputId="fromDate" [showIcon]="true" [(ngModel)]="depositReq.dateTo"
+        dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
     </div>
     <div class="col-12 md:col-3">
-      <button pButton label="Tìm kiếm" icon="pi pi-search"
-              (click)="doGetListDeposit()"></button>
+      <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="doGetListDeposit()"></button>
     </div>
   </div>
   <div class="grid p-3">
@@ -37,8 +34,7 @@
   </div>
   <div class="p-3">
     <div class="mr-2">
-      <button pButton label="Xóa"
-              icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+      <button pButton label="Xóa" icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
     </div>
   </div>
   <div class="p-3">
@@ -74,10 +70,11 @@
           <td>{{ 'status.' + customerData.status | translate }}</td>
           <td>{{ customerData.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
           <td>
-            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền" (click)="openPayment(customerData.customer); customerDataId=customerData.id"
-                    class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
+            <button pButton icon="pi pi-plus" pTooltip="Cộng tiền"
+              (click)="openPayment(customerData.customer); customerDataId=customerData.id"
+              class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
             <button pButton icon="pi pi-times" pTooltip="Từ chối" (click)="cancelTransaction(customerData.id)"
-                    class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
+              class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
           </td>
         </tr>
       </ng-template>
@@ -92,14 +89,12 @@
   </div>
   <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
-                 [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
-                 #paginator [hidden]="paymentData.length < 10"
-                 currentPageReportTemplate=
-                   "{currentPage} of {totalPages}"></p-paginator>
+      [showCurrentPageReport]="true" (onPageChange)="paginate($event)" #paginator
+      currentPageReportTemplate="{currentPage} of {totalPages}"></p-paginator>
   </div>
 </div>
-<p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false"
-          [resizable]="false" [showHeader]="false" [style]="{'width': '40vw'}">
+<p-dialog [dismissableMask]="true" [(visible)]="isPayment" [modal]="true" [draggable]="false" [resizable]="false"
+  [showHeader]="false" [style]="{'width': '40vw'}">
   <div class="payment">
     <div class="col-12">
       <h1>Cộng tài khoản</h1>
@@ -109,15 +104,15 @@
       <div class="secondary-form-control">
         <label for="">TK chính</label>
         <!--        <input type="text" name="" id="" pInputText [(ngModel)]="paymentRequest.amountWallet">-->
-        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet" [maxlength]="20"
-                       mode="currency" currency="VND" locale="vi-VN"></p-inputNumber>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet" [maxlength]="20" mode="currency"
+          currency="VND" locale="vi-VN"></p-inputNumber>
       </div>
     </div>
     <div class="col-12">
       <div class="secondary-form-control">
         <label for="">TK Khuyến mãi</label>
-        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWalletPromotional"
-                       mode="currency" currency="VND" locale="vi-VN" [maxlength]="20"></p-inputNumber>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWalletPromotional" mode="currency"
+          currency="VND" locale="vi-VN" [maxlength]="20"></p-inputNumber>
       </div>
     </div>
     <div class="col-12">
@@ -126,17 +121,15 @@
         <span class="p-text-warning">{{paymentRequest.amountWallet / 1000 | number: '1.0-1'}}(điểm)</span>
       </div>
       <div class="flex justify-content-end mt-2">
-        <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2"
-                (click)="isPayment = false"></button>
-        <button pButton (click)="confirmRequest()"
-                label="Nạp tiền" class="p-button-sm p-button-primary"></button>
+        <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2" (click)="isPayment = false"></button>
+        <button pButton (click)="confirmRequest()" label="Nạp tiền" class="p-button-sm p-button-primary"></button>
       </div>
 
     </div>
   </div>
 </p-dialog>
-<p-dialog [dismissableMask]="true" [(visible)]="isShowImg" [modal]="true" [draggable]="false"
-          [resizable]="false" [header]="'Ảnh minh chứng'">
+<p-dialog [dismissableMask]="true" [(visible)]="isShowImg" [modal]="true" [draggable]="false" [resizable]="false"
+  [header]="'Ảnh minh chứng'">
   <div class="img-container">
     <img [src]="srcShowImg" alt="">
   </div>

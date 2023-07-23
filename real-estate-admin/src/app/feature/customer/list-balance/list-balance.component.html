@@ -10,17 +10,15 @@
       <div class="title">
         <label>Từ ngày</label>
       </div>
-      <p-calendar [readonlyInput]="true" inputId="toDate"
-                  [showIcon]="true" [(ngModel)]="requestBalance.from"
-                  dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
+      <p-calendar [readonlyInput]="true" inputId="toDate" [showIcon]="true" [(ngModel)]="requestBalance.from"
+        dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
         <label>Đến ngày</label>
       </div>
-      <p-calendar [readonlyInput]="true" inputId="fromDate"
-                  [showIcon]="true" [(ngModel)]="requestBalance.to"
-                  dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
+      <p-calendar [readonlyInput]="true" inputId="fromDate" [showIcon]="true" [(ngModel)]="requestBalance.to"
+        dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
     </div>
     <div class="col-12 md:col-3">
       <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="getBalance()"></button>
@@ -94,24 +92,24 @@
       </ng-template>
       <ng-template pTemplate="body" let-transaction>
         <tr>
-          <td>{{ transaction.transactionHistorys.createdDate  | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+          <td>{{ transaction.transactionHistorys.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
           <td>{{ 'type.' + transaction.transactionHistorys.type | translate}}</td>
           <td>{{ transaction.transactionHistorys.content }}</td>
           <td>
             <span
               [ngClass]=" transaction.transactionHistorys.status === 'Up' ?'primary-text-color' : 'danger-text-color'">
-              {{ transaction.transactionHistorys.status === 'Up' ? '+' + (transaction.transactionHistorys.transactionAmount | vnCurrency  ) :
+              {{ transaction.transactionHistorys.status === 'Up' ? '+' +
+              (transaction.transactionHistorys.transactionAmount | vnCurrency ) :
               '-' + (transaction.transactionHistorys.transactionAmount | vnCurrency)}}</span>
           </td>
           <td>
-          <span
-            [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount | vnCurrency}} </span>
+            <span [ngClass]="transaction.wallet.isVolatility ?'primary-text-color' : ''">{{ transaction.wallet.amount |
+              vnCurrency}} </span>
           </td>
-          <td><span
-            [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{ transaction.walletPromotional.amount | vnCurrency}}</span>
+          <td><span [ngClass]="transaction.walletPromotional.isVolatility ?'primary-text-color' : ''">{{
+              transaction.walletPromotional.amount | vnCurrency}}</span>
           </td>
-          <td><span
-          >{{ transaction.transactionHistorys.point }}</span>
+          <td><span>{{ transaction.transactionHistorys.point }}</span>
           </td>
         </tr>
       </ng-template>
@@ -126,11 +124,8 @@
   </div>
   <div class="grid p-3">
     <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [rowsPerPageOptions]="[10,20,30]"
-                 [showCurrentPageReport]="true" (onPageChange)="paginate($event)"
-                 #paginator [hidden]=" transactionList &&   transactionList.length < 10"
-                 currentPageReportTemplate=
-                   "{currentPage} of {totalPages}"></p-paginator>
+      [showCurrentPageReport]="true" (onPageChange)="paginate($event)" #paginator
+      currentPageReportTemplate="{currentPage} of {totalPages}"></p-paginator>
   </div>
 
 </div>
-

@@ -3,7 +3,7 @@ export const environment = {
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: 'https://api.hoalac123.xyz/',
+  baseUrl: 'https://api.hoalac123.com/',
   basePath: '',
   logServer: false,
   logClient: true,
