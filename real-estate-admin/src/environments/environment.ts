@@ -15,7 +15,8 @@ export const environment = {
   mediaUrl: 'https://cdn.eztek.net/',
   clientTimeout: 10000, // 10s
   importExportTimeout: 300000, // 5m
-  idleTimeout: 1800
+  idleTimeout: 1800,
+  cdnUrl: 'https://cdn-test.eztek.net/gateway/Media/Upload',
 };
 
 /*
