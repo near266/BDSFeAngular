@@ -8,6 +8,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { PaginatorModule } from 'primeng/paginator';
+import { DialogModule } from 'primeng/dialog';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -24,6 +28,11 @@ import { PaginatorModule } from 'primeng/paginator';
     TableModule,
     TooltipModule,
     PaginatorModule,
+    DialogModule,
+   ReactiveFormsModule,
+   PasswordModule,
+   ToastModule,
+      
   ]
 })
 export class AccountmoduleModule { }

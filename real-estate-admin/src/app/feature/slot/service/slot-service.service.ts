@@ -28,7 +28,7 @@ export class SlotServiceService extends BaseService {
   
   }
   SearchDistrict(body:any){
-  return this.doPost(`/ward/searchByDistrictId`,body).pipe(map((res:any)=>res));
+  return this.doPost(`ward/searchByDistrictId`,body).pipe(map((res:any)=>res));
   }
   Delete(body:any) : Observable<any> {
   
