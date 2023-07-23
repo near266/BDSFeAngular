@@ -19,19 +19,19 @@ export class SlotServiceService extends BaseService {
     super()
   }
   getListSlot(body:any) : Observable<any>{
-
+  
    return this.doPost(`ward/search`,body).pipe(map((res: any) => res));
-
+   
   }
   Add(body:any) :Observable<any>{
   return this.doPost(`ward/add`,body).pipe(map((res:any)=>res));
-
+  
   }
   SearchDistrict(body:any){
   return this.doPost(`ward/searchByDistrictId`,body).pipe(map((res:any)=>res));
   }
   Delete(body:any) : Observable<any> {
-
+  
   return this.doPost(`ward/delete`,body).pipe(map((res: any)=>res));
   }
   GetAllDistrict() : Observable<any> {
