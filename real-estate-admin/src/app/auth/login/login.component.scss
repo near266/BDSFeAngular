@@ -1,5 +1,7 @@
 .login-header {
-  background: #F5F5F5;
+  background: #fff;
+  box-shadow: 0px 0px 10px -7px;
+  height: 9vh;
 
   .logo-name {
     font-family: Roboto, serif;
@@ -24,12 +26,13 @@
 
 
 .login-body {
-  margin-top: 3rem;
+  // margin-top: 3rem;
+
   h1 {
-    font-family: UTM Libel KT, sans-serif;
+    font-family: 'UTM Libel KT', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 80px;
+    font-size: 70px;
     line-height: 95px;
     /* identical to box height */
     letter-spacing: 0.03em;
@@ -45,19 +48,31 @@
   }
 
   label {
-    font-family: Roboto, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 23px;
     text-align: center;
     letter-spacing: 0.03em;
+    padding: 0 10px;
+  }
+
+  .login-text {
+    font-weight: 600;
+    font-size: 20px;
   }
 }
+
 
 .login-bg {
   background-image: url("../../../assets/resouces/login-bg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
+}
+
+.option {
+  display: flex;
+  align-items: center;
 }

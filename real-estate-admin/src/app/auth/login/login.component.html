@@ -4,8 +4,8 @@
       <h3><span class="left-color">hoalac123</span><span class="right-color">.com</span></h3>
     </div>
     <div class="option">
-      <i class="pi pi-cog mr-2" style="font-size: 1rem"></i>
-      <label for="">Hỗ trợ</label>
+      <i class="pi pi-cog mr-2" style="font-size: 1.5rem"></i>
+      <label for="">Trợ giúp</label>
     </div>
   </div>
 
@@ -18,29 +18,29 @@
         <label for="">Hoà Lạc, nơi đầu tư lí tưởng!</label>
       </div>
       <div class="text-center">
-        <i class="pi pi-cog m-5" style="font-size: 1rem"></i>
+        <img src="../../../assets/icons/LoginIcon.svg" alt="" style="margin: 20px;">
       </div>
       <div class="text-center">
-        <label for="" CLASS="left-color"> ĐĂNG NHẬP TÀI KHOẢN</label>
+        <label for="" class="left-color login-text"> ĐĂNG NHẬP TÀI KHOẢN</label>
       </div>
       <p-messages [value]="msgInvalid" [closable]="false"></p-messages>
       <div class="mt-5 grid justify-content-center" [formGroup]="loginForm">
-        <div class="col-12">
+        <div class="col-10">
           <div class="danger-form-control">
-            <label>Tên Đăng nhập</label>
-            <input type="text" pInputText formControlName="userName"/>
+            <label>Tài khoản</label>
+            <input type="text" pInputText formControlName="userName" />
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-10">
           <div class="danger-form-control">
             <label>Mật khẩu</label>
-            <input [type]="passwordType" pInputText formControlName="password" (keydown.enter)="doLogin()"/>
+            <input [type]="passwordType" pInputText formControlName="password" (keydown.enter)="doLogin()" />
             <i class="pi pi-eye" style="position: absolute; top: 15px; right: 15px;" (click)="changeTypePass()"
-               (keyup.enter)="doLogin()"></i>
+              (keyup.enter)="doLogin()"></i>
           </div>
 
         </div>
-        <div class="col-12">
+        <div class="col-10">
           <div class="grid justify-content-between mt-3 p-2">
             <div class="">
               <p-checkbox [binary]="true" formControlName="rememberMe"></p-checkbox>
@@ -51,10 +51,9 @@
             </div>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-10">
           <div class="flex justify-content-center">
-            <button pButton label="Đăng nhập" class="primary"
-                    (click)="doLogin()"></button>
+            <button pButton label="Đăng nhập" class="primary" (click)="doLogin()"></button>
           </div>
         </div>
       </div>
@@ -62,4 +61,3 @@
   </div>
 
 </div>
-

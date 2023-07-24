@@ -10,12 +10,15 @@ body {
   font-family: var(--font-family);
 }
 
-html, body {
+html,
+body {
   height: 100%;
   padding: 0;
   margin: 0;
   width: 100%;
   font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(80, 80, 80, 1);
 }
 
 .danger-form-control {
@@ -61,7 +64,8 @@ html, body {
     }
   }
 
-  input, textarea {
+  input,
+  textarea {
     border: none;
     width: 100%;
   }
@@ -82,10 +86,18 @@ html, body {
     z-index: 5;
   }
 
-  input, textarea,  p-inputNumber, .p-inputnumber, p-dropdown, .p-dropdown, p-calendar, .p-calendar {
+  input,
+  textarea,
+  p-inputNumber,
+  .p-inputnumber,
+  p-dropdown,
+  .p-dropdown,
+  p-calendar,
+  .p-calendar {
     border: none;
     width: 100%;
   }
+
   .view-content {
     height: 5vh;
     display: flex;
@@ -108,7 +120,8 @@ html, body {
     font-weight: 700;
   }
 
-  input, textarea {
+  input,
+  textarea {
     border: none;
     width: 100%;
   }
@@ -146,7 +159,12 @@ html, body {
     width: 66.6666666667%
   }
 
-  p-inputNumber, .p-inputnumber, p-dropdown, .p-dropdown, p-calendar, .p-calendar {
+  p-inputNumber,
+  .p-inputnumber,
+  p-dropdown,
+  .p-dropdown,
+  p-calendar,
+  .p-calendar {
     width: 100%;
   }
 }
@@ -238,6 +256,7 @@ html, body {
 .p-text-warning {
   color: #F59E0B;
 }
+
 .p-tabview .p-tabview-nav {
   background: #ffffff;
   border: 1px solid #dee2e6;
@@ -324,15 +343,18 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 p-calendar {
- span{
-   button {
-     background: none !important;
-     color: #30A0E0 !important;
-     border: none !important;
-   }
- }
+  span {
+    button {
+      background: none !important;
+      color: #30A0E0 !important;
+      border: none !important;
+    }
+  }
 }
-.p-disabled, .p-component:disabled {
+
+.p-disabled,
+.p-component:disabled {
   color: #6c757d !important;
 }
