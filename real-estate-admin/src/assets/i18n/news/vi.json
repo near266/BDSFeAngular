@@ -42,7 +42,6 @@
       "label": "Hết hạn"
     }
   ],
-
   "listType": [
     {
       "code": null,
@@ -61,8 +60,7 @@
       "label": "Tin vip nổi bật"
     }
   ],
-
-  "listStatusUpdate": [
+  "saleListStatusUpdate": [
     {
       "code": null,
       "label": "Tất cả"
@@ -77,7 +75,7 @@
     },
     {
       "code": 2,
-      "label": "Không duyệt"
+      "label": "Từ chối"
     },
     {
       "code": 3,
@@ -90,6 +88,28 @@
     {
       "code": 5,
       "label": "Hết hạn"
+    }
+  ],
+  "buyListStatusUpdate": [
+    {
+      "code": null,
+      "label": "Tất cả"
+    },
+    {
+      "code": 0,
+      "label": "Chưa duyệt"
+    },
+    {
+      "code": 1,
+      "label": "Đang hiển thị"
+    },
+    {
+      "code": 2,
+      "label": "Từ chối"
+    },
+    {
+      "code": 3,
+      "label": "Đã mua"
     }
   ],
   "unitSaleNews": [

@@ -1,37 +1,37 @@
 <div class="container">
   <div class="grid p-3 border-line">
-    <div class="col-12 md:col-4">
+    <div class="col-12 md:col-3">
       <div class="grid">
         <div class="col-12 md:col-3">
           <span class="p-inputgroup-addon">Khu vực</span>
         </div>
         <div class="col-12 md:col-9 ">
-          <p-dropdown [options]="ListDist" placeholder="Tất cả" [(ngModel)]="RequestSearch.name"
-            optionLabel="name" optionValue="name" [showClear]="true"></p-dropdown>
+          <p-dropdown [options]="ListDist" placeholder="Tất cả" [(ngModel)]="RequestSearch.name" optionLabel="name"
+            optionValue="name" [showClear]="true"></p-dropdown>
         </div>
       </div>
 
 
 
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-8">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">Tên khu đất</span>
         <input type="text" pInputText [(ngModel)]="RequestGetList.name" />
       </div>
     </div>
-    <div class="col-12 md:col-2">
-      <button pButton label="Tìm kiếm" icon="pi pi-search" (click)="search()"></button>
+    <div class="col-12 md:col-1">
+      <button pButton label="Tìm kiếm" (click)="search()"></button>
     </div>
   </div>
-  <div class="grid p-3">
+  <div class="grid p-3 land-list-header">
     <div class="col-12 md:col-10">
       <div class="grid align-items-end">
-        <h2>Danh sách khu đất</h2>
+        <h2 class="land-list-title">DANH SÁCH KHU ĐẤT</h2>
         <span class="mb-4 ml-4">({{totalRecord}} khu đất)</span>
       </div>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="col-12 md:col-2 flex justify-content-end">
 
       <button pButton label="Thêm mới" icon="pi pi-plus" (click)="ShowModel(1)"></button>
     </div>
@@ -79,7 +79,8 @@
           <td class="text-center">{{product.createdBy}}</td>
           <td class="text-center">{{product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
 
-          <td class="text-center">{{(product.lastModifiedDate ? product.lastModifiedDate : product.createdDate) | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td class="text-center">{{(product.lastModifiedDate ? product.lastModifiedDate : product.createdDate) | date:
+            'dd/MM/yyyy HH:mm:ss' }}</td>
 
           <td class="text-center">
             <button pButton icon="pi pi-times" pTooltip="Xóa" class="p-button-sm p-button-danger p-button-outlined mr-2"
@@ -113,7 +114,7 @@
   <ng-template pTemplate="body">
     <div class="mt-2">
       <label class="ml-4 " style="font-weight: 500;font-family: Roboto;">Tên khu đất</label>
-      <input pInputText  type="text" [(ngModel)]="AddRequest.name" placeholder="Nhập tên khu đất" style="width: 100%;" />
+      <input pInputText type="text" [(ngModel)]="AddRequest.name" placeholder="Nhập tên khu đất" style="width: 100%;" />
     </div>
     <div class="mt-2">
       <label class="ml-4" style="font-weight: 500;font-family: Roboto;">Khu vực</label>
@@ -151,14 +152,14 @@
       <div class="secondary-form-control">
         <label>Tên khu đất</label>
 
-        <input type="text"  pInputText  formControlName="name">
+        <input type="text" pInputText formControlName="name">
 
       </div>
       <div [formGroupName]="'district'">
 
         <div class="secondary-form-control">
           <label>Khu vực</label>
-          <input type="text"  pInputText  formControlName="name">
+          <input type="text" pInputText formControlName="name">
 
         </div>
 
@@ -168,7 +169,7 @@
 
       <div class="secondary-form-control">
         <label>Độ ưu tiên</label>
-        <input type="text"  pInputText  formControlName="order" [disabled]="true">
+        <input type="text" pInputText formControlName="order" [disabled]="true">
 
 
       </div>
@@ -177,7 +178,7 @@
       <div class="secondary-form-control">
         <label>Menu trái</label>
 
-        <input type="text"  pInputText  formControlName="order">
+        <input type="text" pInputText formControlName="order">
 
 
       </div>
@@ -195,7 +196,8 @@
 
 </p-dialog>
 
-<p-dialog [dismissableMask]="true" [(visible)]="IsDeleteModal" [modal]="true" [style]="{'width': '544px','height': '231px'}">
+<p-dialog [dismissableMask]="true" [(visible)]="IsDeleteModal" [modal]="true"
+  [style]="{'width': '544px','height': '231px'}">
   <ng-template pTemplate="header">
     <div style="display: flex;margin: auto;align-items: center;">
       <i class="pi pi-exclamation-circle" style="color: rgba(255, 180, 63, 1)"></i>
@@ -203,14 +205,15 @@
     </div>
   </ng-template>
   <ng-template pTemplate="body">
-  <div class="mt-4">
-    <span style="font-weight: 700;font-size: 14px;display: flex;justify-content: center;">Khu đất {{AddRequest.name}} đã có trong hệ thống</span>
-  </div>
-  <div class="mt-4" style="display: flex; justify-content: center;">
-    <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary" (click)="CancleAddSlot(2)"
-      style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm"></button>
-    <button pButton label="Xác nhận" (click)="CancleAddSlot(1)" class=" ml-3"
-      style="color:rgba(255, 255, 255, 1);" styleClass="p-button-sm"></button>
-  </div>
+    <div class="mt-4">
+      <span style="font-weight: 700;font-size: 14px;display: flex;justify-content: center;">Khu đất {{AddRequest.name}}
+        đã có trong hệ thống</span>
+    </div>
+    <div class="mt-4" style="display: flex; justify-content: center;">
+      <button pButton label="Hủy bỏ" class="p-button-outlined  p-button-secondary" (click)="CancleAddSlot(2)"
+        style="color: rgba(80, 80, 80, 1);" styleClass="p-button-sm"></button>
+      <button pButton label="Xác nhận" (click)="CancleAddSlot(1)" class=" ml-3" style="color:rgba(255, 255, 255, 1);"
+        styleClass="p-button-sm"></button>
+    </div>
   </ng-template>
 </p-dialog>
