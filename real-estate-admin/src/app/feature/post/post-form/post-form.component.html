@@ -159,8 +159,8 @@
       <div class="col-12 md:col-8" *ngIf="isBuy">
         <div class="secondary-form-control">
           <label>Tài chính dự kiến</label>
-          <p-inputNumber inputId="integeronly" [maxlength]="20" formControlName="price" mode="currency" currency="VND"
-            locale="vi-VN" [disabled]="true"></p-inputNumber>
+          <div class="view-content" formControlName="price"><span>{{finance}}</span></div>
+
         </div>
 
       </div>

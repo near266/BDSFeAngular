@@ -26,7 +26,8 @@ export class PostFormComponent implements OnInit {
   listStatus: any[];
   params: any;
   listFileUpload: any;
-  listUnit: any[]
+  listUnit: any[];
+  finance: string
 
 
   constructor(
@@ -78,7 +79,7 @@ export class PostFormComponent implements OnInit {
       description: [],
       status: [],
       area: [],
-      rangePrice: [],
+      price: [],
       fullName: [],
       email: [],
       address: [],
@@ -186,8 +187,7 @@ export class PostFormComponent implements OnInit {
     return this.currencyPipe.transform(unit, 'VND')?.replace('.', '*')?.replace(',', '.')?.replace('*', ',') + '';
   }
   changeUnit(e: any) {
-    this.updateForm.get('price')!.setValue(e);
-    console.log('changeee')
+    this.finance = this.listUnit[e.value].label;
   }
 
 }
