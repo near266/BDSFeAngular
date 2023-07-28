@@ -159,7 +159,7 @@
           <label>Tài chính dự kiến</label>
           <!--        <input type="text" pInputText>-->
           <div class="view-content">
-            <span>{{detailData?.rangePrice }}</span>
+            <span>{{detailData?.rangePrice ? detailData.rangePrice : 'Tài chính mở' }}</span>
           </div>
         </div>
       </div>
@@ -168,8 +168,10 @@
           <label>Đơn vị</label>
           <!--        <p-dropdown [options]="listStatus" formControlName="status" optionValue="code"></p-dropdown>-->
           <div class="view-content">
-            <span>{{isBuy ? detailData?.unit : (detailData?.unit === 0 ? 'VNĐ' : (detailData?.unit === 1 ? 'Giá/m2' :
-              ''))}}</span>
+            <span *ngIf="!isBuy">{{detailData?.unit === 0 ? 'VNĐ' : detailData?.unit === 1 ? 'Giá/m2' :
+              'Thỏa thuận'}}</span>
+            <span *ngIf="isBuy">{{detailData?.rangePrice ? detailData.rangePrice : 'Tài chính mở'}}</span>
+            <!-- <span *ngIf="isBuy">{{showBuyUnit()}}</span> -->
           </div>
         </div>
       </div>

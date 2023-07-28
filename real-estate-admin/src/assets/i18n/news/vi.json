@@ -134,43 +134,63 @@
   "unitBoughtNews": [
     {
       "code": 0,
-      "label": "Dưới 500 triệu"
+      "label": "Tài chính mở",
+      "price": 1,
+      "priceTo": null
     },
     {
       "code": 1,
-      "label": "Từ 500 triệu đến 800 triệu"
+      "label": "Dưới 500 triệu",
+      "price": 2,
+      "priceTo": 500000000
     },
     {
       "code": 2,
-      "label": "Từ 800 triệu đến 1 tỷ"
+      "label": "500 - 800 triệu",
+      "price": 500000000,
+      "priceTo": 800000000
     },
     {
       "code": 3,
-      "label": "Từ 1 tỷ đến 2 tỷ"
+      "label": "800 triệu - 1 tỷ",
+      "price": 800000000,
+      "priceTo": 1000000000
     },
     {
       "code": 4,
-      "label": "Từ 2 tỷ đến 3 tỷ"
+      "label": "1 - 2 tỷ",
+      "price": 1000000000,
+      "priceTo": 2000000000
     },
     {
       "code": 5,
-      "label": "Từ 3 tỷ đến 5 tỷ"
+      "label": "2 - 3 tỷ",
+      "price": 2000000000,
+      "priceTo": 3000000000
     },
     {
       "code": 6,
-      "label": "Từ 5 tỷ đến 7 tỷ"
+      "label": "3 - 4 tỷ",
+      "price": 3000000000,
+      "priceTo": 4000000000
     },
     {
       "code": 7,
-      "label": "Từ 7 tỷ đến 10 tỷ"
+      "label": "5 - 7 tỷ",
+      "price": 5000000000,
+      "priceTo": 7000000000
     },
     {
       "code": 8,
-      "label": "Trên 10 tỷ"
+      "label": "7 - 10 tỷ",
+      "price": 7000000000,
+      "priceTo": 10000000000
     },
     {
       "code": 9,
-      "label": ""
+      "label": "Trên 10 tỷ",
+      "price": 10000000000,
+      "priceTo": 1.7976931348623157e+308
     }
   ],
   "typeNews": {

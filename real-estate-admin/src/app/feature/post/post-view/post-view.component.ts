@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from "@angular/router";
 
-import {PostService} from "../service/post.service";
+import { PostService } from "../service/post.service";
 
 @Component({
   selector: 'app-post-view',
@@ -35,7 +35,7 @@ export class PostViewComponent implements OnInit {
   }
 
   update() {
-    this.router.navigate(['news', 'edit'], {queryParams: this.params});
+    this.router.navigate(['news', 'edit'], { queryParams: this.params });
   }
 
   convertPrice(priceFrom: number, priceTo: number): string {
@@ -67,5 +67,12 @@ export class PostViewComponent implements OnInit {
       return 'Trên 10 tỷ';
     }
     return '';
+  }
+  showBuyUnit(): string {
+    return this.detailData?.price === 1 ? 'Tài chính mở' : this.detailData?.price === 2 ? 'Dưới 500 triệu'
+      : this.detailData?.price === 500000000 ? '500 - 800 triệu' : this.detailData?.price === 800000000 ? '800 triệu - 1 tỷ'
+        : this.detailData?.price === 1000000000 ?
+          '1 - 2 tỷ' : this.detailData?.price === 2000000000 ? '2 - 3 tỷ' : this.detailData?.price === 3000000000 ? '3 - 4 tỷ'
+            : this.detailData?.price === 5000000000 ? '5 - 7 tỷ' : this.detailData?.price === 7000000000 ? '7 - 10 tỷ' : 'Trên 10 tỷ'
   }
 }
