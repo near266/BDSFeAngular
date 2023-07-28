@@ -28,6 +28,9 @@ export class PostFormComponent implements OnInit {
   listFileUpload: any;
   listUnit: any[];
   finance: string
+  price: any;
+  priceTo: any;
+  rangePrice: any;
 
 
   constructor(
@@ -81,6 +84,7 @@ export class PostFormComponent implements OnInit {
       area: [],
       price: [],
       priceTo: [],
+      rangePrice: [],
       fullName: [],
       email: [],
       address: [],
@@ -117,7 +121,7 @@ export class PostFormComponent implements OnInit {
       })
     } else {
       const body = {
-        ...this.updateForm.value, image: this.detailData.image
+        ...this.updateForm.value, image: this.detailData.image, price: this.price, priceTo: this.priceTo, rangePrice: this.rangePrice
       }
       this.update(body)
     }
@@ -189,6 +193,10 @@ export class PostFormComponent implements OnInit {
   }
   changeUnit(e: any) {
     this.finance = this.listUnit[e.value].label;
+    this.rangePrice = this.finance;
+    this.price = this.listUnit[e.value].price;
+    this.priceTo = this.listUnit[e.value].priceTo;
+
   }
 
 }
