@@ -4,7 +4,8 @@
       <div class="title">
         <label>Mã khách hàng</label>
       </div>
-      <input pInputText [(ngModel)]="searchCustomer.customerCode" (keydown.enter)="getListCustomer(true)">
+      <input pInputText [(ngModel)]="searchCustomer.customerCode" (keydown)="blockSpace($event)"
+        (keydown.enter)="getListCustomer(true)">
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
@@ -38,6 +39,10 @@
       <div class="mr-2">
         <button pButton label="Chặn" (click)="doDelete()" [disabled]="dataSelection.length < 2" icon="pi pi-lock"
           class="p-button-outlined p-button-danger"></button>
+      </div>
+      <div class="mr-2">
+        <button pButton label="Bỏ chặn" (click)="doActivate()" [disabled]="dataSelection.length < 2"
+          icon="pi pi-lock-open" class="p-button-outlined p-button-danger"></button>
       </div>
     </div>
     <div class="">
