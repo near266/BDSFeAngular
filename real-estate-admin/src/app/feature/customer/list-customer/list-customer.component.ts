@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {CustomerService} from "../service/customer.service";
-import {DialogService} from "primeng/dynamicdialog";
-import {ConfirmationService, MessageService} from "primeng/api";
-import {deleteModal, unBanModal} from "../model/modal";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { CustomerService } from "../service/customer.service";
+import { DialogService } from "primeng/dynamicdialog";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { deleteModal, unBanModal } from "../model/modal";
 
 @Component({
   selector: 'app-list-customer',
@@ -55,7 +55,9 @@ export class ListCustomerComponent implements OnInit {
       this.totalRecord = res.totalCount;
     })
   }
-
+  blockSpace(event: any) {
+    if (event.code === 'Space') event.preventDefault()
+  }
   ban(id: string) {
     const body = {
       listId: [id]
@@ -63,7 +65,7 @@ export class ListCustomerComponent implements OnInit {
     this.confirmationService.confirm({
       ...deleteModal, accept: () => {
         this.customerService.deleteCustomer(body).subscribe(res => {
-          this.messageService.add({severity: 'success', summary: '', detail: 'Thao tác thành công'})
+          this.messageService.add({ severity: 'success', summary: '', detail: 'Thao tác thành công' })
           this.getListCustomer();
         })
       }
@@ -74,7 +76,7 @@ export class ListCustomerComponent implements OnInit {
     this.confirmationService.confirm({
       ...unBanModal, accept: () => {
         this.customerService.unBanCustomer(id).subscribe(res => {
-          this.messageService.add({severity: 'success', summary: '', detail: 'Thao tác thành công'})
+          this.messageService.add({ severity: 'success', summary: '', detail: 'Thao tác thành công' })
           this.getListCustomer();
         })
       }
@@ -92,13 +94,24 @@ export class ListCustomerComponent implements OnInit {
         listId.push(el.customer.id);
       }
     });
-    this.customerService.deleteCustomer({listId: listId}).subscribe(res => {
-      this.messageService.add({severity: 'success', detail: 'Thao tác thành công'})
+    this.customerService.deleteCustomer({ listId: listId }).subscribe(res => {
+      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' })
       this.getListCustomer();
       this.isDeleteAll = false;
     })
   }
+  doActivate() {
 
+  }
+  activateAll() {
+    let listId: any[] = [];
+    this.dataSelection.forEach(el => {
+      if (el && el.customer.id) {
+        listId.push(el.customer.id);
+      }
+    });
+
+  }
   paginate(evt: any) {
     if (this.searchCustomer.pageSize !== evt.rows) {
       this.page = 0;
@@ -112,7 +125,7 @@ export class ListCustomerComponent implements OnInit {
     this.router.navigate(['customers', 'balance', id])
   }
 
-  createCustomer(){
+  createCustomer() {
     this.router.navigate(['customers', 'create'])
   }
 
@@ -128,7 +141,7 @@ export class ListCustomerComponent implements OnInit {
   confirmRequest() {
     this.customerService.paymentRequest(this.paymentRequest).subscribe(res => {
       this.isPayment = false;
-      this.messageService.add({severity: 'success', detail: 'Thao tác thành công '})
+      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
     })
   }
 
