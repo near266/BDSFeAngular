@@ -49,7 +49,7 @@ export class ListBalanceComponent implements OnInit {
     private customerService: CustomerService,
     private route: ActivatedRoute,
     private datePipe: DatePipe
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.translateService.get('typeList').subscribe((res) => {
@@ -73,7 +73,11 @@ export class ListBalanceComponent implements OnInit {
       });
       return;
     }
-    this.customerService.getBalance(this.requestBalance).subscribe((res) => {
+    const newFrom = new Date(this.requestBalance.from.getTime())
+    newFrom.setHours(23, 59, 59)
+    const newTo = new Date(this.requestBalance.to.getTime())
+    newTo.setHours(23, 59, 59)
+    this.customerService.getBalance({ ...this.requestBalance, from: newFrom, to: newTo }).subscribe((res) => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;
       this.balanceInfo = this.transactionList[0];
