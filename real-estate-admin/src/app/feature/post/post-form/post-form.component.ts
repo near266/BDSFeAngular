@@ -80,6 +80,7 @@ export class PostFormComponent implements OnInit {
       status: [],
       area: [],
       price: [],
+      priceTo: [],
       fullName: [],
       email: [],
       address: [],

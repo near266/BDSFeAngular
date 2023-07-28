@@ -159,15 +159,19 @@
       <div class="col-12 md:col-8" *ngIf="isBuy">
         <div class="secondary-form-control">
           <label>Tài chính dự kiến</label>
-          <div class="view-content" formControlName="price"><span>{{finance}}</span></div>
+          <div class="view-content" formControlName="rangePrice">
+            <span *ngIf="!finance">{{detailData?.rangePrice ? detailData.rangePrice : 'Tài chính mở'}}</span>
+            <span *ngIf="finance">{{finance}}</span>
+          </div>
 
         </div>
 
       </div>
-      <div class="col-12 md:col-4">
+      <div class=" col-12 md:col-4">
         <div class="secondary-form-control">
           <label>Đơn vị</label>
-          <p-dropdown [options]="listUnit" optionValue="code" formControlName="unit"
+          <p-dropdown [options]="listUnit" optionValue="code" formControlName="rangePrice"
+            [placeholder]="detailData?.rangePrice ? detailData.rangePrice : 'Tài chính mở'"
             (onChange)="changeUnit($event)"></p-dropdown>
         </div>
       </div>
