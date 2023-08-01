@@ -13,6 +13,7 @@ import { deleteModal, unBanModal } from "../model/modal";
 export class ListCustomerComponent implements OnInit {
   dataSelection: any[] = [];
   dataCustomers: any[] = [];
+  isBlocked: any;
   searchCustomer = {
     keyword: '',
     phone: '',
@@ -33,7 +34,7 @@ export class ListCustomerComponent implements OnInit {
   pageSize = 10;
   page = 1;
   isDeleteAll = false;
-
+  isActiveAll = false;
   constructor(
     private router: Router,
     private customerService: CustomerService,
@@ -45,7 +46,6 @@ export class ListCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.getListCustomer();
   }
-
   getListCustomer(isSearch?: boolean) {
     if (isSearch) {
       this.searchCustomer.page = 1;
@@ -54,6 +54,14 @@ export class ListCustomerComponent implements OnInit {
       this.dataCustomers = res.data;
       this.totalRecord = res.totalCount;
     })
+  }
+  checkBlocked(event: any) {
+    console.log(event.data.customer.status)
+    if (event.data.customer.status) this.isBlocked = false
+    else this.isBlocked = true
+  }
+  unselectCus(event: any) {
+    this.isBlocked = !this.isBlocked
   }
   blockSpace(event: any) {
     if (event.code === 'Space') event.preventDefault()
@@ -75,7 +83,7 @@ export class ListCustomerComponent implements OnInit {
   unBan(id: string) {
     this.confirmationService.confirm({
       ...unBanModal, accept: () => {
-        this.customerService.unBanCustomer(id).subscribe(res => {
+        this.customerService.unBanCustomer([id]).subscribe(res => {
           this.messageService.add({ severity: 'success', summary: '', detail: 'Thao tác thành công' })
           this.getListCustomer();
         })
@@ -101,7 +109,7 @@ export class ListCustomerComponent implements OnInit {
     })
   }
   doActivate() {
-
+    this.isActiveAll = true;
   }
   activateAll() {
     let listId: any[] = [];
@@ -110,7 +118,11 @@ export class ListCustomerComponent implements OnInit {
         listId.push(el.customer.id);
       }
     });
-
+    this.customerService.unBanCustomer(listId).subscribe(res => {
+      this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' })
+      this.getListCustomer();
+      this.isActiveAll = false;
+    })
   }
   paginate(evt: any) {
     if (this.searchCustomer.pageSize !== evt.rows) {

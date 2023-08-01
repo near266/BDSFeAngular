@@ -41,7 +41,7 @@
           class="p-button-outlined p-button-danger"></button>
       </div>
       <div class="mr-2">
-        <button pButton label="Bỏ chặn" (click)="doActivate()" [disabled]="dataSelection.length < 2"
+        <button pButton label="Bỏ chặn" (click)="doActivate()" [disabled]="dataSelection.length < 2 || !isBlocked"
           icon="pi pi-lock-open" class="p-button-outlined p-button-danger"></button>
       </div>
     </div>
@@ -54,7 +54,8 @@
     </div>
   </div>
   <div class="p-3">
-    <p-table [value]="dataCustomers" [(selection)]="dataSelection" dataKey="customer.id">
+    <p-table [value]="dataCustomers" [(selection)]="dataSelection" dataKey="customer.id"
+      (onRowSelect)="checkBlocked($event)" (onRowUnselect)="unselectCus($event)">
       <ng-template pTemplate="header">
         <tr>
           <th>
@@ -141,6 +142,32 @@
   </div>
   <div class="p-3 flex justify-content-center">
     <button pButton label="Chặn" (click)="deleteAll()" icon="pi pi-lock"
+      class="p-button-outlined p-button-danger"></button>
+  </div>
+</p-dialog>
+<p-dialog [dismissableMask]="true" [(visible)]="isActiveAll" [modal]="true" [draggable]="false" [resizable]="false">
+  <div class="p-3">
+    <p-table [value]="dataSelection">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Khách hàng</th>
+          <th>Số dư TK chính</th>
+          <th>Số dư TK KM</th>
+          <th>Điểm thưởng</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-index="rowIndex">
+        <tr>
+          <td>{{item.customer?.customerName }}</td>
+          <td>{{item.wallet?.amount }}</td>
+          <td>{{item.walletPromotional?.amount }}</td>
+          <td>{{ item.customer.point }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="p-3 flex justify-content-center">
+    <button pButton label="Bỏ chặn" (click)="activateAll()" icon="pi pi-lock-open"
       class="p-button-outlined p-button-danger"></button>
   </div>
 </p-dialog>
