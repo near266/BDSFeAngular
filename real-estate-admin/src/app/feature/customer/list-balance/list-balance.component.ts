@@ -79,10 +79,12 @@ export class ListBalanceComponent implements OnInit {
       this.newFrom = new Date(this.requestBalance.from.getTime())
       this.newFrom.setHours(23, 59, 59)
     }
+    else this.newFrom = ''
     if (this.requestBalance.to !== '') {
       this.newTo = new Date(this.requestBalance.to.getTime())
       this.newTo.setHours(23, 59, 59)
     }
+    else this.newTo = ''
     this.customerService.getBalance({ ...this.requestBalance, from: this.newFrom, to: this.newTo }).subscribe((res) => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;
