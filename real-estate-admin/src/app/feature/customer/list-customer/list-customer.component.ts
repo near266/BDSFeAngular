@@ -13,7 +13,7 @@ import { deleteModal, unBanModal } from "../model/modal";
 export class ListCustomerComponent implements OnInit {
   dataSelection: any[] = [];
   dataCustomers: any[] = [];
-  isBlocked: any;
+  isShow: any;
   searchCustomer = {
     keyword: '',
     phone: '',
@@ -35,6 +35,7 @@ export class ListCustomerComponent implements OnInit {
   page = 1;
   isDeleteAll = false;
   isActiveAll = false;
+  block: boolean[] = [];
   constructor(
     private router: Router,
     private customerService: CustomerService,
@@ -57,11 +58,12 @@ export class ListCustomerComponent implements OnInit {
   }
   checkBlocked(event: any) {
     console.log(event.data.customer.status)
-    if (event.data.customer.status) this.isBlocked = false
-    else this.isBlocked = true
+    if (event.data.customer.status === true) this.block.push(true)
+    else this.block.push(false)
+    if (this.block.some(status => status === true)) this.isShow = false
   }
   unselectCus(event: any) {
-    this.isBlocked = !this.isBlocked
+    this.isShow = !this.isShow
   }
   blockSpace(event: any) {
     if (event.code === 'Space') event.preventDefault()
@@ -122,6 +124,7 @@ export class ListCustomerComponent implements OnInit {
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công' })
       this.getListCustomer();
       this.isActiveAll = false;
+      this.isShow = false
     })
   }
   paginate(evt: any) {
