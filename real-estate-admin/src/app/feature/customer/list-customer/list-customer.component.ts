@@ -14,7 +14,7 @@ export class ListCustomerComponent implements OnInit {
   dataSelection: any[] = [];
   dataCustomers: any[] = [];
   isShow: any;
-  point: number;
+  // point: number;
   searchCustomer = {
     keyword: '',
     phone: '',
@@ -28,6 +28,7 @@ export class ListCustomerComponent implements OnInit {
     customerId: '',
     amountWallet: 0,
     amountWalletPromotional: 0,
+    point: 0,
     currency: ''
   }
   isPayment = false;
@@ -58,7 +59,7 @@ export class ListCustomerComponent implements OnInit {
     })
   }
   updatePoint(value: any) {
-    this.point = Math.round(value / 1000)
+    this.paymentRequest.point = Math.round(value / 1000)
   }
   checkBlocked(event: any) {
     console.log(event.data.customer.status)
