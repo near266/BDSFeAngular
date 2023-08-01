@@ -181,8 +181,9 @@
     <div class="col-12">
       <div class="secondary-form-control">
         <label for="">TK chính</label>
-        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet" [maxlength]="20" mode="currency"
-          currency="VND" locale="vi-VN"></p-inputNumber>
+        <p-inputNumber inputId="integeronly" [(ngModel)]="paymentRequest.amountWallet"
+          (ngModelChange)="updatePoint($event)" [maxlength]="20" mode="currency" currency="VND"
+          locale="vi-VN"></p-inputNumber>
       </div>
     </div>
     <div class="col-12">
@@ -195,7 +196,9 @@
     <div class="col-12">
       <div class="flex justify-content-between">
         <label class="header-title">Điểm thưởng</label>
-        <span class="p-text-warning">{{paymentRequest.amountWallet / 1000 | number: '1.0-1'}}(điểm)</span>
+        <p-inputNumber class="point" inputId="integeronly" [(ngModel)]="point" [maxlength]="20"></p-inputNumber>
+        <!-- <div class="p-text-warning point" contenteditable="true">{{paymentRequest.amountWallet / 1000 | number:
+          '1.0-1'}} (điểm)</div> -->
       </div>
       <div class="flex justify-content-end mt-2">
         <button pButton label="Huỷ" class="p-button-sm p-button-secondary mr-2" (click)="isPayment = false"></button>
