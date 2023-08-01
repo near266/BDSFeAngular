@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
 
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
+import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
-import {responseTran, Transaction} from "../model/transaction";
-import {BaseService} from "../../../core/service/base.service";
+import { responseTran, Transaction } from "../model/transaction";
+import { BaseService } from "../../../core/service/base.service";
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +43,8 @@ export class CustomerService extends BaseService {
     return this.doPost('customer/delete', body).pipe(map((res: any) => res));
   }
 
-  unBanCustomer(id: any): Observable<any> {
-    return this.doGet(`api/activate?Id=${id}`).pipe(map((res: any) => res));
+  unBanCustomer(body: any): Observable<any> {
+    return this.doPost('api/activate', body).pipe(map((res: any) => res));
   }
 
   getBalance(body: any): Observable<responseTran> {

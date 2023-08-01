@@ -27,7 +27,7 @@ export class FormCustomerComponent implements OnInit {
     authorities: new FormControl([
       "ROLE_USER"
     ]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     phoneNumber: new FormControl('', Validators.required),
     isUnique: new FormControl(true),
     address: new FormControl(),
@@ -80,7 +80,7 @@ export class FormCustomerComponent implements OnInit {
       }
       if (this.customer.get('password')?.errors) {
         this.post = false
-        this.messageService.add({ severity: 'error', detail: 'Mật khẩu là bắt buộc' })
+        this.messageService.add({ severity: 'error', detail: 'Mật khẩu là bắt buộc và phải chứa tối thiểu 6 kí tự!' })
         return
       }
     }
@@ -88,7 +88,8 @@ export class FormCustomerComponent implements OnInit {
       this.router.navigate(['customers'])
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
     }, (e: any) => {
-      this.messageService.add({ severity: 'error', detail: 'Thất bại' })
+      console.log(e)
+      this.messageService.add({ severity: 'error', detail: e.params.detail })
       this.post = false
     })
   }
