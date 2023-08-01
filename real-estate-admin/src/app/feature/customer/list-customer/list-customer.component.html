@@ -196,7 +196,8 @@
     <div class="col-12">
       <div class="flex justify-content-between">
         <label class="header-title">Điểm thưởng</label>
-        <p-inputNumber class="point" inputId="integeronly" [(ngModel)]="point" [maxlength]="20"></p-inputNumber>
+        <p-inputNumber class="point" inputId="integeronly" [(ngModel)]="paymentRequest.point"
+          [maxlength]="20"></p-inputNumber>
         <!-- <div class="p-text-warning point" contenteditable="true">{{paymentRequest.amountWallet / 1000 | number:
           '1.0-1'}} (điểm)</div> -->
       </div>
