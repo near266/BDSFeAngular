@@ -40,6 +40,8 @@ export class ListBalanceComponent implements OnInit {
   transactionList: Transaction[];
   maxDate = new Date();
   balanceInfo: any = {};
+  newFrom: any;
+  newTo: any
   constructor(
     private dialog: DialogService,
     private confirmationService: ConfirmationService,
@@ -73,11 +75,15 @@ export class ListBalanceComponent implements OnInit {
       });
       return;
     }
-    const newFrom = new Date(this.requestBalance.from.getTime())
-    newFrom.setHours(23, 59, 59)
-    const newTo = new Date(this.requestBalance.to.getTime())
-    newTo.setHours(23, 59, 59)
-    this.customerService.getBalance({ ...this.requestBalance, from: newFrom, to: newTo }).subscribe((res) => {
+    if (this.requestBalance.from !== '') {
+      this.newFrom = new Date(this.requestBalance.from.getTime())
+      this.newFrom.setHours(23, 59, 59)
+    }
+    if (this.requestBalance.to !== '') {
+      this.newTo = new Date(this.requestBalance.to.getTime())
+      this.newTo.setHours(23, 59, 59)
+    }
+    this.customerService.getBalance({ ...this.requestBalance, from: this.newFrom, to: this.newTo }).subscribe((res) => {
       this.transactionList = res.data;
       this.totalRecord = res.totalCount;
       this.balanceInfo = this.transactionList[0];

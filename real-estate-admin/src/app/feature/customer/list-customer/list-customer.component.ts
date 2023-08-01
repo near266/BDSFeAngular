@@ -14,6 +14,7 @@ export class ListCustomerComponent implements OnInit {
   dataSelection: any[] = [];
   dataCustomers: any[] = [];
   isShow: any;
+  point: number;
   searchCustomer = {
     keyword: '',
     phone: '',
@@ -55,6 +56,9 @@ export class ListCustomerComponent implements OnInit {
       this.dataCustomers = res.data;
       this.totalRecord = res.totalCount;
     })
+  }
+  updatePoint(value: any) {
+    this.point = Math.round(value / 1000)
   }
   checkBlocked(event: any) {
     console.log(event.data.customer.status)
