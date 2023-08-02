@@ -162,6 +162,7 @@ export class ListCustomerComponent implements OnInit {
     this.customerService.paymentRequest(this.paymentRequest).subscribe(res => {
       this.isPayment = false;
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
+      this.getListCustomer()
     })
   }
 
