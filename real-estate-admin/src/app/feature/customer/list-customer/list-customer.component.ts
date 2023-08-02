@@ -13,7 +13,7 @@ import { deleteModal, unBanModal } from "../model/modal";
 export class ListCustomerComponent implements OnInit {
   dataSelection: any[] = [];
   dataCustomers: any[] = [];
-  isShow: any;
+  isShow: boolean = true;
   // point: number;
   searchCustomer = {
     keyword: '',
@@ -62,13 +62,19 @@ export class ListCustomerComponent implements OnInit {
     this.paymentRequest.point = Math.round(value / 1000)
   }
   checkBlocked(event: any) {
-    console.log(event.data.customer.status)
     if (event.data.customer.status === true) this.block.push(true)
     else this.block.push(false)
     if (this.block.some(status => status === true)) this.isShow = false
+    else this.isShow = true
   }
   unselectCus(event: any) {
-    this.isShow = !this.isShow
+    // this.isShow = !this.isShow
+    const indexToRemove = this.block.indexOf(event.data.customer.status);
+    if (indexToRemove !== -1) {
+      this.block.splice(indexToRemove, 1);
+    }
+    if (this.block.some(status => status === true)) this.isShow = false
+    else this.isShow = true
   }
   blockSpace(event: any) {
     if (event.code === 'Space') event.preventDefault()
@@ -163,6 +169,7 @@ export class ListCustomerComponent implements OnInit {
       this.isPayment = false;
       this.messageService.add({ severity: 'success', detail: 'Thao tác thành công ' })
       this.getListCustomer()
+      this.paymentRequest.point = 0
     })
   }
 
