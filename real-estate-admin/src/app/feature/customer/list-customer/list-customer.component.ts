@@ -136,6 +136,7 @@ export class ListCustomerComponent implements OnInit {
       this.getListCustomer();
       this.isActiveAll = false;
       this.isShow = false
+      this.block = []
     })
   }
   paginate(evt: any) {
