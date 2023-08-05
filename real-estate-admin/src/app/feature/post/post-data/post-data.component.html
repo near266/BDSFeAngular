@@ -2,7 +2,7 @@
   <div class="grid p-3">
     <div class="col-12 md:col-10">
       <div class="title-content">
-          <label>DANH SÁCH BÀI ĐĂNG </label>
+        <label>DANH SÁCH BÀI ĐĂNG </label>
         <span>({{totalRecord}} bài đăng)</span>
       </div>
     </div>
@@ -12,13 +12,15 @@
       <div class="title">
         <label>Trạng thái</label>
       </div>
-      <p-dropdown [showClear]="true" [options]="listStatus" [(ngModel)]="listRequest.status" optionValue="code"></p-dropdown>
+      <p-dropdown [showClear]="true" [options]="listStatus" [(ngModel)]="listRequest.status"
+        optionValue="code"></p-dropdown>
     </div>
     <div *ngIf="!isBuy" class="field col-12 md:col-3">
       <div class="title">
         <label>Loại tin</label>
       </div>
-      <p-dropdown [showClear]="true" [options]="listType" [(ngModel)]="listRequest.type" optionValue="code"></p-dropdown>
+      <p-dropdown [showClear]="true" [options]="listType" [(ngModel)]="listRequest.type"
+        optionValue="code"></p-dropdown>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
@@ -37,27 +39,29 @@
       <div class="title">
         <label>Ngày đăng</label>
       </div>
-      <p-calendar [showIcon]="true" [(ngModel)]="listRequest.createdDate"
-        dateFormat="dd/mm/yy" placeholder="Ngày đăng"></p-calendar>
+      <p-calendar [showIcon]="true" [(ngModel)]="listRequest.createdDate" dateFormat="dd/mm/yy"
+        placeholder="Ngày đăng"></p-calendar>
     </div>
     <div *ngIf="!isBuy" class="field col-12 md:col-3">
       <div class="title">
         <label>Ngày hết hạn</label>
       </div>
-      <p-calendar style="width: 70%;" [showIcon]="true" [(ngModel)]="listRequest.dueDate"
-        dateFormat="dd/mm/yy" placeholder="Ngày hết hạn"></p-calendar>
+      <p-calendar style="width: 70%;" [showIcon]="true" [(ngModel)]="listRequest.dueDate" dateFormat="dd/mm/yy"
+        placeholder="Ngày hết hạn"></p-calendar>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
         <label>Quận, huyện</label>
       </div>
-      <p-dropdown (onChange)="onDropdownChange()"  [options]="listDistricts" [(ngModel)]="listRequest.ward" optionValue="name" optionLabel="name" [showClear]="true" placeholder="Tất cả"></p-dropdown>
+      <p-dropdown (onChange)="onDropdownChange()" [options]="listDistricts" [(ngModel)]="listRequest.ward"
+        optionValue="name" optionLabel="name" [showClear]="true" placeholder="Tất cả"></p-dropdown>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
         <label>Xã, phường</label>
       </div>
-      <p-dropdown [options]="listWard" [(ngModel)]="listRequest.region" optionValue="name" optionLabel="name" [showClear]="true" placeholder="Tất cả"></p-dropdown>
+      <p-dropdown [options]="listWard" [(ngModel)]="listRequest.region" optionValue="name" optionLabel="name"
+        [showClear]="true" placeholder="Tất cả"></p-dropdown>
     </div>
     <div class="field col-12 md:col-3">
       <div class="title">
@@ -121,11 +125,12 @@
           </td>
           <td>{{ product.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td *ngIf="!isBuy">{{ product.dueDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-          <td>{{ product.order | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ product.lastModifiedDate
+            | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>
             <div class="flex">
               <button *ngIf="!isBuy" pButton (click)="update(product)" icon="pi pi-arrow-up" pTooltip="Đẩy tin"
-              [disabled]="product.status !== 1"class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
+                [disabled]="product.status !== 1" class="p-button-sm p-button-primary p-button-outlined mr-2"></button>
               <button pButton (click)="delete(product.id)" icon="pi pi-trash" pTooltip="Xóa"
                 class="p-button-sm p-button-danger p-button-outlined mr-2"></button>
               <button pButton (click)="reject(product.id)" icon="pi pi-times" pTooltip="Từ chối"
